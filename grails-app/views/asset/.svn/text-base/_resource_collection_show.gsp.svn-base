@@ -1,0 +1,21 @@
+<table class="jquiTable">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Collection Type</th>
+		</tr>
+	</thead>
+	<tbody>
+		<g:if test="${assetInstance.resourceCollections?.size() == null}">
+			no staff
+		</g:if>
+		<g:each in="${assetInstance.resourceCollections.sort{it.type}}" status="i" var="resourceCollectionInstance">
+			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+				<td valign="top" class="value">${fieldValue(bean: resourceCollectionInstance, field: "name")}</td>
+				<td valign="top" class="value">${fieldValue(bean: resourceCollectionInstance, field: "description")}</td>
+				<td valign="top" class="value">${fieldValue(bean: resourceCollectionInstance, field: "type")}</td>
+			</tr>
+		</g:each>
+	</tbody>
+</table>

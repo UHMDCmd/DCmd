@@ -1,0 +1,138 @@
+/* Float Clearing
+ ---------------------------------------------------------------------*/
+
+.module:after
+{
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+/* float clearing for IE6 */
+* html .module
+{
+	height: 1%;
+	overflow: visible;
+}
+
+/* float clearing for IE7 */
+* + html .module
+{
+	min-height: 1%;
+}
+
+/* Breadcrumb Styles
+ ---------------------------------------------------------------------*/
+
+.breadCrumb
+{
+	margin: 0;
+	padding: 0;
+	float: right;
+    display:block;
+    /*height: 20px;*/
+	overflow: visible;
+	/*width: 82%;*/
+    max-width:60%;
+    min-height:20px;
+	padding:5px;
+    /*margin-right: 1.6%;*/
+    margin-right: 17.5%;
+    border:solid 2px #707070;
+	/*background:#F1F2F5;*/
+
+    /*background-color: #f51470;*/
+    /*background-color: #DBE9EB;*/
+    /*background-color: #a5b3b5;*/
+
+
+     /*Safari 4-5, Chrome 1-9*/
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#555555), to(#4B4B4B));
+     /*Safari 5.1, Chrome 10+*/
+    background: -webkit-linear-gradient(top,  #555555, #4B4B4B);
+     /*Firefox 3.6+*/
+    background: -moz-linear-gradient(top,  #555555, #4B4B4B);
+     /*IE 10*/
+    background: -ms-linear-gradient(top,  #555555, #4B4B4B);
+     /*Opera 11.10+*/
+    background: -o-linear-gradient(top,  #555555, #4B4B4B);
+}
+.breadCrumb ul
+{
+	margin: 0;
+	padding: 0;
+	height: 21px;
+	display: block;
+}
+.breadCrumb ul li
+{
+	display: block;
+	float: left;
+	position: relative;
+	height: 21px;
+	overflow: hidden;
+	line-height: 21px;
+	margin: 0px 6px 0px 0;
+	padding: 0px 10px 0px 0;
+	font-size: .9167em;
+	background: url(../admin_theme/content_images/actions_divider_1.png) no-repeat 100% 0;
+}
+.breadCrumb ul li div.chevronOverlay
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 2;
+}
+.breadCrumb ul li span
+{
+	display: block;
+	overflow: hidden;
+}
+.breadCrumb ul li a
+{
+	display: block;
+	position: relative;
+	height: 21px;
+	line-height: 21px;
+	overflow: hidden;
+	float: left;
+   font-family: tahoma;
+    color: #ffb457;
+
+
+}
+.breadCrumb ul li.first a
+{
+	height: 16px !important;
+	text-indent:-1000em;
+	width:16px;
+	padding: 0;
+	margin-top: 2px;
+	overflow: hidden;
+	background:url(/images/IconHome.gif) no-repeat 0 0;
+}
+.breadCrumb ul li.first a:hover
+{
+	background-position: 0 -16px;
+    color: #d4eef5;
+
+}
+.breadCrumb ul li.last
+{
+	background: none;
+	margin-right: 0;
+	padding-right: 0;
+    color: #f5d1d0;
+
+}
+.chevronOverlay
+{
+	display: none;
+	background: url(/images/ChevronOverlay.png) no-repeat 100% 0;
+	width: 13px;
+	height: 20px;
+}
+

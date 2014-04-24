@@ -1,0 +1,52 @@
+<div class="dialog">
+<table>
+<tbody>
+
+<tr class="prop">
+  <td valign="top" class="name">
+    <label for="uhNumber"><g:message code="person.uhNumber.label" default="Uh Number" /></label>
+  </td>
+  <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'uhNumber', 'errors')}">
+    <g:textField name="uhNumber" value="${fieldValue(bean: personInstance, field: 'uhNumber')}" />
+  </td>
+</tr>
+
+<tr class="prop">
+  <td valign="top" class="name">
+    <label for="title"><g:message code="person.title.label" default="Title" /></label>
+  </td>
+  <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'title', 'errors')}">
+    <g:textField name="title" maxlength="45" value="${personInstance?.title}" />
+  </td>
+</tr>
+
+<tr class="prop">
+  <td valign="top" class="name">
+    <label for="lastName"><g:message code="person.lastName.label" default="Last Name" /></label>
+  </td>
+  <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'lastName', 'errors')}">
+    <g:textField name="lastName" maxlength="45" value="${personInstance?.lastName}" />
+  </td>
+</tr>
+
+<tr class="prop">
+  <td valign="top" class="name">
+    <label for="firstName"><g:message code="person.firstName.label" default="First Name" /></label>
+  </td>
+  <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'firstName', 'errors')}">
+    <g:textField name="firstName" maxlength="45" value="${personInstance?.firstName}" />
+  </td>
+</tr>
+
+<tr class="prop">
+  <td valign="top" class="name">
+    <label for="midInit"><g:message code="person.midInit.label" default="Mid Init" /></label>
+  </td>
+  <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'midInit', 'errors')}">
+    <g:textField name="midInit" maxlength="45" value="${personInstance?.midInit}" />
+  </td>
+</tr>
+
+</tbody>
+</table>
+</div>

@@ -1,0 +1,25 @@
+<plugin name='jqgrid' version='3.8.0.1' grailsVersion='1.3.5 &gt; *'>
+  <author>Aaron Oathout</author>
+  <authorEmail>aoathout@gmail.com</authorEmail>
+  <title>JQGrid Plugin</title>
+  <description>\
+Provides easy integration with the jqgrid jquery library.
+</description>
+  <documentation>http://grails.org/plugin/jqgrid</documentation>
+  <resources>
+    <resource>BootStrap</resource>
+    <resource>BuildConfig</resource>
+    <resource>Config</resource>
+    <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
+    <resource>demo.ContactController</resource>
+    <resource>demo.Address</resource>
+    <resource>demo.Contact</resource>
+    <resource>demo.ContactService</resource>
+    <resource>org.codehaus.groovy.grails.plugins.jqgrid.JQGridTagLib</resource>
+  </resources>
+  <dependencies>
+    <plugin name='jqueryUi' version='1.8.2.4 &gt; *' />
+  </dependencies>
+  <behavior />
+</plugin>

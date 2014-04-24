@@ -1,0 +1,66 @@
+<script type="text/javascript">
+   var childCount = ${vendorInstance?.supporters.size()} + 0;
+
+   function addSupporterInfo(){
+	   //alert('adding supporter info');
+     var clone = $("#supporter_clone").clone()
+     var htmlId = 'supportersList['+childCount+'].';
+     var personSelect = clone.find("select[id$=person]");
+     var supportRoleSelect = clone.find("select[id$=supportRole]");
+   	 var supportableObjectTypeSelect = clone.find("select[id$=supportableObjectType]");
+   	 
+     clone.find("input[id$=id]")
+            .attr('id',htmlId + 'id')
+            .attr('name',htmlId + 'id');
+     clone.find("input[id$=deleted]")
+            .attr('id',htmlId + 'deleted')
+            .attr('name',htmlId + 'deleted');
+     clone.find("input[id$=new]")
+            .attr('id',htmlId + 'new')
+            .attr('name',htmlId + 'new')
+			.attr('value', 'true');
+		
+     personSelect.attr('id',htmlId + 'person')
+            .attr('name',htmlId + 'person.id');
+     supportRoleSelect.attr('id',htmlId + 'supportRole')
+            .attr('name',htmlId + 'supportRole.id');
+		 supportableObjectTypeSelect.attr('id', htmlId + 'supportableObjectType')
+		 				.attr('name', htmlId + 'supportableObjectType.id');
+		 				
+     clone.attr('id', 'supporter'+childCount);
+     $("#childList").append(clone);
+     clone.show();
+     personSelect.focus();
+     childCount++;
+   }
+
+   //bind click event on delete buttons using jquery live
+   $('.del-supporter').live('click', function() {
+       //find the parent div
+       var prnt = $(this).parents(".supporter-div");
+       //find the deleted hidden input
+       var delInput = prnt.find("input[id$=deleted]");
+       //check if this is still not persisted
+       var newValue = prnt.find("input[id$=new]").attr('value');
+       //if it is new then i can safely remove from dom
+       if(newValue == 'true'){
+           prnt.remove();
+       }else{
+           //set the deletedFlag to true
+           delInput.attr('value','true');
+           //hide the div
+           prnt.hide();
+       }
+   });
+
+</script>
+
+<div id="childList">
+	<g:each var="supporters" in="${vendorInstance.supporters}" status="i">
+		<!-- Render the contactInfo template (_contactInfo.gsp) here -->
+		<g:render template='supporter'
+			model="['supporter':supporter,'i':i,'hidden':false]" />
+		<!-- Render the contactInfo template (_contactInfo.gsp) here -->
+	</g:each>
+</div>
+<input type="button" value="Add Support Staff" onclick="addSupporterInfo();" />

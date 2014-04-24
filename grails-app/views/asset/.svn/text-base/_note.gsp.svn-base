@@ -1,0 +1,12 @@
+<div id="note${i}" class="note-div" <g:if test="${hidden}">style="display:none;"</g:if>>
+	<g:hiddenField name='notesList[${i}].id' value='${note?.id}' />
+	<g:hiddenField name='notesList[${i}].deleted' value='false' />
+	<g:hiddenField name='notesList[${i}].new' value='false' />
+
+	<g:textArea name='notesList[${i}].text' value='${note?.text}' />
+	<g:hiddenField name='notesList[${i}].noteType.id' value="${note?.noteType?.id ?: noteTypeId}" />
+
+	<span class="del-note">
+		<img src="${resource(dir:'images/skin', file:'icon_delete.png')}" style="vertical-align: middle;" /> 
+	</span>
+</div>

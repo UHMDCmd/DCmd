@@ -1,0 +1,19 @@
+<table class="jquiTable">
+	<thead>
+		<tr>
+			<th>Support Role</th>
+			<th>Support Entity</th>
+		</tr>
+	</thead>
+	<tbody>
+		<g:if test="${assetInstance.supportStaff?.size() == null}">
+			no staff
+		</g:if>
+		<g:each in="${assetInstance.supportStaff.sort{it.supportRole}}" status="i" var="personSupportRoleInstance">
+			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+				<td valign="top" class="value">${fieldValue(bean: personSupportRoleInstance, field: "supportRole")}</td>
+				<td valign="top" class="value">${fieldValue(bean: personSupportRoleInstance, field: "supportableObjectType")}</td>
+			</tr>
+		</g:each>
+	</tbody>
+</table>

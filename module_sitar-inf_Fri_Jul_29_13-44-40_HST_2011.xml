@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_dcmd-inf" default="compile.module.dcmd-inf">
+  <dirname property="module.dcmd-inf.basedir" file="${ant.file.module_dcmd-inf}"/>
+  
+  <property name="module.jdk.home.dcmd-inf" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.dcmd-inf" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.dcmd-inf" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.dcmd-inf" value="${compiler.args}"/>
+  
+  <property name="dcmd-inf.output.dir" value="${module.dcmd-inf.basedir}/out/production/dcmd-inf"/>
+  <property name="dcmd-inf.testoutput.dir" value="${module.dcmd-inf.basedir}/out/test/dcmd-inf"/>
+  
+  <path id="dcmd-inf.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="dcmd-inf.module.production.classpath">
+    <path refid="${module.jdk.classpath.dcmd-inf}"/>
+    <path refid="library.grails-1.3.7.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${dcmd-inf-grailsplugins.output.dir}"/>
+    <fileset dir="${basedir}/../../.grails/1.3.7/projects/SITAR-Inf/plugins/tomcat-1.3.7/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="dcmd-inf.runtime.production.module.classpath">
+    <pathelement location="${dcmd-inf.output.dir}"/>
+    <path refid="library.grails-1.3.7.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="dcmd-inf-grailsplugins.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="dcmd-inf.module.classpath">
+    <path refid="${module.jdk.classpath.dcmd-inf}"/>
+    <pathelement location="${dcmd-inf.output.dir}"/>
+    <path refid="library.grails-1.3.7.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${dcmd-inf-grailsplugins.testoutput.dir}"/>
+    <pathelement location="${dcmd-inf-grailsplugins.output.dir}"/>
+    <fileset dir="${basedir}/../../.grails/1.3.7/projects/SITAR-Inf/plugins/tomcat-1.3.7/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="dcmd-inf.runtime.module.classpath">
+    <pathelement location="${dcmd-inf.testoutput.dir}"/>
+    <pathelement location="${dcmd-inf.output.dir}"/>
+    <path refid="library.grails-1.3.7.classpath"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="dcmd-inf-grailsplugins.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.dcmd-inf">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.dcmd-inf">
+    <patternset refid="excluded.from.module.dcmd-inf"/>
+  </patternset>
+  
+  <path id="dcmd-inf.module.sourcepath">
+    <dirset dir="${module.dcmd-inf.basedir}">
+      <include name="src/java"/>
+      <include name="grails-app/utils"/>
+      <include name="src/groovy"/>
+      <include name="grails-app/controllers"/>
+      <include name="grails-app/domain"/>
+      <include name="grails-app/services"/>
+      <include name="grails-app/taglib"/>
+    </dirset>
+  </path>
+  
+  <path id="dcmd-inf.module.test.sourcepath">
+    <dirset dir="${module.dcmd-inf.basedir}">
+      <include name="test/unit"/>
+      <include name="test/integration"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.dcmd-inf" depends="compile.module.dcmd-inf.production,compile.module.dcmd-inf.tests" description="Compile module dcmd-inf"/>
+  
+  <target name="compile.module.dcmd-inf.production" depends="register.custom.compilers,compile.module.dcmd-inf-grailsplugins" description="Compile module dcmd-inf; production classes">
+    <mkdir dir="${dcmd-inf.output.dir}"/>
+    <groovyc destdir="${dcmd-inf.output.dir}" fork="yes">
+      <src refid="dcmd-inf.module.sourcepath"/>
+      <classpath refid="dcmd-inf.module.production.classpath"/>
+      <patternset refid="excluded.from.compilation.dcmd-inf"/>
+      <javac debug="${compiler.debug}">
+        <compilerarg line="${compiler.args.dcmd-inf}"/>
+      </javac>
+    </groovyc>
+    <instrumentIdeaExtensions destdir="${dcmd-inf.output.dir}">
+      <compilerarg line="${compiler.args.dcmd-inf}"/>
+      <bootclasspath refid="dcmd-inf.module.bootclasspath"/>
+      <classpath refid="dcmd-inf.module.production.classpath"/>
+      <src refid="dcmd-inf.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.dcmd-inf"/>
+    </instrumentIdeaExtensions>
+    
+    <copy todir="${dcmd-inf.output.dir}">
+      <fileset dir="${module.dcmd-inf.basedir}/src/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dcmd-inf.basedir}/grails-app/utils">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dcmd-inf.basedir}/src/groovy">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dcmd-inf.basedir}/grails-app/controllers">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dcmd-inf.basedir}/grails-app/domain">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dcmd-inf.basedir}/grails-app/services">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dcmd-inf.basedir}/grails-app/taglib">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.dcmd-inf.tests" depends="register.custom.compilers,compile.module.dcmd-inf.production" description="compile module dcmd-inf; test classes" unless="skip.tests">
+    <mkdir dir="${dcmd-inf.testoutput.dir}"/>
+    <groovyc destdir="${dcmd-inf.testoutput.dir}" fork="yes">
+      <src refid="dcmd-inf.module.test.sourcepath"/>
+      <classpath refid="dcmd-inf.module.classpath"/>
+      <patternset refid="excluded.from.compilation.dcmd-inf"/>
+      <javac debug="${compiler.debug}">
+        <compilerarg line="${compiler.args.dcmd-inf}"/>
+      </javac>
+    </groovyc>
+    <instrumentIdeaExtensions destdir="${dcmd-inf.testoutput.dir}">
+      <compilerarg line="${compiler.args.dcmd-inf}"/>
+      <bootclasspath refid="dcmd-inf.module.bootclasspath"/>
+      <classpath refid="dcmd-inf.module.classpath"/>
+      <src refid="dcmd-inf.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.dcmd-inf"/>
+    </instrumentIdeaExtensions>
+    
+    <copy todir="${dcmd-inf.testoutput.dir}">
+      <fileset dir="${module.dcmd-inf.basedir}/test/unit">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dcmd-inf.basedir}/test/integration">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.dcmd-inf" description="cleanup module">
+    <delete dir="${dcmd-inf.output.dir}"/>
+    <delete dir="${dcmd-inf.testoutput.dir}"/>
+  </target>
+</project>

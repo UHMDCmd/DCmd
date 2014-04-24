@@ -1,0 +1,57 @@
+
+<%@ page import="edu.hawaii.sitar.inf.Vendor"%>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="layout" content="main" />
+	<g:set var="entityName" value="${message(code: 'vendor.label', default: 'Vendor')}" />
+	<title><g:message code="default.list.label" args="[entityName]" /></title>
+	<jqDT:resources jqueryUI="true" type="js" />
+	<g:javascript src='TableTools-2.0.1/media/js/TableTools.js' />
+	<g:javascript library="tables/vendor" />
+</head>
+<body>
+<ul id="msg"></ul>
+	<div class="nav">
+		<span class="menuButton">
+			<a class="home" href="${createLink(uri: '/')}">
+				<g:message code="default.home.label" />
+			</a>
+		</span>
+		<span class="menuButton">
+			<g:link class="create" action="create">
+				<g:message code="default.new.label" args="[entityName]" />
+			</g:link>
+		</span>
+	</div>
+	<div class="body">
+		<h1>
+			<g:message code="default.list.label" args="[entityName]" />
+		</h1>
+		<g:if test="${flash.message}">
+			<div class="message">
+				${flash.message}
+			</div>
+		</g:if>
+		<div>
+			<table id="list" >
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Fax</th>
+						<th>Line 1</th>
+						<th>Line 2</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Zip Code</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>		
+		</div>
+	</div>
+</body>
+</html>

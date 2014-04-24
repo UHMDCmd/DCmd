@@ -1,0 +1,135 @@
+<div class="dialog">
+	<table>
+		<tbody>
+			<tr class="prop">
+				<td valign="top" class="name">
+					<sitar:requiredInputFieldFlag/><label for="itsId"><g:message code="asset.itsId.label" default="Its Id" /></label>
+				</td>
+				<td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'itsId', 'errors')}">
+					<g:textField name="itsId" maxlength="45" value="${assetInstance?.itsId}" />
+				</td>
+          <td valign="top" class="name">
+              <sitar:requiredInputFieldFlag/><label for="assetType"><g:message code="asset.assetType.label" default="Asset Type" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'assetType', 'errors')}">
+              <g:select name="assetType.id" from="${edu.hawaii.sitar.inf.AssetType.list()}" optionKey="id" value="${assetInstance?.assetType?.id}"  />
+          </td>
+      </tr>	    
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="location"><g:message code="asset.location.label" default="Location" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'location', 'errors')}">
+              <g:select name="location.id" from="${edu.hawaii.sitar.inf.Location.list()}" optionKey="id" value="${assetInstance?.location?.id}" noSelection="['null': '']" />
+          </td>
+          <td valign="top" class="name">
+              <sitar:requiredInputFieldFlag/><label for="ownershipType"><g:message code="asset.ownershipType.label" default="Ownership Type" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'ownershipType', 'errors')}">
+              <g:textField id="ownerTypes" name="ownershipType" maxlength="45" value="${assetInstance?.ownershipType}" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <sitar:requiredInputFieldFlag/><label for="manufacturer"><g:message code="asset.manufacturer.label" default="Manufacturer" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'manufacturer', 'errors')}">
+              <g:select name="manufacturer.id" from="${edu.hawaii.sitar.inf.Manufacturer.list()}" optionKey="id" value="${assetInstance?.manufacturer?.id}"  />
+          </td>
+          <td valign="top" class="name">
+              <label for="productDescription"><g:message code="asset.productDescription.label" default="Product Description" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'productDescription', 'errors')}">
+              <g:textField name="productDescription" maxlength="45" value="${assetInstance?.productDescription}" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="modelDesignation"><g:message code="asset.modelDesignation.label" default="Model Designation" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'modelDesignation', 'errors')}">
+              <g:textField name="modelDesignation" maxlength="45" value="${assetInstance?.modelDesignation}" />
+          </td>
+          <td valign="top" class="name">
+              <label for="vendorSupportLevel"><g:message code="asset.vendorSupportLevel.label" default="Vendor Support Level" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'vendorSupportLevel', 'errors')}">
+              <g:textField name="vendorSupportLevel" maxlength="45" value="${assetInstance?.vendorSupportLevel}" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="supportLevel"><g:message code="asset.supportLevel.label" default="Support Level" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'supportLevel', 'errors')}">
+              <g:textField name="supportLevel" maxlength="45" value="${assetInstance?.supportLevel}" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="serialNo"><g:message code="asset.serialNo.label" default="Serial No" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'serialNo', 'errors')}">
+              <g:textField name="serialNo" maxlength="45" value="${assetInstance?.serialNo}" />
+          </td>
+          <td valign="top" class="name">
+              <label for="decalNo"><g:message code="asset.decalNo.label" default="Decal No" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'decalNo', 'errors')}">
+              <g:textField name="decalNo" maxlength="45" value="${assetInstance?.decalNo}" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="isAvailableForParts"><g:message code="asset.isAvailableForParts.label" default="Is Available For Parts" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'isAvailableForParts', 'errors')}">
+              <g:checkBox name="isAvailableForParts" value="${assetInstance?.isAvailableForParts}" />
+          </td>
+          <td valign="top" class="name">
+              <label for="replacementAssetsGrp"><g:message code="asset.replacementAssetsGrp.label" default="Replacement Assets Grp" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'replacementAssetsGrp', 'errors')}">
+              <g:textField name="replacementAssetsGrp" value="${fieldValue(bean: assetInstance, field: 'replacementAssetsGrp')}" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="replacementTaskingGrp"><g:message code="asset.replacementTaskingGrp.label" default="Replacement Tasking Grp" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'replacementTaskingGrp', 'errors')}">
+              <g:textField name="replacementTaskingGrp" value="${fieldValue(bean: assetInstance, field: 'replacementTaskingGrp')}" />
+          </td>
+          <td valign="top" class="name">
+              <label for="assetStatus"><g:message code="asset.assetStatus.label" default="Asset Status" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'assetStatus', 'errors')}">
+              <g:textField name="assetStatus" maxlength="45" value="${assetInstance?.assetStatus}" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="postMigrationStatus"><g:message code="asset.postMigrationStatus.label" default="Post Migration Status" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'postMigrationStatus', 'errors')}">
+              <g:textField name="postMigrationStatus" maxlength="45" value="${assetInstance?.postMigrationStatus}" />
+          </td>
+          <td valign="top" class="name">
+              <label for="purchaseContract"><g:message code="asset.purchaseContract.label" default="Purchase Contract" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'purchaseContract', 'errors')}">
+              <g:select name="purchaseContract.id" from="${edu.hawaii.sitar.inf.Contract.list()}" optionKey="id" value="${assetInstance?.purchaseContract?.id}" noSelection="['null': '']" />
+          </td>
+      </tr>
+      <tr class="prop">
+          <td valign="top" class="name">
+              <label for="maintenanceContract"><g:message code="asset.maintenanceContract.label" default="Maintenance Contract" /></label>
+          </td>
+          <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'maintenanceContract', 'errors')}">
+              <g:select name="maintenanceContract.id" from="${edu.hawaii.sitar.inf.Contract.list()}" optionKey="id" value="${assetInstance?.maintenanceContract?.id}" noSelection="['null': '']" />
+          </td>
+          <td></td><td></td>
+    	</tr>
+		</tbody>
+	</table>
+</div>

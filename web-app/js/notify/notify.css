@@ -1,0 +1,89 @@
+#notifications {
+    font-size: 12pt;
+    font-family: Arial,sans-serif;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 284px;
+    position: absolute;
+    top: 0;
+    right: 2.0em;
+}
+*html #notifications {
+    width /**/: 302px;
+    top: 0.05em;
+    right: 0.15em;
+}
+#notifications li {
+    margin: 0.5em;
+    color: #ffffff;
+    min-height: 3em;
+    position: relative;
+}
+*html #notifications li {
+    margin /**/: 0.45em 0;
+    height: 3em;
+}
+#notifications li * {
+    margin: 0;
+    padding: 0;
+}
+#notifications li .inner {
+    margin: 0;
+    padding: 1em;
+    /*background: rgba(51, 61, 95, 0.87);*/
+    width: 100%;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    background: rgba(135, 162, 183, 0.86); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(135,162,183,0.86) 0%, rgba(46,63,100,0.86) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(135,162,183,0.86)), color-stop(100%,rgba(46,63,100,0.86))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(135,162,183,0.86) 0%,rgba(46,63,100,0.86) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(135,162,183,0.86) 0%,rgba(46,63,100,0.86) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(135,162,183,0.86) 0%,rgba(46,63,100,0.86) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(135,162,183,0.86) 0%,rgba(46,63,100,0.86) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87a2b7', endColorstr='#2e3f64',GradientType=0 ); /* IE6-9 */
+
+
+
+}
+/*= CSS hack for Opera Rounded Corners */
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
+    #notifications li .inner {
+        background: url(jquery.notify.svg);
+    }
+}
+*html #notifications li .inner {
+    padding: 0.6em;
+    margin: 7px 0 0 2px;
+}
+#notifications li .inner .title {
+    font-weight: bold;
+    font-size: 14pt;
+}
+#notifications li .inner .text {
+    font-size: 11pt;
+}
+#notifications .withicon .inner * {
+    margin-left: 68px;
+}
+#notifications li .inner .icon {
+    display: block;
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    text-align: center;
+    top: 1em;
+    left: -52px;
+    overflow: hidden;
+}
+#notifications li .inner .icon img {
+    margin: 0;
+}
+#notifications .withicon .inner {
+    min-height /**/: 52px;
+}
+*html #notifications .withicon {
+    height /**/: 80px;
+}

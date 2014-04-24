@@ -1,0 +1,62 @@
+<script type="text/javascript">
+   var childCount = ${personInstance?.contactInfos.size()} + 0;
+
+   function addContactInfo(){
+     var clone = $("#contactInfo_clone").clone()
+     var htmlId = 'contactInfosList['+childCount+'].';
+     var contactInfoInput = clone.find("input[id$=contactInfo]");
+     var contactTypeSelect = clone.find("select[id$=contactType]");
+   
+     clone.find("input[id$=id]")
+            .attr('id',htmlId + 'id')
+            .attr('name',htmlId + 'id');
+     clone.find("input[id$=deleted]")
+            .attr('id',htmlId + 'deleted')
+            .attr('name',htmlId + 'deleted');
+     clone.find("input[id$=new]")
+            .attr('id',htmlId + 'new')
+            .attr('name',htmlId + 'new')
+			.attr('value', 'true');
+     contactInfoInput.attr('id',htmlId + 'contactInfo')
+            .attr('name',htmlId + 'contactInfo');
+     contactTypeSelect.attr('id',htmlId + 'contactType')
+            .attr('name',htmlId + 'contactType.id');
+
+     clone.attr('id', 'contactInfo'+childCount);
+     $("#childList").append(clone);
+     clone.show();
+     contactInfoInput.focus();
+     childCount++;
+   }
+
+   //bind click event on delete buttons using jquery live
+   $('.del-contactInfo').live('click', function() {
+       //find the parent div
+       var prnt = $(this).parents(".contactInfo-div");
+       //find the deleted hidden input
+       var delInput = prnt.find("input[id$=deleted]");
+       //check if this is still not persisted
+       var newValue = prnt.find("input[id$=new]").attr('value');
+       //if it is new then i can safely remove from dom
+       if(newValue == 'true'){
+           prnt.remove();
+       }else{
+           //set the deletedFlag to true
+           delInput.attr('value','true');
+           //hide the div
+           prnt.hide();
+       }
+   });
+
+</script>
+
+<div id="childList">
+	<g:each var="contactInfo" in="${personInstance.contactInfos}"
+		status="i">
+		<!-- Render the contactInfo template (_contactInfo.gsp) here -->
+		<g:render template='contactInfo'
+			model="['contactInfo':contactInfo,'i':i,'hidden':false]" />
+		<!-- Render the contactInfo template (_contactInfo.gsp) here -->
+	</g:each>
+</div>
+<input type="button" value="Add ContactInfo" onclick="addContactInfo();" />

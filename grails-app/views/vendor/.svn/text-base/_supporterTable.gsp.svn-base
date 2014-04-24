@@ -1,0 +1,18 @@
+<table id="supportTable" class="jquiTable">
+	<thead>
+	  <tr>                        
+	      <th>Id</th>  
+	      <th>Person</th>                      
+	      <th>Role</th>
+	  </tr>
+	</thead>
+	<tbody>
+		<g:each in="${vendorInstance.supporters.sort{sp->sp.toString()}}" status="i" var="personSupportRoleInstance">
+    	<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">                        
+	      <td><g:link class="white-link" controller="personSupportRole" action="show" id="${personSupportRoleInstance.id}">${fieldValue(bean: personSupportRoleInstance, field: "id")}</g:link></td>                        
+	      <td>${fieldValue(bean: personSupportRoleInstance, field: "person")}</td>                        
+	      <td>${fieldValue(bean: personSupportRoleInstance, field: "supportRole")}</td>  
+			</tr>
+		</g:each>
+	</tbody>
+</table>

@@ -1,0 +1,380 @@
+import java.util.Date;
+
+import edu.hawaii.sitar.inf.*
+import grails.util.GrailsUtil
+
+class BootStrap {
+
+	def init = { servletContext ->
+
+		println "Running BootStrap.groovy"
+		environments {
+			development {
+
+				def df = new java.text.SimpleDateFormat("MM/dd/yyyy", Locale.US)
+
+				if (!Person.count() && !ContactInfo.count()) {
+					def person1 = new Person(uhNumber:"11111111", title:"President", lastName:"Obama", firstName:"Barrack", midInit:"H")
+
+					//create contactTypes
+					def contactTypeEma = new ContactType(name: "Email", description: "Electronic Mail")
+					contactTypeEma.save()
+					def contactTypePho = new ContactType(name: "Phone", description: "Land Line")
+					contactTypePho.save()
+					def contactTypeMob = new ContactType(name: "Mobile", description: "Cellular Phone or Pager")
+					contactTypeMob.save()
+					def contactTypeFax = new ContactType(name: "Fax", description: "Facsimile")
+					contactTypeFax.save()
+
+					person1.addToContactInfos new ContactInfo(contactType: contactTypeMob, contactInfo: "808-444-4444")
+					person1.addToContactInfos new ContactInfo(contactType: contactTypeEma, contactInfo: "me@example.com")
+					person1.addToContactInfos new ContactInfo(contactType: contactTypePho, contactInfo: "808-111-1111")
+					person1.addToContactInfos new ContactInfo(contactType: contactTypeFax, contactInfo: "808-222-2222")
+					person1.save(failOnError: true, flush: true)
+
+					def person2 = new Person(uhNumber:"22222222", title:"Construction Engineer", lastName:"Flintsone", firstName:"Fred", midInit:"").save(faileOnError: true)
+					def person3 = new Person(uhNumber:"33333333", title:"Secretary of State", lastName:"Clinton", firstName:"Hillary", midInit:"R").save(faileOnError: true)
+					def person4 = new Person(uhNumber:"44444444", title:"System Administrator", lastName:"Rubble", firstName:"Betty", midInit:"").save(faileOnError: true, flush: true)
+				}
+
+				def htr
+
+				if(!HawaiiTaxRate.count()){
+					htr = new HawaiiTaxRate(rate:0.04500F, description:"Minimum Oahu Tax Rate")
+					htr.save(failOnError:true)
+					new HawaiiTaxRate(rate:0.04712F, description:"Maximum Oahu Tax Rate").save(failOnError:true,flush:true)
+				}
+
+				if(!SupportRole.count()){
+					new SupportRole(name:'sa').save(failOnError:true)
+					new SupportRole(name:'bo').save(failOnError:true)
+					new SupportRole(name:'owner').save(failOnError:true)
+					new SupportRole(name:'consultant').save(failOnError:true)
+					new SupportRole(name:'vendor representative').save(failOnError:true)
+					new SupportRole(name:'vendor contract manager').save(failOnError:true)
+					new SupportRole(name:'uh contract manager').save(failOnError:true)
+				}
+
+				if(!SupportableObjectType.count()){
+					new SupportableObjectType(name:'Vendor').save(failOnError:true)
+					new SupportableObjectType(name:'Contract').save(failOnError:true)
+					new SupportableObjectType(name:'Server').save(failOnError:true)
+				}
+
+				if(!Vendor.count()){
+					new Vendor(name: "Widgets, Inc.", phone:"1234567").save(failOnError:true)
+					new Vendor(name: "Acme Products Company", phone:"89101112").save(failOnError:true)
+					new Vendor(name: "Widgets 'R' Us", phone:"1314151").save(failOnError:true)
+				}
+
+				def csActive
+				def csInactive
+				if(!ContractStatus.count()){
+					csActive = new ContractStatus(status: "Active",	description: "Contract is currently active.")
+					csActive.save(failOnError:true)
+					csInactive = new ContractStatus(status: "Inactive",	description: "Contract is not currently active.")
+					csInactive.save(failOnError:true,flush:true)
+				}
+
+				if(!Contract.count()){
+					new Contract(
+							uhContractNo:"C100046",
+							vendorContractNo:"54546678",
+							uhContractTitle:"Install, Implement and Maintain a Storage Array",
+							contractStatus:csActive,
+							annualRenewalReminderMm:12,
+							annualRenewalReminderDd:30,
+							annualRenewalDeadlineMm:12,
+							annualRenewalDeadlineDd:30,
+							annualCost:0F,
+							contractBeginDate: df.parse("12/31/2011"),
+							contractEndDate: df.parse("12/30/2012"),
+							taxRate:htr
+							).save(failOnError:true)
+					new Contract(
+							uhContractNo:"AAE324",
+							vendorContractNo:"54AAAF6678",
+							uhContractTitle:"Build an app",
+							contractStatus:csInactive,
+							annualRenewalReminderMm:12,
+							annualRenewalReminderDd:30,
+							annualRenewalDeadlineMm:12,
+							annualRenewalDeadlineDd:30,
+							annualCost:0F,
+							contractBeginDate: df.parse("12/31/2011"),
+							contractEndDate: df.parse("12/30/2012"),
+							taxRate:htr
+							).save(failOnError:true)
+				}
+
+				if (!ContractFeatureType.count()) {
+					def cft = new ContractFeatureType(
+							type: "Hardware Maintenance",
+							description: "Contract provides for hardware maintenance, renewable annually."
+							)
+					cft.save(failOnError: true, flush: true)
+					cft = new ContractFeatureType(
+							type: "Hardware Procurement",
+							description: "Contract provides for discounted purchases of additional hardware."
+							)
+					cft.save(failOnError: true, flush: true)
+				}
+
+				if (!ContractFormType.count()) {
+					def cfmt = new ContractFormType(
+							form: "Form 65",
+							description: "OPRPM Form 65 - Request for Sole Source",
+							formUrl: "www.hawaii.edu/apis/apm/a8200/Forms/Form65.pdf"
+							)
+					cfmt.save(failOnError: true, flush: true)
+					cfmt = new ContractFormType(
+							form: "Form 95",
+							description: "OPRPM Form 95 - Determination of Cost or Price Reasonableness",
+							formUrl: "www.hawaii.edu/apis/apm/a8200/Forms/Form95.pdf"
+							)
+					cfmt.save(failOnError: true, flush: true)
+				}
+				def dev, test, prod
+				if (!Environment.count()) {
+					prod = new Environment( name: 'production', abbreviation: 'prod' ).save( failOnError: true, flush: true )
+					test = new Environment( name: 'test', abbreviation: 'test' ).save( failOnError: true, flush: true )
+					dev  = new Environment( name: 'development', abbreviation: 'dev' ).save( failOnError: true, flush: true )
+				}
+				
+				if (!Server.count()) {
+					def server1 = new Server(
+							hostname:'uhunix',
+							nwaccScan: true,
+							updatedById: 1,
+							solarisFssShare: 2,
+							environment: prod
+							)
+					server1.save(failOnError: true, flush: true)
+
+					def server2 = new Server(
+							hostname:'mid73',
+							nwaccScan: false,
+							updatedById: 1,
+							solarisFssShare: 1,
+							environment: dev
+							)
+					server2.save(failOnError: true, flush: true)
+
+					def server3 = new Server(
+							hostname:'gmo73',
+							nwaccScan: false,
+							updatedById: 1,
+							environment: dev
+							)
+					server3.save(failOnError: true, flush: true)
+
+				}
+
+				if (!ResourceType.count()) {
+					def ram = new ResourceType(
+							resourceType: "RAM",
+							resourceDescription: "Random Access Memory",
+							updatedById: 1,
+							)
+					ram.save(failOnError: true, flush: true)
+
+					def swap = new ResourceType(
+							resourceType: "Swap",
+							resourceDescription: "Swap space",
+							updatedById: 1,
+							)
+					swap.save(failOnError: true, flush: true)
+
+					def cpuCore = new ResourceType(
+							resourceType: "CPU Core",
+							resourceDescription: "CPU Core",
+							updatedById: 1,
+							)
+					cpuCore.save(failOnError: true, flush: true)
+
+					def cpuThread = new ResourceType(
+							resourceType: "CPU Thread",
+							resourceDescription: "CPU Thread/vCPU",
+							updatedById: 1,
+							)
+					cpuThread.save(failOnError: true, flush: true)
+
+					def cert = new ResourceType(
+							resourceType: "SSL Certificate",
+							resourceDescription: "SSL certificate",
+							updatedById: 1,
+							)
+					cert.save(failOnError: true, flush: true)
+
+					def fcDisk = new ResourceType(
+							resourceType: "Fibre Channel Disk Space",
+							resourceDescription: "Fibre Channel disk space",
+							updatedById: 1,
+							)
+					fcDisk.save(failOnError: true, flush: true)
+
+					def sataDisk = new ResourceType(
+							resourceType: "SATA Disk Space",
+							resourceDescription: "SATA disk space",
+							updatedById: 1,
+							)
+					sataDisk.save(failOnError: true, flush: true)
+
+					def internalDisk = new ResourceType(
+							resourceType: "Internal Disk Space",
+							resourceDescription: "Disk space inside a server",
+							updatedById: 1,
+							)
+					internalDisk.save(failOnError: true, flush: true)
+
+				}
+
+				if (!UnitType.count()){
+					def gb = new UnitType(
+							unit: "GB",
+							unitDescription: "Gigabyte",
+							updatedById: 1,
+							)
+					gb.save(failOnError: true, flush: true)
+
+					def mb = new UnitType(
+							unit: "MB",
+							unitDescription: "Megabyte",
+							updatedById: 1,
+							)
+					mb.save(failOnError: true, flush: true)
+
+					def oneItem = new UnitType(
+							unit: "Item",
+							unitDescription: "a unit of a group of items",
+							updatedById: 1,
+							)
+					oneItem.save(failOnError: true, flush: true)
+					
+					def cpuThread = new UnitType(
+						unit: "CPU Threads",
+						unitDescription: "a CPU thread",
+						updatedById: 1,
+						)
+					cpuThread.save(failOnError: true, flush: true)
+					
+					def cpuCore = new UnitType(
+						unit: "CPU Cores",
+						unitDescription: "a CPU core",
+						updatedById: 1,
+						)
+					cpuCore.save(failOnError: true, flush: true)
+				
+				}
+
+				def server, diskArray, cert
+				if (!AssetType.count()){
+					server = new AssetType(
+							name: 'Server - Hardware',
+							description: 'Hardware that consists of one or more servers'
+							)
+					server.save(failOnError: true, flush: true)
+
+					diskArray = new AssetType(
+							name: 'Disk Array',
+							description: 'A disk array'
+							)
+					diskArray.save(failOnError: true, flush: true)
+
+					cert = new AssetType(
+							name: 'SSL Certificate',
+							description: 'SSL Certificate'
+							)
+					cert.save(failOnError: true, flush: true)
+
+				}
+
+				def madeBy1, madeBy2, madeBy3
+				if ( ! Manufacturer.count() ) {
+					madeBy1 = new Manufacturer( name: "Company A", code: "COA", phone: "555-AAAA", updatedById: 1 ).save(failOnError: true, flush: true)
+					madeBy2 = new Manufacturer( name: "Company B", code: "COB", phone: "555-BBBB", updatedById: 1 ).save(failOnError: true, flush: true)
+					madeBy3 = new Manufacturer( name: "Company C", code: "COC", phone: "555-CCCC", updatedById: 1 ).save(failOnError: true, flush: true)
+				}
+
+				def locale1, locale2, locale3
+				if ( ! Location.count() ) {
+					locale1 = new Location( locationDescription: "Banner Conference Room", updatedById: 1 ).save(failOnError: true, flush: true)
+					locale2 = new Location( locationDescription: "Keller 103", updatedById: 1 ).save(failOnError: true, flush: true)
+					locale3 = new Location( locationDescription: "Campus Center 304", updatedById: 1).save(failOnError: true, flush: true)
+				}
+
+				def asset1, asset2, asset3, asset4, asset5
+				if ( ! Asset.count() ) {
+					asset1 = new Asset( itsId: "t2k73", updatedById: 123, location: locale2, assetType: server, manufacturer: madeBy1)
+					asset1.save(failOnError: true, flush: true)
+
+					asset2 = new Asset( itsId: "web21", updatedById: 123, location: locale2, assetType: server, manufacturer: madeBy1)
+					asset2.save(failOnError: true, flush: true)
+
+					asset3 = new Asset( itsId: "hit03", updatedById: 123, location: locale2, assetType: server, manufacturer: madeBy1)
+					asset3.save(failOnError: true, flush: true)
+					
+					asset4 = new Asset( itsId: "esx01", updatedById: 333, location: locale2, assetType: server, manufacturer: madeBy1)
+					asset4.save(failOnError: true, flush: true)
+
+					asset5 = new Asset( itsId: "esx02", updatedById: 333, location: locale2, assetType: server, manufacturer: madeBy1)
+					asset5.save(failOnError: true, flush: true)
+				}
+
+				if ( ! Application.count() ) {
+					def app1 = new Application( applicationTitle: "UHIMS", applicationDescription: "UH Identity Management System", applicationGroup: "IAM", updatedById: 1, environment:test )
+					app1.save(failOnError: true, flush: true)
+
+					def app2 = new Application( applicationTitle: "WPMS", applicationDescription: "White Pages Management System", applicationGroup: "IAM", updatedById: 1, environment:prod )
+					app2.save(failOnError: true, flush: true)
+
+					def app3 = new Application( applicationTitle: "Banner Forms", applicationDescription: "Banner Forms", applicationGroup: "Banner", updatedById: 1, environment:prod )
+					app3.save(failOnError: true, flush: true)
+
+					def app4 = new Application( applicationTitle: "Banner SSA", applicationDescription: "Banner Self-Service", applicationGroup: "Banner", updatedById: 1, environment:prod )
+					app4.save(failOnError: true, flush: true)
+
+					def app5 = new Application( applicationTitle: "Banner Database", applicationDescription: "Banner Database", applicationGroup: "Banner", updatedById: 1, environment:prod )
+					app5.save(failOnError: true, flush: true)
+					
+					def app6 = new Application( applicationTitle: "UHIMS", applicationDescription: "UH Identity Management System", applicationGroup: "IAM", updatedById: 2, environment: prod )
+					app6.save( failOnError: true, flush: true )
+					
+					def app7 = new Application( applicationTitle: "UHIMC", applicationDescription: "UH Identity Management Console", applicationGroup: "IAM", updatedById: 1234, environment: dev )
+					app7.save( failOnError: true, flush: true )
+				}
+				
+				if ( ! ServiceLevelAgreement.count() ) {
+					def sla1 = new ServiceLevelAgreement( slaTitle: "Superior Service", slaType: "Enterprise" )
+					sla1.save(failOnError: true, flush: true)
+				}
+				
+				if(!NoteType.count()){
+					new NoteType(name:'General', description:'a miscellaneous note').save(failOnError:true)
+					new NoteType(name:'Planning', description:'a planning note').save(failOnError:true)
+					new NoteType(name:'Change', description:'a change note').save(failOnError:true)
+				}
+				
+				def rcType1
+				if ( ! ResourceCollectionType.count() ) {
+					rcType1 = new ResourceCollectionType( type: "Cluster", description: "A group of servers" )
+					rcType1.save( flush: true, failOnError: true )
+				}
+				
+				def rc1, rc2
+				if ( ! ResourceCollection.count() ) {
+					rc1 = new ResourceCollection( name: "ESX Cluster", description: "A collection of ESX servers", type: rcType1 )
+					rc1.addToAssets(asset4)
+					rc1.addToAssets(asset5)
+					rc1.save( flush: true, failOnError: true )
+					rc2 = new ResourceCollection( name: "OSX Cluster", description: "A collection of OSX servers", type: rcType1 )
+					rc2.save( flush: true, failOnError: true )
+				}				
+			}
+		}
+	}
+
+
+	def destroy = {
+	}
+}

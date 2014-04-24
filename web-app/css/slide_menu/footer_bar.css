@@ -1,0 +1,208 @@
+
+#footer-bar-basic {
+	clear: both;
+	background-color: 697F7F;
+	/*  background-color:BF8C62; */
+	color: #FFFFFF;
+	font-family: "Arial Black", Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	height: 15px;
+	z-index: 100;
+	position: fixed;
+	bottom: 10px;
+	left:0;
+	width: 25%;
+	padding: 15px 20px 20px 10%;
+	opacity: 0.6;
+	/* rounded corners */
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#footer-edit-delete-bar {
+	clear: both;
+	background-color: 697F7F;
+	/*  background-color:BF8C62; */
+	color: #FFFFFF;
+	font-family: "Arial Black", Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	height: 20px;
+	z-index: 100;
+	position: fixed;
+	right: 5px;
+	bottom: 10px;
+	width: 15%;
+	padding: 10px 20px 20px 10%;
+	opacity: 0.6;
+	/* rounded corners */
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#footer-update-delete-bar {
+	clear: both;
+	background-color: 697F7F;
+	/*  background-color:BF8C62; */
+	color: #FFFFFF;
+	font-family: "Arial Black", Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	height: 20px;
+	z-index: 100;
+	position: fixed;
+	right: 5px;
+	bottom: 10px;
+	width: 20%;
+	padding: 10px 20px 20px 10%;
+	opacity: 0.6;
+	/* rounded corners */
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+}
+#footer-create-save-bar {
+	clear: both;
+	background-color: 697F7F;
+	/*  background-color:BF8C62; */
+	color: #FFFFFF;
+	font-family: "Arial Black", Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	height: 20px;
+	z-index: 100;
+	position: fixed;
+	right: 5px;
+	bottom: 10px;
+	width: 15%;
+	padding: 10px 20px 20px 10%;
+	opacity: 0.6;
+	/* rounded corners */
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+}
+
+/* #top-floating-bar {
+	background: none repeat scroll 0 0 #2D2D2D;
+	height: 30px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+} */
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+.fixed-bar-buttons {
+	float: left;
+	color: #fff;
+}
+
+.fixed-bar-buttons ul {
+	height: 25px;
+	padding-right: 10px;
+}
+
+.fixed-bar-buttons ul li {
+	display: block;
+	float: left;
+	font-family: "Arial Black", Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	height: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 0px;
+	/* rounded corners */
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+
+	/* background-color: #ffffff; */
+}
+
+.fixed-bar-buttons ul li:hover {
+	background-color: 225353;
+}
+
+#content-panel {
+	float: left;
+	margin-top: 60px;
+}
+
+.home_button {
+	background: url(images/icon_46.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.list_button {
+	background: url(images/icon_21.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.create_button {
+	background: url(images/icon_13.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.edit_button {
+	background: url(images/icon_25.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.save_button {
+	background: url(images/icon_52.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.delete_button {
+	background: url(images/icon_26.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.update_button {
+	background: url(images/icon_52.png) center left no-repeat;
+	color: #333;
+	padding-left: 25px;
+}
+
+.logout_button {
+    background: url(images/icon_52.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+
+.breadcrumb_button{
+    background: url(images/icon_52.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+
+.breadcrumbTrash_button{
+    background-image: url(images/trash.png);
+    background-color: #ff4400;
+    padding-left: 10px;
+}

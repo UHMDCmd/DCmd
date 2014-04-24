@@ -1,0 +1,114 @@
+10
+
+dir
+4844
+svn+ssh://svnd@repo.its.hawaii.edu/midware/sitar-inf/trunk/sitar
+svn+ssh://svnd@repo.its.hawaii.edu/midware
+
+
+
+2011-08-03T23:14:00.757131Z
+4829
+keithhir
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cfdf2c30-4e16-0410-9916-ed9fc15ca156
+
+SITAR-Inf Data Model.mwb
+file
+
+
+
+
+2013-02-16T00:51:34.597000Z
+6fca8e29b9d2002a7125fe0497c7a4bc
+2011-07-20T19:46:23.809754Z
+4816
+mhodges_uhm
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+37909
+
+application.properties
+file
+
+
+
+
+2011-07-29T23:28:23.496000Z
+969ac0132a574b246060d0d8ee837c30
+2011-07-07T00:34:45.860398Z
+4758
+keithhir_uhm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+358
+
+grails-app
+dir
+
+lib
+dir
+
+scripts
+dir
+
+src
+dir
+
+test
+dir
+
+web-app
+dir
+

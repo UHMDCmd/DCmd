@@ -1,0 +1,163 @@
+
+/*
+ * On document load, bind the click event of the 
+ * 'Add Required Renewal Form' button to an ajax call that
+ * adds a ContractRenewalFormType to the current Contract.
+ * Also, hide all of the td elements in the table
+ * so the id of ContractRenewalFormType object is not
+ * visible.
+ */
+$(document).ready(function() {
+	try{
+	// Bind the click event
+	alert('bind ready')
+  	$('#remoteAddRequiredRenewalFormButton').bind('click', function() {
+
+  		// validate input
+  		if(validateRequiredRenewalFormInput()){
+  			
+  			// set up the ajax call
+	  		$.ajax({
+	  			url: '/dcmd/contract/addToRequiredRenewalForms',
+	  			data: getRequiredRenewalFormParamsToAdd(),
+	  			type: 'POST',
+	  			dataType: 'json',
+	  			success: refreshRequiredRenewalFormData,
+	  			error: function(jqXHR, textStatus, errorThrown){
+	  				alert('The addition of form/doc was not successful.');
+	  				alert(textStatus);
+	  			}
+	  		});
+  		}
+	});
+	}catch(exception){
+		alert('caught' + exception.toString());
+	}
+	addRequiredRenewalFormDeleteButtons();
+	addRequiredRenewalFormTableStyles();
+});
+
+/*
+ * Loop through all tbody rows and add a delete button column. Note that if the
+ * number of column headings changes in <table id="requiredRenewalFormsTable">
+ * then the length check below needs to be updated.
+ */
+function addRequiredRenewalFormDeleteButtons(){
+	if(('#requiredRenewalFormsTable thead tr th').length == 2){
+		$('#requiredRenewalFormsTable thead tr').append("<th>&nbsp;</th>");
+	}
+	$('#requiredRenewalFormsTable tbody tr').each(function(index){
+		var id = this.children[0].innerText.trim();
+		var del = getRequiredRenewalFormDeleteButton(index);
+		$(this).append(del);
+		var buttonId = "#remoteDeleteRequiredRenewalForm" + index;
+		$(buttonId).bind('click', function(){
+	  		$.ajax({
+	  			url: '/dcmd/contract/removeFromRequiredRenewalForms',
+	  			data: getRequiredRenewalFormParamsToRemove(id),
+	  			type: 'POST',
+	  			success: refreshRequiredRenewalFormData,
+	  			error: function(jqXHR, textStatus, errorThrown){
+	  				alert('The removal of form/doc was not complete.');
+	  				alert(errorThrown);
+	  			}
+	  		});
+		});
+	});
+}
+
+function addRequiredRenewalFormTableStyles(){
+	$("#editRequiredRenewalFormsTable").css({borderCollapse:"collapse", borderSpacing:"0px", marginBottom:"10px"});
+	$("#editRequiredRenewalFormsTable th").addClass("ui-state-default").css({border:"0px"});
+	$("#editRequiredRenewalFormsTable td").addClass("ui-widget-content").css({border:"0px"});
+}
+
+function getRequiredRenewalFormDeleteButton(index){
+	return "<td><input type='submit' name='remoteDeleteRequiredRenewalForm" + index + "' value='Remove' id='remoteDeleteRequiredRenewalForm" + index + "'></td>";
+}
+
+/*
+ * Get a <td> containing a linkable id.
+ */
+function getRequiredRenewalFormIdRow(id){
+	var td = "<td>";
+	td += "<a class='white-link' href='contractFormType/show/" + id + ">"
+	td += id;
+	td += "</a>"
+	td += "</td>";
+	return td;
+}
+
+/*
+ * Formats the params to be sent in the ajax Add request.
+ */
+function getRequiredRenewalFormParamsToAdd(){
+	alert("contractId: " + $('#contractId').val() + ", requiredRenewalForm: " + $('#requiredRenewalForm').val())
+	var params = { 
+		contractId:$('#contractId').val(),
+		requiredRenewalForm:$('#requiredRenewalForm').val()
+	};
+	return $.param(params);
+}
+
+/*
+ * Formats the params to be sent in the ajax Remove request.
+ */
+function getRequiredRenewalFormParamsToRemove(id){
+	var params = {
+			contractId:$('#contractId').val(),
+			requiredRenewalForm:id
+	};
+alert("contractId: " + $('#contractId').val() + ", requiredRenewalForm: " + $('#requiredRenewalForm').val())
+
+	return $.param(params);
+}
+
+/*
+ * When ajax call completes successfully, replace all rows in the table with
+ * values returned.
+ */
+function refreshRequiredRenewalFormData(data, status, jqXHR){
+			
+	// clear out all table rows not in th
+	var rowCount = $('#requiredRenewalFormsTable tbody tr').length;
+	$('#requiredRenewalFormsTable tbody tr').remove();
+	var newRow;
+	for(rowIndex in data){
+		newRow = '<tr ';
+		if((rowIndex % 2) == 1){
+			newRow += "class='even'>";
+		}else{
+			newRow += "class='odd'>";
+		}
+		newRow += getRequiredRenewalFormIdRow(data[rowIndex].id)
+		newRow += "<td>" + data[rowIndex].id + "</td>"
+		newRow += "<td>" + data[rowIndex].contractFormType + "</td>"
+		newRow += "</tr>";
+		$('#requiredRenewalFormsTable').append(newRow);
+	}
+	addRequiredRenewalFormDataDeleteButtons();
+	
+	var newRowCount = $('#requiredRenewalFormsTable tbody tr').length;
+	if(rowCount == newRowCount){
+		alert("The form/doc type is already specified!");
+	}
+}
+
+function validateRequiredRenewalFormInput(){
+	alert('validate ready');
+
+	var msg='';
+	if($('#requiredRenewalForm').val() == ''){
+		msg += 'You must select a form/doc type.';
+	}
+	if(msg != ''){
+		alert(msg);
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
+

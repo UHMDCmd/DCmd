@@ -1,0 +1,17 @@
+<table>
+	<tbody>
+		<tr class="prop">
+			<td valign="top" class="name"><g:message code="asset.purchaseListPrice.label" default="Purchase List Price" /></td>
+			<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "purchaseListPrice")}</td>
+			<td valign="top" class="name"><g:message code="asset.purchaseDiscountPrice.label" default="Purchase Discount Price" /></td>
+			<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "purchaseDiscountPrice")}</td>
+		</tr>
+		
+		<tr class="prop">
+			<td valign="top" class="name"><g:message code="asset.maintenanceListPrice.label" default="Maintenance List Price" /></td>
+			<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "maintenanceListPrice")}</td>
+			<td valign="top" class="name"><g:message code="asset.maintenanceDiscountPrice.label" default="Maintenance Discount Price" /></td>
+			<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "maintenanceDiscountPrice")}</td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,26 @@
+<div id="supporter${i}" class="supporter-div" <g:if test="${hidden}">style="display:none;"</g:if>>
+	<g:hiddenField name='supportersList[${i}].id' value='${supporter?.id}' />
+	<g:hiddenField name='supportersList[${i}].deleted' value='false' />
+	<g:hiddenField name='supportersList[${i}].new' value='false' />
+
+	<g:select name='supportersList[${i}].person.id'
+		from="${edu.hawaii.sitar.inf.Person.list()}"
+		id="supportersList[${i}].person"
+		value='${supporter?.person}' optionKey='id' />
+	<g:select name="supportersList[${i}].supportRole.id"
+		from="${edu.hawaii.sitar.inf.SupportRole.list()}"
+		value="${supporter?.supportRole?.id}"
+        id="supportersList[${i}].supportRole"
+		optionKey="id"
+		optionValue="name"/>
+	<g:select name="supportersList[${i}].supportableObjectType.id"
+		from="${edu.hawaii.sitar.inf.SupportableObjectType.list()}"
+		value="${supporter?.supportRole?.id}"
+        id="supportersList[${i}].supportableObjectType"
+		optionKey="id"
+		optionValue="name"/>
+
+	<span class="del-supporter"> <img
+		src="${resource(dir:'images/skin', file:'icon_delete.png')}"
+		style="vertical-align: middle;" /> </span>
+</div>

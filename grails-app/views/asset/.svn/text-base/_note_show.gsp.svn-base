@@ -1,0 +1,23 @@
+<g:if test="${!notes?.size()}">
+	<div>No '${noteType.name}' notes created yet</div>
+</g:if>
+<g:else>
+	<table class="jquiTable">
+		<thead>
+			<tr>
+				<th>Created</th>
+				<th>Updated</th>
+				<th>Text</th>
+			</tr>
+		</thead>
+		<tbody>		
+			<g:each in="${notes.sort{a,b-> b.lastUpdated <=> a.lastUpdated}}" var="note">
+				<tr>
+					<td>${note.dateCreated}</td>
+					<td>${note.lastUpdated}</td>
+					<td>${note.text}</td>
+				</tr>
+			</g:each>
+		</tbody>
+	</table>
+</g:else>

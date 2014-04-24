@@ -1,0 +1,33 @@
+<%@ page import="edu.hawaii.sitar.inf.Asset"%>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="layout" content="main" />
+	<g:set var="entityName" value="${message(code: 'asset.label', default: 'Asset')}" />
+	<g:javascript library="asset" />
+	<calendar:resources lang="en" theme="green" />
+	<title>
+		<g:message code="default.edit.label" args="[entityName]" />
+	</title>
+	</head>
+	<body>
+		<g:render template="../nav" model="[entityName: entityName]" />
+		<div class="body">
+			<g:render template="../content_title" model="[entityName: entityName, code:'default.edit.label']" />
+			<sitar:requiredInputFieldsReminder/>
+			<s:info/>
+			<g:hasErrors bean="${assetInstance}">
+				<s:errorDiv>
+					<s:renderErrors bean="${assetInstance}" as="list" />
+				</s:errorDiv>
+			</g:hasErrors>
+			<g:form method="post">
+				<g:hiddenField name="id" value="${assetInstance?.id}" />
+				<g:hiddenField name="version" value="${assetInstance?.version}" />
+				<g:render template="dialog" />
+				<g:render template="update_delete_buttons"/>
+				<g:render template="tabs" />
+			</g:form>
+		</div>
+	</body>
+</html>

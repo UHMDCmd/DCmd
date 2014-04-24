@@ -1,0 +1,24 @@
+<table>
+	<tbody>
+		<tr class="prop">
+			<td valign="top" class="name"><g:message code="asset.endOfServiceLife.label" default="End Of Service Life" /></td>
+			<td valign="top" class="value"><g:formatDate date="${assetInstance?.endOfServiceLife}" /></td>
+			<td valign="top" class="name"><g:message code="asset.warrantyEndDate.label" default="Warranty End Date" /></td>
+			<td valign="top" class="value"><g:formatDate date="${assetInstance?.warrantyEndDate}" /></td>
+		</tr>
+		
+		<tr class="prop">
+			<td valign="top" class="name"><g:message code="asset.retiredDate.label" default="Retired Date" /></td>
+			<td valign="top" class="value"><g:formatDate date="${assetInstance?.retiredDate}" /></td>
+			<td valign="top" class="name"><g:message code="asset.removedFromInventoryDate.label" default="Removed From Inventory Date" /></td>
+			<td valign="top" class="value"><g:formatDate date="${assetInstance?.removedFromInventoryDate}" /></td>
+		</tr>
+		
+		<tr class="prop">
+			<td valign="top" class="name"><g:message code="asset.replacementAvailabilityDate.label" default="Replacement Availability Date" /></td>
+			<td valign="top" class="value"><g:formatDate date="${assetInstance?.replacementAvailabilityDate}" /></td>
+			<td valign="top" class="name"><g:message code="asset.migrationCompletionDate.label" default="Migration Completion Date" /></td>
+			<td valign="top" class="value"><g:formatDate date="${assetInstance?.migrationCompletionDate}" /></td>
+		</tr>
+	</tbody>
+</table>			

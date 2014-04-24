@@ -1,0 +1,207 @@
+#update {
+    margin:10px 40px;
+}
+
+.button {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0.5em 1em 0.55em;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover {
+    text-decoration: none;
+}
+
+.button:active {
+    position: relative;
+    top: 1px;
+}
+
+/* white */
+.white {
+    color: #606060;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top,  #fff,  #ededed);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+
+.white:hover {
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+
+.white:active {
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top,  #ededed,  #fff);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+
+.tip {
+    text-align: left;
+    width:auto;
+    max-width:500px;
+}
+
+.tip-title {
+    font-size: 11px;
+    text-align:center;
+    margin-bottom:2px;
+}
+
+#right-container {
+    display: none;
+}
+
+#center-container {
+    width:98%;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#infovis {
+    width:100%;
+}
+
+.innerButton {
+    right:0px;
+}
+.innerDiv {
+    right:2px;
+    text-align:right;
+    margin-left:auto;
+    margin-top:5px;
+    padding-bottom:5px;
+    z-index:4;
+}
+.edit_dialog_box {
+    right:2px;
+    text-align:left;
+    margin-left:auto;
+    margin-top:5px;
+    padding-bottom:5px;
+    z-index:4;
+}
+
+.PStopRow td {
+    border-top:1px solid white;
+}
+.CDUtopRow td {
+    border-top:1px solid white;
+}
+.PSUtopRow td {
+    border-top:1px solid white;
+}
+
+.treeButton {
+    background:white;
+    opacity:0.7;
+    font-size:1.3em;
+    -moz-border-radius:3px 3px 3px 3px;
+    border-radius:3px 3px 3px 3px;
+    border:solid 1px #000;
+    margin-right:3px;
+    padding-left:3px;
+    padding-right:3px;
+    z-index:5;
+
+}
+
+.treeButton:hover {
+    opacity:1;
+}
+
+.detailsDiv {
+    padding-top:8px;
+    padding-left:0px;
+    text-align:left;
+    font-size:1em;
+}
+.detailsTD {
+    line-height:1.2em;
+    padding-left:20px;
+    text-align:left;
+    font-size:1em;
+    border-right:1px solid white;
+    border-left:1px solid white;
+}
+.detailsTH {
+    line-height:1.2em;
+    text-align:center;
+    font-size:1em;
+    font-weight:bold;
+
+
+}
+
+.rotateDiv {
+    height:160px;
+    width:160px;
+    text-align:center;
+    z-index:0;
+
+
+    transform:rotate(270deg);
+    -ms-transform:rotate(270deg); /* IE 9 */
+    -webkit-transform:rotate(270deg); /* Safari and Chrome */
+    color:white;
+    font-size:2em;
+}
+
+.sideLabel {
+
+}
+
+.node {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index:3;
+}
+
+.labelNode {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index:1;
+}
+
+.dialog-tr {
+    text-align:left;
+    margin-top:5px;
+}
+
+.connectorsDiv {
+    width:100%;
+
+}
+
+/*breaker pole css*/
+.fieldSetA {background: #4a4d4a}
+.fieldSetB {background: #4a4d4a}
+.ph {color: #e6e6e6} /*poleheader*/
+

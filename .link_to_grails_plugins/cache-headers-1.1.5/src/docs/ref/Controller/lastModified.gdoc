@@ -1,0 +1,21 @@
+
+h1. lastModified
+
+h2. Purpose
+
+
+
+h2. Examples
+
+{code:java}
+foo.lastModified(object)
+{code}
+
+h2. Description
+
+
+
+Arguments:
+
+[* @object@
+]

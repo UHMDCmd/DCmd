@@ -1,0 +1,33 @@
+<table>
+	<thead></thead>
+	<tbody>
+	  <tr class="prop">
+	      <td valign="top" class="name">
+	          <label for="purchaseListPrice"><g:message code="asset.purchaseListPrice.label" default="Purchase List Price" /></label>
+	      </td>
+	      <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'purchaseListPrice', 'errors')}">
+	          <g:textField name="purchaseListPrice" value="${fieldValue(bean: assetInstance, field: 'purchaseListPrice')}" />
+	      </td>
+	      <td valign="top" class="name">
+	          <label for="purchaseDiscountPrice"><g:message code="asset.purchaseDiscountPrice.label" default="Purchase Discount Price" /></label>
+	      </td>
+	      <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'purchaseDiscountPrice', 'errors')}">
+	          <g:textField name="purchaseDiscountPrice" value="${fieldValue(bean: assetInstance, field: 'purchaseDiscountPrice')}" />
+	      </td>
+	  </tr>
+	  <tr class="prop">
+	      <td valign="top" class="name">
+	          <label for="maintenanceListPrice"><g:message code="asset.maintenanceListPrice.label" default="Maintenance List Price" /></label>
+	      </td>
+	      <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'maintenanceListPrice', 'errors')}">
+	          <g:textField name="maintenanceListPrice" value="${fieldValue(bean: assetInstance, field: 'maintenanceListPrice')}" />
+	      </td>
+	      <td valign="top" class="name">
+	          <label for="maintenanceDiscountPrice"><g:message code="asset.maintenanceDiscountPrice.label" default="Maintenance Discount Price" /></label>
+	      </td>
+	      <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'maintenanceDiscountPrice', 'errors')}">
+	          <g:textField name="maintenanceDiscountPrice" value="${fieldValue(bean: assetInstance, field: 'maintenanceDiscountPrice')}" />
+	      </td>
+	  </tr>
+	</tbody>
+</table>

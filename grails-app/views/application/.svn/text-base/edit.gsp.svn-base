@@ -1,0 +1,134 @@
+
+
+<%@ page import="edu.hawaii.sitar.inf.Application" %>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}" />
+        <title><g:message code="default.edit.label" args="[entityName]" /></title>
+    </head>
+    <body>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${applicationInstance}">
+            <div class="errors">
+                <g:renderErrors bean="${applicationInstance}" as="list" />
+            </div>
+            </g:hasErrors>
+            <g:form method="post" >
+                <g:hiddenField name="id" value="${applicationInstance?.id}" />
+                <g:hiddenField name="version" value="${applicationInstance?.version}" />
+                <div class="dialog">
+                    <table>
+                        <tbody>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="applicationTitle"><g:message code="application.applicationTitle.label" default="Application Title" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'applicationTitle', 'errors')}">
+                                    <g:textField name="applicationTitle" maxlength="45" value="${applicationInstance?.applicationTitle}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="applicationDescription"><g:message code="application.applicationDescription.label" default="Application Description" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'applicationDescription', 'errors')}">
+                                    <g:textArea name="applicationDescription" cols="40" rows="5" value="${applicationInstance?.applicationDescription}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="applicationGroup"><g:message code="application.applicationGroup.label" default="Application Group" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'applicationGroup', 'errors')}">
+                                    <g:textField name="applicationGroup" maxlength="45" value="${applicationInstance?.applicationGroup}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="applicationTier"><g:message code="application.applicationTier.label" default="Application Tier" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'applicationTier', 'errors')}">
+                                    <g:textField name="applicationTier" maxlength="45" value="${applicationInstance?.applicationTier}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="tierInstance"><g:message code="application.tierInstance.label" default="Tier Instance" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'tierInstance', 'errors')}">
+                                    <g:textField name="tierInstance" value="${fieldValue(bean: applicationInstance, field: 'tierInstance')}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="sla"><g:message code="application.sla.label" default="Service Level Agreement" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'sla', 'errors')}">
+                                    <g:select name="sla.id" from="${edu.hawaii.sitar.inf.ServiceLevelAgreement.list()}" optionKey="id" value="${applicationInstance?.sla?.id}" noSelection="['null': '']" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="updatedById"><g:message code="application.updatedById.label" default="Updated By Id" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'updatedById', 'errors')}">
+                                    <g:textField name="updatedById" value="${fieldValue(bean: applicationInstance, field: 'updatedById')}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="notes"><g:message code="application.notes.label" default="Notes" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'notes', 'errors')}">
+                                    <g:select name="notes" from="${edu.hawaii.sitar.inf.Note.list()}" multiple="yes" optionKey="id" size="5" value="${applicationInstance?.notes*.id}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="servers"><g:message code="application.servers.label" default="Servers" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'servers', 'errors')}">
+                                    <g:select name="servers" from="${edu.hawaii.sitar.inf.Server.list()}" multiple="yes" optionKey="id" size="5" value="${applicationInstance?.servers*.id}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="supportStaff"><g:message code="application.supportStaff.label" default="Support Staff" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'supportStaff', 'errors')}">
+                                    <g:select name="supportStaff" from="${edu.hawaii.sitar.inf.SupportRole.list()}" multiple="yes" optionKey="id" size="5" value="${applicationInstance?.supportStaff*.id}" />
+                                </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <div class="buttons">
+                    <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
+                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                </div>
+            </g:form>
+        </div>
+    </body>
+</html>

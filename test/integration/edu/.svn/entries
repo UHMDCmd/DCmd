@@ -1,0 +1,31 @@
+10
+
+dir
+4844
+svn+ssh://svnd@repo.its.hawaii.edu/midware/sitar-inf/trunk/sitar/test/integration/edu
+svn+ssh://svnd@repo.its.hawaii.edu/midware
+
+
+
+2011-07-21T00:23:48.201072Z
+4821
+keithhir_uhm
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cfdf2c30-4e16-0410-9916-ed9fc15ca156
+
+hawaii
+dir
+

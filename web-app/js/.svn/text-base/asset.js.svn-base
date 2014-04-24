@@ -1,0 +1,18 @@
+$(function() {
+	$( "#tabs" ).tabs();
+	var ownerTypes = [
+		"Leased",
+		"Perpetual",
+	];
+	$( "#ownerTypes" ).autocomplete({
+		source: ownerTypes
+	});
+});
+
+$(function() {
+	$( "#tabs-notes" ).tabs();
+});	
+
+$('#addNoteButton').bind('click', function() {
+	addNote();
+});

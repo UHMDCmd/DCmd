@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><g:layoutTitle default="Grails" /></title>
+        <g:javascript  library="jquery" plugin="jquery" />
+        <g:javascript library="application" />
+        <jqui:resources themeCss="${resource(dir:'css/le-frog',file:'jquery-ui-1.8.14.custom.css')}" />
+        <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
+        <link rel="stylesheet" href="${resource(dir:'css',file:'uh-theme.css')}" />
+        <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
+				<link href='http://fonts.googleapis.com/css?family=Lobster+Two:400italic&v2' rel='stylesheet' type='text/css'>
+				<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono&v2' rel='stylesheet' type='text/css'>
+				<link href='http://fonts.googleapis.com/css?family=Goblin+One&v2' rel='stylesheet' type='text/css'>
+				<link href='http://fonts.googleapis.com/css?family=Lobster&v2' rel='stylesheet' type='text/css'>
+				<g:layoutHead />
+    </head>
+    <body>
+		<div id="container">
+			<header>
+				<div id="uhLogo"><a href=""><img src="${resource(dir:'images/sitar-theme',file:'uh-logo.png')}" alt="University of Hawaii" border="0"></a></div>
+        		<div id="grailsLogo"><a href="http://grails.org"><img src="${resource(dir:'images',file:'grails_logo.png')}" alt="Grails" border="0" /></a></div>
+			</header>
+        	<g:layoutBody />
+			<div class="push"></div>
+		</div><!-- End of Container -->
+		<footer></footer>
+    </body>
+</html>

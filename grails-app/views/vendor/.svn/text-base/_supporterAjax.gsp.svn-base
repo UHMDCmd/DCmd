@@ -1,0 +1,33 @@
+<g:javascript src="../js/combobox.js" />
+<g:javascript src="../js/vendorSupporters.js" />
+<div id="new_person_support_role">
+	<table id="editSupportersTable">
+		<thead>
+			<tr>
+				<th width='225px'>
+					<label for="person"><g:message code="person.code.label" default="Person" /></label>
+					<span class="tiny">(Start typing first or last name or UH number)</span>
+				</th>
+				<th>
+					<label for="supportRole"><g:message code="supportRole.code.label" default="Support Role" /></label>
+				</th>
+				<th>
+					&nbsp;
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><s:person/></td>
+				<td>
+						<g:select name="supportRole" class="srs" from="${edu.hawaii.sitar.inf.SupportRole.list()}" noSelection="['':'-Choose a role-']" optionKey="id" /></td>
+				<td>
+					<button id="remoteAdd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+						<span class="ui-button-text">Add Support Staff</span>
+					</button>					
+			</tr>
+		</tbody>
+	</table>
+	<g:select name="supportableObjectType" from="${edu.hawaii.sitar.inf.SupportableObjectType.list()}" value="Vendor" disabled="true" optionKey="id" style="display:none"/>
+	<g:hiddenField name="personId"/>
+</div>

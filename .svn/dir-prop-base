@@ -1,0 +1,12 @@
+K 10
+svn:ignore
+V 77
+*.log
+.classpath
+.project
+.settings
+CodeNarcReport.html
+cobertura.ser
+target
+
+END

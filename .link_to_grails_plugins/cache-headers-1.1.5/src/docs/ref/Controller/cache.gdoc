@@ -1,0 +1,21 @@
+
+h1. cache
+
+h2. Purpose
+
+
+
+h2. Examples
+
+{code:java}
+foo.cache(boolean)
+{code}
+
+h2. Description
+
+
+
+Arguments:
+
+[* @boolean@
+]

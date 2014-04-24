@@ -1,0 +1,68 @@
+<g:set var="safe_note_type_name" value="${noteType?.name?.split(' ')?.collect{p->p.toLowerCase()}.join('_')}" />
+<!-- Render the note template (_note.gsp) hidden so we can clone it -->
+<g:render template='note' model="['note':null,'i':'_clone','hidden':true, noteTypeId:noteType.id]" />
+<!-- Render the note template (_note.gsp) hidden so we can clone it -->			
+
+<script type="text/javascript">
+   var childCount = ${totalNotes} + 0;
+
+   function add${safe_note_type_name}Note(){
+     var clone = $("#note_clone").clone()
+     var htmlId = 'notesList['+childCount+'].';
+     var noteTextInput = clone.find("textarea[id$=text]");
+     var noteTypeInput = clone.find("input[id$='noteType.id']");
+   
+     clone.find("input[id$=id]")
+            .attr('id',htmlId + 'id')
+            .attr('name',htmlId + 'id');
+     clone.find("input[id$=deleted]")
+            .attr('id',htmlId + 'deleted')
+            .attr('name',htmlId + 'deleted');
+     clone.find("input[id$=new]")
+            .attr('id',htmlId + 'new')
+            .attr('name',htmlId + 'new')
+			.attr('value', 'true');
+     noteTextInput.attr('id',htmlId + 'text')
+            .attr('name',htmlId + 'text');
+     noteTypeInput.attr('id',htmlId + 'noteType.id')
+            .attr('name',htmlId + 'noteType.id')
+            .val("${noteType.id}");
+
+     clone.attr('id', 'note'+childCount);
+     $("#childListFor${safe_note_type_name}").append(clone);
+     clone.show();
+     noteTextInput.focus();
+     childCount++;
+   }
+
+   //bind click event on delete buttons using jquery live
+   $('.del-note').live('click', function() {
+       //find the parent div
+       var prnt = $(this).parents(".note-div");
+       //find the deleted hidden input
+       var delInput = prnt.find("input[id$=deleted]");
+       //check if this is still not persisted
+       var newValue = prnt.find("input[id$=new]").attr('value');
+       //if it is new then i can safely remove from dom
+       if(newValue == 'true'){
+           prnt.remove();
+       }else{
+           //set the deletedFlag to true
+           delInput.attr('value','true');
+           //hide the div
+           prnt.hide();
+       }
+   });
+
+</script>
+
+<div id="childListFor${safe_note_type_name}">
+	<g:each var="note" in="${notes}" status="i">
+		<!-- Render the note template (_note.gsp) here -->
+		<g:render template='note' model="['note':note,'i':i.toInteger() + offset.toInteger(),'hidden':false]" />
+		<!-- End render the note template (_note.gsp) here -->
+	</g:each>
+</div>
+<button id="add${safe_note_type_name}NoteButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+	<span class="ui-button-text" onclick="add${safe_note_type_name}Note();return false;">Add ${noteType.name} Note</span>
+</button>

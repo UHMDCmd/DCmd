@@ -1,0 +1,291 @@
+<%@  page import="edu.hawaii.its.dcmd.inf.GeneralService" %>
+<%
+    def genService = grailsApplication.classLoader.loadClass('edu.hawaii.its.dcmd.inf.GeneralService').newInstance()
+%>
+
+<r:require modules='select2' />
+
+<script>
+    $(document).ready(function() {
+
+        $('#assetSelect').select2({
+            placeholder: 'Please Select...',
+            maximumInputLength: 20,
+            width:200,
+            data: [${genService.listRackableAssetsAsSelect()}]
+        }).select2('val', '0');
+
+        $('#assetSelect').on("change", function() {
+            getNumPositions();
+        });
+
+        //Bind the click event here
+        $('#addAsset').bind('click', function() {
+            if(validateAssetSelection()){
+
+                //set up the ajax call
+                $.ajax({
+                    url: '/its/dcmd/rack/addAssetToRack',
+                    data: getAssetParamsForAdd(),
+                    type: 'POST',
+                    success: function(data) {renderRack(data); getNumPositions();},
+                    error: function(){
+                        alert('The addition of the Asset was not successful.');
+                    }
+                });
+            }
+        });
+
+        $('#addPlan').bind('click', function() {
+            if(validateAssetSelection()){
+
+                //set up the ajax call
+                $.ajax({
+                    url: '/its/dcmd/rack/addPlannedAssetToRack',
+                    data: getAssetParamsForAdd(),
+                    type: 'POST',
+                    success: function(data) {renderRack(data); getNumPositions();},
+                    error: function(){
+                        alert('The addition of the Asset was not successful.');
+                    }
+                });
+            }
+        });
+
+        // Reserve button
+        $('#reserveSelected').bind('click', function() {
+            jQuery.ajax({
+                async: false,
+                url: '/its/dcmd/rack/reserveSelected',
+                data: getSelected(),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                success: function(data) {renderRack(data);},
+                //error: function cleanData() function ()  {alert('Can only Reserve Open slots'); }
+                error: function ()  {alert('Can only Reserve Open slots'); renderRack(data)}
+
+            });
+
+
+        });
+
+        // Open button
+        $('#openSelected').bind('click', function() {
+
+            jQuery.ajax({
+                async: false,
+                url: '/its/dcmd/rack/openSelected',
+                data: getSelected(),
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {renderRack(data); getNumPositions();},
+                error: function () { alert('Error trying to validate'); }
+            });
+
+        });
+
+
+    });
+
+    /*
+     * Get the value of the asset from dropdown
+     */
+    function validateAssetSelection(){
+        var msg='';
+        if($('#asset_Id').val() == ''){
+            msg += 'You must select an Asset from the dropdown.';
+        }
+        if($('#asset_Id').val() == '-Choose an Asset to Add-'){
+            msg += 'You must select an Asset from the dropdown.';
+        }
+        if(msg != ''){
+            alert(msg);
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function getAssetParamsForAdd(){
+
+        var params = { asset_Id:$('#assetSelect').val(), addPosition:document.getElementById('select-result').innerHTML, id:$('#id').val()};
+        return $.param(params);
+    }
+
+    function getNumPositions() {
+//        alert("TEST");
+//          alert ($('#asset_Id').val());
+
+        jQuery.ajax({
+            async: false,
+            url: '/its/dcmd/rack/numPositions',
+            data: getAssetParamsForAdd(),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                document.getElementById('numPositions').innerHTML = data.positions;
+                document.getElementById('onCurrentRack').innerHTML = data.currentRack;
+                document.getElementById('onPlannedRack').innerHTML = data.plannedRack;
+            },
+            error: function () { alert('Error with Asset selection'); }
+        });
+
+    }
+
+    function getAssetsParamsForRemove(){
+        var params = {assetsToRemove:assetsToRemove, id:$('#id').val()};
+        return $.param(params);
+    }
+
+    function getSelected(){
+      //  alert(document.getElementById('select-result').innerHTML);
+        var params = { selected:document.getElementById('select-result').innerHTML, id:$('#id').val()};
+        return $.param(params);
+    }
+
+    function renderRack(data){
+        var newTable = "";
+
+        if(data.data == -1) {
+            alert("Asset is already assigned to a Rack.");
+
+        }
+        else if(data.data == -2) {
+            alert("Can only place Asset in \'Open\' RUs.");
+        }
+        else {
+            for  (var i=44; i>=0; i=i-1) {
+                newTable = newTable + "<li id='ru" + data.data[i].RUstatus + "' class='ui-state-default'>" + data.data[i].label + "</li>";
+            }
+            document.getElementById('rackItem').innerHTML = newTable;
+            document.getElementById('select-result').innerHTML = "";
+
+          //  data.data.removeData();
+        }
+    }
+
+</script>
+
+<div>
+    <table>
+        <thead>
+        <g:if test="${action == 'edit'}">
+        <th id="stickyDiv">
+            <label for="asset_Id"><g:message code = "rack_asset.code.label" default="Select Rack Asset" /></label>
+        </th>
+        </g:if>
+        <th >
+            <label for="section1"><g:message code = "section1.code.label" default="Rack Collection" /></label>
+        </th>
+
+        %{--<th>
+            &nbsp;
+        </th>--}%
+        </thead>
+        <tbody>
+
+
+        <g:if test="${action == 'edit'}">
+        <tr>
+            <g:render template="../rack/sticky_bar" />
+            <td  id="rackButtons">
+                <div>
+                    <input type="hidden" id="assetSelect" name="assetSelect"/>
+
+
+                    <br> <br>
+                    RUs required by Asset: <span id="numPositions"></span>
+                    <br> <br>
+                    Current Rack placement: <span id="onCurrentRack"></span>
+                    <br> <br>
+                    Planned Rack placement: <span id="onPlannedRack"></span>
+                    <br><br>
+
+                RUs currently selected:<span name="select-result" id="select-result" class="srs"></span>
+                <br><br>
+                <button id="addAsset"
+                        class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                        role="button" aria-disabled="false">
+                    <span class="ui-button-text">Make <b>current</b> Asset position</span>
+                </button><br>
+                    <button id="addPlan"
+                            class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                            role="button" aria-disabled="false">
+                        <span class="ui-button-text">Make <b>planned</b> Asset position</span>
+                    </button><br>
+                <button id="reserveSelected"
+                        class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                        role="button" aria-disabled="false">
+                    <span class="ui-button-text">Reserve Selected RUs</span>
+                </button>
+                    <br>
+                    <button id="openSelected"
+                            class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                            role="button" aria-disabled="false">
+                        <span class="ui-button-text">Open Selected RUs</span>
+                    </button>
+                    <br><br>
+                    <h3>Rack Operations:</h3><br>
+                    <ul>
+                        <li> <b>Add current:</b>  Select An asset from the drop-down list, click a start position on the right, and
+                        click "Make current Asset position".  Asset will occupy RUs started at selected position, going down.</li><br>
+                        <li><b>Add planned:</b> The same as above, except is the <b>planned</b> position of the Asset.  Note that
+                        RUs can have both a current <b>and</b> Asset in them.</li><br>
+                        <li><b>Reserve Slots:</b>  Select any number of Open slots and click "Reserve" to reserve RU(s).</li><br>
+                        <li><b>Open Slots:</b>  Select any number of slots and click "Open" to clear RU(s).  Note any Assets
+                        occupying selected RUs will be completely removed from Rack.</li>
+                    </ul>
+                </div>
+            </td>
+        </g:if>
+        <g:hiddenField name="id" value="${rackId}" />
+
+                <script>
+                    $(function() {
+                        $( "#rackItem").selectable({
+                            cancel: 'a',
+                            stop: function() {
+                                var result = $( "#select-result").empty();
+
+                                $(".ui-selected", this).each(function() {
+                                    var index = 45-$( "#rackItem li").index(this);
+                                    result.append(" " + (index));
+                                });
+                            }
+                        });
+                    });
+
+                </script>
+
+            <td style="width:75%">
+                <div id="rackDisplay">
+                    <table>
+                    <tr>
+                        <td style="width:4%">
+                            <ul name= "rackIndex" id="rackIndex" class='droptrue'>
+                                <g:each in="${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).RUs.reverse()}" var="RU" status = "i">
+                                    <li>${45-i}</li>
+                                </g:each>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul name = "rackItem" id="rackItem" class='droptrue'>
+                                <g:each in="${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).RUs.reverse()}" var="RU" status = "i">
+
+                                    <li id="ru${RU.RUstatus}" class="ui-state-default">${RU.toString()}</li>
+
+                                </g:each>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+
+             </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>

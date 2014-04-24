@@ -1,0 +1,79 @@
+
+<%@ page import="edu.hawaii.sitar.inf.Application" %>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}" />
+        <title><g:message code="default.list.label" args="[entityName]" /></title>
+    </head>
+    <body>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <div class="list">
+                <table>
+                    <thead>
+                        <tr>
+                        
+                            <g:sortableColumn property="id" title="${message(code: 'application.id.label', default: 'Id')}" />
+                        
+                            <g:sortableColumn property="applicationTitle" title="${message(code: 'application.applicationTitle.label', default: 'Application Title')}" />
+                        
+                            <g:sortableColumn property="applicationDescription" title="${message(code: 'application.applicationDescription.label', default: 'Application Description')}" />
+                        
+                            <g:sortableColumn property="applicationGroup" title="${message(code: 'application.applicationGroup.label', default: 'Application Group')}" />
+                        
+                            <g:sortableColumn property="environment" title="${message(code: 'application.environment.label', default: 'Environment')}" /></th>
+                        
+                            <g:sortableColumn property="applicationTier" title="${message(code: 'application.applicationTier.label', default: 'Application Tier')}" />
+                        
+                            <g:sortableColumn property="tierInstance" title="${message(code: 'application.tierInstance.label', default: 'Tier Instance')}" />
+                            
+                            <th><g:message code="application.servers.label" default="Server(s)" /></th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <g:each in="${applicationInstanceList}" status="i" var="applicationInstance">
+                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                        
+                            <td><g:link action="show" id="${applicationInstance.id}">${fieldValue(bean: applicationInstance, field: "id")}</g:link></td>
+                        
+                            <td>${fieldValue(bean: applicationInstance, field: "applicationTitle")}</td>
+                        
+                            <td>${fieldValue(bean: applicationInstance, field: "applicationDescription")}</td>
+                        
+                            <td>${fieldValue(bean: applicationInstance, field: "applicationGroup")}</td>
+                        
+                            <td>${fieldValue(bean: applicationInstance, field: "environment") }</td>
+                            
+                            <td>${fieldValue(bean: applicationInstance, field: "applicationTier")}</td>
+                        
+                            <td>${fieldValue(bean: applicationInstance, field: "tierInstance")}</td>
+                            
+                            <td>
+                            	<ul>
+                                <g:each in="${applicationInstance.servers.sort{it?.hostname} }" var="s">
+									<li><g:link controller="server" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+						</tr>
+                    </g:each>
+                    </tbody>
+                </table>
+            </div>
+            <div class="paginateButtons">
+                <g:paginate total="${applicationInstanceTotal}" />
+            </div>
+        </div>
+    </body>
+</html>

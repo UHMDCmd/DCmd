@@ -1,0 +1,47 @@
+<table>
+	<thead></thead>
+	<tbody>
+    <tr class="prop">
+        <td valign="top" class="name">
+            <label for="endOfServiceLife"><g:message code="asset.endOfServiceLife.label" default="End Of Service Life" /></label>
+        </td>
+        <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'endOfServiceLife', 'errors')}">
+        	<calendar:datePicker showTime="true" name="endOfServiceLife" value="${assetInstance?.endOfServiceLife }" />
+        </td>
+        <td valign="top" class="name">
+            <label for="warrantyEndDate"><g:message code="asset.warrantyEndDate.label" default="Warranty End Date" /></label>
+        </td>
+        <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'warrantyEndDate', 'errors')}">
+            <calendar:datePicker showTime="true" name="warrantyEndDate" value="${assetInstance?.warrantyEndDate}" />
+        </td>
+    </tr>
+    <tr class="prop">
+        <td valign="top" class="name">
+            <label for="retiredDate"><g:message code="asset.retiredDate.label" default="Retired Date" /></label>
+        </td>
+        <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'retiredDate', 'errors')}">
+            <calendar:datePicker showTime="true" name="retiredDate" value="${assetInstance?.retiredDate}" />
+        </td>
+        <td valign="top" class="name">
+            <label for="removedFromInventoryDate"><g:message code="asset.removedFromInventoryDate.label" default="Removed From Inventory Date" /></label>
+        </td>
+        <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'removedFromInventoryDate', 'errors')}">
+            <calendar:datePicker showTime="true" name="removedFromInventoryDate" value="${assetInstance?.removedFromInventoryDate}" />
+        </td>
+    </tr>
+    <tr class="prop">
+        <td valign="top" class="name">
+            <label for="replacementAvailabilityDate"><g:message code="asset.replacementAvailabilityDate.label" default="Replacement Availability Date" /></label>
+        </td>
+        <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'replacementAvailabilityDate', 'errors')}">
+            <calendar:datePicker showTime="true" name="replacementAvailabilityDate" value="${assetInstance?.replacementAvailabilityDate}" />
+        </td>
+        <td valign="top" class="name">
+            <label for="migrationCompletionDate"><g:message code="asset.migrationCompletionDate.label" default="Migration Completion Date" /></label>
+        </td>
+        <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'migrationCompletionDate', 'errors')}">
+            <calendar:datePicker showTime="true" name="migrationCompletionDate" value="${assetInstance?.migrationCompletionDate}" />
+        </td>
+    </tr>
+	</tbody>
+</table>

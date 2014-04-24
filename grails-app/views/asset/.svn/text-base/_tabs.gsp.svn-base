@@ -1,0 +1,55 @@
+<g:set var="action" value="${actionName != 'show' ? 'edit' : 'show'}"/>
+<span>actionName: ${actionName}; action: ${action}</span>
+<div id="tabs" style="margin-top: 5px">
+	<ul>
+		<li>
+			<a href="#tabs-pricing">Pricing</a>
+		</li>
+		<li>
+			<a href="#tabs-dates">Dates</a>
+		</li>
+		<li>
+			<a href="#tabs-resource-collections">
+				<g:message code="asset.resourceCollections.label" default="Resource Collections" />
+			</a>
+		</li>
+		<li>
+			<a href="#tabs-support-staff"><g:message code="asset.supportStaff.label" default="Support Staff" /></a>
+		</li>
+		<li>
+			<a href="#tabs-notes"><g:message code="notes.label" default="Notes" /></a>
+		</li>
+	</ul>
+	<div id="tabs-pricing">
+		<g:render template="pricing_${action}"/>
+	</div>
+	<div id="tabs-dates">
+		<g:render template='dates_${action}'/>
+	</div>
+	<div id="tabs-resource-collections">
+		<g:render template='resource_collection_${action}'/>
+	</div>
+	<div id="tabs-support-staff">
+		<g:render template='support_staff_${action}'/>
+	</div>
+	<g:set var="noteTypeList" value="${edu.hawaii.sitar.inf.NoteType.list().sort{nt->nt.name}}" />
+	<div id="tabs-notes">
+		<ul>
+			<g:each in="${noteTypeList}" var="noteTypeInstance">
+				<g:set var="div_id" value="${noteTypeInstance.name.split(' ')?.collect{p->p.toLowerCase()}.join('_')}" />
+				<li><a href="#notes-${div_id}">${noteTypeInstance.name}</a></li>
+			</g:each>
+		</ul>
+		<g:set var="offset" value="0" />
+		<g:each in="${noteTypeList}" var="noteTypeInstance" status="i">
+			<g:set var="div_id" value="${noteTypeInstance.name.split(' ')?.collect{p->p.toLowerCase()}.join('_')}" />
+			<div id="notes-${div_id}" >
+				<g:render template="note_${action}" model="[totalNotes:assetInstance.notes.size(), 
+																										noteType:noteTypeInstance, 
+																										notes:assetInstance.notesByType(noteTypeInstance),
+																										offset:offset]"/>
+				<g:set var="offset" value="${offset.toInteger() + assetInstance.notesByType(noteTypeInstance).size()}"/>
+			</div>
+		</g:each>
+	</div>
+</div>

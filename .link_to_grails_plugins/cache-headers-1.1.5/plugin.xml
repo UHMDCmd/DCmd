@@ -1,0 +1,40 @@
+<plugin name='cache-headers' version='1.1.5' grailsVersion='1.2.0 &gt; *'>
+  <author>Marc Palmer</author>
+  <authorEmail>marc@grailsrocks.com</authorEmail>
+  <title>Caching Headers Plugin</title>
+  <description>\
+Improve your application performance with browser caching, with easy ways to set caching headers in controller responses 
+</description>
+  <documentation>http://grails.org/plugin/cache-headers</documentation>
+  <resources>
+    <resource>UrlMappings</resource>
+    <resource>com.grailsrocks.cacheheaders.TestController</resource>
+    <resource>com.grailsrocks.cacheheaders.CacheHeadersService</resource>
+  </resources>
+  <dependencies>
+    <plugin name='controllers' version='1.1 &gt; *' />
+    <plugin name='logging' version='1.1 &gt; *' />
+  </dependencies>
+  <behavior>
+    <method name='cache' artefact='Controller' type='com.grailsrocks.cacheheaders.TestController'>
+      <description />
+      <argument type='java.lang.Boolean' />
+    </method>
+    <method name='cache' artefact='Controller' type='com.grailsrocks.cacheheaders.TestController'>
+      <description />
+      <argument type='java.lang.String' />
+    </method>
+    <method name='cache' artefact='Controller' type='com.grailsrocks.cacheheaders.TestController'>
+      <description />
+      <argument type='java.util.Map' />
+    </method>
+    <method name='withCacheHeaders' artefact='Controller' type='com.grailsrocks.cacheheaders.TestController'>
+      <description />
+      <argument type='groovy.lang.Closure' />
+    </method>
+    <method name='lastModified' artefact='Controller' type='com.grailsrocks.cacheheaders.TestController'>
+      <description />
+      <argument type='java.lang.Object' />
+    </method>
+  </behavior>
+</plugin>

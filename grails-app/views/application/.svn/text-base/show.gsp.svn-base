@@ -1,0 +1,146 @@
+
+<%@ page import="edu.hawaii.sitar.inf.Application" %>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}" />
+        <title><g:message code="default.show.label" args="[entityName]" /></title>
+    </head>
+    <body>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <div class="dialog">
+                <table>
+                    <tbody>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.id.label" default="Id" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "id")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.applicationTitle.label" default="Application Title" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "applicationTitle")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.applicationDescription.label" default="Application Description" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "applicationDescription")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.applicationGroup.label" default="Application Group" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "applicationGroup")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.applicationTier.label" default="Application Tier" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "applicationTier")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.tierInstance.label" default="Tier Instance" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "tierInstance")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.sla.label" default="Service Level Agreement" /></td>
+                            
+                            <td valign="top" class="value"><g:link controller="serviceLevelAgreement" action="show" id="${applicationInstance?.sla?.id}">${applicationInstance?.sla?.encodeAsHTML()}</g:link></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Date Created" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${applicationInstance?.dateCreated}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.lastUpdated.label" default="Last Updated" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${applicationInstance?.lastUpdated}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.updatedById.label" default="Updated By Id" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "updatedById")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.notes.label" default="Notes" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${applicationInstance.notes}" var="n">
+                                    <li><g:link controller="notes" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.servers.label" default="Servers" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${applicationInstance.servers}" var="s">
+                                    <li><g:link controller="server" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.supportStaff.label" default="Support Staff" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${applicationInstance.supportStaff}" var="s">
+                                    <li><g:link controller="supportRole" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div class="buttons">
+                <g:form>
+                    <g:hiddenField name="id" value="${applicationInstance?.id}" />
+                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                </g:form>
+            </div>
+        </div>
+    </body>
+</html>

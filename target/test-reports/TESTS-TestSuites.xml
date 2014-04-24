@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="2" failures="0" hostname="Jesse-PC" id="0" name="LdapTests" package="edu.hawaii.its.dcmd.inf" tests="2" time="0.133" timestamp="2013-05-01T22:55:34">
+      <properties />
+
+      <testcase classname="edu.hawaii.its.dcmd.inf.LdapTests" name="testJJUserIsThere" time="0.087">
+          <error message="Cannot get property &apos;uid=johannae,ou=People,dc=hawaii,dc=edu&apos; on null object" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot get property &apos;uid=johannae,ou=People,dc=hawaii,dc=edu&apos; on null object
+	at edu.hawaii.its.dcmd.inf.LdapTests.testJJUserIsThere(LdapTests.groovy:20)
+</error>
+
+      </testcase>
+
+      <testcase classname="edu.hawaii.its.dcmd.inf.LdapTests" name="testLdapServerShouldExist" time="0.015">
+          <error message="Cannot invoke method exists() on null object" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke method exists() on null object
+	at edu.hawaii.its.dcmd.inf.LdapTests.testLdapServerShouldExist(LdapTests.groovy:16)
+</error>
+
+      </testcase>
+
+      <system-out><![CDATA[]]></system-out>
+
+      <system-err><![CDATA[--Output from testJJUserIsThere--
+--Output from testLdapServerShouldExist--
+]]></system-err>
+
+  </testsuite>
+</testsuites>

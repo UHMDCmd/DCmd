@@ -1,0 +1,19 @@
+<div id="contactInfo${i}" class="contactInfo-div" <g:if test="${hidden}">style="display:none;"</g:if>>
+	<g:hiddenField name='contactInfosList[${i}].id'
+		value='${contactInfo?.id}' />
+	<g:hiddenField name='contactInfosList[${i}].deleted' value='false' />
+	<g:hiddenField name='contactInfosList[${i}].new' value='false' />
+
+	<g:textField name='contactInfosList[${i}].contactInfo'
+		value='${contactInfo?.contactInfo}' />
+	<g:select name="contactInfosList[${i}].contactType.id"
+		from="${edu.hawaii.sitar.inf.ContactType.list()}"
+		value="${contactInfo?.contactType?.id}"
+        id="contactInfosList[${i}].contactType"
+		optionKey="id"
+		optionValue="name"/>
+
+	<span class="del-contactInfo"> <img
+		src="${resource(dir:'images/skin', file:'icon_delete.png')}"
+		style="vertical-align: middle;" /> </span>
+</div>

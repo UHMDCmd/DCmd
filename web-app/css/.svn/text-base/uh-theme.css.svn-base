@@ -1,0 +1,189 @@
+/* CSS Document */
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html, body{
+	background: #bfbeb0 url(../images/sitar-theme/body-bg.jpg) repeat;
+	height: 100%;
+}
+
+body{
+	background: url(../images/sitar-theme/header-bg.jpg) repeat-x center top;
+	width: 100%;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	color: #26261d;
+}
+
+/* HTML5 Tags */
+header, section, footer,
+aside, nav, article, figure{
+	display: block;
+}
+
+#container{
+	position: relative;
+	width: 1000px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -24px;
+}
+
+header{
+	height: 121px;
+}
+
+#uhLogo{
+	padding: 10px 0;
+	float: left;
+}
+
+#grailsLogo{
+	float: right;
+}
+
+#pageBody{
+	margin: 0 0 50px;
+	padding: 0 20px;
+}
+
+#pageBody h1{
+	margin: 20px 0;
+	font-family: 'Lobster', cursive;
+	font-size: 36px;
+	font-weight: 400;
+	color: #26261d;
+	text-shadow: 0 1px 0 #dfdfd8;
+}
+
+#pageBody .intro-text{
+	font-size: 18px;
+	color: #737158;
+	margin: 0 0 40px;
+	text-shadow: 0 1px 0 #e1e1d9;
+}
+
+#controllerList, #nav, #container .body{
+	background: #e5e5e5 url(../images/sitar-theme/content-bg.jpg) repeat-x;
+	padding: 15px;
+	border: 10px solid #aaaa9c;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	width: 570px;
+	float: left;
+}
+
+#controllerList p{
+	font-size: 14px;
+	padding: 0 0 15px;
+}
+
+#controllerList h2, #nav h2{
+	font-weight: normal;
+	color: #35650f;
+	padding: 0 0 15px;
+}
+
+#controllerList ul{
+	margin: 0 0 0 30px;
+}
+
+#controllerList ul li{
+	list-style: none;
+	margin: 0 0 3px;
+}
+
+#controllerList ul li a{
+	font-weight: normal;
+	font-size: 11px;
+	padding: 2px 4px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#controllerList ul li a:hover{
+	background: #BFBEB0;
+	color: #26261d;
+	text-shadow: 0 1px 0 #e1e1d9;
+}
+
+#nav{
+	margin: 0 0 0 40px;
+	width: 250px;
+}
+
+#nav ul{
+	margin: 0 0 20px 30px;
+}
+
+#nav ul li{
+	color: #737158;
+	font-size: 10px;
+	margin: 0;
+}
+
+.nav{
+	background: 0 none;
+	border: 0 none;
+	margin: -18px 0 0;
+	padding: 0 20px;
+}
+
+.nav .menuButton a{
+	color: #bfbeb0;
+	font-weight: normal;
+}
+
+#container .body{
+	margin: 25px 0 0;
+	width: 950px;
+}
+
+#container .body h1{
+	margin: 0 0 20px;
+}
+
+.white-link{
+	color:#ffffff !important; 
+}
+.tiny{
+	font-size:xx-small;
+}
+
+footer{
+	background: url(../images/sitar-theme/footer-bg.jpg) repeat-x;
+	height: 24px;
+}
+
+.value-override{
+	width:auto;
+}
+
+.push{
+	height: 24px;
+	clear: both;
+}
+
+.clear{
+	clear: both;
+}
+
+/* #tabs a:link { */
+/*     color: #FFCC00; */
+/*     font-weight: bold; */
+/*     text-decoration: none; */
+/* } */
+
+/* #tabs a:visited { */
+/*     color: #FFCC00; */
+/*     font-weight: bold; */
+/*     text-decoration: none; */
+/* } */
+
+/* #tabs a:hover { */
+/*     color: #FFCC00; */
+/*     font-weight: bold; */
+/*     text-decoration: none; */
+/* } */

@@ -1,0 +1,62 @@
+
+
+<%@ page import="edu.hawaii.sitar.inf.Person" %>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
+        <title><g:message code="default.create.label" args="[entityName]" /></title>
+    </head>
+    <body>
+		<g:javascript>
+				$(function() {
+					$( "#tabs" ).tabs({
+					});
+				});
+		</g:javascript>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${personInstance}">
+            <div class="errors">
+                <g:renderErrors bean="${personInstance}" as="list" />
+            </div>
+            </g:hasErrors>
+            
+			<g:form action="save" >
+			<!-- We moved the "dialog" div to the person template (_person.gsp) because it is identical between edit.gsp and create.gsp -->
+			<g:render template="person" model="['personInstance':personInstance]" />
+				
+			 <div class="buttons">
+			    <span class="button"><g:submitButton name="create" class="save"
+			      value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
+			 </div>
+
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Contact Information</a>
+					</li>
+				</ul>
+				<div id="tabs-1">
+					<!-- Render the contactInfos template (_contactInfos.gsp) -->
+					<g:render template='contactInfos'
+						model="['personInstance':personInstance]" />
+					<!-- Render the contactInfos template (_contactInfo.gsp) -->
+				</div>
+			</div><!-- tabs -->
+
+			</g:form>
+
+        </div>
+   <!-- Render the contactInfo template (_contactInfo.gsp) hidden so we can clone it -->
+   <g:render template='contactInfo' model="['contactInfo':null,'i':'_clone','hidden':true]"/>
+   <!-- Render the contactInfo template (_contactInfo.gsp) hidden so we can clone it -->
+       </body>
+</html>
