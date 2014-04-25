@@ -1,0 +1,5 @@
+                                                                       DCmd (Data Center Meta Data) is a Data Center Asset management system that maintains records for applications, servers, software clusters, as well as the individuals responsible for them.
+
+                                                                       DCmd was developed on the Grails framework, and leverages the technologies of VMWare and LDAP for retrieving software and contact information; Jquery/Javascript, JQgrid, JSON/AJAX for querying and saving to the Database from the the front-end User Interface.
+
+                                                                       A branch for Power Systems is also in development, which features a top down tree structure for data visualization and an interactive GUI for adding and maintaining rack configurations.
