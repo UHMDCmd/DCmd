@@ -3,7 +3,7 @@ package edu.hawaii.its.dcmd.inf
 import grails.converters.JSON
 
 class ItcRackController {
-    /*
+
     def assetService
     def generalService
 
