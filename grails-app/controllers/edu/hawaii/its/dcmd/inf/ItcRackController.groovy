@@ -52,48 +52,54 @@ class ItcRackController {
         def slot_size = Integer.parseInt(params.slot_size)
         def rackUnitInstance
 
+        println("imageid : " + imageId)
+        println("imageid : " + params.imageId)
+
         def jsonData
 
-        RackUnit oldUnit = rack.getUnitBySlot(rack, slot_num) //checks item in list, match for slotnum attribute
+        RackUnit currentUnit = rack.getUnitBySlot(rack, slot_num) //checks item in list, match for slotnum attribute
 
-        if (oldUnit != null){
-            println("found old unit, removing from collection...")
-            rack.removeFromRUs(oldUnit)
-            oldUnit.delete()
-            rack.save(flush: true, failOnError: true)
+        if(imageId == 0){ //if image id received is 0, reset the current unit
+        if (currentUnit != null){
+            println("found old unit, resetting values...")
 
-            if (rack.RUs.contains(oldUnit)){
-                println('the unit was not removed')
-            }
-            else{
-                println("old unit removed!!")
-                println("ru size: " + rack.RUs.size())
+            currentUnit.imageId =  0
+            currentUnit.slotSize = 0
+            currentUnit.save(flush: true, failOnError: true)
 
-            }
+//            if (rack.RUs.contains(currentUnit)){
+//                println('the unit was not removed')
+//            }
+//            else{
+//                println("old unit removed!!")
+//                println("ru size: " + rack.RUs.size())
+//            }
         }
-        else{
-            println("there was no previous unit, creating new unit instance")
         }
 
-
-        println("imageId: " + imageId)
         if(imageId != 0){
-            rackUnitInstance = new RackUnit(onRack:rack, ru_slot: slot_num , imageId: params.imageId, slotSize:slot_size)
+            currentUnit.ru_slot = slot_num
+            currentUnit.imageId = imageId
+            currentUnit.slotSize = slot_size
 
-
-
-            if(!rackUnitInstance.hasErrors() && rackUnitInstance.save(flush: true, failOnError: true)){
-                rack.addToRUs(rackUnitInstance)
-                //rack.RUs.add(slot_num,rackUnitInstance)
+            if(!currentUnit.hasErrors() && currentUnit.save(flush: true, failOnError: true)){
+                rack.save(flush: true, failOnError: true)
                 println("rack size " + rack.RUs.size())
-                println("Added new rack instance")
-                println("Rack: " + rack.itsId + " ; new Rack unit on: " + rackUnitInstance.onRack.itsId + " ; ru_slot: " + rackUnitInstance.ru_slot + " ; slot_size: "+ rackUnitInstance.slotSize +" ; imageId: " + rackUnitInstance.imageId)
+                println("Update rack instance")
+                println("Rack: " + rack.itsId + " ; new Rack unit on: " + currentUnit.onRack.itsId + " ; ru_slot: " + currentUnit.ru_slot + " ; slot_size: "+ currentUnit.slotSize +" ; imageId: " + currentUnit.imageId)
             }
             else{
                 println("There was an error in creating new rack instance.")
             }
 
         }
+//        else if (imageId == 0){
+//            rackUnitInstance = new RackUnit(onRack:rack, ru_slot: slot_num , imageId: 0, slotSize:0)
+//            if(!rackUnitInstance.hasErrors() && rackUnitInstance.save(flush: true, failOnError: true)){
+//            rack.addToRUs(rackUnitInstance)
+//            println("re added empty slot")
+//            }
+//        }
 
         if (!rack.hasErrors() && rack.save(flush: true, failOnError: true)){
             rack.RUs.sort({a,b -> b.ru_slot <=> a.ru_slot} as Comparator)

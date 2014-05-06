@@ -157,20 +157,20 @@
         var rackUnits = [];
         rackUnits = data[1];
 
-
         var imageType = [];
         imageType = data[2];
 
         var slotNum = [];
-        slotNum = data[3];
+        slotNum = data[3]; //the slot number this unit lives at
 
-        var slot_occ = [];
+        var slot_occ = [];  //number of rack spaces the unit occupies
         slot_occ = data[4];
 
 //        var total = rackUnits.length;
         var total = 45;
 
-       //  alert("total: " + total);
+//         alert("slot occ data: " + slot_occ);
+//        alert("slot num data:" + slotNum);
 
 
         var deviceCollection = '<td><div id="deviceCollection" class="deviceCollection">';
@@ -184,7 +184,8 @@
         var tag = null;
         for(x; x < total; x++){
 
-            num = (slot_occ[unitCount]-1);
+            num = (slot_occ[unitCount]-1); //the total number of slots this particular unit occupies
+
 
             if(slotNum[unitCount] == (total-x)){
                 if (imageType[unitCount] == 0){
@@ -192,6 +193,7 @@
                     tag = (total-x);
                     for(count = 0; count < num; count++){
                         x++;
+                        unitCount++;
                         deviceCollection += '<h3 id="slot_'+(total-x) +'" class="unit_occupied"><div class=nums><p>'+ (total-x) + '</p></h3><div><p class=stats>This Slot is part of slot '+ tag +'</div>';
                     }
                 }
@@ -200,6 +202,7 @@
                     tag = (total-x);
                     for(count = 0; count < num; count++){
                         x++;
+                        unitCount++;
                         deviceCollection += '<h3 id="slot_'+(total-x) +'" class="unit_occupied"><div class=nums><p>'+ (total-x) + '</p></h3><div><p class=stats>This Slot is part of slot '+ tag +'</div>';
                     }
                 }
@@ -208,6 +211,7 @@
                     tag = (total-x);
                     for(count = 0; count < num; count++){
                         x++;
+                        unitCount++;
                         deviceCollection += '<h3 id="slot_'+(total-x) +'" class="unit_occupied"><div class=nums><p>'+ (total-x) + '</p></h3><div><p class=stats>This Slot is part of slot '+ tag +'</div>';
                     }
                 }
@@ -217,6 +221,7 @@
                     tag = (total-x);
                     for(count = 0; count < num; count++){
                         x++;
+                        unitCount++;
                         deviceCollection += '<h3 id="slot_'+(total-x) +'" class="unit_occupied"><div class=nums><p>'+ (total-x) + '</p></h3><div><p class=stats>This Slot is part of slot '+ tag +'</div>';
                     }
                 }
@@ -226,6 +231,7 @@
                     tag = (total-x);
                     for(count = 0; count < num; count++){
                         x++;
+                        unitCount++;
                         deviceCollection += '<h3 id="slot_'+(total-x) +'" class="unit_occupied"><div class=nums><p>'+ (total-x) + '</p></h3><div><p class=stats>This Slot is part of slot '+ tag +'</div>';
                     }
                 }
@@ -235,15 +241,18 @@
                     tag = (total-x);
                     for(count = 0; count < num; count++){
                         x++;
+                        unitCount++;
                         deviceCollection += '<h3 id="slot_'+(total-x) +'" class="unit_occupied"><div class=nums><p>'+ (total-x) + '</p></h3><div><p class=stats>This Slot is part of slot '+ tag +'</div>';
                     }
                 }
+
                 unitCount++;
             }
 
             else{
                 deviceCollection += '<h3 id="slot_'+(total-x) +'" class="unit_empty"><div class=nums><p>'+ (total-x) + '</p></h3><div><p class=stats>No Device Assigned</div>';
             }
+
         }
 
         //add end tags
@@ -468,6 +477,7 @@
 
 
         loadSelectedRack(selected_row);//refresh rack selected row is set on click
+        slot_size = 1;
     }
     /*************************
      *  PDU display
