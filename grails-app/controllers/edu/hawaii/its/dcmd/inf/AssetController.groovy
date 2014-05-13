@@ -1,5 +1,4 @@
 package edu.hawaii.its.dcmd.inf
-import grails.plugins.springsecurity.Secured
 
 import grails.converters.JSON
 import org.springframework.validation.ObjectError

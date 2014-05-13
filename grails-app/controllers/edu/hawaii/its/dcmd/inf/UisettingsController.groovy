@@ -1,6 +1,6 @@
 package edu.hawaii.its.dcmd.inf
 
-import grails.plugins.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.converters.JSON
 
 class UisettingsController {
