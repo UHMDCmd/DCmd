@@ -211,5 +211,24 @@ class RackController {
 
     }
 
+    def getDeviceDetails ={
+        def deviceName = params.deviceName
+        def theAsset = Asset.findByItsId(deviceName)
+        PhysicalServer device = theAsset
+        def jsonData
+
+        if (theAsset.assetType == 'Physical Server'){
+
+
+        println("retrieved data: ")
+            println("itsid: " + device.itsId)
+            println("itstype: " + device.assetType)
+                 }
+
+        jsonData = [device.itsId,device.assetType.toString()]
+
+        render jsonData as JSON
+    }
+
 }
 
