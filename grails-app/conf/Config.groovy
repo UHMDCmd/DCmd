@@ -21,21 +21,21 @@ grails.app.context="its/dcmd"
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
-        xml: ['text/xml', 'application/xml'],
-        text: 'text/plain',
-        js: 'text/javascript',
-        rss: 'application/rss+xml',
-        atom: 'application/atom+xml',
-        css: 'text/css',
-        csv: 'text/csv',
-        pdf: 'application/pdf',
-        rtf: 'application/rtf',
-        excel: 'application/vnd.ms-excel',
-        ods: 'application/vnd.oasis.opendocument.spreadsheet',
-        all: '*/*',
-        json: ['application/json','text/json'],
-        form: 'application/x-www-form-urlencoded',
-        multipartForm: 'multipart/form-data'
+    xml: ['text/xml', 'application/xml'],
+    text: 'text/plain',
+    js: 'text/javascript',
+    rss: 'application/rss+xml',
+    atom: 'application/atom+xml',
+    css: 'text/css',
+    csv: 'text/csv',
+    pdf: 'application/pdf',
+    rtf: 'application/rtf',
+    excel: 'application/vnd.ms-excel',
+    ods: 'application/vnd.oasis.opendocument.spreadsheet',
+    all: '*/*',
+    json: ['application/json','text/json'],
+    form: 'application/x-www-form-urlencoded',
+    multipartForm: 'multipart/form-data'
 ]
 
 grails.stringchararrayaccessor.disabled=true
@@ -122,9 +122,9 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/index.gsp:': ['permitAll'],
 
 
-//        '/**': ['ROLE_USER']
+    //        '/**': ['ROLE_USER']
 
-//        '/audit/**': ['ROLE_ADMIN'],
+    //        '/audit/**': ['ROLE_ADMIN'],
         '/user/**': ['ROLE_ADMIN'],
         '/**/home': ['ROLE_READ', 'ROLE_WRITE', 'ROLE_ADMIN'],
         '/**/list': ['ROLE_READ', 'ROLE_WRITE','ROLE_ADMIN'],
@@ -144,14 +144,14 @@ environments {
     development {
 
 
-       grails.serverURL = "http://localhost:8080/its/${appName}"
+        grails.serverURL = "http://localhost:8080/its/${appName}"
         /*
         log4j {
-            logger {
-                grails.app.domain="info,stdout"
-            }
+        logger {
+        grails.app.domain="info,stdout"
         }
-        */
+        }
+         */
     }
     production {
         grails.serverURL =  "http://www.hawaii.edu/its/${appName}"
@@ -171,85 +171,90 @@ grails.plugin.springsecurity.ldap.context.server = 'ldap://ldap1.hawaii.edu:389'
 //log4j configuration
 /*
 log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
+// Example of changing the log pattern for the default console
+// appender:
+//
 
-    //debug 'org.hibernate.SQL'
-    //trace 'org.hibernate.type'
+//debug 'org.hibernate.SQL'
+//trace 'org.hibernate.type'
 
-    warn 'grails.app'
-    info 'grails.app.controller'
+warn 'grails.app'
+info 'grails.app.controller'
 //    debug 'grails.app.service.BarService'
 
 //    debug 'org.codehaus.groovy.grails.plugins.springsecurity',
 //            'grails.plugins.springsecurity',
 //            'org.springframework.security'
 
-    appenders {
-        console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-        root {
-            info()
-        }
+appenders {
+console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+root {
+info()
+}
 //        file name:'file', file:'C:\\Users\\bkarsin\\Desktop\\mylog.log'
-    }
-    root {
-        error 'stdout'
-    }
+}
+root {
+error 'stdout'
+}
 
-    info 'org.'
+info 'org.'
 
 
-    error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-            'org.codehaus.groovy.grails.web.pages', //  GSP
-            'org.codehaus.groovy.grails.web.sitemesh', //  layouts
-            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-            'org.codehaus.groovy.grails.web.mapping', // URL mapping
-            'org.codehaus.groovy.grails.commons', // core / classloading
-            'org.codehaus.groovy.grails.plugins', // plugins
-            'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
-            'org.springframework',
-            'org.hibernate',
-            'net.sf.ehcache.hibernate'
+error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+'org.codehaus.groovy.grails.web.pages', //  GSP
+'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+'org.codehaus.groovy.grails.web.mapping', // URL mapping
+'org.codehaus.groovy.grails.commons', // core / classloading
+'org.codehaus.groovy.grails.plugins', // plugins
+'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+'org.springframework',
+'org.hibernate',
+'net.sf.ehcache.hibernate'
 
-    warn   'org.mortbay.log'
+warn   'org.mortbay.log'
 
 }
-        */
+ */
 
 grails.resources.modules = {
 	
-		application_theme {
-//			dependsOn 'jquery'
-            resource url :'/css/BreadCrumb.css'
-			resource url :'css/admin_theme/ie.css'
-			resource url :'css/admin_theme/layout.css'
-		}
+    application_theme {
+        resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
+        resource url :'/css/BreadCrumb.css'
+        resource url :'css/admin_theme/ie.css'
+        resource url :'css/admin_theme/layout.css'
+        
+//        //tabletools
+//        resource url:'/js/TableTools-2.0.1/media/js/ZeroClipboard.js'
+//        resource url:'/js/TableTools-2.0.1/media/js/TableTools.js'
+        
+    }
 
-        tabletools {
-            resource url:'/js/TableTools-2.0.1/media/js/ZeroClipboard.js'
-            resource url:'/js/TableTools-2.0.1/media/js/TableTools.js'
-        }
+    tabletools {
+        resource url:'/js/TableTools-2.0.1/media/js/ZeroClipboard.js'
+        resource url:'/js/TableTools-2.0.1/media/js/TableTools.js'
+    }
 
-        asset {
-            resource url:'/js/asset.js'
-        }
+    asset {
+        resource url:'/js/asset.js'
+    }
 
-        application {
-            resource url:'/js/application.js'
-        }
+    application {
+        resource url:'/js/application.js'
+    }
 		
-		ui_tables{
-            dependsOn: 'jquery'
-			dependsOn: 'jqueryUi'
-			resource url: '/js/jquery.dataTables.js'
+    ui_tables{
+        dependsOn: 'jquery'
+        dependsOn: 'jqueryUi'
+        resource url: '/js/jquery.dataTables.js'
 			
-		}
-		ui {
-			resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
-			resource url: '/js/jquery-ui-1.8.15.custom.min.js'
-            resource url: '/css/BreadCrumb.css'
-//			resource url: '/js/jquery.dataTables.js'
+    }
+    ui {
+        resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
+        resource url: '/js/jquery-ui-1.8.15.custom.min.js'
+        resource url: '/css/BreadCrumb.css'
+        //			resource url: '/js/jquery.dataTables.js'
         //          resource url: '/js/tabs.js'
     }
 
@@ -258,11 +263,11 @@ grails.resources.modules = {
         resource url: '/js/jquery.easing.1.3.js'
     }
     footer{
-//			resource url: '/css/slide_menu/footer_bar.css'
-//			resource url: '/js/floating_footer.js'
-//			resource url: '/css/slide_menu/images/house.png'
-//			resource url: '/css/slide_menu/images/database_table.png'
-//			resource url: '/css/slide_menu/images/database_add.png'
+        //			resource url: '/css/slide_menu/footer_bar.css'
+        //			resource url: '/js/floating_footer.js'
+        //			resource url: '/css/slide_menu/images/house.png'
+        //			resource url: '/css/slide_menu/images/database_table.png'
+        //			resource url: '/css/slide_menu/images/database_add.png'
     }
     select2 {
         resource url:'/css/select2.css'
@@ -317,21 +322,21 @@ grails.plugin.springsecurity.authority.className = 'edu.hawaii.its.dcmd.inf.Role
 /* remove this line 
 // GSP settings
 grails {
-    views {
-        gsp {
-            encoding = 'UTF-8'
-            htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
-            codecs {
-                expression = 'html' // escapes values inside null
-                scriptlet = 'none' // escapes output from scriptlets in GSPs
-                taglib = 'none' // escapes output from taglibs
-                staticparts = 'none' // escapes output from static template parts
-            }
-        }
-        // escapes all not-encoded output at final stage of outputting
-        filteringCodecForContentType {
-            //'text/html' = 'html'
-        }
-    }
+views {
+gsp {
+encoding = 'UTF-8'
+htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
+codecs {
+expression = 'html' // escapes values inside null
+scriptlet = 'none' // escapes output from scriptlets in GSPs
+taglib = 'none' // escapes output from taglibs
+staticparts = 'none' // escapes output from static template parts
+}
+}
+// escapes all not-encoded output at final stage of outputting
+filteringCodecForContentType {
+//'text/html' = 'html'
+}
+}
 }
 remove this line */

@@ -30,10 +30,11 @@
     <g:render template="../show_secondary" />
 </div>
 
-<h1>UI Settings</h1>
+
 <div class="pageBodyNoMargin">
-    <article class="module width_full">
-        <div class="module_content">
+    <article class="module width_full" style="display: block; width:50%">
+        <h1>UI Settings</h1>
+        <div class="module_content" >
         <g:form controller="uisettings">
                 <div class="show-wrapper">
                     <table class="floatTables">
@@ -43,8 +44,8 @@
                                 <select id="theme" name="theme">
                                 <option value="1" selected="selected">Grape</option>
                                 <option value="2">The Darkness</option>
-                                <option value="3">Pepper Grinder</option>
-                                <option value="4">Dot Luv</option>
+                                <option value="3">Dot Luv</option>
+                                
                             </select>
                                 </td>
                         </td>

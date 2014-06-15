@@ -17,13 +17,6 @@ modules = {
 
     }
 
-    pepper_theme {
-        resource url: '/css/pepper_theme/jquery-ui-1.10.3.custom.css'
-        resource url: '/css/pepper_theme/BreadCrumb.css'
-
-//        resource url: '/css/admin_theme/layout.css'
-//        resource url: '/css/admin_theme/ie.css'
-    }
 
     dotluv_theme{
 

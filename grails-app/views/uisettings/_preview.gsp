@@ -56,7 +56,7 @@
     });
 
 </script>
-<div id="preview" style="position:absolute" align="center">
+<div id="preview" style="position:absolute; display: block" align="center">
 <table>
     <td>
     <table id="gridPreview"></table>

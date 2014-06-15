@@ -8,32 +8,35 @@
     <jq:resources/>
 
     <jqgrid:resources />
-    <jqui:resources themeCss="${resource(dir:'css/le-frog',file:'jquery-ui-1.8.14.custom.css')}" />
+    <jqui:resources themeCss="${resource(dir:'css/grape-theme',file:'jquery-ui-1.8.15.custom.css')}" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
     <r:require modules='application_theme,menu, asset' />
 
+<script>
+    $(document).ready(function() {
+        try{
+        <g:set var="themeVal" value="${edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString()).themeVal}"/>
+        }
+        catch(err){
+            if((${themeVal}.equals(null)){
+            ${themeVal} = 1
+            }
+        }
+    });
+</script>
 
-   <g:if test="${session.getValue("themeVal") == 1}" >
+   <g:if test="${themeVal == 1}" >
     <r:require module="grape_theme"/>
     </g:if>
-
-    <g:if test="${session.getValue("themeVal") == 2}" >
+    <g:elseif test="${themeVal == 2}" >
     <r:require module="darkness_theme"/>
-    </g:if>
-    <g:if test="${session.getValue("themeVal") == 3}" >
-        <r:require module="pepper_theme"/>
-    </g:if>
-    <g:if test="${session.getValue("themeVal") == 4}" >
+    </g:elseif>
+    <g:elseif test="${themeVal == 3}" >
         <r:require module="dotluv_theme"/>
-    </g:if>
+    </g:elseif>
     <g:else>
         <r:require module="grape_theme"/>
     </g:else>
-
-   %{-- <g:if test="${session.themeVal == 3}" >
-        <r:require module="theme3"/>
-    </g:if>--}%
-
 
 
     <r:layoutResources/>
