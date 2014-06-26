@@ -221,7 +221,7 @@ grails.resources.modules = {
 	
     application_theme {
         resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
-        resource url :'/css/BreadCrumb.css'
+        resource url :'css/grape-theme/BreadCrumb.css'
         resource url :'css/admin_theme/ie.css'
         resource url :'css/admin_theme/layout.css'
         
@@ -253,7 +253,7 @@ grails.resources.modules = {
     ui {
         resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
         resource url: '/js/jquery-ui-1.8.15.custom.min.js'
-        resource url: '/css/BreadCrumb.css'
+        //resource url: '/css/BreadCrumb.css'
         //			resource url: '/js/jquery.dataTables.js'
         //          resource url: '/js/tabs.js'
     }

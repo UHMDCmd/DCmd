@@ -89,7 +89,7 @@
                 <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.png')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.5.0</sub></font></a>
             </h1>
 
-            <h2 class="section_title">Dashboard</h2>
+            <h2 class="section_title"></h2>
 
         </hgroup>
     </header>

@@ -1,4 +1,4 @@
-<g:if test="${(action == 'show')||(action == 'list') || (action == 'create') || (action == 'edit')}">
+<g:if test="${(action == 'show')||(action == 'list') || (action == 'create') || (action == 'edit')||(action == 'index')}">
 
     <script type="text/javascript">
         $(document).ready(function(){

@@ -249,7 +249,7 @@ article.actionsbar_logout {
 
 /*.actionsbar span .settings_button{ *//*for submit form*/
     /*display: inline-block;*/
-    /*background: url(images/settings.png) center left no-repeat;*/
+    /*background: url(images/settings1.png) center left no-repeat;*/
     /*color: #333;*/
     /*padding-left: 25px;*/
     /*float: left;*/
@@ -604,7 +604,7 @@ aside#sidebar {
     background: url(content_images/icn_video.png) no-repeat center left;
 }
 #sidebar li.icn_settings a {
-    background: url(content_images/icn_settings.png) no-repeat center left;
+    background: url(images/settings1.png) no-repeat center left;
 }
 #sidebar li.icn_security a {
     background: url(content_images/icn_security.png) no-repeat center left;

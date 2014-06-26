@@ -79,7 +79,7 @@
 
 </div>
 
-   </div>
+
  <div class="pageBody" id="outerElement">
 %{--     <export:formats formats="['csv', 'excel', 'ods', 'pdf', 'rtf', 'xml']" /> --}%
      <g:render template="../toolTip" />

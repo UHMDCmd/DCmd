@@ -89,9 +89,14 @@ class PersonController {
         objectId = location.id
     }
 
-
-
      def ext = "/its/dcmd/" + objectType + "/show?id=" + objectId;
+
+    //special case for uisettings page
+     if (objectType.equals('settings')){
+         itsName = "UI Settings"
+         ext = "/its/dcmd/uisettings";
+     }
+
   //   println("Name: " + itsName)
   //   println("extension: " + ext)
 

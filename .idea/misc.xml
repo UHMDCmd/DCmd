@@ -4,6 +4,9 @@
     <entry_points version="2.0" />
   </component>
   <component name="IdProvider" IDEtalkID="A72F2BFA14F908F1C544C0B7CA85F9DF" />
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/grails-app/views/login/list.gsp" />
+  </component>
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>

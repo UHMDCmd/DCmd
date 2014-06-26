@@ -3,55 +3,55 @@
 
     $(document).ready(function() {
 
+        var mydata = [
+            {id:"1",invdate:"2010-05-24",name:"test",note:"note",tax:"10.00",total:"2111.00"} ,
+            {id:"2",invdate:"2010-05-25",name:"test2",note:"note2",tax:"20.00",total:"320.00"},
+            {id:"3",invdate:"2007-09-01",name:"test3",note:"note3",tax:"30.00",total:"430.00"},
+            {id:"4",invdate:"2007-10-04",name:"test",note:"note",tax:"10.00",total:"210.00"},
+            {id:"5",invdate:"2007-10-05",name:"test2",note:"note2",tax:"20.00",total:"320.00"},
+            {id:"6",invdate:"2007-09-06",name:"test3",note:"note3",tax:"30.00",total:"430.00"},
+            {id:"7",invdate:"2007-10-04",name:"test",note:"note",tax:"10.00",total:"210.00"},
+            {id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"21.00",total:"320.00"},
+            {id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+            {id:"11",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+            {id:"12",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+            {id:"13",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+            {id:"14",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+            {id:"15",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"}
+        ];
 
         jQuery("#gridPreview").jqGrid({
-            url: '../js/preview/books.xml',
-            datatype: "xml",
-            colNames:["Author","Title", "Price", "Published Date"],
+            data: mydata,
+            datatype: "local",
+            height: 'auto',
+            rowNum: 30,
+            rowList: [10,20,30],
+            colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
             colModel:[
-                {name:"Author",index:"Author", width:120, xmlmap:"ItemAttributes>Author"},
-                {name:"Title",index:"Titltes>Title"},
-                {name:"Price",index:"Manufacturer", width:100, align:"right",xmlmap:"ItemAttributes>Price", sorttype:"float"},
-                {name:"DatePub",index:"ProductGroup", width:130,xmlmap:"ItemAttributes>DatePub",sorttype:"date"}
+                {name:'id',index:'id', width:60, sorttype:"int"},
+                {name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
+                {name:'name',index:'name', width:100, editable:true},
+                {name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number", editable:true},
+                {name:'tax',index:'tax', width:80, align:"right",sorttype:"float", editable:true},
+                {name:'total',index:'total', width:80,align:"right",sorttype:"float"},
+                {name:'note',index:'note', width:150, sortable:false}
             ],
-            height:250,
-            rowNum:10,
-            rowList:[10,20,30],
+            pager: "#gridPreview",
             viewrecords: true,
-            loadonce: true,
-            xmlReader: {
-                root : "Items",
-                row: "Item",
-                repeatitems: false,
-                id: "ASIN"
+            sortname: 'name',
+            grouping:true,
+            groupingView : {
+                groupField : ['name']
             },
-            caption: "Grid P"
+            caption: "Preview Grid"
         });
-
-        jQuery('#gridPreview').filterToolbar({id:'gridPreview', searchOnEnter:true});
-        $("#gridPreview").jqGrid('navGrid','#allAssetPager',{
-                    add:false,
-                    del:false,
-                    edit:false,
-                    refresh:false,
-                    refreshstate:"current",
-                    search:false
-                },
-                {},//edit options
-
-                {recreateForm:true //since clearAfterAdd is trueby default, recreate the form so we re-establish value for parent id
-                });
-
-
-        var setTooltipsOnColumnHeader = function (grid, iColumn, text) {
-            var thd = jQuery("thead:first", grid[0].grid.hDiv)[0];
-            jQuery("tr.ui-jqgrid-labels th:eq(" + iColumn + ")", thd).attr("title", text);
-        };
 
 
         jQuery(window).bind('resize', function() {
             dynamicListSize('#gridPreview');
         }).trigger('resize');
+
+
 
     });
 
@@ -87,7 +87,8 @@
     </div>
 </div>
 </div>
-</div>
-</td>
 </table>
 </div>
+
+
+

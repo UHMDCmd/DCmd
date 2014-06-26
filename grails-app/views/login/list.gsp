@@ -7,7 +7,7 @@
     <jqui:resources themeCss="${resource(dir:'css/le-frog',file:'jquery-ui-1.8.14.custom.css')}" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
     %{--<r:require modules='application_theme, ui, menu, asset' />--}%
-    <g:render template="../themes"/>
+    %{--<g:render template="../themes"/>--}%
     <r:layoutResources/>
 
     <script type="text/javascript">

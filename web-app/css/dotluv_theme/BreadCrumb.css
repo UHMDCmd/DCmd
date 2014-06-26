@@ -77,7 +77,7 @@
 	margin: 0px 6px 0px 0;
 	padding: 0px 10px 0px 0;
 	font-size: .9167em;
-	background: url(../../css/images/actions_divider_1.png) no-repeat 100% 0;
+    background: url(../admin_theme/content_images/actions_divider_1.png) no-repeat 100% 0;
 }
 .breadCrumb ul li div.chevronOverlay
 {
@@ -112,7 +112,7 @@
 	padding: 0;
 	margin-top: 2px;
 	overflow: hidden;
-	background:url(../images/IconHome.gif) no-repeat 0 0;
+    background: url(../admin_theme/content_images/actions_divider_1.png) no-repeat 100% 0;
 }
 .breadCrumb ul li.first a:hover
 {
@@ -131,7 +131,8 @@
 .chevronOverlay
 {
 	display: none;
-	background: url(../images/ChevronOverlay.png) no-repeat 100% 0;
+	/*background: url(/images/ChevronOverlay.png) no-repeat 100% 0;*/
+    background: url(../admin_theme/content_images/actions_divider_1.png) no-repeat 100% 0;
 	width: 13px;
 	height: 20px;
 }

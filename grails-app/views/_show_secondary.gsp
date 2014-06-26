@@ -269,7 +269,7 @@
                 $.ajax({url:'/its/dcmd/person/resetBreadCrumbs'});
                 $("#crumbTrail").remove();
 
-                $('#breadCrumb').append("<img src='../css/images/actions_divider_1.png'/>"); //<li><a></a></li>
+                $('#breadCrumb').append("");
             });
 
         </script>
