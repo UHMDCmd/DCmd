@@ -4,7 +4,6 @@
 	<head>
         <g:set var="assetType" value="${fieldValue(bean:assetInstance, field: 'assetType')}" />
         %{--<g:set var="objectId" value="{assetId}" />--}%
-        <r:require modules="ui,menu"/>
         <jqDT:resources jqueryUi="true" type="js" />
         <title><g:message code="default.dcmd.label" /></title>
 

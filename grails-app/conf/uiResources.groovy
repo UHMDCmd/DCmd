@@ -17,14 +17,11 @@ modules = {
 
     }
 
+    dot_theme{
+      resource url: 'css/dot_theme/BreadCrumb.css'
+        resource url: 'css/dot_theme/jquery-ui-1.10.3.custom.css'
+    }
 
-    dotluv_theme{
 
-   resource url: '/css/dotluv_theme/jquery-ui-1.10.3.custom.css'
-    resource url: '/css/dotluv_theme/BreadCrumb.css'
-
-//        resource url: '/css/admin_theme/layout.css'
-//        resource url: '/css/admin_theme/ie.css'
-}
 
 }

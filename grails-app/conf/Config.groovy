@@ -216,24 +216,25 @@ warn   'org.mortbay.log'
 
 }
  */
+grails.resources.debug = true
 
 grails.resources.modules = {
 	
-    application_theme {
+    boiler_plate {
         resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
-        resource url :'css/grape-theme/BreadCrumb.css'
+        resource url: '/js/jquery-ui-1.8.15.custom.min.js'
+
         resource url :'css/admin_theme/ie.css'
         resource url :'css/admin_theme/layout.css'
         
-//        //tabletools
-//        resource url:'/js/TableTools-2.0.1/media/js/ZeroClipboard.js'
-//        resource url:'/js/TableTools-2.0.1/media/js/TableTools.js'
-        
-    }
-
-    tabletools {
+        //table tools
         resource url:'/js/TableTools-2.0.1/media/js/ZeroClipboard.js'
         resource url:'/js/TableTools-2.0.1/media/js/TableTools.js'
+
+        //menu
+        resource url: '/css/slide_menu/slide_menu.css'
+        resource url: '/js/jquery.easing.1.3.js'
+
     }
 
     asset {
@@ -243,32 +244,7 @@ grails.resources.modules = {
     application {
         resource url:'/js/application.js'
     }
-		
-    ui_tables{
-        dependsOn: 'jquery'
-        dependsOn: 'jqueryUi'
-        resource url: '/js/jquery.dataTables.js'
-			
-    }
-    ui {
-        resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
-        resource url: '/js/jquery-ui-1.8.15.custom.min.js'
-        //resource url: '/css/BreadCrumb.css'
-        //			resource url: '/js/jquery.dataTables.js'
-        //          resource url: '/js/tabs.js'
-    }
 
-    menu {
-        resource url: '/css/slide_menu/slide_menu.css'
-        resource url: '/js/jquery.easing.1.3.js'
-    }
-    footer{
-        //			resource url: '/css/slide_menu/footer_bar.css'
-        //			resource url: '/js/floating_footer.js'
-        //			resource url: '/css/slide_menu/images/house.png'
-        //			resource url: '/css/slide_menu/images/database_table.png'
-        //			resource url: '/css/slide_menu/images/database_add.png'
-    }
     select2 {
         resource url:'/css/select2.css'
         resource url: '/js/select2/select2.js'
@@ -294,8 +270,6 @@ grails.resources.modules = {
         resource url: '/js/notify/jquery.notify.js'
         resource url: '/js/notify/notify.css'
     }
-
-
 
 }
 

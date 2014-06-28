@@ -8,20 +8,24 @@
     <jq:resources/>
 
     <jqgrid:resources />
-    <jqui:resources themeCss="${resource(dir:'css/grape-theme',file:'jquery-ui-1.8.15.custom.css')}" />
+    %{--<jqui:resources themeCss="${resource(dir:'css/grape-theme',file:'jquery-ui-1.8.15.custom.css')}" />--}%
     <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
-    <r:require modules='application_theme,menu, asset' />
+    <r:require modules='boiler_plate, asset' />
 
 <script>
     $(document).ready(function() {
         try{
-        <g:set var="themeVal" value="${edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString()).themeVal}"/>
-        }
+            <g:set var="themeVal" value="${edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString()).themeVal}"/>
+
+    }
+
         catch(err){
             if((${themeVal}.equals(null)){
             ${themeVal} = 1
             }
         }
+
+
     });
 </script>
 
@@ -32,7 +36,7 @@
     <r:require module="darkness_theme"/>
     </g:elseif>
     <g:elseif test="${themeVal == 3}" >
-        <r:require module="dotluv_theme"/>
+        <r:require module="dot_theme"/>
     </g:elseif>
     <g:else>
         <r:require module="grape_theme"/>
@@ -88,33 +92,6 @@
 
         </hgroup>
     </header>
-    <!-- end of header bar -->
-    <%--
-            <section id="secondary_bar">
-
-                <div class="user">
-                    <p>
-                      John Doe
-                        <!--  John Doe (<a href="#">3 Messages</a>)-->
-                    </p>
-                    <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
-                </div>
-
-                <div class="breadcrumbs_container"><%--
-                    <article class="breadcrumbs">
-                        <a href="${createLink(uri: '/')}">DCMD Home</a>
-                        <div class="breadcrumb_divider"></div>
-                        <a class="current">Dashboard</a>
-                    </article>
-                </div>
-
-            </section>
-    --%>
-    <!-- end of secondary bar -->
-
-
-
-
 
     <g:layoutBody />
 
@@ -122,9 +99,7 @@
 
 
 </div>
-<!-- End of Container -->
 <footer></footer>
-
 
 </body>
 </html>

@@ -20,26 +20,10 @@ class UisettingsController {
         def username = principal.username
         long userId = principal.id
         User user = User.get(userId)
-        //strange issue with offset number, temp switch case fix
-        int num = 0
-        if (params.theme == 49){  //grape theme
-            num = 1
-        }
-        else if (params.theme == 50){ //darkness theme
-            num =2
-        }
-        else if (params.theme == 51){ //dot luv
-            num = 3
-        } 
 
-
-        user.properties['themeVal'] = num
+        user.properties['themeVal'] = params.theme
         user.save(failOnError: true, flush: true)
-        // println("theme val is set to (before call): " + User.get(userId).themeVal)
-        // setThemeSessionVar(); //set the session variable
-
-
-
+        //println("theme val is set : " + User.get(userId).themeVal)
 
         redirect(controllerUri:'its/dcmd')
 

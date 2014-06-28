@@ -2,7 +2,6 @@
 <%@ page import="edu.hawaii.its.dcmd.inf.Host" %>
 <html>
     <head>
-        <r:require modules='footer, tabletools' />
         <export:resource/>
         <meta content="main" name="layout" />
         <g:set var="entityName" value="${message(code: 'host.label', default: 'Host')}" />

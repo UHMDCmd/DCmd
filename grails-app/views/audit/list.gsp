@@ -2,7 +2,6 @@
 <html>
 	<head>
 
-        <r:require modules='footer, tabletools' />
         <export:resource/>
         <meta content="main" name="layout" />
 	    	<g:set var="entityName" value="${message(code: 'audit_log.label', default: 'Audit Log')}" />

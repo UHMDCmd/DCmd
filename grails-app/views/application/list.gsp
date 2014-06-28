@@ -1,7 +1,6 @@
 <%@ page import="edu.hawaii.its.dcmd.inf.Application"%>
 <html>
     <head>
-        <r:require modules='footer, tabletools' />
 
         <meta content="main" name="layout" />
         <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}" />

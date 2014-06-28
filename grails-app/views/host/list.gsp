@@ -3,7 +3,6 @@
 <html>
 <head>
 %{--    <r:require modules='ui,menu,footer, tabletools, bootstrap' />--}%
-<r:require modules='footer, tabletools' />
     <export:resource/>
     <meta content="main" name="layout" />
     <g:set var="entityName" value="${message(code: 'host.label', default: 'Host')}" />

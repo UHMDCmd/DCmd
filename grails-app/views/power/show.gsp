@@ -6,7 +6,6 @@
     <title><g:message code="default.dcmd.label"/></title>
     <jqDT:resources jqueryUi="true" type="js" />
 
-    <r:require modules="ui,menu"/>
 
     <g:applyLayout name="breadcrumb_bar">
         <g:include controller="power" action="setBreadCrumbForCurrentItem" params="[pageType: 'power']"/>

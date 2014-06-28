@@ -2,7 +2,6 @@
 <html>
 <head>
 
-    <r:require modules='footer,tabletools' />
 
     <meta content="main" name="layout" />
     <title><g:message code="default.dcmd.label" /></title>

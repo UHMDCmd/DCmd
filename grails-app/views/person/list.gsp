@@ -2,7 +2,6 @@
 <%@ page import="edu.hawaii.its.dcmd.inf.Person" %>
 <html>
     <head>
-        <r:require modules='footer, tabletools' />
 
         <meta content="main" name="layout" />
         <g:set var="entityName" value="${message(code: 'person.label', default: 'Staff')}" />

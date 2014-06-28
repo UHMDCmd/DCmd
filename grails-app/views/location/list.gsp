@@ -2,8 +2,6 @@
 <html>
 <head>
 
-    <r:require modules='footer, tabletools' />
-
     <meta content="main" name="layout" />
     <g:set var="entityName" value="${message(code: 'location.label', default: 'Location')}" />
     <title><g:message code="default.dcmd.label" /></title>

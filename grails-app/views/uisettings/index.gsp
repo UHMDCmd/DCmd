@@ -2,7 +2,6 @@
 <html>
 <head>
 
-    <r:require modules='tabletools' />
 
     <meta content="main" name="layout" />
 
