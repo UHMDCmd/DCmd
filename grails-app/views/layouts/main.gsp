@@ -16,16 +16,12 @@
     $(document).ready(function() {
         try{
             <g:set var="themeVal" value="${edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString()).themeVal}"/>
-
     }
-
         catch(err){
             if((${themeVal}.equals(null)){
             ${themeVal} = 1
             }
         }
-
-
     });
 </script>
 
@@ -35,9 +31,19 @@
     <g:elseif test="${themeVal == 2}" >
     <r:require module="darkness_theme"/>
     </g:elseif>
-    <g:elseif test="${themeVal == 3}" >
+   <g:elseif test="${themeVal == 3}" >
+       <r:require module="lightness_theme"/>
+   </g:elseif>
+    <g:elseif test="${themeVal == 4}" >
         <r:require module="dot_theme"/>
     </g:elseif>
+   <g:elseif test="${themeVal == 5}" >
+       <r:require module="kermit_theme"/>
+   </g:elseif>
+   <g:elseif test="${themeVal == 6}" >
+       <r:require module="mint_theme"/>
+   </g:elseif>
+
     <g:else>
         <r:require module="grape_theme"/>
     </g:else>

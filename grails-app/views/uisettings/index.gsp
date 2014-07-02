@@ -38,9 +38,12 @@
                                 <select id="theme" name="theme">
                                 <option value="0">--Select a Theme--</option>
                                 <option value="1">Grape</option>
-                                <option value="2">The Darkness</option>
-                                <option value="3">Dot Luv</option>
-                                
+                                <option value="2">Darkness</option>
+                                    <option value="3">Lightness</option>
+                                    <option value="4">Dot Luv</option>
+                                <option value="5">Kermit the Frog</option>
+                                <option value="6">Mint Choc</option>
+
                             </select>
                                 </td>
 
