@@ -43,22 +43,21 @@
     border:solid 2px #707070;
 	/*background:#F1F2F5;*/
 
-/*    background-color: #F1F2F5;
-*/
+    /*background-color: #f51470;*/
     /*background-color: #DBE9EB;*/
     /*background-color: #a5b3b5;*/
 
 
-    /* Safari 4-5, Chrome 1-9 */
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5D798D), to(#586874));
-    /* Safari 5.1, Chrome 10+ */
-    background: -webkit-linear-gradient(top,  #5D798D, #586874);
-    /* Firefox 3.6+ */
-    background: -moz-linear-gradient(top,  #5D798D, #586874);
-    /* IE 10 */
-    background: -ms-linear-gradient(top,  #5D798D, #586874);
-    /* Opera 11.10+ */
-    background: -o-linear-gradient(top,  #5D798D, #586874);
+     /*Safari 4-5, Chrome 1-9*/
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#555555), to(#4B4B4B));
+     /*Safari 5.1, Chrome 10+*/
+    background: -webkit-linear-gradient(top,  #555555, #4B4B4B);
+     /*Firefox 3.6+*/
+    background: -moz-linear-gradient(top,  #555555, #4B4B4B);
+     /*IE 10*/
+    background: -ms-linear-gradient(top,  #555555, #4B4B4B);
+     /*Opera 11.10+*/
+    background: -o-linear-gradient(top,  #555555, #4B4B4B);
 }
 .breadCrumb ul
 {
@@ -101,7 +100,7 @@
 	overflow: hidden;
 	float: left;
    font-family: tahoma;
-    color: #cddbdd;
+    color: #ffb457;
 
 
 }
@@ -113,7 +112,7 @@
 	padding: 0;
 	margin-top: 2px;
 	overflow: hidden;
-    background: url(../admin_theme/content_images/actions_divider_1.png) no-repeat 100% 0;
+	background:url(/images/IconHome.gif) no-repeat 0 0;
 }
 .breadCrumb ul li.first a:hover
 {

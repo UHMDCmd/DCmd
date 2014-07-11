@@ -646,7 +646,7 @@ class BootStrap {
 
                 def t5k99, t2k40, t2k41, t2k99, pub05, pub02, pub03, pvt02, aphrodite, apx01, t2k06, t2k07, t2k08, pvt08, VMCluster2
                 if ( ! PhysicalServer.count() ) {
-                    pvt08 = new PhysicalServer(cluster:solarisCluster, itsId: "pvt08", updatedById: 001, location: locale2, assetType: server, manufacturer: madeBy1, rackable:true, RU_begin: 0, RU_size:0, RU_planned_begin: 0)
+                    pvt08 = new PhysicalServer(cluster:solarisCluster, itsId: "pvt08", updatedById: 001, location: locale2, assetType: server, manufacturer: madeBy1, status: availStatus, rackable:true, RU_begin: 0, RU_size:0, RU_planned_begin: 0)
                     pvt08.save(failOnError: true, flush:true)
 
                     VMCluster2 = new PhysicalServer(cluster:solarisCluster, itsId: "VM Cluster 2", updatedById: 001, location: locale2, assetType: server, manufacturer: madeBy1, rackable:true, RU_begin: 0, RU_size:0, RU_planned_begin: 0)

@@ -44,7 +44,7 @@
        <r:require module="mint_theme"/>
    </g:elseif>
 
-    <g:else>
+   <g:else>
         <r:require module="grape_theme"/>
     </g:else>
 
@@ -93,8 +93,55 @@
 
                 <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.png')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.5.0</sub></font></a>
             </h1>
+            <g:set var="currentMode" value="${session.getAttribute("modeType")}"/>
 
-            <h2 class="section_title"></h2>
+            <g:if test="${currentMode == 'edit mode'}">
+            <h2 class="section_title" style="color:#798898"> [ <span class="blink_me" style="color:#86aeb2">${currentMode}</span> ] </h2>
+            </g:if>
+            <g:elseif test="${currentMode == 'create mode'}">
+                <h2 class="section_title" style="color:#798898"> [ <span class="blink_me" style="color:#c04469">${currentMode}</span> ] </h2>
+            </g:elseif>
+            <g:else>
+                <h2 class="section_title"></h2>
+            </g:else>
+
+            <style>
+            .blink_me {
+                -webkit-animation-name: blinker;
+                -webkit-animation-duration: 2s;
+                -webkit-animation-timing-function: linear;
+                -webkit-animation-iteration-count: infinite;
+
+                -moz-animation-name: blinker;
+                -moz-animation-duration: 1s;
+                -moz-animation-timing-function: linear;
+                -moz-animation-iteration-count: infinite;
+
+                animation-name: blinker;
+                animation-duration: 1s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+
+            @-moz-keyframes blinker {
+                0% { opacity: 1.0; }
+                50% { opacity: 0.0; }
+                100% { opacity: 1.0; }
+            }
+
+            @-webkit-keyframes blinker {
+                0% { opacity: 1.0; }
+                50% { opacity: 0.0; }
+                100% { opacity: 1.0; }
+            }
+
+            @keyframes blinker {
+                0% { opacity: 1.0; }
+                50% { opacity: 0.0; }
+                100% { opacity: 1.0; }
+            }
+            </style>
+
 
         </hgroup>
     </header>

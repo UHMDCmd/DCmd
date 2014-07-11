@@ -171,6 +171,10 @@
         </g:if>
 
         <g:if test="${action == 'edit'}">
+        <script>
+           ${session.setAttribute("modeType","edit mode")}
+        </script>
+
             <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
             <div class="actions_divider"></div>
 
@@ -184,8 +188,10 @@
                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
         </g:if>
 
-        <g:if test="${action == 'create'}">
-
+        <g:elseif test="${action == 'create'}">
+            <script>
+                ${session.setAttribute("modeType","create mode")}
+            </script>
             <a class = "home_button" href="${createLink(uri: '/person/home')}">DCmd Home</a>
 
             <div class="actions_divider"></div>
@@ -206,8 +212,13 @@
                     class="discard_button"
                     action="discard"
                     value="${message(code: 'default.button.saveCreate.label', default: 'Discard')}" />
-        </g:if>
-
+        </g:elseif>
+        <g:else>
+            %{--clear the session variable--}%
+            <script>
+                ${session.removeAttribute("modeType")}
+            </script>
+        </g:else>
     </article>
     </sec:ifLoggedIn>
 %{--

@@ -1,0 +1,118 @@
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+#fl_menu {
+    margin: 0;
+    padding: 0;
+    color: #666666;
+    font-weight: bold;
+    display: block;
+    float: left;
+    width: 85%;
+    height: 35px;
+    line-height: 35px;
+
+    text-shadow: 0 1px 0 #fff;
+    text-align:center;
+
+    margin-left: 6%;
+    z-index:50;
+}
+
+#fl_menu .label {
+	padding-left: 0px;
+	line-height: 30px;
+	font-family: "Arial Black", Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+
+	color: #666666;
+	letter-spacing: 7px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+    z-index:50;
+    position: relative;
+ 	}
+
+#fl_menu .menu {
+	display: none;
+}
+
+#fl_menu .menu .menu_item{
+    position:relative;
+    width:150px;
+    height: 38px;
+	display: block;
+    background-color:  #F1F1F4;
+	color: #666666;
+	border-top: 1px solid #333;
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	text-decoration: none;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+    z-index: 1;
+}
+
+#fl_menu .menu div.menu_item:hover {
+    background-image:none;
+	background-color: #2f6108;
+	color: #fff;
+    z-index: 50;
+}
+#fl_menu .menu div.menu_item:hover a.menu_item_link{
+    color:#FFF;
+}
+#fl_menu .menu div.menu_item:hover span.menu_item_link{
+    color:#FFF;
+}
+#fl_menu .menu span.menu_item_link {
+    color:#666666;
+    text-decoration: none;
+    font-weight:bold;
+    line-height:35px;
+    font-size:13px;
+
+}
+#fl_menu .menu a.submenu_item:hover {
+    background-image:none;
+    background-color: #2f6108;
+    color: #fff;
+    z-index: 50;
+}
+#fl_menu .submenu_item {
+    display:none;
+}
+#fl_menu .menu_item:hover .submenu_item {
+    display:block;
+    position:relative;
+    width:150px;
+    height: 38px;
+    display: block;
+    background-color:  #F1F1F4;
+    color: #666666;
+    border-top: 1px solid #333;
+    border-left:1px solid #333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    z-index:1;
+    margin-left:150px;
+    top:-35px;
+
+
+}
+
+#fl_menu.sticky {
+}

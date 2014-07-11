@@ -40,8 +40,8 @@
                                 <option value="1">Grape</option>
                                 <option value="2">Darkness</option>
                                     <option value="3">Lightness</option>
-                                    <option value="4">Dot Luv</option>
-                                <option value="5">Kermit the Frog</option>
+                                    <option value="4">Dot Love</option>
+                                <option value="5">Green Machine</option>
                                 <option value="6">Mint Choc</option>
 
                             </select>
