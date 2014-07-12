@@ -43,6 +43,7 @@ modules = {
 
     layout_black{
         resource url :'css/admin_theme/layout_black.css'
+
     }
 
     layout_plant{
@@ -51,6 +52,21 @@ modules = {
 
     layout_orange{
         resource url: 'css/admin_theme/layout_orange.css'
+    }
+    font_size_11{
+        resource url: 'css/admin_theme/font_size_11.css'
+    }
+    font_size_14{
+        resource url: 'css/admin_theme/font_size_14.css'
+    }
+    font_size_16{
+        resource url: 'css/admin_theme/font_size_16.css'
+    }
+    font_size_18{
+        resource url: 'css/admin_theme/font_size_18.css'
+    }
+    font_size_20{
+        resource url: 'css/admin_theme/font_size_20.css'
     }
 
 }

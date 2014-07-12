@@ -17,13 +17,15 @@
             try{
                 <g:set var="themeVal" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.themeVal}"/>
                 <g:set var="background" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.background}"/>
+                <g:set var="font_size" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.font}"/>
+
             }
             catch(err){
-             console.log("themeVal error caught")
-                        }
+                console.log("themeVal error caught")
+            }
         });
     </script>
-%{--grid and color scheme--}%
+    %{--grid and color scheme--}%
     <g:if test="${themeVal == 1}" >
         <r:require module="grape_theme"/>
     </g:if>
@@ -45,26 +47,43 @@
     <g:elseif test="${themeVal == null}">
         <r:require module="grape_theme"/>
     </g:elseif>
-%{--grid and color scheme--}%
+    %{--grid and color scheme--}%
 
     <g:if test="${background == 1}" >
-    <r:require module="layout_basic"/>
+        <r:require module="layout_basic"/>
     </g:if>
     <g:elseif test="${background == 2}" >
-    <r:require module="layout_blue"/>
+        <r:require module="layout_blue"/>
     </g:elseif>
     <g:elseif test="${background == 3}" >
-    <r:require module="layout_black"/>
+        <r:require module="layout_black"/>
     </g:elseif>
     <g:elseif test="${background == 4}" >
-    <r:require module="layout_plant"/>
+        <r:require module="layout_plant"/>
     </g:elseif>
     <g:elseif test="${background == 5}" >
-    <r:require module="layout_orange"/>
+        <r:require module="layout_orange"/>
     </g:elseif>
     <g:elseif test="${background == null}">
-    <r:require module="layout_basic"/>
+        <r:require module="layout_basic"/>
     </g:elseif>
+
+    <g:if test="${font_size == 11}" >
+        <r:require module="font_size_11"/>
+    </g:if>
+    <g:elseif test="${font_size == 14}" >
+        <r:require module="font_size_14"/>
+    </g:elseif>
+    <g:elseif test="${font_size == 16}" >
+        <r:require module="font_size_16"/>
+    </g:elseif>
+    <g:elseif test="${font_size == 18}" >
+        <r:require module="font_size_18"/>
+    </g:elseif>
+    <g:elseif test="${font_size == 20}" >
+        <r:require module="font_size_20"/>
+    </g:elseif>
+
 
     <r:layoutResources/>
 

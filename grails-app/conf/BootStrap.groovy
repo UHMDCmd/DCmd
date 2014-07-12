@@ -262,7 +262,7 @@ class BootStrap {
                     ROLE_USER.save(failOnError:true, flush:true)
                 }
 
-                def defaultSettings = new Uisettings(themeVal:1,header:1,background:1,font:1).save(failOnError: true,flush:true)
+                def defaultSettings = new Uisettings(themeVal:1,header:1,background:1,font:11).save(failOnError: true,flush:true)
 
 
                 def userKarsin, userElfalan, userHodges, kawachi, ckawano, jonathan, czane, steven, garry, thang, romeot,

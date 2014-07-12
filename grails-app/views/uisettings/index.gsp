@@ -59,27 +59,15 @@
                         <td valign="value">
                             <select id="fontSize" name="fontSize">
                                 <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
                                 <option value="14">14</option>
-                                <option value="15">15</option>
                                 <option value="16">16</option>
+                                <option value="18">18</option>
+                                <option value="20">20</option>
                             </select>
                         </td>
                         </tr>
-                        %{--<tr>--}%
-                        %{--<td valign="top" class="name"><b>Font Style</b></td>--}%
-                        %{--<td valign="value">--}%
-                            %{--<select id="fontStyle" name="fontStyle">--}%
-                                %{--<option value="1">x</option>--}%
-                                %{--<option value="2">x</option>--}%
-                                %{--<option value="3">x</option>--}%
-                                %{--<option value="4">x</option>--}%
-                                %{--<option value="5">x</option>--}%
-                                %{--<option value="6">x</option>--}%
-                            %{--</select>--}%
-                        %{--</td>--}%
-                        %{--</tr>--}%
+
+
                     </td>
 
 
@@ -92,19 +80,18 @@
                                 <li class="ui-state-default" style="background-image: url('../css/admin_theme/content_images/black.png')"></li>
                                 <li class="ui-state-default" style="background-image: url('../css/admin_theme/content_images/green.png')"></li>
                                 <li class="ui-state-default" style="background-image: url('../css/admin_theme/content_images/purple.png')"></li>
-                                %{--<li class="ui-state-default"></li>--}%
-                                %{--<li class="ui-state-default"></li>--}%
-                                %{--<li class="ui-state-default"></li>--}%
+
                             </ol>
                             <style>
                             #feedback { font-size: 1.4em; }
-                            #selectable .ui-selecting { border: 3px solid #ffbc1a; }
-                            #selectable .ui-selected { border: 3px solid #F39814; color: white; }
+                            #selectable .ui-selecting { border: 4px solid #ffbc1a; }
+                            #selectable .ui-selected { border: 4px solid #F39814; color: white; }
                             #selectable { list-style-type: none; margin: 0; padding: 0; width: 650px; }
                             #selectable li { margin: 4px; padding: 1px; float: left; width: 50px; height: 40px; font-size: 4em; text-align: center; }
                             </style>
 <script>
     $(document).ready(function(){
+
                         $('#selectable').selectable({
                          selected: function (event, ui) {
                          var selected = ($(this).find('.ui-selected').attr('id'));
@@ -120,9 +107,8 @@
                                  type:'GET',
                                  contentType: 'application/json; charset=utf-8',
                                  dataType: 'json',
-                                 success: function(data) {
-                                   var response = data.backId
-                                     //alert(response);
+                                success: function(data) {
+                                     sessionStorage.backgroundColor = data.returnVal;
                                      location.reload();
 
                                 },
@@ -134,7 +120,19 @@
                                 $("#selectable li").attr('id', function(i){
                                  return 'selectable' + (i+1);
                                     });
+
+        loadDetails();
+
+        function loadDetails() {
+            $("#fontSize").val(sessionStorage.fontVal);
+            $("#selectable").val(sessionStorage.backgroundColor);
+            $("#theme").val(sessionStorage.selectedTheme);
+        }
     });
+
+
+
+
                             </script>
                         </td>
                     </tr>
@@ -152,11 +150,34 @@
 </div>
 
 <script>
-   //
 
     //submit change function, automatically called on select change
     $("#theme").change(function(){
      $("#settingsSubmit").click();
+        sessionStorage.selectedTheme = $("#theme").val();
+    });
+
+    //listener for font size
+    $("#fontSize").change(function(){
+
+        var selected = $("#fontSize").val();
+        var params = Object();
+        params.fontValue = selected;
+
+        $.ajax({
+            async:false,
+            url: '../Uisettings/changeFont',
+            data: params,
+            type:'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function(data) {
+                sessionStorage.fontVal =  data.returnVal;
+                location.reload();
+
+            },
+            error: function () { console.log('Error updating page content'); }
+        });
     });
 </script>
 

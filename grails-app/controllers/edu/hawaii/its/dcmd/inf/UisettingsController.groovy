@@ -36,8 +36,6 @@ class UisettingsController {
         long userId = principal.id
         User user = User.get(userId)
 
-
-
         println("selection: " + params.selected)
         def selection = params.selected
         if (selection == 'selectable1'){
@@ -55,22 +53,44 @@ class UisettingsController {
         else if (selection == 'selectable5'){
             user.userSettings.properties['background'] = 5
         }
-//        else if (selection == 'selectable6'){
-//            user.userSettings.properties['background'] = 6
-//        }
-//        else if (selection == 'selectable7'){
-//            user.userSettings.properties['background'] = 7
-//        }
-//        else if (selection == 'selectable8'){
-//            user.userSettings.properties['background'] = 8
-//        }
 
         println("background set: " + user.userSettings.background)
 
         user.save(failOnError: true, flush: true)
 
-        def jsonData = [backId : user.userSettings.background]
+        def jsonData = [returnVal : user.userSettings.background]
         render jsonData as JSON
+    }
+
+    def changeFont = {
+        def size = params.fontValue
+
+        def username = principal.username
+        long userId = principal.id
+        User user = User.get(userId)
+
+        println("font selected: " + size)
+        if(size == '11'){
+            user.userSettings.properties['font'] = 11;
+        }else if(size == '14'){
+            user.userSettings.properties['font'] = 14;
+        }  else if(size == '16'){
+            user.userSettings.properties['font'] = 16;
+        }  else if(size == '18'){
+            user.userSettings.properties['font'] = 18;
+        }  else if(size == '20'){
+            user.userSettings.properties['font'] = 20;
+        }
+        else{
+            println("font not set correctly")
+        }
+        println("font set: " + user.userSettings.font)
+
+        user.save(failOnError: true, flush: true)
+
+        def jsonData = [returnVal : user.userSettings.font]
+        render jsonData as JSON
+
     }
 
     //     void setThemeSessionVar (){
