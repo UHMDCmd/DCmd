@@ -12,42 +12,59 @@
     <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
     <r:require modules='boiler_plate, asset' />
 
-<script>
-    $(document).ready(function() {
-        try{
-            <g:set var="themeVal" value="${edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString()).themeVal}"/>
-    }
-        catch(err){
-            if((${themeVal}.equals(null)){
-            ${themeVal} = 1
+    <script>
+        $(document).ready(function() {
+            try{
+                <g:set var="themeVal" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.themeVal}"/>
+                <g:set var="background" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.background}"/>
             }
-        }
-    });
-</script>
-
-   <g:if test="${themeVal == 1}" >
-    <r:require module="grape_theme"/>
+            catch(err){
+             console.log("themeVal error caught")
+                        }
+        });
+    </script>
+%{--grid and color scheme--}%
+    <g:if test="${themeVal == 1}" >
+        <r:require module="grape_theme"/>
     </g:if>
     <g:elseif test="${themeVal == 2}" >
-    <r:require module="darkness_theme"/>
+        <r:require module="darkness_theme"/>
     </g:elseif>
-   <g:elseif test="${themeVal == 3}" >
-       <r:require module="lightness_theme"/>
-   </g:elseif>
+    <g:elseif test="${themeVal == 3}" >
+        <r:require module="lightness_theme"/>
+    </g:elseif>
     <g:elseif test="${themeVal == 4}" >
         <r:require module="dot_theme"/>
     </g:elseif>
-   <g:elseif test="${themeVal == 5}" >
-       <r:require module="kermit_theme"/>
-   </g:elseif>
-   <g:elseif test="${themeVal == 6}" >
-       <r:require module="mint_theme"/>
-   </g:elseif>
-
-   <g:else>
+    <g:elseif test="${themeVal == 5}" >
+        <r:require module="kermit_theme"/>
+    </g:elseif>
+    <g:elseif test="${themeVal == 6}" >
+        <r:require module="mint_theme"/>
+    </g:elseif>
+    <g:elseif test="${themeVal == null}">
         <r:require module="grape_theme"/>
-    </g:else>
+    </g:elseif>
+%{--grid and color scheme--}%
 
+    <g:if test="${background == 1}" >
+    <r:require module="layout_basic"/>
+    </g:if>
+    <g:elseif test="${background == 2}" >
+    <r:require module="layout_blue"/>
+    </g:elseif>
+    <g:elseif test="${background == 3}" >
+    <r:require module="layout_black"/>
+    </g:elseif>
+    <g:elseif test="${background == 4}" >
+    <r:require module="layout_plant"/>
+    </g:elseif>
+    <g:elseif test="${background == 5}" >
+    <r:require module="layout_orange"/>
+    </g:elseif>
+    <g:elseif test="${background == null}">
+    <r:require module="layout_basic"/>
+    </g:elseif>
 
     <r:layoutResources/>
 
@@ -96,7 +113,7 @@
             <g:set var="currentMode" value="${session.getAttribute("modeType")}"/>
 
             <g:if test="${currentMode == 'edit mode'}">
-            <h2 class="section_title" style="color:#798898"> [ <span class="blink_me" style="color:#86aeb2">${currentMode}</span> ] </h2>
+                <h2 class="section_title" style="color:#798898"> [ <span class="blink_me" style="color:#86aeb2">${currentMode}</span> ] </h2>
             </g:if>
             <g:elseif test="${currentMode == 'create mode'}">
                 <h2 class="section_title" style="color:#798898"> [ <span class="blink_me" style="color:#c04469">${currentMode}</span> ] </h2>

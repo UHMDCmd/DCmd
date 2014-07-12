@@ -11,9 +11,9 @@
         <meta content="main" name="layout" />
         <script language="javascript" type="text/javascript" src="../js/mustache.js"></script>
 
-        <g:applyLayout name="breadcrumb_bar">
-            <g:include controller="person" action="setBreadCrumbForCurrentItem" params="[pageType: 'asset', instance :assetInstance]"/>
-        </g:applyLayout>
+        %{--<g:applyLayout name="breadcrumb_bar">--}%
+            %{--<g:include controller="person" action="setBreadCrumbForCurrentItem" params="[pageType: 'asset', instance :assetInstance]"/>--}%
+        %{--</g:applyLayout>--}%
 
     </head>
     <body>

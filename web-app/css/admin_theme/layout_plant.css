@@ -1,0 +1,55 @@
+/* Essentials */
+
+html, div, map, dt, isindex, form, header, aside, section, section, article, footer {
+    display: block;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+    background: -moz-radial-gradient(50% 100%, circle farthest-side, #615F4C 0, #242019 98%);/* FF3.6+ */
+    background: -webkit-radial-gradient(50% 100%, circle farthest-side, #615F4C 0, #242019 98%);/* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(50% 100%, circle farthest-side, #615F4C 0, #242019 98%);/* Opera 11.10+ */
+    background: -ms-radial-gradient(50% 100%, circle farthest-side, #615F4C 0, #242019 98%);/* IE10+ */
+    background: radial-gradient(50% 100%, circle farthest-side, #615F4C 0, #242019 98%);/* W3C */
+
+    font-size: 12px;
+}
+
+.clear {
+    clear: both;
+}
+
+.spacer {
+    height: 20px;
+}
+
+a:link, a:visited {
+    color: #77BACE;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+article#container{
+    background: #222222;
+}
+
+ Header
+ header#header {
+height: 55px;
+width: 100%;
+background: #222222 url(content_images/header_bg.png) repeat-x;
+}
+
+header#header {
+    font-family: "Arial Black", Arial, Helvetica, sans-serif;
+    height: 55px;
+    width: 100%;
+    background: #222222 url(content_images/greengrain.png) repeat-x;
+}
+

@@ -1,7 +1,7 @@
 package edu.hawaii.its.dcmd.inf
 
 import com.logicmpls.Crumb
-
+import edu.hawaii.its.dcmd.inf.Uisettings
 class User {
 
     transient springSecurityService
@@ -12,8 +12,9 @@ class User {
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
-    int themeVal
+    //int themeVal
 
+    Uisettings userSettings
 
     ArrayList <Crumb> BreadCrumbs = new ArrayList<Crumb>();
 
@@ -21,11 +22,10 @@ class User {
 
 
     static constraints = {
+        userSettings(nullable: false)
         username blank: false, unique: true
         password blank: false
         enabled(default:true)
-        themeVal (nullable: true)
-
     }
 
     static mapping = {

@@ -63,7 +63,7 @@ body {
 
 #fl_menu .menu div.menu_item:hover {
     background-image:none;
-	background-color: #2f6108;
+	background-color: #37312c;
 	color: #fff;
     z-index: 50;
 }
@@ -83,7 +83,7 @@ body {
 }
 #fl_menu .menu a.submenu_item:hover {
     background-image:none;
-    background-color: #2f6108;
+    background-color: #37312c;
     color: #fff;
     z-index: 50;
 }

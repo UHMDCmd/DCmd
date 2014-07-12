@@ -49,15 +49,15 @@
 
 
      /*Safari 4-5, Chrome 1-9*/
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#425562), to(#586975));
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7ae38), to(#f8b74d));
      /*Safari 5.1, Chrome 10+*/
-    background: -webkit-linear-gradient(top,  #425562, #586975);
+    background: -webkit-linear-gradient(top,  #f7ae38, #f8b74d);
      /*Firefox 3.6+*/
-    background: -moz-linear-gradient(top,  #425562, #586975);
+    background: -moz-linear-gradient(top,  #f7ae38, #f8b74d);
      /*IE 10*/
-    background: -ms-linear-gradient(top,  #425562, #586975);
+    background: -ms-linear-gradient(top,  #f7ae38, #f8b74d);
      /*Opera 11.10+*/
-    background: -o-linear-gradient(top,  #425562, #586975);
+    background: -o-linear-gradient(top,  #f7ae38, #f8b74d);
 }
 .breadCrumb ul
 {

@@ -24,6 +24,7 @@ class BootStrap {
                     ROLE_USER.save(failOnError:true,flush:true)
                 }
 
+                 def defaultSettings = new Uisettings(themeVal:1,header:1,background:1,font:1).save(failOnError: true,flush:true)
 
                 def userKarsin, userElfalan, userHodges, kawachi, ckawano, jonathan, czane, steven, garry, thang, romeot,
                     anicasm, nakadoma, vyoshida, osamum, kc96813
@@ -261,42 +262,43 @@ class BootStrap {
                     ROLE_USER.save(failOnError:true, flush:true)
                 }
 
+                def defaultSettings = new Uisettings(themeVal:1,header:1,background:1,font:1).save(failOnError: true,flush:true)
 
 
                 def userKarsin, userElfalan, userHodges, kawachi, ckawano, jonathan, czane, steven, garry, thang, romeot,
                     anicasm, nakadoma, vyoshida, osamum, kc96813
                 if(!User.count()) {
-                    userKarsin = new User(username: 'karsin', password:'none', enabled: true)
+                    userKarsin = new User(username: 'karsin', password:'none', enabled: true, userSettings: defaultSettings)
                     userKarsin.save(failOnError:true,flush:true)
-                    userElfalan = new User(username: 'elfalan', password:'none', enabled: true)
+                    userElfalan = new User(username: 'elfalan', password:'none', enabled: true, userSettings: defaultSettings)
                     userElfalan.save(failOnError:true,flush:true)
-                    userHodges = new User(username: 'mhodges', password:'none', enabled: true)
+                    userHodges = new User(username: 'mhodges', password:'none', enabled: true, userSettings: defaultSettings)
                     userHodges.save(failOnError:true,flush:true)
-                    kawachi= new User(username: 'kawachi', password:'none', enabled: true)
+                    kawachi= new User(username: 'kawachi', password:'none', enabled: true, userSettings: defaultSettings)
                     kawachi.save(failOnError:true,flush:true)
-                    ckawano= new User(username: 'ckawano', password:'none', enabled: true)
+                    ckawano= new User(username: 'ckawano', password:'none', enabled: true, userSettings: defaultSettings)
                     ckawano.save(failOnError:true,flush:true)
-                    jonathan= new User(username: 'jonathan', password:'none', enabled: true)
+                    jonathan= new User(username: 'jonathan', password:'none', enabled: true, userSettings: defaultSettings)
                     jonathan.save(failOnError:true,flush:true)
-                    czane= new User(username: 'czane', password:'none', enabled: true)
+                    czane= new User(username: 'czane', password:'none', enabled: true, userSettings: defaultSettings)
                     czane.save(failOnError:true,flush:true)
-                    steven= new User(username: 'steven', password:'none', enabled: true)
+                    steven= new User(username: 'steven', password:'none', enabled: true, userSettings: defaultSettings)
                     steven.save(failOnError:true,flush:true)
-                    garry= new User(username: 'garry', password:'none', enabled: true)
+                    garry= new User(username: 'garry', password:'none', enabled: true, userSettings: defaultSettings)
                     garry.save(failOnError:true,flush:true)
-                    thang= new User(username: 'thang', password:'none', enabled: true)
+                    thang= new User(username: 'thang', password:'none', enabled: true, userSettings: defaultSettings)
                     thang.save(failOnError:true,flush:true)
-                    romeot= new User(username: 'romeot', password:'none', enabled: true)
+                    romeot= new User(username: 'romeot', password:'none', enabled: true, userSettings: defaultSettings)
                     romeot.save(failOnError:true,flush:true)
-                    anicasm= new User(username: 'anicasm', password:'none', enabled: true)
+                    anicasm= new User(username: 'anicasm', password:'none', enabled: true, userSettings: defaultSettings)
                     anicasm.save(failOnError:true,flush:true)
-                    nakadoma= new User(username: 'nakadoma', password:'none', enabled: true)
+                    nakadoma= new User(username: 'nakadoma', password:'none', enabled: true, userSettings: defaultSettings)
                     nakadoma.save(failOnError:true,flush:true)
-                    vyoshida= new User(username: 'vyoshida', password:'none', enabled: true)
+                    vyoshida= new User(username: 'vyoshida', password:'none', enabled: true, userSettings: defaultSettings)
                     vyoshida.save(failOnError:true,flush:true)
-                    osamum= new User(username: 'osamum', password:'none', enabled: true)
+                    osamum= new User(username: 'osamum', password:'none', enabled: true, userSettings: defaultSettings)
                     osamum.save(failOnError:true,flush:true)
-                    kc96813= new User(username: 'kc96813', password:'none', enabled: true)
+                    kc96813= new User(username: 'kc96813', password:'none', enabled: true, userSettings: defaultSettings)
                     kc96813.save(failOnError:true,flush:true)
 
                 }
@@ -327,6 +329,7 @@ class BootStrap {
                 }
 
                 def df = new java.text.SimpleDateFormat("MM/dd/yyyy", Locale.US)
+
 
 
 //				}

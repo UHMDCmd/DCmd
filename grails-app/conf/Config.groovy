@@ -221,8 +221,10 @@ grails.resources.debug = true
 grails.resources.modules = {
 	
     boiler_plate {
-        resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
         resource url: '/js/jquery-ui-1.8.15.custom.min.js'
+        resource url: '/css/grape-theme/jquery-ui-1.8.15.custom.css'
+        resource url: '/css/BreadCrumb.css'
+        resource url: '/css/slide_menu/slide_menu.css'
 
         resource url :'css/admin_theme/ie.css'
         resource url :'css/admin_theme/layout.css'
