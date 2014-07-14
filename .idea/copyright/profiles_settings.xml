@@ -1,5 +1,5 @@
 <component name="CopyrightManager">
-  <settings default="DCmd">
+  <settings default="">
     <module2copyright>
       <element module="All" copyright="DCmd" />
     </module2copyright>
