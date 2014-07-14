@@ -151,7 +151,6 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/commons-validator/commons-validator/jars/commons-validator-1.3.1.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/commons-el/commons-el/jars/commons-el-1.0.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/commons-beanutils/commons-beanutils/jars/commons-beanutils-1.8.3.jar!/" />
-          <root url="jar://$USER_HOME$/.grails/ivy-cache/hsqldb/hsqldb/jars/hsqldb-1.8.0.10.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/xpp3/xpp3_min/jars/xpp3_min-1.1.4c.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/javax.servlet/jstl/jars/jstl-1.1.2.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/oro/oro/jars/oro-2.0.8.jar!/" />
