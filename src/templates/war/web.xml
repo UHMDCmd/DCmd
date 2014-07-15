@@ -18,6 +18,20 @@
     </context-param>
 
     <filter>
+        <filter-name>Remote Address Filter</filter-name>
+        <filter-class>org.apache.catalina.filters.RemoteAddrFilter</filter-class>
+        <init-param>
+            <param-name>allow</param-name>
+            <param-value>127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|10.2.1.178|172.16.4.213</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Remote Address Filter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>org.codehaus.groovy.grails.web.sitemesh.GrailsPageFilter</filter-class>
     </filter>
