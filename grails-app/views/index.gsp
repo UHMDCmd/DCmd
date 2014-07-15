@@ -1,6 +1,26 @@
 <html>
 <head>
-    <sec:ifLoggedIn>
+    %{--
+  - Copyright (c) 2014 University of Hawaii
+  -
+  - This file is part of DataCenter metadata (DCmd) project.
+  -
+  - DCmd is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License as published by
+  - the Free Software Foundation, either version 3 of the License, or
+  - (at your option) any later version.
+  -
+  - DCmd is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+  - If not, see <http://www.gnu.org/licenses/>.
+  --}%
+
+<sec:ifLoggedIn>
         <meta http-equiv="refresh" content="0; person/home">
 
 
@@ -29,7 +49,7 @@
 
             <h1 class="site_title">
 
-                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.png')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.5.0</sub></font></a>
+                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.png')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.5.1</sub></font></a>
             </h1>
 
             <h2 class="section_title"></h2>

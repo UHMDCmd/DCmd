@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2014 University of Hawaii
+ *
+ * This file is part of DataCenter metadata (DCmd) project.
+ *
+ * DCmd is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DCmd is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
 //package edu.hawaii.its.dcmd.inf
 
 // locations to search for config files that get merged into the main config
@@ -37,6 +57,14 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
     form: 'application/x-www-form-urlencoded',
     multipartForm: 'multipart/form-data'
 ]
+
+//grails.plugin.springsecurity.useBasicAuth = true
+//grails.plugin.springsecurity.basic.realmName = "API"
+
+//grails.plugin.springsecurity.filterChain.chainMap = [
+//        '/**':'securityContextPersistenceFilter,logoutFilter,basicAuthenticationFilter,securityContextHolderAwareRequestFilter,exceptionTranslationFilter,filterInvocationInterceptor'
+        //'/**':'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,rememberMeAuthenticationFilter,anonymousAuthenticationFilter,exceptionTranslationFilter,filterInvocationInterceptor'
+//]
 
 grails.stringchararrayaccessor.disabled=true
 
@@ -94,10 +122,12 @@ grails.plugin.springsecurity.logout.afterLogoutUrl =
 /***************************************************************************************
  * Un-comment this for Test
  ***************************************************************************************/
-//grails.plugins.springsecurity.cas.serviceUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/j_spring_cas_security_check'
-//grails.plugins.springsecurity.cas.proxyCallbackUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/secure/receptor'
-//grails.plugins.springsecurity.logout.afterLogoutUrl =
+//grails.plugin.springsecurity.cas.serviceUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/j_spring_cas_security_check'
+//grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/secure/receptor'
+//grails.plugin.springsecurity.logout.afterLogoutUrl =
 //    'https://login.its.hawaii.edu/cas/logout?url=http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/'
+
+
 
 
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/user/home'
@@ -109,18 +139,18 @@ grails.plugin.springsecurity.useSecurityEventListener = true
 
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 
-grails.plugin.springsecurity.rejectIfNoRule = false
-grails.plugin.springsecurity.fii.rejectPublicInvocations = true
+//grails.plugin.springsecurity.rejectIfNoRule = false
+//grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
 
 grails.plugin.springsecurity.interceptUrlMap = [
-        '/**':    ['IS_AUTHENTICATED_REMEMBERED'],
+        '/': ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/api/**':    ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
         '/login/**': ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY' ],
         '/logout/**': ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/**/js/**':       ['permitAll'],
-        '/**/css/**':      ['permitAll'],
-        '/**/images/**':   ['permitAll'],
-        '/index.gsp:': ['permitAll'],
-
+        '/**/js/**':       ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/**/css/**':      ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/**/images/**':   ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
 
     //        '/**': ['ROLE_USER']
 
@@ -131,10 +161,10 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/**/show': ['ROLE_READ', 'ROLE_WRITE','ROLE_ADMIN'],
         '/**/edit': ['ROLE_WRITE', 'ROLE_ADMIN'],
         '/**/create': ['ROLE_WRITE', 'ROLE_ADMIN'],
-        '/**/supportList': ['ROLE_WRITE', 'ROLE_ADMIN']
-
-
+        '/**/supportList': ['ROLE_WRITE', 'ROLE_ADMIN'],
+        '/**':['ROLE_READ', 'ROLE_WRITE','ROLE_ADMIN']
 ]
+
 
 // set per-environment serverURL stem for creating absolute links
 environments {
@@ -217,6 +247,8 @@ warn   'org.mortbay.log'
 }
  */
 grails.resources.debug = true
+
+
 
 grails.resources.modules = {
 	
