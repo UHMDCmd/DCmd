@@ -24,7 +24,7 @@
 
     <filter>
         <filter-name>charEncodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>  C:\Users\Ben\Desktop\intellij-projects\DCmd\src\templates\war\web.xml
         <init-param>
             <param-name>targetBeanName</param-name>
             <param-value>characterEncodingFilter</param-value>
