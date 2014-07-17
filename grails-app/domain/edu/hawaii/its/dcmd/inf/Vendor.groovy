@@ -38,7 +38,7 @@ class Vendor extends SupportableObject {
 	Date dateCreated = new Date()
 	Date lastUpdated = new Date()
 	String supportableType = "vendor"
-	//List supporters = new ArrayList()
+
 	List notes = new ArrayList()
 	
 	

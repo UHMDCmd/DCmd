@@ -32,7 +32,6 @@ class User {
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
-    //int themeVal
 
     Uisettings userSettings
 
