@@ -110,6 +110,7 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.tomcat.embed/tomcat-embed-core/jars/tomcat-embed-core-7.0.52.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.esotericsoftware.kryo/kryo/bundles/kryo-2.22.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/de.javakaffee/kryo-serializers/bundles/kryo-serializers-0.26.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/ch.ethz.ganymed/ganymed-ssh2/jars/ganymed-ssh2-build210.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>

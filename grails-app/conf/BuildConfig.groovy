@@ -37,22 +37,22 @@ grails.project.dependency.resolution = {
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
-      //  mavenLocal()
-      //  mavenCentral()
-      //  mavenRepo "http://snapshots.repository.codehaus.org"
-      //  mavenRepo "http://repository.codehaus.org"
-      //  mavenRepo "http://download.java.net/maven/2/"
-      //  mavenRepo "http://repository.jboss.com/maven2/"
-      //  mavenRepo "http://repo.spring.io/milestone/"
+        //  mavenLocal()
+        //  mavenCentral()
+        //  mavenRepo "http://snapshots.repository.codehaus.org"
+        //  mavenRepo "http://repository.codehaus.org"
+        //  mavenRepo "http://download.java.net/maven/2/"
+        //  mavenRepo "http://repository.jboss.com/maven2/"
+        //  mavenRepo "http://repo.spring.io/milestone/"
+
+        //uncomment to install ssh plugin dependency
+        // mavenRepo("http://repo1.maven.org/maven2/")
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-      // runtime 'mysql:mysql-connector-java:5.1.13'
+        // runtime 'mysql:mysql-connector-java:5.1.13'
         runtime "hsqldb:hsqldb:1.8.0.10"
-
-
-
     }
 
 
@@ -75,7 +75,7 @@ grails.project.dependency.resolution = {
         runtime ':calendar:1.2.1'
         runtime ':codenarc:0.12'
 
-       // compile ':tooltip:0.8'
+        // compile ':tooltip:0.8'
         runtime ':jquery-datatables:1.7.5'
         runtime ':jquery-ui:1.8.11'
         runtime ':mysql-connectorj:5.1.22.1'
@@ -87,7 +87,9 @@ grails.project.dependency.resolution = {
         compile ':spring-security-ldap:2.0-RC2'
 
         compile ':scaffolding:1.0.0'
-       // 2.1.1 config
+        compile ':remote-ssh:0.2'
+
+        // 2.1.1 config
 
 
 //        //2.3.8 config

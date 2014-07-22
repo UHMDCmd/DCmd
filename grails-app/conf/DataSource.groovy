@@ -48,6 +48,16 @@ environments {
            // logSql = true
         }
 
+//        dataSource_dcimlookup {
+//            dialect = org.hibernate.dialect.MySQLInnoDBDialect
+//            driverClassName = 'com.mysql.jdbc.Driver'
+//            username = 'keller'
+//            password = 'keller'
+//           // url = 'jdbc:mysql://localhost/lookup'
+//            url = "jdbc:mysql://dcim.its.hawaii.edu/"
+//            dbCreate = 'update'
+//        }
+
           /**
            *   
            *dbCreate = "create" // one of 'create', 'create-drop','update'
