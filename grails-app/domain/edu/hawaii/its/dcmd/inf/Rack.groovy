@@ -25,6 +25,7 @@ class Rack extends Asset{
     Integer ruCap
     String rackNum
     String railType
+    String rowId
 
     List RUs = new ArrayList();
 
@@ -45,6 +46,7 @@ class Rack extends Asset{
      //   assets(nullable:true)
         RUs(nullable:true)
         strips(nullable:true)
+        rowId(nullable:true)
     }
 
 

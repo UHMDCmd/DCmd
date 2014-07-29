@@ -33,7 +33,6 @@
             <td valign="top" class="name"><g:message code="rack.id.label" default="Id" /></td>
             <td valign="top" class="value">${fieldValue(bean: rackInstance, field: "id")}</td>
         </tr>
-
         <tr>
             <td valign="top" class="name"><g:message code="rack.assetStatus.label" default="Asset Status" /></td>
             <td valign="top" class="value ${hasErrors(bean: rackInstance, field: 'assetStatus', 'errors')}">

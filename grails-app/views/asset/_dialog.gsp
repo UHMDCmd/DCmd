@@ -254,6 +254,10 @@
 
         <g:if test="${assetType == 'Rack'}">
             <tr>
+                <td valign="top" class="name"><g:message code="rack.rowId.label" default="rowId" /></td>
+                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "rowId")}</td>
+            </tr>
+            <tr>
                 <td valign="top" class="name"><g:message code="asset.location.label" default="Location" /></td>
                 <td valign="top" class="value ${hasErrors(bean: assetInstance, field: 'location', 'errors')}">
                     <g:select name="location.id" from="${edu.hawaii.its.dcmd.inf.Location.list()}" optionKey="id" value="${assetInstance?.location?.id}" noSelection="['null': '']" />
