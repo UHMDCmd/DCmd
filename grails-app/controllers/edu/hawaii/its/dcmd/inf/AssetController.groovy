@@ -341,8 +341,7 @@ class AssetController {
 //
                     }
 
-                }
-            }
+                }            }
 
 			//save and redirect
 			if (!assetInstance.hasErrors() && assetInstance.save(flush: true)) {
