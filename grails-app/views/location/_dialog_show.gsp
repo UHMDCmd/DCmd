@@ -40,6 +40,14 @@ ${fieldValue(bean: locationInstance, field: 'locationDescription')}
             </td>
         </tr>
         <tr class="prop">
+            <td valign="top" class="name"><g:message
+                    code="location.id.label" default="DCIM dataCenter Id" /></td>
+
+            <td valign="top" class="value">
+                ${fieldValue(bean: locationInstance, field: "dataCenterID")}
+            </td>
+        </tr>
+        <tr class="prop">
             <td valign="top" class="name">Address</td>
             <td valign="top" class="value">
                 ${fieldValue(bean: locationInstance, field: "addr")}
@@ -68,6 +76,15 @@ ${fieldValue(bean: locationInstance, field: 'locationDescription')}
 
             <td valign="top" class="value">
                 ${fieldValue(bean: locationInstance, field: "lastUpdated")}
+            </td>
+
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name"><g:message
+                    code="location.squareFootage.label" default="Square Footage" /></td>
+
+            <td valign="top" class="value">
+                ${fieldValue(bean: locationInstance, field: "squareFootage")}
             </td>
 
         </tr>

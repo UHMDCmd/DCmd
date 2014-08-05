@@ -1,0 +1,12 @@
+DataCenterID	Name	SquareFootage	DeliveryAddress	Administrator	MaxkW	DrawingFileName	EntryLogging	ContainerID	MapX	MapY
+1	K103	1944			0	k103AColo.png	0	14	248	276
+2	ITC201	8000			0	ITCFlr2.PNG	0	15	658	532
+3	K203	0			0	k203map.jpg	0	14	250	216
+4	ITC312IDF	0			0	ITCIDF.png	0	17	92	246
+5	ITC212IDF	0			0	ITCIDF.png	0	15	726	538
+6	ITC412IDF	0			0	ITCIDF.png	0	18	94	244
+7	ITC512IDF	0			0	ITCIDF.png	0	19	90	246
+8	ITC612IDF	0			0	ITCIDF.png	0	20	96	248
+9	WAN	0			0	CLOUD1_BW.bmp	0	0	0	0
+10	POST 014 BET	0			0	example.png	0	23	100	346
+11	HIG 118 BET	0			0	example.png	0	24	562	612

@@ -34,6 +34,8 @@ class Location {
     String generalNote
     String changeNote
     String planningNote
+    Integer squareFootage
+    Integer dataCenterID
 
     static auditable = true
 
@@ -53,6 +55,8 @@ class Location {
         generalNote(nullable: true)
         changeNote(nullable: true)
         planningNote(nullable: true)
+        squareFootage(nullable:true)
+        dataCenterID(nullable:true)
     }
 
 	String toString() {
