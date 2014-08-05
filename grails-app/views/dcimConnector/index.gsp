@@ -22,10 +22,15 @@
 </g:form>
 
 <g:form method="post">
-<g:actionSubmit value="run DCIM Update for Racks" action="updateRackAttributes"/>
+<g:actionSubmit value="run DCIM Update for DataCenters" action="updateDataCentersWithDCIM"/>
 </g:form>
+
 <g:form method="post">
-<g:actionSubmit value="run DCIM Update for DataCenters" action="updateDataCenters"/>
+    <g:actionSubmit value="run DCIM Update for Racks" action="updateRackAttributesWithDCIM"/>
+</g:form>
+
+<g:form method="post">
+    <g:actionSubmit value="import Physical Servers from production" action="importServersFromProduction"/>
 </g:form>
 
 <div>

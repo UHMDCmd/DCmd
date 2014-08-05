@@ -40,11 +40,15 @@ class DcimConnectorController {
     }
 
     /**********************************************************************
-     * Update Device Controller Action
+     * Update Physical Server/Device Controller Action
      *********************************************************************/
 
     /**
      * Update the DCmd servers list through file saved in queryResults directory in dcimConnector view dir.
+     * Functions: + creates list of attributes for physical servers from input file "devices.txt"
+     *            + Checks current physical servers in dcmd and does cross check with dcim references
+     *            + If the rack that the server is on does not exist, creates new rack instance
+     *            + Adds servers to rack and updates attributes
      */
     def updatePhysicalDevicesWithDCIM =  {
         //servers, dataCenterList, cabinetList, deviceList
@@ -91,6 +95,8 @@ class DcimConnectorController {
 
         //if device that rack is on does not exits in dcmd, create a new rack instance
         createRacksFromDCIM(masterList)
+
+        //update server attributes and add server to corresponding rack
         addDevicesToRacks(masterList)
 
         //create another def to update rack attributes, send rackupdatelist to this
@@ -172,7 +178,12 @@ class DcimConnectorController {
             }
         }
     }
-
+    /**
+     * Support method for updatePhysicalServerWihDCIM
+     * @param serverInstance
+     * @param parameters
+     * @return
+     */
     def updateServerInstance(serverInstance, parameters){
 
         serverInstance.properties['RU_size'] = 1;
@@ -184,7 +195,7 @@ class DcimConnectorController {
 /****************************************************************************
  * Update DataCenters
  ****************************************************************************/
-    def updateDataCenters = {
+    def updateDataCentersWithDCIM = {
 
         def attributesToUpdateFrom = createItemList("grails-app/views/dcimConnector/queryResults/datacenters.txt")
         ArrayList <Location> dataCenters = Location.getAll();
@@ -241,7 +252,7 @@ class DcimConnectorController {
  * Update Racks with DCIM attributes
  *****************************************************************************/
 
-    def updateRackAttributes ={
+    def updateRackAttributesWithDCIM ={
         println('updating rack attributes...')
 
         def cabinetList = createItemList("grails-app/views/dcimConnector/queryResults/cabinets.txt");
@@ -255,19 +266,23 @@ class DcimConnectorController {
         }
 
         ArrayList<Rack> rackList = Rack.getAll()
-        ArrayList<String []> attributesToUpdateFrom = new ArrayList();
+        ArrayList<String> racksThatHaveBeenUpdated = new ArrayList();
 
         //do cross check of racks in DCIM
         for(int x = 0; x < rackList.size(); x++){
+
             def itsId = rackList.get(x).itsId
+
             if(cabinetLabels.contains(itsId)){
                 def index = cabinetLabels.indexOf(itsId)
                 def attributes = cabinetList.get(index)
-                Rack rackInstance = Rack.findByItsId(itsId)
+
                 def dataCenterId = Integer.parseInt(attributes[1])
                 def cabLocation = attributes[2]
                 def zoneId = Integer.parseInt(attributes[3])
                 def rowId = attributes[4]
+
+                Rack rackInstance = Rack.findByItsId(itsId)
 
                 Location dataCenter = Location.findByDataCenterID(dataCenterId)
 
@@ -277,19 +292,20 @@ class DcimConnectorController {
                 rackInstance.properties['zoneId'] = zoneId
                 rackInstance.save(failOnError: true, flush: true)
 
+                    racksThatHaveBeenUpdated.add(rackInstance.itsId)
             }
         }
 
 
-        def updateStatus = attributesToUpdateFrom.toString()
+        def updateStatus = racksThatHaveBeenUpdated.toString()
+
+        println("racks that have been updated: " + updateStatus)
+
         render(view:"updateRackAttributes", model:[updateStatus:updateStatus])
 
     }
 
-
-
-
-    /*******************************************************
+     /*******************************************************
      /**
      * Support Methods for trimming and creating item lists from file
      */
@@ -337,7 +353,83 @@ class DcimConnectorController {
         return outputList
     }
 
+/*****************************************************************
+ * Import Servers From Production
+ ******************************************************************/
 
+    /**
+     * Import Servers From File physicalServer_list.csv
+     */
+
+    def importServersFromProduction = {
+
+        def serverList = createServerItemList("grails-app/views/dcimConnector/queryResults/physicalServer_list.csv");
+        ArrayList <String> updatedList = new ArrayList<String>()
+
+        for(int x = 0; x < serverList.size(); x++){
+
+            PhysicalServer serverInstance = new PhysicalServer()
+
+            def item = serverList.get(x)
+            def itsId = item[0]
+            def serverType = item[1]
+           // def status = item[2]
+          //  def primarySA = item[3]
+            //def ru_size = item[4]
+           // def currentRack = item[5]
+           // def currentPosition = item[6]
+           // def currentLocation = item[7]
+           // def serialNum = item[8]
+           // def manufacturer = item[9]
+           // def model = item[10]
+           // def generalNotes = item[11]
+
+            if(!(PhysicalServer.findByItsId(itsId))){
+              serverInstance = new PhysicalServer(itsId: itsId, assetType: AssetType.findByName('Server - Hardware'), serverType: serverType).save(failOnError: true, flush:true)
+            }
+            else if (PhysicalServer.findByItsId(itsId)){
+                serverInstance = PhysicalServer.findByItsId(itsId)
+               //do nothing for now, allow updated from dcim
+            }
+            println(serverInstance.itsId)
+            updatedList.add(serverInstance.itsId)
+        }
+
+        def updateStatus = updatedList.toString()
+        render(view:"importServersFromProduction", model:[updatedServers:updateStatus])
+    }
+
+
+
+    /**
+     * support method for importing servers
+     * @param fileUrl
+     * @return
+     */
+    ArrayList createServerItemList(String fileUrl){
+
+        def devices = new File(fileUrl)
+        ArrayList items = new ArrayList();
+
+        devices.eachLine{line ->
+            String [] deviceAttributes = line.split(",");
+
+            for(int x=0; x < deviceAttributes.size(); x++){
+                def temp = deviceAttributes[x]
+                deviceAttributes[x] = trimQuotes(temp)
+            }
+            items.add(deviceAttributes)
+        }
+
+        items.remove(0); //remove the header row
+        return items
+    }
+
+  def trimQuotes(String item){
+      String temp1 = item.substring(1, item.length())
+      String temp2 = temp1.substring(0, temp1.length() -1)
+      return temp2
+  }
 
 
 }
