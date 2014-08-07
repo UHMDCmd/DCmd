@@ -32,6 +32,7 @@ class RackUnit {
     int ru_slot
     int slotSize
     int connector
+    int deviceId
 
     static belongsTo = [onRack: Rack]
 
@@ -48,6 +49,7 @@ class RackUnit {
         imageId (nullable: true)
         ru_slot(nullable: true)
         slotSize(nullable:true)
+        deviceId(nullable:true)
     }
 
     String toString() {

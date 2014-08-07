@@ -428,6 +428,11 @@ div.gridFixWidth {
     background: #0000cc;
     color: #ffffff;
 }
+#ruOccupiedByDCIM{
+    text-align: center;
+    background: #4d5f68;
+    color: #ffffff;
+}
 
 #ruPlanned {
     text-align: center;

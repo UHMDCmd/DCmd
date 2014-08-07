@@ -14,7 +14,7 @@
 <body>
 
 <g:form method="post">
-<g:actionSubmit value="run Query" action="runQuery"/>
+<g:actionSubmit value="run Query" action="runQuery" />
 </g:form>
 
 <g:form method="post">
@@ -31,6 +31,10 @@
 
 <g:form method="post">
     <g:actionSubmit value="import Physical Servers from production" action="importServersFromProduction"/>
+</g:form>
+
+<g:form method="post">
+    <g:actionSubmit value="fill slots" action="updateOccupiedRackSlots"/>
 </g:form>
 
 <div>
