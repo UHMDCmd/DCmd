@@ -40,6 +40,13 @@
                 <td valign="top" class="value"><g:link controller="location" action="show" id="${rackInstance?.location?.id}">
                     ${rackInstance?.location?.encodeAsHTML()}</g:link></td>
             </tr>
+            <tr>
+                <td valign="top" class="name"><g:message code="rack.datacenter.label" default="Row Id" /></td>
+                <td valign="top" class="value">${fieldValue(bean: rackInstance, field: "rowId")}</td>
+            </tr><tr>
+                <td valign="top" class="name"><g:message code="rack.datacenter.label" default="Zone Id" /></td>
+                <td valign="top" class="value">${fieldValue(bean: rackInstance, field: "zoneId")}</td>
+            </tr>
         </table>
     </div>
 

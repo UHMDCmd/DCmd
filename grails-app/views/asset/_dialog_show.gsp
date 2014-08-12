@@ -22,65 +22,65 @@
 <div class="dialog">
 
     <div class="show-wrapper">
-        <table class="floatTables">
+    <table class="floatTables">
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.itsId.label" default="Its Id" /></td>
+            <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "itsId")}</td>
+        </tr>
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.id.label" default="Id" /></td>
+            <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "id")}</td>
+        </tr>
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.assetType.label" default="Asset Type" /></td>
+            <td valign="top" class="value">${assetInstance?.assetType?.encodeAsHTML()}</td>
+        </tr>
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.status.label" default="Asset Status" /></td>
+            <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "status")}</td>
+        </tr>
+        <g:if test="${assetType == 'Physical Server'}">
             <tr>
-                <td valign="top" class="name"><g:message code="asset.itsId.label" default="Its Id" /></td>
-                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "itsId")}</td>
+                <td valign="top" class="name">Server Type</td>
+                <td valign="top" class="value">
+                    ${assetInstance.serverType}
+                </td>
             </tr>
-            <tr>
-				<td valign="top" class="name"><g:message code="asset.id.label" default="Id" /></td>
-				<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "id")}</td>
-            </tr>
-            <tr>
-				<td valign="top" class="name"><g:message code="asset.assetType.label" default="Asset Type" /></td>
-				<td valign="top" class="value">${assetInstance?.assetType?.encodeAsHTML()}</td>
-            </tr>
-            <tr>
-                <td valign="top" class="name"><g:message code="asset.status.label" default="Asset Status" /></td>
-                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "status")}</td>
-            </tr>
-            <g:if test="${assetType == 'Physical Server'}">
+            <g:if test="${assetInstance.serverType == 'VMware Host'}">
                 <tr>
-                    <td valign="top" class="name">Server Type</td>
+                    <td valign="top" class="name">Cluster</td>
                     <td valign="top" class="value">
-                        ${assetInstance.serverType}
+                        <a href="../cluster/show?id=${assetInstance.cluster?.id}">${assetInstance.cluster.toString()}</a>
                     </td>
                 </tr>
-                <g:if test="${assetInstance.serverType == 'VMware Host'}">
-                    <tr>
-                        <td valign="top" class="name">Cluster</td>
-                        <td valign="top" class="value">
-                            <a href="../cluster/show?id=${assetInstance.cluster?.id}">${assetInstance.cluster.toString()}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td valign="top" class="name">VMware Host OS</td>
-                        <td valign="top" class="value">
-                            <a href="../host/show?id=${assetInstance.getGlobalZone()?.id}">${assetInstance.getGlobalZone().toString()}</a>
-                        </td>
-                    </tr>
-                </g:if><g:elseif test="${assetInstance.serverType == 'Solaris Global Zone'}">
-                    <tr>
-                        <td valign="top" class="name">Global Zone</td>
-                        <td valign="top" class="value">
-                            <a href="../host/show?id=${assetInstance.getGlobalZone()?.id}">${assetInstance.getGlobalZone().toString()}</a>
-                        </td>
-                    </tr>
-                </g:elseif><g:else>
-                    <tr>
-                        <td valign="top" class="name">Standalone Host</td>
-                        <td valign="top" class="value">
-                            <a href="../host/show?id=${assetInstance.getGlobalZone()?.id}">${assetInstance.getGlobalZone().toString()}</a>
-                        </td>
-                    </tr>
-                </g:else>
-
                 <tr>
-                    <td valign="top" class="name">RU (Rack Unit) Size</td>
-                    <td valign="top" class="value">${assetInstance.RU_size.encodeAsHTML()}</td>
+                    <td valign="top" class="name">VMware Host OS</td>
+                    <td valign="top" class="value">
+                        <a href="../host/show?id=${assetInstance.getGlobalZone()?.id}">${assetInstance.getGlobalZone().toString()}</a>
+                    </td>
                 </tr>
-                </table>
-                <table class="floatTables" style="border:1px solid #CCCCCC;">
+            </g:if><g:elseif test="${assetInstance.serverType == 'Solaris Global Zone'}">
+            <tr>
+                <td valign="top" class="name">Global Zone</td>
+                <td valign="top" class="value">
+                    <a href="../host/show?id=${assetInstance.getGlobalZone()?.id}">${assetInstance.getGlobalZone().toString()}</a>
+                </td>
+            </tr>
+        </g:elseif><g:else>
+            <tr>
+                <td valign="top" class="name">Standalone Host</td>
+                <td valign="top" class="value">
+                    <a href="../host/show?id=${assetInstance.getGlobalZone()?.id}">${assetInstance.getGlobalZone().toString()}</a>
+                </td>
+            </tr>
+        </g:else>
+
+            <tr>
+                <td valign="top" class="name">RU (Rack Unit) Size</td>
+                <td valign="top" class="value">${assetInstance.RU_size.encodeAsHTML()}</td>
+            </tr>
+            </table>
+            <table class="floatTables" style="border:1px solid #CCCCCC;">
                 <tr><td colspan="2"><center><b>Current Rack</b></center></td></tr>
                 <tr>
                     <td valign="top" class="name">Rack</td>
@@ -99,31 +99,42 @@
                     <td valign="top" class="name">Position in Rack</td>
                     <td valign="top" class="value">${assetInstance?.position().encodeAsHTML()}</td>
                 </tr>
-                </table>
-                <br>
-                <table class="floatTables" style="border:1px solid #CCCCCC;">
+            </table>
+            <br>
+            <table class="floatTables" style="border:1px solid #CCCCCC;">
 
-                  <tr><td colspan="2"><center><b>Planned Rack</b></center></td></tr>
-                  <tr>
-                    <td valign="top" class="name">Rack</td>
-                    <td valign="top" class="value"><g:link controller="asset" action="show" id="${assetInstance?.getPlannedRackAssignmentId()}">
-                    ${assetInstance?.getPlannedRackAssignment().encodeAsHTML()}</g:link></td>
+              <tr><td colspan="2"><center><b>Planned Rack</b></center></td></tr>
+              <tr>
+                <td valign="top" class="name">Rack</td>
+                <td valign="top" class="value"><g:link controller="asset" action="show" id="${assetInstance?.getPlannedRackAssignmentId()}">
+            ${assetInstance?.getPlannedRackAssignment().encodeAsHTML()}</g:link></td>
                   </tr>
-                  <tr>
-                  <td valign="top" class="name">Rack Location</td>
-                      <td valign="top" class="value">
-                          <a href="../location/show?id=${Rack.get(assetInstance?.getPlannedRackAssignmentId())?.location?.id}">
-                          ${Rack.get(assetInstance?.getPlannedRackAssignmentId())?.location?.encodeAsHTML()}
-                          </a>
-                      </td>
-                </tr>
-                <tr>
-                    <td valign="top" class="name">Position in Rack</td>
-                    <td valign="top" class="value">${assetInstance?.plannedPosition().encodeAsHTML()}</td>
-                </tr>
-            </g:if>
+            <tr>
+                <td valign="top" class="name">Rack Location</td>
+                <td valign="top" class="value">
+                    <a href="../location/show?id=${Rack.get(assetInstance?.getPlannedRackAssignmentId())?.location?.id}">
+                        ${Rack.get(assetInstance?.getPlannedRackAssignmentId())?.location?.encodeAsHTML()}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="name">Position in Rack</td>
+                <td valign="top" class="value">${assetInstance?.plannedPosition().encodeAsHTML()}</td>
+            </tr>
+        </g:if>
+        <g:if test="${assetType == 'Rack'}">
 
-        </table>
+                <td valign="top" class="name"><g:message code="rack.location.label" default="Location" /></td>
+                <td valign="top"><g:link controller="location" action="show" id="${assetInstance?.location?.id}">
+                        ${assetInstance?.location?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="name"><g:message code="rack.rowId.label" default="Row Id" /></td>
+                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "rowId")}</td>
+                <td valign="top" class="name"><g:message code="rack.zoneId.label" default="Zone Id" /></td>
+                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "zoneId")}</td>
+
+        </g:if>
+
+    </table>
     </div>
 
     <div class="show-wrapper">
@@ -144,7 +155,7 @@
             </tr>
             <tr>
                 <td valign="top" class="name"><g:message code="asset.ownershipType.label" default="Ownership Type" /></td>
-				<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "ownershipType")}</td>
+                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "ownershipType")}</td>
             </tr>
             <tr>
                 <td valign="top" class="name"><g:message code="asset.supportLevel.label" default="Support Level" /></td>
@@ -155,50 +166,50 @@
                 <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "vendorSupportLevel")}</td>
         </table>
     </div>
-       <br/>
+    <br/>
     <div class="show-wrapper">
         <table class="floatTables">
             <tr>
                 <td valign="top" class="name"><g:message code="asset.serialNo.label" default="Serial No" /></td>
-				<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "serialNo")}</td>
+                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "serialNo")}</td>
             </tr>
             <tr>
                 <td valign="top" class="name"><g:message code="asset.CSI.label" default="Customer Service ID" /></td>
                 <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "CSI")}</td>
             </tr>
             <tr>
-				<td valign="top" class="name"><g:message code="asset.decalNo.label" default="Decal No" /></td>
-				<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "decalNo")}
+                <td valign="top" class="name"><g:message code="asset.decalNo.label" default="Decal No" /></td>
+                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "decalNo")}
             </tr>
             <tr>
-				<td valign="top" class="name"><g:message code="asset.isAvailableForParts.label" default="Is Available For Parts" /></td>
-				<td valign="top" class="value"><g:formatBoolean boolean="${assetInstance?.isAvailableForParts}" /></td>
+                <td valign="top" class="name"><g:message code="asset.isAvailableForParts.label" default="Is Available For Parts" /></td>
+                <td valign="top" class="value"><g:formatBoolean boolean="${assetInstance?.isAvailableForParts}" /></td>
             </tr>
             <tr>
-				<td valign="top" class="name"><g:message code="asset.postMigrationStatus.label" default="Post Migration Status" /></td>
-				<td valign="top" class="value">${fieldValue(bean: assetInstance, field: "postMigrationStatus")}</td>
+                <td valign="top" class="name"><g:message code="asset.postMigrationStatus.label" default="Post Migration Status" /></td>
+                <td valign="top" class="value">${fieldValue(bean: assetInstance, field: "postMigrationStatus")}</td>
             </tr>
             <tr>
-%{--
-				<td valign="top" class="name"><g:message code="asset.purchaseContract.label" default="Purchase Contract" /></td>
-				<td valign="top" class="value"><g:link controller="contract" action="show" id="${assetInstance?.purchaseContract?.id}">
-					${assetInstance?.purchaseContract?.encodeAsHTML()}</g:link></td>
+                %{--
+                                <td valign="top" class="name"><g:message code="asset.purchaseContract.label" default="Purchase Contract" /></td>
+                                <td valign="top" class="value"><g:link controller="contract" action="show" id="${assetInstance?.purchaseContract?.id}">
+                                    ${assetInstance?.purchaseContract?.encodeAsHTML()}</g:link></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" class="name"><g:message code="asset.maintenanceContract.label" default="Maintenance Contract" /></td>
+                                <td valign="top" class="value"><g:link controller="contract" action="show" id="${assetInstance?.maintenanceContract?.id}">
+                                    ${assetInstance?.maintenanceContract?.encodeAsHTML()}</g:link></td>
+                            </tr>
+                --}%
+            <tr>
+                <td valign="top" class="name"><g:message code="asset.dateCreated.label" default="Date Created" /></td>
+                <td valign="top" class="value"><g:formatDate date="${assetInstance?.dateCreated}" /></td>
             </tr>
             <tr>
-				<td valign="top" class="name"><g:message code="asset.maintenanceContract.label" default="Maintenance Contract" /></td>
-				<td valign="top" class="value"><g:link controller="contract" action="show" id="${assetInstance?.maintenanceContract?.id}">
-					${assetInstance?.maintenanceContract?.encodeAsHTML()}</g:link></td>
+                <td valign="top" class="name"><g:message code="asset.lastUpdated.label" default="Last Updated" /></td>
+                <td valign="top" class="value"><g:formatDate date="${assetInstance?.lastUpdated}" /></td>
             </tr>
---}%
-            <tr>
-				<td valign="top" class="name"><g:message code="asset.dateCreated.label" default="Date Created" /></td>
-				<td valign="top" class="value"><g:formatDate date="${assetInstance?.dateCreated}" /></td>
-            </tr>
-            <tr>
-				<td valign="top" class="name"><g:message code="asset.lastUpdated.label" default="Last Updated" /></td>
-				<td valign="top" class="value"><g:formatDate date="${assetInstance?.lastUpdated}" /></td>
-		    </tr>
-	    </table>
+        </table>
     </div>
     <br />
 </div>
