@@ -15,6 +15,8 @@ class DcimConnectorController {
     AssetService assetService
     def sessionFactory
     def racksToBeUpdated
+    RemoteSSH sshConnection
+
 
     //run full update
     def index() {
@@ -27,11 +29,15 @@ class DcimConnectorController {
          * -updateRackAttributesWithDCIM
          * -updateOccupiedRackSlots
          */
-        try {
-            runQuery()
-        }catch(Exception e){
-            println("error occuried during update due to" + e.cause)
-        }
+       def updateService = new DcimUpdateService()
+       updateService.startUpdate()
+
+//        try {
+//            runQuery()
+//
+//        }catch(Exception e){
+//            println("error occuried during update due to" + e.cause)
+//        }
     }
 
     /**
@@ -188,10 +194,10 @@ class DcimConnectorController {
 
                 rackUnitInstance.properties['filledBy'] = serverInstance
                 rackUnitInstance.properties['onRack'] = rackInstance
-                rackUnitInstance.properties['label'] = deviceLabel
+               // rackUnitInstance.properties['label'] = deviceLabel
+                rackUnitInstance.properties['label'] = "<a href='/its/dcmd/asset/show?id=${serverInstance.id}'>${serverInstance.itsId}</a>"
                 rackUnitInstance.properties['RUstatus'] = 'Filled'
                 rackUnitInstance.properties['ru_slot'] = slotPosition
-
                 rackUnitInstance.save(failOnError: true, flush: true)
                 rackInstance.save(failOnError: true, flush: true)
 
@@ -458,6 +464,11 @@ class DcimConnectorController {
 
         println("\nDCIM Update Successful")
         flash.message = "DCIM Device Update Was Successful"
+
+        //clean up GORM
+        def session = sessionFactory.currentSession
+        session.flush()
+        session.clear()
 
        redirect(uri: '/physicalServer/list')
     }

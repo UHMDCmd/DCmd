@@ -28,6 +28,8 @@
 <script>
     $(document).ready(function() {
 
+        var colorVar = 'FF0000';
+
         $('#assetSelect').select2({
             placeholder: 'Please Select...',
             maximumInputLength: 20,
@@ -159,7 +161,7 @@
     }
 
     function getSelected(){
-      //  alert(document.getElementById('select-result').innerHTML);
+        //  alert(document.getElementById('select-result').innerHTML);
         var params = { selected:document.getElementById('select-result').innerHTML, id:$('#id').val()};
         return $.param(params);
     }
@@ -176,12 +178,30 @@
         }
         else {
             for  (var i=44; i>=0; i=i-1) {
-                newTable = newTable + "<li id='ru" + data.data[i].RUstatus + "' class='ui-state-default'>" + data.data[i].label + "</li>";
+                // newTable = newTable + "<li id='ru" + data.data[i].RUstatus + "' class='ui-state-default'>" + data.data[i].label + "</li>";
+                newTable = newTable + "<li id='ru" + data.data[i].RUstatus + "' class='ui-state-default'>" +
+
+
+                        "<table id ='ru_element'>" +
+                        "<tr>" +
+                        "<td class='ends' width='5%'>"+
+                        "<div class='nums'><p>" + (i+1) + "</p></div>" +
+                        "</td>" +
+                        "<td  class='label' width='90%'>" +
+                        "<p>" + data.data[i].label + "<p>" + "</td>" +
+                        "<td class='ends' width='5%'>" +
+                        "<div class='nums'><p>" + (i+1) + "</p></div>" +
+                        "</td>" +
+                        "</tr>" +
+                        "</table>" +
+                        "</li>";
+
+
             }
             document.getElementById('rackItem').innerHTML = newTable;
             document.getElementById('select-result').innerHTML = "";
 
-          //  data.data.removeData();
+            //  data.data.removeData();
         }
     }
 
@@ -191,9 +211,9 @@
     <table>
         <thead>
         <g:if test="${action == 'edit'}">
-        <th id="stickyDiv">
-            <label for="asset_Id"><g:message code = "rack_asset.code.label" default="Select Rack Asset" /></label>
-        </th>
+            <th id="stickyDiv">
+                <label for="asset_Id"><g:message code = "rack_asset.code.label" default="Select Rack Asset" /></label>
+            </th>
         </g:if>
         <th >
             <label for="section1"><g:message code = "section1.code.label" default="Rack Collection" /></label>
@@ -207,7 +227,7 @@
 
 
         <g:if test="${action == 'edit'}">
-        <tr>
+            <tr>
             <g:render template="../rack/sticky_bar" />
             <td  id="rackButtons">
                 <div>
@@ -222,23 +242,23 @@
                     Planned Rack placement: <span id="onPlannedRack"></span>
                     <br><br>
 
-                RUs currently selected:<span name="select-result" id="select-result" class="srs"></span>
-                <br><br>
-                <button id="addAsset"
-                        class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                        role="button" aria-disabled="false">
-                    <span class="ui-button-text">Make <b>current</b> Asset position</span>
-                </button><br>
+                    RUs currently selected:<span name="select-result" id="select-result" class="srs"></span>
+                    <br><br>
+                    <button id="addAsset"
+                            class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                            role="button" aria-disabled="false">
+                        <span class="ui-button-text">Make <b>current</b> Asset position</span>
+                    </button><br>
                     <button id="addPlan"
                             class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
                             role="button" aria-disabled="false">
                         <span class="ui-button-text">Make <b>planned</b> Asset position</span>
                     </button><br>
-                <button id="reserveSelected"
-                        class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                        role="button" aria-disabled="false">
-                    <span class="ui-button-text">Reserve Selected RUs</span>
-                </button>
+                    <button id="reserveSelected"
+                            class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                            role="button" aria-disabled="false">
+                        <span class="ui-button-text">Reserve Selected RUs</span>
+                    </button>
                     <br>
                     <button id="openSelected"
                             class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
@@ -261,51 +281,105 @@
         </g:if>
         <g:hiddenField name="id" value="${rackId}" />
 
-                <script>
-                    $(function() {
-                        $( "#rackItem").selectable({
-                            cancel: 'a',
-                            stop: function() {
-                                var result = $( "#select-result").empty();
+        <script>
+            $(function() {
+                $( "#rackItem").selectable({
+                    cancel: 'a',
+                    stop: function() {
+                        var result = $( "#select-result").empty();
 
-                                $(".ui-selected", this).each(function() {
-                                    var index = 45-$( "#rackItem li").index(this);
-                                    result.append(" " + (index));
-                                });
-                            }
+                        $(".ui-selected", this).each(function() {
+                            var index = 45-$( "#rackItem li").index(this);
+                            result.append(" " + (index));
                         });
-                    });
+                      
+                    }
 
-                </script>
+                });
 
-            <td style="width:75%">
-                <div id="rackDisplay">
-                    <table>
+
+            });
+
+        </script>
+
+        <td style="width:75%">
+            <div id="rackDisplay">
+                <table>
                     <tr>
-                        <td style="width:4%">
-                            <ul name= "rackIndex" id="rackIndex" class='droptrue'>
-                                <g:each in="${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).RUs.reverse()}" var="RU" status = "i">
-                                    <li>${45-i}</li>
-                                </g:each>
-                            </ul>
-                        </td>
+                        %{--<td style="width:4%">--}%
+                        %{--<ul name= "rackIndex" id="rackIndex" class='droptrue'>--}%
+                        %{--<g:each in="${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).RUs.reverse()}" var="RU" status = "i">--}%
+                        %{--<li>${45-i}</li>--}%
+                        %{--</g:each>--}%
+                        %{--</ul>--}%
+                        %{--</td>--}%
                         <td>
                             <ul name = "rackItem" id="rackItem" class='droptrue'>
                                 <g:each in="${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).RUs.reverse()}" var="RU" status = "i">
-
-                                    <li id="ru${RU.RUstatus}" class="ui-state-default">${RU.toString()}</li>
-
+                                    <li id="ru${RU.RUstatus}" class="ui-state-default">
+                                        <table id ="ru_element">
+                                            <tr>
+                                                <td class="ends" width="5%">
+                                                    <div class="nums"><p>${45-i}</p></div>
+                                                </td>
+                                                <td  class="label" width="90%">
+                                                    ${RU.toString()}
+                                                </td>
+                                                <td class="ends" width="5%">
+                                                    <div class="nums"><p>${45-i}</p></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </li>
                                 </g:each>
                             </ul>
                         </td>
                     </tr>
                 </table>
-                </div>
+            </div>
 
-             </td>
+        </td>
         </tr>
         </tbody>
     </table>
 
 
 </div>
+<style type="text/css">
+.nums {
+    /*internal text*/
+    display:table;
+    /*width:50px;*/
+    /*height:30px;*/
+    /*background: -moz-linear-gradient(top, #8f8f8f, #252525);*/
+    /*background: -webkit-linear-gradient(top, #8f8f8f, #252525);*/
+    /*background: -o-linear-gradient(top, #8f8f8f, #252525);*/
+    /*background: linear-gradient(top, #8f8f8f, #252525);*/
+
+    /*border: 2px solid transparent; -moz-box-shadow: 0 0 5px 5px #4e4c22;*/
+    /*-webkit-box-shadow: 0 0 5px 5px #4e4c22;*/
+    /*box-shadow: 0 0 1px 1px #4e4c22;*/
+    /*border-radius: 5px;*/
+    vertical-align: middle;
+    text-align: center;
+    height:20px;
+    border-radius: 5px;
+
+}
+
+.nums p {
+    font-family:Veranda, Helvetica, sans-serif ; font-size: 140%; color: #c5d2d3;
+    text-shadow:
+    -2px -1px 0 #343434,
+    2px -1px 0 #343434,
+    -2px 1px 0 #343434,
+    2px 1px 0 #343434;
+    text-align: justify;
+    vertical-align: middle;
+    padding-top: 8px;
+    padding-left: 2px;
+
+
+    /*background-color: #4c4c4c;*/
+}
+</style>
