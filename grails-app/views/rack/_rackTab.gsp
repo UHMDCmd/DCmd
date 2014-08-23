@@ -178,24 +178,21 @@
         }
         else {
             for  (var i=44; i>=0; i=i-1) {
-                // newTable = newTable + "<li id='ru" + data.data[i].RUstatus + "' class='ui-state-default'>" + data.data[i].label + "</li>";
                 newTable = newTable + "<li id='ru" + data.data[i].RUstatus + "' class='ui-state-default'>" +
 
-
-                        "<table id ='ru_element'>" +
+                        "<table class ='ru_element'>" +
                         "<tr>" +
-                        "<td class='ends' width='5%'>"+
+                        "<td class='ends' width='3%'>"+
                         "<div class='nums'><p>" + (i+1) + "</p></div>" +
                         "</td>" +
-                        "<td  class='label' width='90%'>" +
+                        "<td  class='label ru" + data.data[i].RUstatus +"' width='94%'>" +
                         "<p>" + data.data[i].label + "<p>" + "</td>" +
-                        "<td class='ends' width='5%'>" +
+                        "<td class='ends' width='3%'>" +
                         "<div class='nums'><p>" + (i+1) + "</p></div>" +
                         "</td>" +
                         "</tr>" +
                         "</table>" +
                         "</li>";
-
 
             }
             document.getElementById('rackItem').innerHTML = newTable;
@@ -292,7 +289,7 @@
                             var index = 45-$( "#rackItem li").index(this);
                             result.append(" " + (index));
                         });
-                      
+
                     }
 
                 });
@@ -303,29 +300,29 @@
         </script>
 
         <td style="width:75%">
-            <div id="rackDisplay">
+            <div id="rackDisplay" style="background: #9a9a9a">
                 <table>
                     <tr>
-                        %{--<td style="width:4%">--}%
-                        %{--<ul name= "rackIndex" id="rackIndex" class='droptrue'>--}%
-                        %{--<g:each in="${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).RUs.reverse()}" var="RU" status = "i">--}%
-                        %{--<li>${45-i}</li>--}%
-                        %{--</g:each>--}%
-                        %{--</ul>--}%
-                        %{--</td>--}%
+                        <td>
+                            <div id="top_img" align="center" style="max-width: 100%"><img src="../images/metal_graphic_top_s.png" align="middle" style="display:block; height:auto; max-height:100%;width:auto; max-width:98%"></div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <ul name = "rackItem" id="rackItem" class='droptrue'>
                                 <g:each in="${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).RUs.reverse()}" var="RU" status = "i">
-                                    <li id="ru${RU.RUstatus}" class="ui-state-default">
-                                        <table id ="ru_element">
+                                    <li class="ru${RU.RUstatus} ui-state-default">
+                                        <table class ="ru_element">
                                             <tr>
-                                                <td class="ends" width="5%">
+                                                <td class="ends" width="3%">
                                                     <div class="nums"><p>${45-i}</p></div>
                                                 </td>
-                                                <td  class="label" width="90%">
+
+                                                <td  class="label ru${RU.RUstatus}" width="94%">
                                                     ${RU.toString()}
                                                 </td>
-                                                <td class="ends" width="5%">
+
+                                                <td class="ends" width="3%">
                                                     <div class="nums"><p>${45-i}</p></div>
                                                 </td>
                                             </tr>
@@ -335,6 +332,11 @@
                             </ul>
                         </td>
                     </tr>
+                    <tr>
+                            <td>
+                            <div id="bottom_img" align="center"><img src="../images/metal_graphic_bottom_s.png" style="display:block; height:auto; max-height:100%;width:auto; max-width:98%"></div>
+                            </td>
+                     </tr>
                 </table>
             </div>
 
@@ -346,40 +348,5 @@
 
 </div>
 <style type="text/css">
-.nums {
-    /*internal text*/
-    display:table;
-    /*width:50px;*/
-    /*height:30px;*/
-    /*background: -moz-linear-gradient(top, #8f8f8f, #252525);*/
-    /*background: -webkit-linear-gradient(top, #8f8f8f, #252525);*/
-    /*background: -o-linear-gradient(top, #8f8f8f, #252525);*/
-    /*background: linear-gradient(top, #8f8f8f, #252525);*/
 
-    /*border: 2px solid transparent; -moz-box-shadow: 0 0 5px 5px #4e4c22;*/
-    /*-webkit-box-shadow: 0 0 5px 5px #4e4c22;*/
-    /*box-shadow: 0 0 1px 1px #4e4c22;*/
-    /*border-radius: 5px;*/
-    vertical-align: middle;
-    text-align: center;
-    height:20px;
-    border-radius: 5px;
-
-}
-
-.nums p {
-    font-family:Veranda, Helvetica, sans-serif ; font-size: 140%; color: #c5d2d3;
-    text-shadow:
-    -2px -1px 0 #343434,
-    2px -1px 0 #343434,
-    -2px 1px 0 #343434,
-    2px 1px 0 #343434;
-    text-align: justify;
-    vertical-align: middle;
-    padding-top: 8px;
-    padding-left: 2px;
-
-
-    /*background-color: #4c4c4c;*/
-}
 </style>
