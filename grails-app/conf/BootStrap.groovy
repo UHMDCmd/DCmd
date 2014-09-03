@@ -49,7 +49,7 @@ class BootStrap {
 
 
                 def userKarsin, userElfalan, userHodges, kawachi, ckawano, jonathan, czane, steven, garry, thang, romeot,
-                    anicasm, nakadoma, vyoshida, osamum, kc96813
+                    anicasm, nakadoma, vyoshida, osamum, kc96813, userKylanh
                 if(!User.count()) {
                     userKarsin = new User(username: 'karsin', password:'none', enabled: true)
                     userKarsin.save(failOnError:true,flush:true)
@@ -83,11 +83,13 @@ class BootStrap {
                     osamum.save(failOnError:true,flush:true)
                     kc96813= new User(username: 'kc96813', password:'none', enabled: true)
                     kc96813.save(failOnError:true,flush:true)
+                    userKylanh = new User(username: 'kylanh', password:'none', enabled: true)
+                    userKylanh.save(failOnError:true,flush:true)
 
                 }
                 def rolesKarsin, rolesElfalan, rolesHodges, rolesKawachi, rolesCkawano, rolesJonathan, rolesCzane,
                     rolesSteven, rolesGarry, rolesThang, rolesRomeot, rolesAnicasm, rolesNakadoma, rolesVyoshida,
-                    rolesOsamum, rolesKc96813
+                    rolesOsamum, rolesKc96813, rolesKylanh
                 if(!UserRole.count()) {
                     rolesKarsin = new UserRole(user: userKarsin, role: ROLE_USER)
                     rolesKarsin.save(failOnError:true,flush:true)
@@ -108,6 +110,7 @@ class BootStrap {
                     rolesVyoshida= new UserRole(user: vyoshida, role: ROLE_USER).save(failOnError:true,flush:true)
                     rolesOsamum= new UserRole(user: osamum, role: ROLE_USER).save(failOnError:true,flush:true)
                     rolesKc96813= new UserRole(user: kc96813, role: ROLE_USER).save(failOnError:true,flush:true)
+                    rolesKylanh= new UserRole(user: userKylanh, role: ROLE_USER).save(failOnError:true,flush:true)
 
                 }
 
@@ -479,7 +482,7 @@ class BootStrap {
 
 
                 def userKarsin, userElfalan, userHodges, kawachi, ckawano, jonathan, czane, steven, garry, thang, romeot,
-                    anicasm, nakadoma, vyoshida, osamum, kc96813
+                    anicasm, nakadoma, vyoshida, osamum, kc96813, userKylanh
                 if(!User.count()) {
                     userKarsin = new User(username: 'karsin', password:'none', enabled: true)
                     userKarsin.save(failOnError:true,flush:true)
@@ -513,11 +516,13 @@ class BootStrap {
                     osamum.save(failOnError:true,flush:true)
                     kc96813= new User(username: 'kc96813', password:'none', enabled: true)
                     kc96813.save(failOnError:true,flush:true)
+                    userKylanh = new User(username: 'kylanh', password:'none', enabled: true)
+                    userKylanh.save(failOnError:true,flush:true)
 
                 }
                 def rolesKarsin, rolesElfalan, rolesHodges, rolesKawachi, rolesCkawano, rolesJonathan, rolesCzane,
                         rolesSteven, rolesGarry, rolesThang, rolesRomeot, rolesAnicasm, rolesNakadoma, rolesVyoshida,
-                        rolesOsamum, rolesKc96813
+                        rolesOsamum, rolesKc96813, rolesKylanh
                 if(!UserRole.count()) {
                     rolesKarsin = new UserRole(user: userKarsin, role: ROLE_ADMIN)
                     rolesKarsin.save(failOnError:true,flush:true)
@@ -538,6 +543,7 @@ class BootStrap {
                     rolesVyoshida= new UserRole(user: vyoshida, role: ROLE_READ).save(failOnError:true,flush:true)
                     rolesOsamum= new UserRole(user: osamum, role: ROLE_READ).save(failOnError:true,flush:true)
                     rolesKc96813= new UserRole(user: kc96813, role: ROLE_READ).save(failOnError:true,flush:true)
+                    rolesKylanh= new UserRole(user: userKylanh, role: ROLE_ADMIN).save(failOnError:true,flush:true)
 
                 }
 
@@ -859,7 +865,7 @@ class BootStrap {
                 }
 
 
-                def t5k99, t2k40, t2k41, t2k99, pub05, pub02, pub03, pvt02, aphrodite, apx01, t2k06, t2k07, t2k08, pvt08, VMCluster2
+                def t5k99, t2k40, t2k41, t2k99, pub05, pub02, pub03, pvt02, aphrodite, apx01, t2k06, t2k07, t2k08, pvt08, VMCluster2, esx56, esx59
                 if ( ! PhysicalServer.count() ) {
                     pvt08 = new PhysicalServer(cluster:solarisCluster, itsId: "pvt08", updatedById: 001, location: locale2, assetType: server, manufacturer: madeBy1, rackable:true, RU_begin: 0, RU_size:0, RU_planned_begin: 0)
                     pvt08.save(failOnError: true, flush:true)
@@ -906,6 +912,11 @@ class BootStrap {
                     apx01 = new PhysicalServer(cluster:standalone, itsId: "apx01", updatedById: 001, location: locale2, assetType: server, manufacturer: madeBy1, RU_begin: 0, RU_size:0, RU_planned_begin: 0)
                     apx01.save(failOnError: true, flush:true)
 
+                    esx56 = new PhysicalServer(cluster:standalone, itsId: "esx56", updatedById: 001, location: locale2, assetType: server, manufacturer: madeBy1, rackable:true, RU_begin: 0, RU_size:0, RU_planned_begin: 0)
+                    esx56.save(failOnError: true, flush:true)
+                    
+                    esx56 = new PhysicalServer(cluster:standalone, itsId: "esx59", updatedById: 001, location: locale2, assetType: server, manufacturer: madeBy1, rackable:true, RU_begin: 0, RU_size:0, RU_planned_begin: 0)
+                    esx56.save(failOnError: true, flush:true)
 
                 }
 
@@ -1152,7 +1163,7 @@ class BootStrap {
                             env: test,
                             asset: t5k99,
                             status: availStatus,
-                            type: 'Non-Global Zone'
+                            type: 'VMware'
                     )
                     mdb74.save(failOnError: true, flush: true)
 

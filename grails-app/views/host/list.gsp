@@ -36,7 +36,7 @@
         <g:include controller="person" action="setBreadCrumbForCurrentItem" params="[pageType: 'host']"/>
     </g:applyLayout>
 
-%{--
+
     <style>
     .loadingModal {
         display:    none;
@@ -60,8 +60,8 @@
     }
 
     </style>
---}%
-    <g:if test="${session.getValue("hostSize") > 0}">
+
+    <g:if test="${session.getAttribute("hostSize") > 0}">
 
         <script type="text/javascript">
 
@@ -71,7 +71,7 @@
 
          $(window).onbeforeunload(function(){    //reset the session vars if the update was execuited
             ${session.setAttribute("hostSize", 0)}
-             ${session.setAttribute("newHosts", null)}
+             ${session.setAttribute("updatedHosts", null)}
          });
 
              //alert('Hosts Have Been updated with Vcenter')
@@ -112,9 +112,9 @@
 <export:formats formats="['csv', 'excel', 'ods', 'pdf', 'rtf', 'xml']" />
 <g:render template="../toolTip" />
     <g:render template="listGrid" />
+--}%
 
-%{--
-<g:form controller="VMWare">
+<g:form controller="VMware">
     <g:actionSubmit id='btn_update_hosts' value="Update Hosts" action="index"/>
 </g:form>
 
@@ -138,11 +138,11 @@
                 </div>
                 <div class="modal-body">
                    Hosts Have Been Updated With Vcenter.
-                   <b>${session.getValue("hostSize")}</b> New Hosts Have Been Created.
+                   <b>${session.getAttribute("hostSize")}</b> New Hosts Have Been Created.
                     <br>
                     Here is a list of the new Hosts that have been created:
                     <br>
-                    <g:each in="${params.newHosts}">
+                    <g:each in="${params.updatedHosts}">
                        <p>${it}</p>
                     </g:each>
                 </div>

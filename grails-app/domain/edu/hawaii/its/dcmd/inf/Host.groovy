@@ -51,6 +51,9 @@ class Host extends SupportableObject {
     Cluster cluster
 //	List hostSupporters = new ArrayList()
 
+    // Possible values:  connected, disconnected, inaccessible, invalid, orphaned
+    String vCenterState
+
     static auditable = true
 
     static belongsTo = [asset: Asset]
@@ -97,6 +100,8 @@ class Host extends SupportableObject {
         appAdmin(nullable: true)
         location(nullable: true)
         rackAssignment(nullable: true)
+
+        vCenterState(nullable: true)
 	}
 
 
