@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2014 University of Hawaii
+ *
+ * This file is part of DataCenter metadata (DCmd) project.
+ *
+ * DCmd is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DCmd is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
 //package edu.hawaii.its.dcmd.inf
 
 // locations to search for config files that get merged into the main config
@@ -38,8 +58,17 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
         multipartForm: 'multipart/form-data'
 ]
 
+//grails.plugin.springsecurity.useBasicAuth = true
+//grails.plugin.springsecurity.basic.realmName = "API"
+
+//grails.plugin.springsecurity.filterChain.chainMap = [
+//        '/**':'securityContextPersistenceFilter,logoutFilter,basicAuthenticationFilter,securityContextHolderAwareRequestFilter,exceptionTranslationFilter,filterInvocationInterceptor'
+        //'/**':'securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,rememberMeAuthenticationFilter,anonymousAuthenticationFilter,exceptionTranslationFilter,filterInvocationInterceptor'
+//]
+
 grails.stringchararrayaccessor.disabled=true
 
+grails.databinding.useSpringBinder=true
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
@@ -65,14 +94,14 @@ grails.spring.bean.packages = []
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
-grails.plugins.springsecurity.cas.loginUri = '/login'
+grails.plugin.springsecurity.cas.loginUri = '/login'
 
-grails.plugins.springsecurity.ldap.context.managerDn = '[dc=hawaii,dc=edu]'
-grails.plugins.springsecurity.ldap.context.managerPassword = '[]'
-grails.plugins.springsecurity.ldap.context.server = 'ldap://ldap1.its.hawaii.edu:389/'
-grails.plugins.springsecurity.ldap.authorities.groupSearchBase =
+grails.plugin.springsecurity.ldap.context.managerDn = '[dc=hawaii,dc=edu]'
+grails.plugin.springsecurity.ldap.context.managerPassword = '[]'
+grails.plugin.springsecurity.ldap.context.server = 'ldap://ldap1.its.hawaii.edu:389/'
+grails.plugin.springsecurity.ldap.authorities.groupSearchBase =
     '[dc=hawaii,dc=edu,ou=People]'
-grails.plugins.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
+grails.plugin.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
 
 /***************************************************************************************
  * Un-comment this for Production
@@ -85,35 +114,43 @@ grails.plugins.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
 /***************************************************************************************
  * Un-comment this for Local Development
  ***************************************************************************************/
-grails.plugins.springsecurity.cas.serviceUrl = 'http://localhost:8080/its/dcmd/j_spring_cas_security_check'
-grails.plugins.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/its/dcmd/secure/receptor'
-grails.plugins.springsecurity.logout.afterLogoutUrl =
+grails.plugin.springsecurity.cas.serviceUrl = 'http://localhost:8080/its/dcmd/j_spring_cas_security_check'
+grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/its/dcmd/secure/receptor'
+grails.plugin.springsecurity.logout.afterLogoutUrl =
     'https://login.its.hawaii.edu/cas/logout?url=http://localhost:8080/its/dcmd/'
 
 /***************************************************************************************
  * Un-comment this for Test
  ***************************************************************************************/
-//grails.plugins.springsecurity.cas.serviceUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/j_spring_cas_security_check'
-//grails.plugins.springsecurity.cas.proxyCallbackUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/secure/receptor'
-//grails.plugins.springsecurity.logout.afterLogoutUrl =
+//grails.plugin.springsecurity.cas.serviceUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/j_spring_cas_security_check'
+//grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/secure/receptor'
+//grails.plugin.springsecurity.logout.afterLogoutUrl =
 //    'https://login.its.hawaii.edu/cas/logout?url=http:///dcm51.pvt.hawaii.edu:8080/its/dcmd/'
 
 
-grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/user/home'
-grails.plugins.springsecurity.cas.serverUrlPrefix = 'https://login.its.hawaii.edu/cas'
 
-grails.plugins.springsecurity.cas.proxyReceptorUrl = '/secure/receptor'
 
-grails.plugins.springsecurity.useSecurityEventListener = true
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/user/home'
+grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://login.its.hawaii.edu/cas'
 
-grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
+grails.plugin.springsecurity.cas.proxyReceptorUrl = '/secure/receptor'
 
-grails.plugins.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.useSecurityEventListener = true
 
-grails.plugins.springsecurity.interceptUrlMap = [
-//        '/**':    ['IS_AUTHENTICATED_REMEMBERED']
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+
+//grails.plugin.springsecurity.rejectIfNoRule = false
+//grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
+
+grails.plugin.springsecurity.interceptUrlMap = [
+        '/': ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/api/**':    ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
         '/login/**': ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY' ],
         '/logout/**': ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/**/js/**':       ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/**/css/**':      ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/**/images/**':   ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
 
 //        '/**': ['ROLE_USER']
 
@@ -124,10 +161,10 @@ grails.plugins.springsecurity.interceptUrlMap = [
         '/**/show': ['ROLE_READ', 'ROLE_WRITE','ROLE_ADMIN'],
         '/**/edit': ['ROLE_WRITE', 'ROLE_ADMIN'],
         '/**/create': ['ROLE_WRITE', 'ROLE_ADMIN'],
-        '/**/supportList': ['ROLE_WRITE', 'ROLE_ADMIN']
-
-
+        '/**/supportList': ['ROLE_WRITE', 'ROLE_ADMIN'],
+        '/**':['ROLE_READ', 'ROLE_WRITE','ROLE_ADMIN']
 ]
+
 
 // set per-environment serverURL stem for creating absolute links
 environments {
@@ -138,11 +175,13 @@ environments {
 
 
        grails.serverURL = "http://localhost:8080/its/${appName}"
+        /*
         log4j {
             logger {
                 grails.app.domain="info,stdout"
             }
         }
+        */
     }
     production {
         grails.serverURL =  "http://www.hawaii.edu/its/${appName}"
@@ -157,9 +196,10 @@ ldapServers {
         indexed = ["objectClass", "uid", "mail", "userPassword"]
     }
 }
-grails.plugins.springsecurity.ldap.context.server = 'ldap://ldap1.hawaii.edu:389'
+grails.plugin.springsecurity.ldap.context.server = 'ldap://ldap1.hawaii.edu:389'
 
 //log4j configuration
+/*
 log4j = {
     // Example of changing the log pattern for the default console
     // appender:
@@ -205,6 +245,8 @@ log4j = {
     warn   'org.mortbay.log'
 
 }
+        */
+
 
 
 grails.resources.modules = {
@@ -285,9 +327,9 @@ grails.resources.modules = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'edu.hawaii.its.dcmd.inf.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'edu.hawaii.its.dcmd.inf.UserRole'
-grails.plugins.springsecurity.authority.className = 'edu.hawaii.its.dcmd.inf.Role'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'edu.hawaii.its.dcmd.inf.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'edu.hawaii.its.dcmd.inf.UserRole'
+grails.plugin.springsecurity.authority.className = 'edu.hawaii.its.dcmd.inf.Role'
 
 
 ////cookie session plugin config

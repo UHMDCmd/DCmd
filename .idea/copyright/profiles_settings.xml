@@ -1,5 +1,14 @@
 <component name="CopyrightManager">
   <settings default="">
-    <module2copyright />
+    <module2copyright>
+      <element module="All" copyright="DCmd" />
+    </module2copyright>
+    <LanguageOptions name="GSP">
+      <option name="fileTypeOverride" value="1" />
+      <option name="addBlankAfter" value="false" />
+    </LanguageOptions>
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="addBlankAfter" value="false" />
+    </LanguageOptions>
   </settings>
 </component>

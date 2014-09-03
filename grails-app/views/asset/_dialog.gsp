@@ -1,3 +1,23 @@
+%{--
+  - Copyright (c) 2014 University of Hawaii
+  -
+  - This file is part of DataCenter metadata (DCmd) project.
+  -
+  - DCmd is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License as published by
+  - the Free Software Foundation, either version 3 of the License, or
+  - (at your option) any later version.
+  -
+  - DCmd is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+  - If not, see <http://www.gnu.org/licenses/>.
+  --}%
+
 <%@ page import="edu.hawaii.its.dcmd.inf.Host; edu.hawaii.its.dcmd.inf.Location; edu.hawaii.its.dcmd.inf.Rack" %>
 <%@  page import="edu.hawaii.its.dcmd.inf.GeneralService" %>
 <%@  page import="edu.hawaii.its.dcmd.inf.HostService" %>
@@ -474,11 +494,11 @@
         <label class="dialogLabel" for="dialogHostname">Host Name</label>
         <input type="text" name="dialogHostname" id="dialogHostname" class="text ui-widget-content ui-corner-all" /><br>
         <label class="dialogLabel" for="dialogEnv">Environment</label>
-        <g:render template="../environmentSelect" model="[objectInstance:hostInstance]"/>
+        <g:render template="../environmentSelect" />
         <label class="dialogLabel" for="dialogStatus">Status</label>
-        <g:render template="../statusSelect" model="[objectInstance:hostInstance, idNum:2]"/>
+        <g:render template="../statusSelect" model="[objectInstance:assetInstance, idNum:2]"/>
         <label class="dialogLabel" for="dialogSA">PrimarySA</label>
-        <g:render template="../personSelect" model="[objectInstance:hostInstance, idNum:2]"/>
+        <g:render template="../personSelect" model="[objectInstance:assetInstance, idNum:2]"/>
         <label class="dialogLabel" for="dialogNotes">Host Notes</label>
         <input type="text" name="dialogNotes" id="dialogNotes" class="text ui-widget-content ui-corner-all" /><br>
         <div style="margin-top:5px">

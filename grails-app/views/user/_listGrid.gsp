@@ -28,7 +28,27 @@
                         keys: true, editbutton: false, delbutton: true}
                     },
                 {name:'username', width:120, editable:true,title:false},
-                {name:'role', width:100, editable:true, search:false, sortable:false, title:false, edittype:'select', editoptions: {dataUrl:'${createLink(controller:"user",action:"listRolesAsSelect")}'}},
+                {name:'role', width:100, editable:true, search:false, sortable:false, title:false, edittype:'select', editoptions: {dataUrl:'%{--
+  - Copyright (c) 2014 University of Hawaii
+  -
+  - This file is part of DataCenter metadata (DCmd) project.
+  -
+  - DCmd is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License as published by
+  - the Free Software Foundation, either version 3 of the License, or
+  - (at your option) any later version.
+  -
+  - DCmd is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+  - If not, see <http://www.gnu.org/licenses/>.
+  --}%
+
+${createLink(controller:"user",action:"listRolesAsSelect")}'}},
                 {name:'id', hidden:true}
             ],
 

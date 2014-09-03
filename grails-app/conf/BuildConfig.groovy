@@ -2,6 +2,26 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 
+/*
+ * Copyright (c) 2014 University of Hawaii
+ *
+ * This file is part of DataCenter metadata (DCmd) project.
+ *
+ * DCmd is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DCmd is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -17,12 +37,13 @@ grails.project.dependency.resolution = {
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+      //  mavenLocal()
+      //  mavenCentral()
+      //  mavenRepo "http://snapshots.repository.codehaus.org"
+      //  mavenRepo "http://repository.codehaus.org"
+      //  mavenRepo "http://download.java.net/maven/2/"
+      //  mavenRepo "http://repository.jboss.com/maven2/"
+      //  mavenRepo "http://repo.spring.io/milestone/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -37,34 +58,37 @@ grails.project.dependency.resolution = {
 
     plugins {
 
-        runtime ':jquery:1.7'
+        build ":tomcat:7.0.52.1"
+        runtime ":hibernate:3.6.10.14"
 
+
+        runtime ':jquery:1.7'
         runtime:':jquery-ui:1.8.11'
         runtime ':jqgrid:3.8.0.1'
 
 
         runtime ':breadcrumbs:0.5.2'
         runtime ':export:1.5'
-        runtime ':audit-logging:0.5.4'
+        runtime ':audit-logging:1.0.0'
         runtime ':google-visualization:0.6.2'
         runtime ':cache-headers:1.1.5'
         runtime ':calendar:1.2.1'
         runtime ':codenarc:0.12'
-        runtime ':hibernate:2.1.1'
-      //  runtime ':jquery:1.6.1.1'
+
+       // compile ':tooltip:0.8'
         runtime ':jquery-datatables:1.7.5'
         runtime ':jquery-ui:1.8.11'
         runtime ':mysql-connectorj:5.1.22.1'
-        runtime ':spring-security-cas:1.0.5'
-        runtime ':spring-security-core:1.2.7.3'
+        runtime ':resources:1.2.8'
+        runtime ":cookie-session:2.0.14"
 
-        runtime ':spring-security-ldap:1.0.6'
+        compile ':spring-security-core:2.0-RC2'
+        compile ':spring-security-cas:2.0-RC1'
+        compile ':spring-security-ldap:2.0-RC2'
 
+        compile ':scaffolding:1.0.0'
        // 2.1.1 config
-        runtime ':tomcat:2.1.1'
-        runtime ':hibernate:2.1.1'
-       runtime ':resources:1.1.6'
-        runtime ':jquery:1.6.1.1'
+
 
 //        //2.3.8 config
 //        build ':tomcat:7.0.52.1'

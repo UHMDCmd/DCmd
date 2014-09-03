@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2014 University of Hawaii
+ *
+ * This file is part of DataCenter metadata (DCmd) project.
+ *
+ * DCmd is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * DCmd is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import grails.converters.JSON
+
 import java.util.Date;
 
 import edu.hawaii.its.dcmd.inf.*
@@ -9,6 +31,7 @@ import edu.hawaii.its.dcmd.inf.Environment
 import edu.hawaii.its.dcmd.inf.User
 import edu.hawaii.its.dcmd.inf.Status
 import edu.hawaii.its.dcmd.inf.PowerSource
+import grails.converters.JSON
 
 class BootStrap {
 
@@ -202,6 +225,104 @@ class BootStrap {
             }
 
             test {
+
+                JSON.registerObjectMarshaller(Host) {
+                    def returnArray = [:]
+                    returnArray['Hostname'] = it.hostname
+                    returnArray['DCmd_ID'] = it.id
+                    returnArray['Environment'] = it.env?.abbreviation
+                    returnArray['Status'] = it.status?.abbreviation
+                    returnArray['Type'] = it.type
+                    returnArray['PhysicalServer'] = it.asset?.itsId
+                    returnArray['OS'] = it.os
+                    returnArray['Services'] = it.tiers
+                    returnArray['SupportStaff'] = it.supporters
+
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(SupportRole) {
+                    def returnArray = [:]
+                    returnArray['Role'] = it.roleName?.roleName
+                    returnArray['Person'] = it.person?.uhName
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Tier){
+                    System.out.println(it.instanceDependencies?.first()?.service?.serviceTitle)
+
+                    def returnArray = [:]
+                    returnArray['ServiceName'] = it.instanceDependencies?.first()?.service?.serviceTitle
+                    returnArray['Application'] = it.mainApp
+                    return returnArray
+
+                }
+
+                JSON.createNamedConfig('applicationAll') {
+                    it.registerObjectMarshaller(Application) { Application app, JSON json ->
+                        def returnArray = [:]
+                        returnArray['AppName'] = app.applicationTitle
+                        returnArray['Environment'] = app.env?.abbreviation
+                        returnArray['Services'] = app.services
+                        return returnArray
+                    }
+                }
+
+                JSON.registerObjectMarshaller(Application) {
+                    def returnArray = [:]
+                    returnArray['AppName'] = it.applicationTitle
+                    returnArray['Environment'] = it.env?.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(RoleType) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.roleName
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Environment) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Status) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Person) {
+                    def returnArray = [:]
+                    returnArray['uhName'] = it.uhName
+                    return returnArray
+                }
+
+                JSON.createNamedConfig('personAll') {
+                    it.registerObjectMarshaller(Person) { Person person, JSON json ->
+                        def returnArray = [:]
+                        returnArray['uhName'] = person.uhName
+                        returnArray['firstName'] = person.firstName
+                        returnArray['lastName'] = person.lastName
+                        returnArray['uhNumber'] = person.uhNumber
+                        return returnArray
+                    }
+                }
+
+                JSON.registerObjectMarshaller(Service) {
+                    def returnArray = [:]
+                    returnArray['ServiceName'] = it.serviceTitle
+                    returnArray['Environment'] = it.env?.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Cluster) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.name
+                    return returnArray
+                }
+
                 def powerType
                 powerType = new AssetType(
                         name: 'Power',
@@ -239,12 +360,106 @@ class BootStrap {
                     strip2 = new PowerStrip(itsId:'XZ', capacity:10, breaker:Breaker1, powerUsed:10, assetType:powerType, type: PSType1).save(failOnError:true)
                     strip3 = new PowerStrip(itsId:'YZ', capacity:10, breaker:Breaker1, powerUsed:10, assetType:powerType).save(failOnError:true)
                 }
-
             }
 
             development {
 
+                JSON.registerObjectMarshaller(Host) {
+                    def returnArray = [:]
+                    returnArray['Hostname'] = it.hostname
+                    returnArray['DCmd_ID'] = it.id
+                    returnArray['Environment'] = it.env?.abbreviation
+                    returnArray['Status'] = it.status?.abbreviation
+                    returnArray['Type'] = it.type
+                    returnArray['PhysicalServer'] = it.asset?.itsId
+                    returnArray['OS'] = it.os
+                    returnArray['Services'] = it.tiers
+                    returnArray['SupportStaff'] = it.supporters
 
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(SupportRole) {
+                    def returnArray = [:]
+                    returnArray['Role'] = it.roleName?.roleName
+                    returnArray['Person'] = it.person?.uhName
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Tier){
+                    System.out.println(it.instanceDependencies?.first()?.service?.serviceTitle)
+
+                    def returnArray = [:]
+                    returnArray['ServiceName'] = it.instanceDependencies?.first()?.service?.serviceTitle
+                    returnArray['Application'] = it.mainApp
+                    return returnArray
+
+                }
+
+                JSON.createNamedConfig('applicationAll') {
+                    it.registerObjectMarshaller(Application) { Application app, JSON json ->
+                        def returnArray = [:]
+                        returnArray['AppName'] = app.applicationTitle
+                        returnArray['Environment'] = app.env?.abbreviation
+                        returnArray['Services'] = app.services
+                        return returnArray
+                    }
+                }
+
+                JSON.registerObjectMarshaller(Application) {
+                    def returnArray = [:]
+                    returnArray['AppName'] = it.applicationTitle
+                    returnArray['Environment'] = it.env?.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(RoleType) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.roleName
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Environment) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Status) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Person) {
+                    def returnArray = [:]
+                    returnArray['uhName'] = it.uhName
+                    return returnArray
+                }
+
+                JSON.createNamedConfig('personAll') {
+                    it.registerObjectMarshaller(Person) { Person person, JSON json ->
+                        def returnArray = [:]
+                        returnArray['uhName'] = person.uhName
+                        returnArray['firstName'] = person.firstName
+                        returnArray['lastName'] = person.lastName
+                        returnArray['uhNumber'] = person.uhNumber
+                        return returnArray
+                    }
+                }
+
+                JSON.registerObjectMarshaller(Service) {
+                    def returnArray = [:]
+                    returnArray['ServiceName'] = it.serviceTitle
+                    returnArray['Environment'] = it.env?.abbreviation
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(Cluster) {
+                    def returnArray = [:]
+                    returnArray['Name'] = it.name
+                    return returnArray
+                }
 
                 def ROLE_READ, ROLE_WRITE, ROLE_ADMIN, ROLE_USER
                 if (!Role.count()) {

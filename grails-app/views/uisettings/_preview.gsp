@@ -10,7 +10,7 @@
             colNames:["Author","Title", "Price", "Published Date"],
             colModel:[
                 {name:"Author",index:"Author", width:120, xmlmap:"ItemAttributes>Author"},
-                {name:"Title",index:"Title", width:180,xmlmap:"ItemAttributes>Title"},
+                {name:"Title",index:"Titltes>Title"},
                 {name:"Price",index:"Manufacturer", width:100, align:"right",xmlmap:"ItemAttributes>Price", sorttype:"float"},
                 {name:"DatePub",index:"ProductGroup", width:130,xmlmap:"ItemAttributes>DatePub",sorttype:"date"}
             ],
@@ -25,7 +25,7 @@
                 repeatitems: false,
                 id: "ASIN"
             },
-            caption: "Grid Preview"
+            caption: "Grid P"
         });
 
         jQuery('#gridPreview').filterToolbar({id:'gridPreview', searchOnEnter:true});
@@ -56,17 +56,38 @@
     });
 
 </script>
-
-<div id="container">
-<table id="gridPreview" style="position:absolute"></table>
-
-
-<div id="tabs" style="float:left ">
+<div id="preview" style="position:absolute" align="center">
+<table>
+    <td>
+    <table id="gridPreview"></table>
+    </td>
+    <td>
+<div id="tabs">
 <div id="tabs-notes">
     <ul>
 
         <li>
-            <a href="#notes-general"><g:message code="notes-general.label" default="General" /></a>
+            <a href="#notes-general">%{--
+  - Copyright (c) 2014 University of Hawaii
+  -
+  - This file is part of DataCenter metadata (DCmd) project.
+  -
+  - DCmd is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License as published by
+  - the Free Software Foundation, either version 3 of the License, or
+  - (at your option) any later version.
+  -
+  - DCmd is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with DCmd.  It is contained in the DCmd release as LICENSE.txt
+  - If not, see <http://www.gnu.org/licenses/>.
+  --}%
+
+<g:message code="notes-general.label" default="General" /></a>
         </li>
         <li>
             <a href="#notes-change"><g:message code="notes-change.label" default="Change" /></a>
@@ -87,4 +108,6 @@
 </div>
 </div>
 </div>
-
+</td>
+</table>
+</div>
