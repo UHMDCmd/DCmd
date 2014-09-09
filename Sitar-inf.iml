@@ -53,6 +53,7 @@
       <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/grails-app/jobs" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
@@ -111,6 +112,7 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.esotericsoftware.kryo/kryo/bundles/kryo-2.22.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/de.javakaffee/kryo-serializers/bundles/kryo-serializers-0.26.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/ch.ethz.ganymed/ganymed-ssh2/jars/ganymed-ssh2-build210.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/org.quartz-scheduler/quartz/jars/quartz-2.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>

@@ -300,11 +300,17 @@
         </script>
 
         <td style="width:75%">
-            <div id="rackDisplay" style="background: #9a9a9a">
-                <table>
+            <div id="rackDisplay" style="background: #9a9a9a; border: solid #233333; border-radius:20px">
+                <table style="border-radius: 5px">
                     <tr>
                         <td>
-                            <div id="top_img" align="center" style="max-width: 100%"><img src="../images/metal_graphic_top_s.png" align="middle" style="display:block; height:auto; max-height:100%;width:auto; max-width:98%"></div>
+
+                            <div id="top_img" align="center" style="max-width: 100%; position: relative;border-radius: 43px 45px 43px 43px; ">
+                                <div class="rack_label">
+                                    <p>${edu.hawaii.its.dcmd.inf.Rack.get(rackId.toLong()).itsId}</p>
+                                </div>
+                                <img src="../images/top_vent.png" align="middle" style="display:block; height:auto; max-height:100%;width:auto; max-width:95%"></div>
+
                         </td>
                     </tr>
                     <tr>
@@ -333,10 +339,10 @@
                         </td>
                     </tr>
                     <tr>
-                            <td>
+                        <td>
                             <div id="bottom_img" align="center"><img src="../images/metal_graphic_bottom_s.png" style="display:block; height:auto; max-height:100%;width:auto; max-width:98%"></div>
-                            </td>
-                     </tr>
+                        </td>
+                    </tr>
                 </table>
             </div>
 

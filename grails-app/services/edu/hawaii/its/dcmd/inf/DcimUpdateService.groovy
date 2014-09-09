@@ -13,44 +13,42 @@ class DcimUpdateService {
 
 
     def sshConfig
+    def scpConfig1
+    def scpConfig2
+    def scpConfig3
     def port=22;
-    AssetService assetService
     def sessionFactory
     def racksToBeUpdated
 
     /**
      *   retrieve all devices, cabinets and datacenters via ssh connection to dcim.its.hawaii.edu/keller
      */
-    def runQuery () {
-        RemoteSSH sshConnection
-        try{
-            println("waiting for query to complete...")
-            sshConnection = new RemoteSSH('dcim.its.hawaii.edu', 'elfalan', '14611782','', './runAllQueries.sh','',port)
-        }catch(Exception e){
-            println("caught exception \n" + e.cause)
-        }
-        if(sshConnection == null){
-            println("connection not working")
-        }else{
-            //  def result = sshConnection.Result(sshConfig)
-            // println(result.toString())
-
-            RemoteSCPGet scpget1 =new RemoteSCPGet('dcim.its.hawaii.edu', 'elfalan', '14611782', '/home/elfalan/devices.txt' ,'grails-app/views/dcimConnector/queryResults', port)
-            RemoteSCPGet scpget2=new RemoteSCPGet('dcim.its.hawaii.edu', 'elfalan', '14611782', '/home/elfalan/cabinets.txt' ,'grails-app/views/dcimConnector/queryResults', port)
-            RemoteSCPGet scpget3=new RemoteSCPGet('dcim.its.hawaii.edu', 'elfalan', '14611782', '/home/elfalan/datacenters.txt' ,'grails-app/views/dcimConnector/queryResults', port)
-
-
-
-            //  def results=scpget1.Result(sshConfig) + scpget2.Result(sshConfig) + scpget3.Result(sshConfig)
-
-            //    def deviceList = createItemList("grails-app/views/dcimConnector/queryResults/devices.txt");
-            //    def dataCenterList = createItemList("grails-app/views/dcimConnector/queryResults/datacenters.txt");
-            //   def cabinetList = createItemList("grails-app/views/dcimConnector/queryResults/cabinets.txt");
-
-            //response for page
-            importServersFromProduction()
-        }
+    def startUpdate(){
+        runQuery()
     }
+
+    def runQuery () {
+
+        println("waiting for query to complete...")
+
+        RemoteSSH ash=new RemoteSSH('dcim.its.hawaii.edu', 'elfalan', '14611782','', './runAllQueries.sh','',port)
+        def result=ash.Result(sshConfig)
+
+        RemoteSCPGet scpget1 =new RemoteSCPGet('dcim.its.hawaii.edu', 'elfalan', '14611782', '/home/elfalan/devices.txt' ,'grails-app/views/dcimConnector/queryResults', port)
+        RemoteSCPGet scpget2=new RemoteSCPGet('dcim.its.hawaii.edu', 'elfalan', '14611782', '/home/elfalan/cabinets.txt' ,'grails-app/views/dcimConnector/queryResults', port)
+        RemoteSCPGet scpget3=new RemoteSCPGet('dcim.its.hawaii.edu', 'elfalan', '14611782', '/home/elfalan/datacenters.txt' ,'grails-app/views/dcimConnector/queryResults', port)
+
+        def results=scpget1.Result(sshConfig) + scpget2.Result(sshConfig) + scpget3.Result(sshConfig)
+
+        def deviceList = createItemList("grails-app/views/dcimConnector/queryResults/devices.txt");
+        def dataCenterList = createItemList("grails-app/views/dcimConnector/queryResults/datacenters.txt");
+        def cabinetList = createItemList("grails-app/views/dcimConnector/queryResults/cabinets.txt");
+
+        //response for page
+        Thread.sleep(10000)
+        importServersFromProduction()
+    }
+
 
     /**********************************************************************
      * Update Physical Server/Device Controller Action
@@ -65,6 +63,7 @@ class DcimUpdateService {
      */
     def updatePhysicalDevicesWithDCIM () {
         println("waiting for Physical Server update to complete...")
+
 
 
         def deviceList = createItemList("grails-app/views/dcimConnector/queryResults/devices.txt");
@@ -116,7 +115,6 @@ class DcimUpdateService {
         addDevicesToRacks(masterList)
 
         def updateStatus = "found " + size + " out of " + servers.size()
-        // render(view:"updatePhysicalDevicesWithDCIM", model:[updateStatus:updateStatus, notFound: notFound.toString()])
 
         updateDataCentersWithDCIM()
 
@@ -155,8 +153,8 @@ class DcimUpdateService {
             deviceLabel = deviceLabel.toLowerCase()
 
             Rack rackInstance = Rack.findByItsId(rackLabel)
-            PhysicalServer temp = PhysicalServer.findByItsId(deviceLabel)
-            def serverInstance = Asset.findById(temp.id)
+            PhysicalServer serverInstance = PhysicalServer.findByItsId(deviceLabel)
+            //def serverInstance = Asset.findById(temp.id)
 
             //update the server attributes
             serverInstance = updateServerInstance(serverInstance, item)
@@ -237,6 +235,8 @@ class DcimUpdateService {
     def updateDataCentersWithDCIM () {
         println("waiting for Data Center update to complete...")
 
+
+
         def attributesToUpdateFrom = createItemList("grails-app/views/dcimConnector/queryResults/datacenters.txt")
         ArrayList <Location> dataCenters = Location.getAll();
         ArrayList <String> labels = new ArrayList<String>()
@@ -283,6 +283,7 @@ class DcimUpdateService {
 
         def updateStatus = Location.getAll().toString()
 
+
         updateRackAttributesWithDCIM()
     }
 
@@ -293,10 +294,8 @@ class DcimUpdateService {
 /**
  * Functions: Updates rack attributes retrieved from file cabinets.txt
  */
-    def updateRackAttributesWithDCIM  (){
+    def updateRackAttributesWithDCIM (){
         println("waiting for rack update to complete...")
-
-
 
         def cabinetList = createItemList("grails-app/views/dcimConnector/queryResults/cabinets.txt");
 
@@ -337,8 +336,6 @@ class DcimUpdateService {
 
                 racksThatHaveBeenUpdated.add(rackInstance.itsId)
             }
-
-            updateOccupiedRackSlots()
         }
 
         //populates slots that are occupied by other devices such as switchs, filters etc.
@@ -348,10 +345,7 @@ class DcimUpdateService {
 
         println("racks that have been updated: " + updateStatus)
 
-        // render(view:"updateRackAttributes", model:[updateStatus:updateStatus])
-        render(view:"index", model:[updateStatus:updateStatus])
-
-        // updateOccupiedRackSlots()
+        updateOccupiedRackSlots()
 
     }
 
@@ -424,34 +418,42 @@ class DcimUpdateService {
             def deviceLabel = item[0]
             def slotPosition  = Integer.parseInt(item[4])
             def deviceId = Integer.parseInt(item[1])
+            def deviceHeight = Integer.parseInt(item[5])
 
             if(slotPosition > 0){
-                Rack rackInstance = Rack.findByItsId(rackName)
-                RackUnit rackUnitInstance = rackInstance.getUnitBySlot(rackInstance,slotPosition)
-                rackUnitInstance.properties['label'] = "Unavailable Per DCIM - " + deviceLabel
-                rackUnitInstance.properties['RUstatus'] = 'OccupiedByDCIM'
-                rackUnitInstance.properties['deviceId'] = deviceId
-                //rackUnitInstance.properties['filledBy'] = serverInstance
-                rackUnitInstance.properties['onRack'] = rackInstance
-                rackUnitInstance.properties['ru_slot'] = slotPosition
 
-                if(!rackUnitInstance.hasErrors()){
-                    rackUnitInstance.save(failOnError: true, flush: true)
-                    rackInstance.save(failOnError: true, flush: true)
-                    println("updated rack: " + rackInstance.itsId)
-                    println("updated rackunit: " + rackUnitInstance.label)
-                }else{println("save failed")}
+                Rack rackInstance = Rack.findByItsId(rackName)
+                for(int i = 0; i < deviceHeight; i++){
+                    RackUnit rackUnitInstance = rackInstance.getUnitBySlot(rackInstance,slotPosition)
+                    if(!rackUnitInstance.filledBy){ //if the rack unit is not filled by asset, update occupied label
+                        rackUnitInstance.properties['label'] = "Unavailable Per DCIM - " + deviceLabel
+                        rackUnitInstance.properties['RUstatus'] = 'OccupiedByDCIM'
+                        rackUnitInstance.properties['deviceId'] = deviceId
+                        //rackUnitInstance.properties['filledBy'] = serverInstance
+                        rackUnitInstance.properties['onRack'] = rackInstance
+                        rackUnitInstance.properties['ru_slot'] = slotPosition
+
+                        if(!rackUnitInstance.hasErrors()){
+                            rackUnitInstance.save(failOnError: true, flush: true)
+                            rackInstance.save(failOnError: true, flush: true)
+                            println("updated rack: " + rackInstance.itsId)
+                            println("updated rackunit: " + rackUnitInstance.label)
+                        }else{println("save failed")}
+                    }
+                    slotPosition++
+                }
             }
         }
 
         println("\nDCIM Update Successful")
+        flash.message = "DCIM Device Update Was Successful"
 
         //clean up GORM
         def session = sessionFactory.currentSession
         session.flush()
         session.clear()
 
-
+        //redirect(uri: '/physicalServer/list')
     }
 
     /*******************************************************
@@ -511,10 +513,8 @@ class DcimUpdateService {
      * Import Servers From File physicalServer_list.csv
      */
 
-    def importServersFromProduction () {
+    def importServersFromProduction (){
         println("waiting for server import to complete...")
-
-
 
         def serverList = createServerItemList("grails-app/views/dcimConnector/queryResults/physicalServer_list.csv");
         ArrayList <String> updatedList = new ArrayList<String>()
@@ -526,17 +526,7 @@ class DcimUpdateService {
             def item = serverList.get(x)
             def itsId = item[0]
             def serverType = item[1]
-            //these attributes should be updated from dcim
-            // def status = item[2]
-            //  def primarySA = item[3]
-            //def ru_size = item[4]
-            // def currentRack = item[5]
-            // def currentPosition = item[6]
-            // def currentLocation = item[7]
-            // def serialNum = item[8]
-            // def manufacturer = item[9]
-            // def model = item[10]
-            // def generalNotes = item[11]
+
 
             if(!(PhysicalServer.findByItsId(itsId))){
                 serverInstance = new PhysicalServer(itsId: itsId, assetType: AssetType.findByName('Server - Hardware'), serverType: serverType).save(failOnError: true, flush:true)
@@ -588,5 +578,3 @@ class DcimUpdateService {
 
 
 }
-
-

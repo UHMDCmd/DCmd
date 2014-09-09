@@ -12,7 +12,7 @@ class DcimConnectorController {
 
     def sshConfig
     def port=22;
-    AssetService assetService
+
     def sessionFactory
     def racksToBeUpdated
     RemoteSSH sshConnection
@@ -29,8 +29,8 @@ class DcimConnectorController {
          * -updateRackAttributesWithDCIM
          * -updateOccupiedRackSlots
          */
-       def updateService = new DcimUpdateService()
-       updateService.startUpdate()
+        // def updateService = new DcimUpdateService()
+        // updateService.startUpdate()
 
 //        try {
 //            runQuery()
@@ -39,6 +39,7 @@ class DcimConnectorController {
 //            println("error occuried during update due to" + e.cause)
 //        }
     }
+
 
     /**
      *   retrieve all devices, cabinets and datacenters via ssh connection to dcim.its.hawaii.edu/keller
@@ -133,7 +134,7 @@ class DcimConnectorController {
         // render(view:"updatePhysicalDevicesWithDCIM", model:[updateStatus:updateStatus, notFound: notFound.toString()])
         render(view:"index", model:[updateStatus:updateStatus, notFound: notFound.toString()])
 
-       // updateDataCentersWithDCIM()
+        // updateDataCentersWithDCIM()
 
     }
 
@@ -170,8 +171,8 @@ class DcimConnectorController {
             deviceLabel = deviceLabel.toLowerCase()
 
             Rack rackInstance = Rack.findByItsId(rackLabel)
-            PhysicalServer temp = PhysicalServer.findByItsId(deviceLabel)
-            def serverInstance = Asset.findById(temp.id)
+            PhysicalServer serverInstance = PhysicalServer.findByItsId(deviceLabel)
+            //def serverInstance = Asset.findById(temp.id)
 
             //update the server attributes
             serverInstance = updateServerInstance(serverInstance, item)
@@ -194,7 +195,7 @@ class DcimConnectorController {
 
                 rackUnitInstance.properties['filledBy'] = serverInstance
                 rackUnitInstance.properties['onRack'] = rackInstance
-               // rackUnitInstance.properties['label'] = deviceLabel
+                // rackUnitInstance.properties['label'] = deviceLabel
                 rackUnitInstance.properties['label'] = "<a href='/its/dcmd/asset/show?id=${serverInstance.id}'>${serverInstance.itsId}</a>"
                 rackUnitInstance.properties['RUstatus'] = 'Filled'
                 rackUnitInstance.properties['ru_slot'] = slotPosition
@@ -230,7 +231,7 @@ class DcimConnectorController {
         int size = Integer.parseInt(parameters[5])
 
         if(size > 1){
-        serverInstance.properties['RU_size'] = size
+            serverInstance.properties['RU_size'] = size
         }else{serverInstance.properties['RU_size'] = 1}
 
         serverInstance.properties['RU_begin'] = Integer.parseInt(parameters[4]); //slot position
@@ -369,7 +370,7 @@ class DcimConnectorController {
         // render(view:"updateRackAttributes", model:[updateStatus:updateStatus])
         render(view:"index", model:[updateStatus:updateStatus])
 
-       // updateOccupiedRackSlots()
+        // updateOccupiedRackSlots()
 
     }
 
@@ -406,15 +407,15 @@ class DcimConnectorController {
             def rackNum = Integer.parseInt(rackName)
 
             if(rackNum > 0){
-               // println("current item: " + item.toString())
+                // println("current item: " + item.toString())
 
                 if(rackList.contains(rackName)){ //skip dontcare racks
                     newDeviceList.add(allDeviceList.get(x))
                     deviceListLabels.add(deviceName.toLowerCase())
-                 //   println(x + "\n ADDED : " + item)
+                    //   println(x + "\n ADDED : " + item)
                 }
                 else{
-                //    println( x + "\n SKIPPED :" + item)
+                    //    println( x + "\n SKIPPED :" + item)
                 }
             }
         }
@@ -442,23 +443,30 @@ class DcimConnectorController {
             def deviceLabel = item[0]
             def slotPosition  = Integer.parseInt(item[4])
             def deviceId = Integer.parseInt(item[1])
+            def deviceHeight = Integer.parseInt(item[5])
 
             if(slotPosition > 0){
-                Rack rackInstance = Rack.findByItsId(rackName)
-                RackUnit rackUnitInstance = rackInstance.getUnitBySlot(rackInstance,slotPosition)
-                rackUnitInstance.properties['label'] = "Unavailable Per DCIM - " + deviceLabel
-                rackUnitInstance.properties['RUstatus'] = 'OccupiedByDCIM'
-                rackUnitInstance.properties['deviceId'] = deviceId
-                //rackUnitInstance.properties['filledBy'] = serverInstance
-                rackUnitInstance.properties['onRack'] = rackInstance
-                rackUnitInstance.properties['ru_slot'] = slotPosition
 
-                if(!rackUnitInstance.hasErrors()){
-                    rackUnitInstance.save(failOnError: true, flush: true)
-                     rackInstance.save(failOnError: true, flush: true)
-                     println("updated rack: " + rackInstance.itsId)
-                    println("updated rackunit: " + rackUnitInstance.label)
-                }else{println("save failed")}
+                Rack rackInstance = Rack.findByItsId(rackName)
+                for(int i = 0; i < deviceHeight; i++){
+                    RackUnit rackUnitInstance = rackInstance.getUnitBySlot(rackInstance,slotPosition)
+                    if(!rackUnitInstance.filledBy){ //if the rack unit is not filled by asset, update occupied label
+                        rackUnitInstance.properties['label'] = "Unavailable Per DCIM - " + deviceLabel
+                        rackUnitInstance.properties['RUstatus'] = 'OccupiedByDCIM'
+                        rackUnitInstance.properties['deviceId'] = deviceId
+                        //rackUnitInstance.properties['filledBy'] = serverInstance
+                        rackUnitInstance.properties['onRack'] = rackInstance
+                        rackUnitInstance.properties['ru_slot'] = slotPosition
+
+                        if(!rackUnitInstance.hasErrors()){
+                            rackUnitInstance.save(failOnError: true, flush: true)
+                            rackInstance.save(failOnError: true, flush: true)
+                            println("updated rack: " + rackInstance.itsId)
+                            println("updated rackunit: " + rackUnitInstance.label)
+                        }else{println("save failed")}
+                    }
+                    slotPosition++
+                }
             }
         }
 
@@ -470,7 +478,7 @@ class DcimConnectorController {
         session.flush()
         session.clear()
 
-       redirect(uri: '/physicalServer/list')
+        redirect(uri: '/physicalServer/list')
     }
 
     /*******************************************************

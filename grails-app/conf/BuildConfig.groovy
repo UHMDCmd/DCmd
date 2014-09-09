@@ -89,6 +89,8 @@ grails.project.dependency.resolution = {
         compile ':scaffolding:1.0.0'
         compile ':remote-ssh:0.2'
 
+        compile ":quartz:1.0.2"
+
         // 2.1.1 config
 
 

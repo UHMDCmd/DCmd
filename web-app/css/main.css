@@ -410,7 +410,7 @@ div.gridFixWidth {
     background: -ms-linear-gradient(0deg, #333333 0, #656F7D 76%);/* IE10+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1'); /* for IE */
     background: linear-gradient(0deg, #333333 0, #656F7D 76%);/* W3C */
-/*shadow*/
+    /*shadow*/
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=225, Color=#25252E)";/*IE 8*/
     -moz-box-shadow: 1px -1px 3px 4px #25252E;/*FF 3.5+*/
     -webkit-box-shadow: 1px -1px 3px 4px #25252E;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
@@ -502,6 +502,8 @@ div.gridFixWidth {
     background: linear-gradient(0deg, #153A8F 0, #1D51CC 76%);/* W3C */
     /*background: #0000cc;*/
     color: #c5d2d3;
+    /*font-family: bold "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;*/
+    /*font-size: 20px;*/
 }
 
 /*#ruOccupiedByDCIM,*/
@@ -530,7 +532,6 @@ div.gridFixWidth {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1'); /* for IE */
     background: linear-gradient(0deg, #B5B5B5 0, #CCCFCC 76%);/* W3C */
     color: #38852e;
-    font: bolder;
 }
 
 #ruPlanned {
@@ -569,6 +570,34 @@ div.gridFixWidth {
     vertical-align: middle;
     padding-top: 8px;
     padding-left: 2px;
+
+}
+.rack_label {
+    /*internal text*/
+    display:block;
+    /*vertical-align: middle;*/
+    /*text-align: center;*/
+    font-size: 40px;
+    position: absolute;
+    padding:10px;
+    top:40%;
+    right:45%;
+    border: solid 3px #feedbe;
+    background-color: #efdeb1;
+    border-radius: 5px
+
+}
+.rack_label p {
+    font-family:Veranda, Helvetica, sans-serif ; font-size: 140%; color: #646d7b;
+    text-shadow:
+    -2px -1px 0 #343434,
+    2px -1px 0 #343434,
+    -2px 1px 0 #343434,
+    2px 1px 0 #343434;
+    text-align: justify;
+    vertical-align: middle;
+    padding:10px;
+
 
 }
 
