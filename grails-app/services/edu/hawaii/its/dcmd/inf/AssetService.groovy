@@ -285,7 +285,9 @@ class AssetService {
         def totalRows = racks.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
-        def results = racks?.collect { [ cell: [ "<a href='../asset/show?id=${it.id}'>${it.itsId}</a>", "<a href='../location/show?id=${it.location?.id}'>${it.location.toString()}</a>", it.isAvailableForParts,  it.serialNo, it.lastUpdated.format('MM/dd/yy h:m a'), it.generalNote], id: it.id ] }
+        def results = racks?.collect { [ cell: [ "<a href='../asset/show?id=${it.id}'>${it.itsId}</a>", "<a href='../location/show?id=${it.location?.id}'>${it.location.toString()}</a>",
+                                                 it.rowId, it.zoneId, it.cabLocation,
+                                                 it.lastUpdated.format('MM/dd/yy h:m a'), it.generalNote], id: it.id ] }
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         return jsonData
 

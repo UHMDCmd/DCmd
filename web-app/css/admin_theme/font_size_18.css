@@ -1,2 +1,9 @@
 .ui-jqgrid {font-size:18px}
 .ui-jqgrid tr.jqgrow td {font-size:18px;width:auto}
+td, th {
+    font: 18px verdana, arial, helvetica, sans-serif;
+    line-height: 19px;
+    /*    padding: .2em .2em .2em .3em;*/
+
+    vertical-align: top;
+}

@@ -31,14 +31,14 @@ width:'1000',
 caption:'Rack List',
 url:'listAllRack',
             datatype: "json",
-            colNames:['ITS Id', 'Location',
-                'Avail. for parts', 'Serial #', 'Last Updated', 'General Notes', 'id'],
+            colNames:['ITS Id', 'Location', 'Zone ID', 'Row ID', 'Cabinet', 'Last Updated', 'General Notes', 'id'],
             colModel:[
                 {name:'itsId', width:100, editable:false,title:false},
                 {name:'location', width:120, editable:false,title:false},
-                {name:'isAvailableForParts', width:120,title:false},
-                {name:'serialNo', width:180, editable:false,title:false},
-                {name:'lastUpdated', editable:false, width:120,title:false, search:false},
+                {name:'zoneId', width:80, editable:false,title:false},
+                {name:'rowId', width:80, editable:false,title:false},
+                {name:'cabLocation', width:80, editable:false,title:false},
+                {name:'lastUpdated', editable:false, width:150,title:false, search:false},
                 {name:'generalNote', width:400,title:false},
                 {name:'id', hidden:true}
             ],
@@ -79,8 +79,9 @@ url:'listAllRack',
 
     setTooltipsOnColumnHeader($("#allRack"), 0, "A unique ITS Id given to the Entity");
     setTooltipsOnColumnHeader($("#allRack"),1,"The Physical Location of the Rack");
-    setTooltipsOnColumnHeader($("#allRack"),2,"Parts availability Status");
-    setTooltipsOnColumnHeader($("#allRack"),3,"Serial #");
+    setTooltipsOnColumnHeader($("#allRack"),2,"The Zone ID of the Rack within the DataCenter");
+    setTooltipsOnColumnHeader($("#allRack"),3,"The Row ID of the Rack within the Zone");
+    setTooltipsOnColumnHeader($("#allRack"),3,"The Cabinet ID within the Row");
     setTooltipsOnColumnHeader($("#allRack"),4,"Last update of This Record");
 
 
