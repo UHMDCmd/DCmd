@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2014 University of Hawaii
  *
@@ -21,17 +20,16 @@
 
 package edu.hawaii.its.dcmd.inf
 
-                      /*
+import com.vmware.vim25.mo.util.MorUtil
 
-import java.net.URL
+import java.rmi.RemoteException
 import com.vmware.vim25.*
 import com.vmware.vim25.mo.*
-import com.vmware.vim25.ws.WSClient
-import org.codenarc.rule.logging.PrintlnAstVisitor
+//import org.codenarc.rule.logging.PrintlnAstVisitor
 import grails.validation.Validateable
 
 @Validateable
-class VMWareController {
+class VMwareController {
     def index = {
         try{
             int count = 0;
@@ -44,24 +42,15 @@ class VMWareController {
             def si = new ServiceInstance(url, username, password, true)
             def rootFolder = si.rootFolder
 
-            ArrayList <ManagedEntity> entityList = new ArrayList();
             InventoryNavigator nav = new InventoryNavigator(rootFolder)
 
-            nav.searchManagedEntities("VirtualMachine").each{
-                entityList.add(it)
+            ArrayList<ManagedEntity> virtualMachines = new ArrayList<ManagedEntity>()
+            nav.searchManagedEntities("VirtualMachine").each {
+                virtualMachines.add(it)
             }
 
-
-            for (int x = 0; x < entityList.size(); x++){
-                entityList.get(x).name  //replace the name of the vm
-            }
-
-            ArrayList hostList = Host.findAll()
-            println("Host size: " + hostList.size())
-
-            //newHosts sent to list controller to display updated on modal
-            ArrayList <String> newHosts = updateHosts(entityList, hostList)
-
+            // newHosts sent to list controller to display updated on modal
+            ArrayList <String> updatedHosts = updateHosts(virtualMachines, si.getServerConnection())
 
             render "Root folder: ${rootFolder.name} "
             new InventoryNavigator(rootFolder).searchManagedEntities("VirtualMachine").each {
@@ -80,80 +69,111 @@ class VMWareController {
 
             si.serverConnection.logout()
 
-            redirect(controller: "host" ,action: "list", params: [newHosts:newHosts] )
+            redirect(controller: "host" ,action: "list", params: [updatedHosts:updatedHosts] )
         }
-        catch(java.rmi.RemoteException e){
-            session.putValue("status",false)
+        catch(RemoteException e){
+            println "Error: ${e.message}"
+            session.setAttribute("status",false)
             redirect(controller: "host" ,action: "list" )
         }
-
     }
 
+    // Helper method to get only the first part of the hosts name since vmware returns the full name only.
+    // ex. mdb74.pvt.hawaii.edu would return mdb74
+    private String getShortenedHostName(String name) {
+        def parts = name.split("\\.")
 
+        parts[0]
+    }
 
-    public ArrayList <String> updateHosts(ArrayList<ManagedEntity> entityList, ArrayList <Host> currentHosts){
+    // Have to create a method that updates the current Hosts(Virtual Machines) already in DCMD.
+    // This controller is not to create new Hosts or Assets(HostSystems).
+    private ArrayList<String> updateHosts(ArrayList<ManagedEntity> virtualMachines, ServerConnection sc){
 
-        int begin = currentHosts.size()
-        int end = 0;
-        String message = ""
-        println("printing current hosts...")
-        for (int x = 0; x < currentHosts.size(); x ++){
-            println("host name: " + currentHosts.get(x).hostname)
-        }
+        def dcmdHosts = Host.findAll()
 
         //string list of names for displaying on screen
-        ArrayList <String> hostNames = new ArrayList();
-        for (int x = 0; x < currentHosts.size(); x++){
-            hostNames.add(currentHosts.get(x).hostname)
+        ArrayList <String> hostNames = new ArrayList()
+        for (int x = 0; x < dcmdHosts.size(); x++){
+            hostNames.add(dcmdHosts.get(x).hostname)
         }
 
-        ArrayList <String> newHostNames = new ArrayList<String>()
-
-        for (int x = 0; x < entityList.size(); x++){
-            def entity = entityList.get(x)
-
-            if (!(hostNames.contains(entity.name))){ //if list does not contain entity, create new host
-                //create new hosts
-                new Host(hostname: entity.name).save(failOnError: true, flush:true)
-                println("created new host: " + entity.name)
-
-                newHostNames.add(entity.name)//add name to list to return
+        ArrayList<String> updatedHosts = new ArrayList<String>()
+        for (ManagedEntity vm: virtualMachines){
+            if ((hostNames.contains(vm.name))){ //if current hosts contains the vmware host
+                //Check against fields that can change: Asset, Status
+                updatedHosts = updatedHosts + checkForChanges(dcmdHosts, vm, sc)
             }
         }
 
-        newHostNames = newHostNames.sort()
+        session.setAttribute("hostSize", hostNames.size())
+        session.setAttribute("newHosts",hostNames)
 
-        if (newHostNames.size() > 0){
-            session.setAttribute("hostSize", newHostNames.size())
-            session.setAttribute("newHosts",newHostNames)
-        }
-        if (newHostNames.size() == 0 ){
-            session.setAttribute("hostSize", 0)
-            session.setAttribute("newHosts",newHostNames)
-        }
-
-        return newHostNames
+        updatedHosts
 
     }
 
+    private ArrayList<String> checkForChanges(ArrayList<Host> dcmdHosts, ManagedEntity vm, ServerConnection sc) {
+        def added
+        ArrayList<String> updatedHosts = new ArrayList<String>()
+        for (Host host : dcmdHosts) {
+            added = false
 
-    public void setSessionVars(ArrayList<String> names){
+            if (host.hostname == vm.name) {
+                HostSystem vcHost = (HostSystem) MorUtil.createExactManagedEntity(sc, vm.runtime.host)
+                def vcHostName = getShortenedHostName(vcHost.name)
+                if (isAssetChanged(Asset.findById(host.assetId).itsId, vcHostName)) {
+                    // Change Asset
+                    def asset = Asset.findByItsId(vcHostName)
+                    if (asset == null) {
+                        assetDoesntExist(vcHostName)
+                    }
+                    else {
+                        host.asset = asset
+                        host.save(flush: true)
+                        updatedHosts.add(host.hostname)
+                        added = true
+                    }
+                }
 
-        if (names.size() == 0){
-            session.setAttribute("hostSize", 0)
-            session.setAttribute("newHosts",names)
+                if (isVcStateChanged(host.vCenterState, vm.runtime.connectionState)) {
+                    // Change Status
+                    host.vCenterState = vm.runtime.connectionState.toString()
+                    host.save(flush: true)
+                    if (!added) {
+                        updatedHosts.add(host.hostname)
+                    }
+                }
+            }
+        }
+
+        updatedHosts
+    }
+
+    private boolean isAssetChanged(String assetName, String vmHost) {
+        if (!assetName.equals(vmHost)) {
+            true
         }
         else {
-            session.setAttribute("hostSize", names.size())
-            session.setAttribute("newHosts",names)
+            false
         }
     }
 
+    private boolean isVcStateChanged(String vCenterState, VirtualMachineConnectionState conn) {
+        if (vCenterState != conn.toString()) {
+            true
+        }
+        else {
+            false
+        }
+    }
 
+    void assetDoesntExist(String name) {
+        //TODO: Should this create the asset or notify someone that this asset doesn't exist in dcmd
+    }
 
-
-
-    public static Map<String, PerfCounterInfo> getPerfCounters(PerformanceManager pm) throws Exception {
+/*
+    private static Map<String, PerfCounterInfo> getPerfCounters(PerformanceManager pm) throws Exception {
         Map<String, PerfCounterInfo> result = new HashMap<String, PerfCounterInfo>();
         PerfCounterInfo[] counters = pm.getPerfCounter();
 
@@ -350,8 +370,5 @@ class VMWareController {
                     + csvs[i].getValue());
         }
     }
-
-
+*/
 }
-
-                      */

@@ -161,7 +161,7 @@
     }
 
     function getSelected(){
-        //  alert(document.getElementById('select-result').innerHTML);
+      //  alert(document.getElementById('select-result').innerHTML);
         var params = { selected:document.getElementById('select-result').innerHTML, id:$('#id').val()};
         return $.param(params);
     }
@@ -327,6 +327,7 @@
                                                 <td  class="label ru${RU.RUstatus}" width="94%">
                                                     ${RU.toString()}
                                                 </td>
+                                    <li id="ru${RU.RUstatus}" class="ui-state-default" title="${RU.toString()}" >${RU.toString()}</li>
 
                                                 <td class="ends" width="3%">
                                                     <div class="nums"><p>${45-i}</p></div>
@@ -352,7 +353,77 @@
     </table>
 
 
+    <script>
+
+
+            $(".ui-state-default").mouseover(function(e){
+
+               var status = this.id;  //id should be filled to display attributes dialog
+               var title = this.title;
+               var deviceName = title.substring(title.lastIndexOf("'")+1,title.lastIndexOf("<"));
+                deviceName = deviceName.substr(1,deviceName.length);
+
+                var params = new Object();
+                var data = null;
+
+                var responseData = null;
+
+            if(status === 'ruFilled'){
+               // getDeviceData()
+                params.deviceName = deviceName;
+
+                $.ajax({
+                    url: '/its/dcmd/rack/getDeviceDetails',
+                    data: params,
+                    type: 'POST',
+                    success: function(data) {
+                       alert(data)
+
+                    },
+                    error: function(){
+                        alert('The retrieval of attributes for this device was unsuccessful.');
+                    }
+                });
+
+
+            $(function(){
+                $("#device_bubble").dialog ({
+                    autoOpen:false,
+                    height:300,
+                    resizable:true,
+                    width:500,
+                    modal:false,
+                    closeButton: false,
+                    position: {
+                        my: "left bottom",
+                        at: "right bottom",
+                        of: window }
+
+                });
+
+            });
+
+            $( "#device_bubble" ).dialog( "open");
+            }
+
+        });
+
+            //close dialog on mouseout
+            $(".ui-state-default").mouseout(function(e){
+                $('#device_bubble').dialog("close");
+        });
+
+//        function getDeviceDetails(){
+//
+//        }
+
+
+
+    </script>
+
 </div>
 <style type="text/css">
 
 </style>
+<div id="device_bubble" title="Device Details" style="font-size:20px; display:none; "></div>
+
