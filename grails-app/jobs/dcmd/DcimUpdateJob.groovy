@@ -1,10 +1,12 @@
 package dcmd
 
+import edu.hawaii.its.dcmd.inf.VMwareController
 import edu.hawaii.its.dcmd.inf.DcimConnectorController
 import edu.hawaii.its.dcmd.inf.DcimUpdateService
 import grails.async.Promise
 import grails.async.Promises.*
 
+/*
 class DcimUpdateJob {
     def dcimUpdateService
 
@@ -26,5 +28,5 @@ class DcimUpdateJob {
     }
 }
 
-
+  */
 

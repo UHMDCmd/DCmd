@@ -27,8 +27,17 @@
 
 <r:require modules='select2' />
 
-<script>
-    $(document).ready(function() { $("#assetSelect").select2({
+<script language="javascript" type="text/javascript" src="../js/isotope.pkgd.min.js"></script>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+
+        var $container = $('#container');
+        $container.isotope({
+            itemSelector:'.item',
+            layoutMode:'fitRows'
+        });
+
+    $("#assetSelect").select2({
         placeholder: 'Please Select...',
         maximumInputLength: 20,
         width:150,
@@ -68,27 +77,46 @@
 
 
     function changeHostType(type) {
+        if(type.val == "VMWare" || type == "VMWare") {
+            myElements = document.querySelectorAll(".vmOption");
 
-        if(type.val == "VMware Guest" || type == "VMware Guest") {
-            document.getElementById("clusterDiv").style.visibility = 'visible';
-            document.getElementById("serverDiv").style.visibility = 'hidden';
+            for (var i = 0; i < myElements.length; i++) {
+                myElements[i].style.visibility='visible';
+                myElements[i].style.position='relative';
+            }
+            document.getElementById("otherOption").style.visibility = 'hidden';
+            document.getElementById("otherOption").style.position = 'absolute';
+            if(${action!='create'})
+                document.getElementById("vmWarning").style.visibility='visible';
         }
         else {
-            document.getElementById("serverDiv").style.visibility = 'visible';
-            document.getElementById("clusterDiv").style.visibility = 'hidden';
+            myElements = document.querySelectorAll(".vmOption");
 
+            for (var i = 0; i < myElements.length; i++) {
+                myElements[i].style.visibility='hidden';
+                myElements[i].style.position='absolute';
+            }
+            document.getElementById("otherOption").style.visibility = 'visible';
+            document.getElementById("otherOption").style.position = 'relative';
+            if(${action!='create'})
+                document.getElementById("vmWarning").style.visibility='hidden';
         }
+        var $container = $("#container");
+        $container.isotope('layout');
     }
 
 </script>
 
+
+
 <div class="dialog">
-<table>
-<tbody>
+    <div id="container" class="js-isotope" data-isotope-options='{ "columnWidth":400}' style="min-height:275px">
 
+        <div class="item">
+<table class="floatTables" style="border:1px solid #CCCCCC;">
+<tr><td colspan="2"><center><b>General Information</b></center></td></tr>
 <tr class="prop">
-
-<td valign="top" class="name"><span style="color: #FF0000;" >*</span>
+    <td valign="top" class="name"><span style="color: #FF0000;" >*</span>
     <label for="hostname"><g:message
                 code="host.hostname.label" default="Hostname" /></label></td>
 
@@ -139,7 +167,34 @@
             <input type="hidden" name="type" id="type" />
         </td>
     </tr>
+    <g:if test="${action == 'create'}">
+        <tr class="prop">
+            <td valign="top" class="name"><label for="primarySA"><g:message
+                    code="host.primarySA.label" default="Primary SA" /></label></td>
+            <td valign="top"
+                class="value">
+                <g:render template="../personSelect" model="[objectInstance:hostInstance]"/>
+            </td>
+        </tr>
+    </g:if>
+</table>
+</div>
+<div class="item">
 
+<table class="floatTables" style="border:1px solid #CCCCCC;">
+        <tr class="vmOption"><td colspan="2"><center><span style="color: #FF0000;" >*</span><b>VMWare Details (pulled from VCenter)</b></center></td></tr>
+        <tr class="vmOption">
+            <td valign="top" class="name">VM State</td>
+            <td valign="top" class="value">${hostInstance.getVCenterStateString()}</td>
+        </tr>
+        <tr class="vmOption">
+            <td valign="top" class="name" id="clusterLabel">Cluster</td>
+            <td valign="top"
+                class="value ${hasErrors(bean: hostInstance, field: 'cluster', 'errors')}">
+                <input type="hidden" name="clusterSelect" id="clusterSelect" />
+            </td>
+        </tr>
+        <tr id="otherOption"><td colspan="2"><center><b>Host Details</b></center></td></tr>
     <tr class="prop" id="serverDiv">
         <td valign="top" class="name" id="serverLabel">Physical Server</td>
         <td valign="top"
@@ -147,15 +202,26 @@
             <input type="hidden" name="assetSelect" id="assetSelect" />
         </td>
     </tr>
-
-    <tr class="prop" id="clusterDiv">
-        <td valign="top" class="name" id="clusterLabel">Cluster</td>
-        <td valign="top"
-            class="value ${hasErrors(bean: hostInstance, field: 'cluster', 'errors')}">
-            <input type="hidden" name="clusterSelect" id="clusterSelect" />
+    <tr>
+        <td valign="top" class="name"><label for="maxMemory"><g:message code="host.maxMemory.label" default="Max Memory" /></label></td>
+        <td><g:textField name="maxMemory" maxlength="45" value="${hostInstance?.maxMemory}"/></td>
         </td>
     </tr>
+    <tr>
+        <td valign="top" class="name"><label for="maxCpu"><g:message code="host.maxCpu.label" default="Max CPU" /></label></td>
+        <td><g:textField name="maxCpu" maxlength="45" value="${hostInstance?.maxCpu}"/></td>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" class="name"><label for="ipAddress"><g:message code="host.ipAddress.label" default="IP Address" /></label></td>
+        <td><g:textField name="ipAddress" maxlength="45" value="${hostInstance?.ipAddress}"/></td>
 
+    </tr>
+    <tr>
+        <td valign="top" class="name"><label for="fullDomain"><g:message code="host.fullDomain.label" default="DNS" /></label></td>
+        <td><g:textField name="fullDomain" maxlength="45" value="${hostInstance?.fullDomain}"/></td>
+        </td>
+    </tr>
     <tr class="prop">
         <td valign="top" class="name"><label for="os"><g:message
                 code="host.os.label" default="OS" /></label></td>
@@ -165,25 +231,6 @@
                          value="${fieldValue(bean: hostInstance, field: 'os')}" />
         </td>
     </tr>
-
-    <tr class="prop">
-        <td valign="top" class="name"><label for="solarisFssShare"><g:message
-                code="host.solarisFssShare.label"
-                default="Solaris Fss Share" /></label></td>
-        <td valign="top"
-            class="value ${hasErrors(bean: hostInstance, field: 'solarisFssShare', 'errors')}">
-            <g:textField name="solarisFssShare"
-                         value="${fieldValue(bean: hostInstance, field: 'solarisFssShare')}" />
-        </td>
-    </tr>
-
-    <tr class="prop">
-        <td valign="top" class="name"><label for="dateCreated"><g:message
-                code="host.dateCreated.label" default="Date Created" /></label></td>
-        <td valign="top" class="value"><g:formatDate
-                date="${hostInstance?.dateCreated}" /></td>
-    </tr>
-
     <tr class="prop">
         <td valign="top" class="name"><label for="lastUpdated"><g:message
                 code="host.lastUpdated.label" default="Last Updated" /></label></td>
@@ -191,29 +238,11 @@
                 date="${hostInstance?.lastUpdated}" /></td>
     </tr>
 
-    <tr class="prop">
-        <td valign="top" class="name"><label for="nwaccScan"><g:message
-                code="host.nwaccScan.label" default="Nwacc Scan" /></label></td>
-        <td valign="top"
-            class="value ${hasErrors(bean: hostInstance, field: 'nwaccScan', 'errors')}">
-            <g:checkBox name="nwaccScan"
-                        value="${hostInstance?.nwaccScan}" />
-        </td>
-    </tr>
-
-<g:if test="${action == 'create'}">
-    <tr class="prop">
-        <td valign="top" class="name"><label for="primarySA"><g:message
-                code="host.primarySA.label" default="Primary SA (inherited from Services if not defined)" /></label></td>
-        <td valign="top"
-            class="value">
-            <g:render template="../personSelect" model="[objectInstance:hostInstance]"/>
-        </td>
-    </tr>
-</g:if>
-
-    </tbody>
 </table>
+</div>
+</div>
+
+
     <g:if test="${action == 'create'}">
         <div class="alert_info">
             - Create Host for more options to become available below -

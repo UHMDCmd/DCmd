@@ -225,6 +225,7 @@ class AssetController {
         def assetInstance = Asset.get(params.id)
 //        resetCloneVar()
 
+        System.out.println(assetInstance.itsId)
         if(params.statusSelect) {
             params.status = generalService.createOrSelectStatus(params)
         }
@@ -249,13 +250,12 @@ class AssetController {
             System.out.println(globalZone.toString())
             System.out.println(globalZone.type)
             globalZone.save()
-            System.out.println("TEST")
             params.globalZone = globalZone
         }
         else
             params.globalZone = null
 
-        if(params.serverType != 'VMware Host') {
+        if(params.serverType != 'VMWare') {
             params.cluster = null
         }
 
@@ -271,12 +271,14 @@ class AssetController {
                 }
                 else
                     params.RU_begin = 0
+                /*
                 if(Integer.parseInt(params.plannedRack) != 0) {
                     if(params.RU_planned_begin)
                         params.RU_planned_begin = Integer.parseInt(params.RU_planned_begin)+Integer.parseInt(params.RU_size)-1
                 }
                 else
                     params.RU_planned=0
+                    */
 
                 if (params.RU_size)
                     params.RU_size = Integer.parseInt(params.RU_size)
@@ -315,7 +317,7 @@ class AssetController {
                         }
                     }
                 }
-
+                      /*
                 if(Integer.parseInt(params.plannedRack) == 0) {
                     params.assetId = assetInstance.id
                     assetService.removePlannedAsset(params)
@@ -341,7 +343,9 @@ class AssetController {
 //
                     }
 
-                }            }
+                }
+                */
+            }
 
 			//save and redirect
 			if (!assetInstance.hasErrors() && assetInstance.save(flush: true)) {
@@ -509,7 +513,7 @@ class AssetController {
     def listServerTypesAsSelect={
         StringBuffer buf = new StringBuffer("<select>")
         buf.append("<option value=\'Solaris Global Zone\'>Solaris Global Zone</option>")
-        buf.append("<option value=\'VMware\'>VMware</option>")
+        buf.append("<option value=\'VMWare\'>VMWare</option>")
         buf.append("<option value=\'VMware Standalone\'>VMware Standalone</option>")
         buf.append("<option value=\'Standalone\'>Standalone</option>")
 

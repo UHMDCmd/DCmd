@@ -65,7 +65,12 @@
         <script type="text/javascript">
 
             $(window).load(function(){
-                $('#sModal').modal().show();
+                $("#vmDialog").dialog({
+                    autoOpen: false,
+                    width: '80%',
+                    position: ['center', 80],
+                    modal: true
+                });
             });
 
          $(window).onbeforeunload(function(){    //reset the session vars if the update was execuited
@@ -113,23 +118,59 @@
     <g:render template="listGrid" />
 --}%
 
-<g:form controller="VMware">
+
+%{-- <g:form controller="VMware">
     <g:actionSubmit id='btn_update_hosts' value="Update Hosts" action="index"/>
 </g:form>
+                  --}%
+<input class="ui-corner-all" id="btn_update_hosts"  type="button" value="Update Hosts"/>
 
     <div class="loadingModal" id="loadingModal"></div>
 
     <script type="text/javascript">
+
         $( "#btn_update_hosts" ).click(function() {
+
+
             document.getElementById("loadingModal").style.display="inline";
             $("#loadingModal").html("<div style='font-family:Veranda, Helvetica, sans-serif ; font-size: 24px; text-align: center; padding-top: 40%;'>" +
-             "Connecting to Vcenter, Updating Hosts...Please Wait<div>");
+                    "Connecting to Vcenter, Updating Hosts...Please Wait<div>");
+            //var postdata = $("${gridId}").jqGrid('getGridParam', 'postData');
+            var url="${createLink(controller:"VMware",action:"index")}";
+            jQuery.ajax({
+                async:false,
+                url: url,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                //data: postdata,
+                success: function(data) {
+                    document.getElementById("loadingModal").style.display="none";
+                    $("#vmDialog").dialog("open");
+                },
+                error: function () { console.log('Error updating list'); }
+            });
+            /*
+            var url="${createLink(controller:"VMware",action:"testConfig")}";
+            jQuery.ajax({
+                async:false,
+                url: url,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                //data: postdata,
+                success: function(data) {
+                },
+                error: function () { console.log('Error updating list'); }
+            });
+            */
         });
+
+
     </script>
 
    <!-- Modal -->
-    <div class="modal fade" id="sModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div id='vmDialog' style="visibility:hidden; width:80%; min-height:300px;">
+
+    <!--<div  id="vmDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -150,10 +191,8 @@
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-</div>
 
 %{--<g:button id='btn_update_hosts' >Update Hosts</g:button>--}%
 

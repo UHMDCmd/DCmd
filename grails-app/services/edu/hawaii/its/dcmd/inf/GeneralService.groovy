@@ -291,8 +291,8 @@ def listLocationsAsSelect() {
 
         StringBuffer buf = new StringBuffer("")
         buf.append("{id:\'Solaris Global Zone\', text:\'Solaris Global Zone\'},")
-        buf.append("{id:\'VMware Host\', text:\'VMware Physical Host\'},")
-        buf.append("{id:\'VMware Standalone\', text:\'VMware Standalone\'},")
+        buf.append("{id:\'VMWare\', text:\'VMWare\'},")
+        buf.append("{id:\'Windows\', text:\'Windows Server\'},")
         buf.append("{id:\'Standalone\', text:\'Standalone\'}")
 
 
@@ -303,9 +303,7 @@ def listLocationsAsSelect() {
         StringBuffer buf = new StringBuffer("")
         buf.append("{id:\'Solaris Global Zone\', text:\'Solaris Global Zone\'},")
         buf.append("{id:\'Non-Global Zone\', text:\'Non-Global Zone\'},")
-        buf.append("{id:\'VMware Host\', text:\'VMware Host OS\'},")
-        buf.append("{id:\'VMware Guest\', text:\'VMware Guest\'},")
-        buf.append("{id:\'VMware Standalone\', text:\'VMware Standalone OS\'},")
+        buf.append("{id:\'VMWare\', text:\'VMWare\'},")
         buf.append("{id:\'Standalone\', text:\'Standalone OS\'}")
 
 

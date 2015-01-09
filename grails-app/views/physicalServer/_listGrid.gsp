@@ -1,7 +1,58 @@
 
 <script type="text/javascript">
 
+function openItem(serverId) {
+    jQuery.ajax({
+        async: false,
+        url: '/its/dcmd/physicalServer/getServerDetails?serverId='+serverId,
+        type:'POST',
+        dataType:'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function(data) {
+            $("#e_itsId").val(data.server.itsId);
+            $("#l_itsId").html(data.server.itsId)
+            $("#e_status").val(data.status);
+            $("#l_status").html(data.status);
+            //alert(data.server.itsId);
+            lock();
+        },
+        error: function () { alert('Error retrieving elog info'); }
+    });
+
+
+    //$( "#item_dialog").dialog({appendTo: ""});
+    $("#item_dialog").dialog("open");
+}
+
+function unlock() {
+    $('.locked').position = 'absolute';
+    $('.locked').hide();
+    $('.unlocked').position = 'relative';
+    $('.unlocked').show();
+}
+
+function lock() {
+    $('.locked').position = 'relative';
+    $('.locked').show();
+    $('.unlocked').position = 'absolute';
+    $('.unlocked').hide();;
+}
+
+
 $(document).ready(function() {
+    $( "#item_dialog" ).dialog({
+        autoOpen: false,
+        width: 800,
+        height: 400,
+        show: {
+            effect: "blind",
+            duration: 1000
+        },
+        hide: {
+            effect: "blind",
+            duration: 1000
+        }
+    });
 
     var fixPositionsOfFrozenDivs = function () {
         var grid = this.grid || this;
@@ -42,11 +93,13 @@ height:'auto',
 width:'1000',
 url:'listAllPhyServer',
             datatype: "json",
-            colNames:['ITS Id', 'Server Type', 'Status', 'Primary SA', 'RU Size', 'Current Rack', 'Current Position', 'Current Location',
-                'Avail. for parts', 'Serial #', 'Manufacturer', 'Model', 'General Notes', 'id'],
+            colNames:['ITS Id', 'Server Type', 'VM Cluster', 'Host OS', 'Status', 'Primary SA', 'RU Size', 'Current Rack', 'Current Position', 'Current Location',
+                'Avail. for parts', 'Serial #', 'Manufacturer', 'Model', 'Total Memory', 'Memory Assigned', 'Total Cores', 'Max CPU Assigned', 'General Notes', 'id'],
             colModel:[
                 {name:'itsId', width:100, editable:false, frozen:true, title:false},
                 {name:'serverType', width:120, editable:false, frozen:true, title:false},
+                {name:'cluster', width:120, editable:false, title:false},
+                {name:'hostOS', width:120, editable:false, title:false},
                 {name:'assetStatus', width:100, editable:false, title:false},
                 {name:'primarySA', width:120, title:false, sortable:false},
                 {name:'RU_size', width:80, title:false},
@@ -57,6 +110,10 @@ url:'listAllPhyServer',
                 {name:'serialNo', width:180, editable:false, title:false},
                 {name:'manufacturer', width:120, editable:false, title:false},
                 {name:'modelDesignation', width:120, editable:false, title:false},
+                {name:'memorySize', width:120, editable:false, title:false},
+                {name:'memoryAssigned', width:120, editable:false, title:false},
+                {name:'numCores', width:120, editable:false, title:false},
+                {name:'cpuAssigned', width:120, editable:false, title:false},
                 {name:'generalNote', width:400,title:false},
                 {name:'id', hidden:true}
             ],
@@ -73,6 +130,7 @@ url:'listAllPhyServer',
     pager: '#allServerPager',
     headertiltes: false,
     scrollOffset:0,
+    toolbar:[true, 'top'],
     gridComplete: function() {
         dynamicListSize("#allPhyServer");
     },
@@ -85,13 +143,15 @@ url:'listAllPhyServer',
 
 });
 
+    createTopToolbar("#allPhyServer");
+
     var setTooltipsOnColumnHeader = function (grid, iColumn, text) {
         var thd = jQuery("thead:first", grid[0].grid.hDiv)[0];
         jQuery("tr.ui-jqgrid-labels th:eq(" + iColumn + ")", thd).attr("title", text);
     };
 
     setTooltipsOnColumnHeader($("#allPhyServer"),0,"A unique ITS Id given to the Entity");
-    setTooltipsOnColumnHeader($("#allPhyServer"),1,"Virtualization method of Server (e.g., Solaris, VMware, etc.)");
+    setTooltipsOnColumnHeader($("#allPhyServer"),1,"Virtualization method of Server (e.g., Solaris, VMWare, etc.)");
     setTooltipsOnColumnHeader($("#allPhyServer"),2,"Status e.g. Online, Offline, Standby, etc.");
     setTooltipsOnColumnHeader($("#allPhyServer"),3,"The Primary System Administrator for this Server");
     setTooltipsOnColumnHeader($("#allPhyServer"),4,"Amount of space the Physical Server occupies on a Rack");
@@ -163,3 +223,11 @@ url:'listAllPhyServer',
 
 <table id="allPhyServer"></table>
 <div id="allServerPager"></div>
+
+
+<div id="item_dialog" title="Item Details">
+    <g:render template="details"/>
+    <br>
+    <input type="button" onclick="lock()" value="Lock"/>
+    <input type="button" onclick="unlock()" value="Unlock"/>
+</div>

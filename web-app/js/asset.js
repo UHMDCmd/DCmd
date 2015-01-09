@@ -211,3 +211,41 @@ function fixGboxHeight() {
         pagerHeight = $(this.p.pager).outerHeight();
         $("#gbox_" + $.jgrid.jqID(this.id)).height(gviewHeight + pagerHeight);
 }
+
+function createTopToolbar(gridName) {
+    var $grid=$(gridName);
+    var $gview = $grid.closest(".ui-jqgrid-view"),
+        $topToolbar = $gview.find(">.ui-userdata"),
+        $bdiv = $grid.closest(".ui-jqgrid-bdiv"),
+        resetTopToolbarHeight = function () {
+            var scrollbarHeight = 18; // some test value
+            $topToolbar.find(">div").height(scrollbarHeight);
+            $topToolbar.css("border-top", "0").css("height", "auto");
+            scrollbarHeight = $topToolbar.height() - scrollbarHeight;
+            $topToolbar.find(">div").height(scrollbarHeight);
+            $topToolbar.height(scrollbarHeight);
+            fixPositionsOfFrozenDivs.call($grid[0]);
+        };
+// insert empty div in the top toolbar and make its width
+// the same as the width of the grid
+    $topToolbar.css({ overflowX: "scroll", overflowY: "hidden"})
+        .append($("<div>").width($grid.width()));
+// set the height of the div and the height of toolbar
+// based on the height of the horizontal scrollbar
+    resetTopToolbarHeight();
+// detect scrolling of topbar
+    $topToolbar.scroll(function () {
+        // synchronize the srollbar of the grid
+        $bdiv.scrollLeft($(this).scrollLeft());
+    });
+// detect scrolling of the grid
+    $bdiv.scroll(function () {
+        // synchronize the srollbar of the toppbar
+        $topToolbar.scrollLeft($(this).scrollLeft());
+    });
+// detect zoop of the page and adjust the
+    $(window).on("resize", function () {
+        resetTopToolbarHeight();
+        fixPositionsOfFrozenDivs.call($grid[0]);
+    });
+}

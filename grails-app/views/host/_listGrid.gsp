@@ -44,19 +44,22 @@ height:'auto',
 //caption:'Host List',
 url:'listAll',
             datatype: "json",
-            colNames:['Host', 'Asset', 'Host Type', 'Status', 'Host OS', 'Primary Host SA', 'Environment', 'Application(s)',
-                'Service(s)', 'Service Primary SA(s)', 'General Notes', 'id'],
+            colNames:['Host', 'Asset', 'Host Type', 'VM State', 'Environment', 'Primary Host SA', 'Host OS', 'Application(s)',
+                'Service(s)', 'Service Primary SA(s)','Max. Memory (GB)', 'Max. CPU (MHz)','IP Address', 'General Notes', 'id'],
             colModel:[
                 {name:'hostname', width: 100, formatter: 'showlink', formatoptions: {showAction:'show'}, frozen:true, title:false},
                 {name:'asset', width:120, frozen:true, title:false},
                 {name:'type', width:150,title:false},
-                {name:'status', width:100,title:false},
-                {name:'os', width:160,title:false},
-                {name:'primarySA', width:120, sortable:false,title:false},
+                {name:'vCenterState', width:100,title:false},
                 {name:'env', width:100,title:false},
+                {name:'primarySA', width:120, sortable:false,title:false},
+                {name:'os', width:250,title:false},
                 {name:'appList', width:200,title:false},
                 {name:'serviceList', width:250, title:false},
                 {name:'serviceAdmin', width: 200, sortable:false, search:false, title:false},
+                {name:'maxMemory', width: 120, title:false},
+                {name:'maxCpu', width: 100, title:false},
+                {name:'ip', width:150, title:false},
                 {name:'generalNote', width:'400',title:false},
                 {name:'id', hidden:true}
             ],
@@ -73,6 +76,7 @@ url:'listAll',
     pager: '#hostAllPager',
     headertitles: true,
     scrollOffset:0,
+    toolbar:[true, 'top'],
     gridComplete: function() {
         dynamicListSize("#allHosts");
     },
@@ -83,6 +87,8 @@ url:'listAll',
         fixPositionsOfFrozenDivs.call(this);
     }
 });
+
+    createTopToolbar("#allHosts");
 
 //    $('#export-button').click(function(){
 //        var postData = $("#allHosts").jqGrid('getGridParam','postData');
@@ -100,7 +106,7 @@ url:'listAll',
 
     setTooltipsOnColumnHeader($("#allHosts"),0,"ITS name of the Host");
     setTooltipsOnColumnHeader($("#allHosts"),1,"The Physical Server (or cluster) Host is running on");
-    setTooltipsOnColumnHeader($("#allHosts"),2,"Virtualizaiton Type (e.g., Global Zone, VMware, Standalone, etc.)");
+    setTooltipsOnColumnHeader($("#allHosts"),2,"Virtualizaiton Type (e.g., Global Zone, VMWare, Standalone, etc.)");
     setTooltipsOnColumnHeader($("#allHosts"),3,"Status e.g. Online, Offline, Standby, etc.");
     setTooltipsOnColumnHeader($("#allHosts"),4,"The Primary Operating System of this Host");
     setTooltipsOnColumnHeader($("#allHosts"),5,"The Primary System Administrator for this Host");

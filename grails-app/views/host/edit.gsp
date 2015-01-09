@@ -51,6 +51,7 @@
 
 				<g:render template="../content_title"
 					model="[entityName: 'Host', code:'default.edit.label']" />
+                <div id="vmWarning" style="font-size:16pt; color:red; position:relative; margin-top:-25px; text-align:center;">*Editing VMWare Guest attributes may be overwritten by VCenter</div>
 				<dcmd:requiredInputFieldsReminder />
 				<s:info />
 				<g:hasErrors bean="${hostInstance}">
@@ -58,8 +59,6 @@
 						<s:renderErrors bean="${hostInstance}" as="list" />
 					</s:errorDiv>
 				</g:hasErrors>
-
-
 
                 <g:render template="../toolTip" />
 					<g:render template="dialog" />

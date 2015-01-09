@@ -40,7 +40,7 @@
 <body>
 
 <div id="container">
-    <g:render template="../show_secondary" model="[pageType:'asset', objectId:0, action:'list']" />
+    <g:render template="../show_secondary" model="[pageType:'rack', objectId:0, action:'list']" />
     <g:render template="../breadcrumbs" model="[pageType:'asset', action:'show']"/>
 
 

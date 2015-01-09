@@ -25,10 +25,14 @@ html, body {
     height: 20px;
 }
 
+
 a:link, a:visited {
-    color: #77BACE;
-    text-decoration: none;
+    /*
+//    color: #77BACE;
+*/
+    text-decoration: underline;
 }
+
 
 a:hover {
     text-decoration: underline;

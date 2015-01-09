@@ -18,92 +18,43 @@
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-<%@ page import="edu.hawaii.its.dcmd.inf.Asset"%>
+<%@ page import="edu.hawaii.its.dcmd.inf.PhysicalServer" %>
 <html>
 <head>
-    <g:applyLayout name="main">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="layout" content="main" />
-        <g:set var="entityName"
-               value="${message(code: 'asset.label', default: 'Asset')}" />
-        <g:javascript library="asset" />
-        <calendar:resources lang="en" theme="blue" />
-        <title><g:message code="default.create.label"
-                          args="[entityName]" /></title>
+    <meta content="main" name="layout" />
+    <title><g:message code="default.dcmd.label" /></title>
+    <jqDT:resources jqueryUi="true" type="js" />
 
-        <jqgrid:resources />
-    </g:applyLayout>
 </head>
 <body>
-<g:form action="save">
-    <g:javascript>
-        $(function() {
-            var ownerTypes = [
-                "Leased",
-                "Perpetual",
-            ];
-            $( "#ownerTypes" ).autocomplete({
-                source: ownerTypes
-            });
-        });
-    </g:javascript>
 
+<g:form action="save" >
     <div id="container">
-        <section id="secondary_bar">
+        <g:render template="../show_secondary" model="[pageType:'host', objectId:physicalServerId, action:'create']" />
+        <g:render template="../breadcrumbs" model="[pageType:'physicalServer', action:'create']"/>
 
-            <div class="user">
-                <p>John Doe</p>
-            </div>
-
-            <div class="breadcrumbs_container">
-
-                <article class="breadcrumbs">
-                <%--<g:form controller="asset">
-                                --%><a class="home_button" href="${createLink(uri: '/')}">DCMD
-                Home</a>
-                    <div class="breadcrumb_divider"></div>
-
-                    <span class="save_button"><g:submitButton name="create"
-                                                              class="save"
-                                                              value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
-
-
-
-                    <%--<span class="delete_button"><g:actionSubmit class="delete"
-                                         action="delete"
-                                         value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                                 <g:hiddenField name="id" value="${assetInstance?.id}" />
-                             --%>
-                </article>
-            </div>
-
-        </section>
     </div>
-    <div class="pagebodynomargin">
+
+    <div class="pageBodyNoMargin">
         <article class="module width_full">
             <div class="module_content">
-                <h1>
-                    <g:message code="default.create.label" args="[entityName]" />
-                </h1>
-                <dcmd:requiredInputFieldsReminder />
-                <s:info />
-                <g:hasErrors bean="${assetInstance}">
-                    <s:errorDiv>
-                        <s:renderErrors bean="${assetInstance}" as="list" />
-                    </s:errorDiv>
+                <h1>Create Physical Server</h1>
+                <g:if test="${flash.message}">
+                    <div class="message">${flash.message}</div>
+                </g:if>
+                <g:hasErrors bean="${physicalServerInstance}">
+                    <div class="errors">
+                        <g:renderErrors bean="${physicalServerInstance}" as="list" />
+                    </div>
                 </g:hasErrors>
                 <g:render template="../toolTip" />
-
-                <g:render template="dialog" />
-
-
-
-            </div>
+                <g:render template="dialog" model="[action:'create']"/>
+            <%--
+               <g:render template='hostSupporter' model="['hostsupporter':null,'i':'_clone','hidden':true]"/>
+         --%>
         </article>
-
     </div>
-
 </g:form>
 </body>
 </html>
+

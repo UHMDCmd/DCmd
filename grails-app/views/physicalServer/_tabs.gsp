@@ -33,9 +33,10 @@
             <li>
                 <a href="#tabs-hosts">Hosts</a>
             </li>
+            %{--
             <li>
                 <a href="#tabs-replacements">Replacements</a>
-            </li>
+            </li> --}%
             <li>
                 <a href="#tabs-support-staff"><g:message code="asset.supportStaff.label" default="Support Staff" /></a>
             </li>
@@ -50,13 +51,13 @@
         </div>
         --}%
         <div id="tabs-hosts">
-            <g:render template='hostGrid' model="[action:action, physicalServerId: assetId]"/>
+            <g:render template='hostGrid' model="[action:action, physicalServerId: physicalServerInstance.id]"/>
         </div>
-    <div id="tabs-replacements">
-    </div>
+%{--    <div id="tabs-replacements">
+    </div>                          --}%
     <div id="tabs-support-staff">
-        <g:render template="../technicalSupportStaffGrid" model="[action:action, type:'asset', objectId:assetId]"/>
-        <g:render template="../functionalSupportStaffGrid" model="[action:action, type:'asset', objectId:assetId]"/>
+        <g:render template="../technicalSupportStaffGrid" model="[action:action, type:'asset', objectId:physicalServerInstance.id]"/>
+        <g:render template="../functionalSupportStaffGrid" model="[action:action, type:'asset', objectId:physicalServerInstance.id]"/>
     </div>
     <div id="tabs-notes">
         <ul>
@@ -72,13 +73,13 @@
             </li>
         </ul>
         <div id="notes-general">
-            <g:render template='../noteTab' model="[action:action, pageType:'asset', noteType:'generalNote', objectInstance: physicalServerInstance, objectId: assetId]"/>
+            <g:render template='../noteTab' model="[action:action, pageType:'asset', noteType:'generalNote', objectInstance: physicalServerInstance, objectId: physicalServerInstance.id]"/>
         </div>
         <div id="notes-change">
-            <g:render template='../noteTab' model="[action:action, pageType:'asset', noteType:'changeNote', objectInstance: physicalServerInstance, objectId: assetId]"/>
+            <g:render template='../noteTab' model="[action:action, pageType:'asset', noteType:'changeNote', objectInstance: physicalServerInstance, objectId: physicalServerInstance.id]"/>
         </div>
         <div id="notes-planning">
-            <g:render template='../noteTab' model="[action:action, pageType:'asset', noteType:'planningNote', objectInstance: physicalServerInstance, objectId: assetId]"/>
+            <g:render template='../noteTab' model="[action:action, pageType:'asset', noteType:'planningNote', objectInstance: physicalServerInstance, objectId: physicalServerInstance.id]"/>
         </div>
     </div>
 </div>

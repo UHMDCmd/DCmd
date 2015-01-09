@@ -140,7 +140,6 @@
 
 <div class="actionsbar_container">
     <sec:ifLoggedIn>
-
         <article class="actionsbar">
         <g:if test="${action == 'home'}">
             <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
@@ -157,7 +156,7 @@
 
                 <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
                 <div class="actions_divider"></div>
-                <g:if test="${pageType != 'user' && pageType != 'tier'}">
+                <g:if test="${pageType != 'user' && pageType != 'tier' && pageType != 'rack' && pageType != 'asset'}">
                     <g:actionSubmit controller="${pageType}" class="create_button" action="create" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </g:if>
             </g:form>
@@ -171,7 +170,7 @@
                 <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
                 <div class="actions_divider"></div>
 
-                <g:if test="${pageType != 'denied'}">
+                <g:if test="${pageType != 'denied' && assetType != 'Rack' && pageType != 'asset'}">
                     <g:actionSubmit controller="${pageType}" class="create_button" action="create" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 
                     <g:actionSubmit controller="${pageType}" class="edit_button" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
@@ -184,6 +183,12 @@
                                     onclick="return confirm('${message(code: 'default.button.clone.confirm.message', default: 'Clone This Entity?')}');"/>
                     </g:if>
 --}%
+                </g:if>
+                <g:if test="${pageType == 'asset'}">
+%{--                    <g:actionSubmit controller="physicalServer" class="create_button" action="create" value="${message(code: 'default.button.create.label', default: 'Create')}" /> --}%
+
+                    <g:actionSubmit class="delete_button" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                 </g:if>
             </g:form>
         </g:if>

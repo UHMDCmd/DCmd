@@ -78,10 +78,15 @@ class HostService {
             cache true
         }
 
-        // Secondary query on ids from previous (with filtering and sorting)...
-        def hosts = Host.createCriteria().list(max: maxRows, offset: rowOffset) {
-            'in'('id', hostIds)
-            // Search Filters
+        def hosts
+        def totalRows, numberOfPages
+        def results
+        try {
+            // Secondary query on ids from previous (with filtering and sorting)...
+            hosts = Host.createCriteria().list(max: maxRows, offset: rowOffset) {
+                'in'('id', hostIds)
+                // Search Filters
+
             if (params.hostname) ilike('hostname', "%${params.hostname}%")
             if (params.asset) {
                 asset {
@@ -153,30 +158,44 @@ class HostService {
                         order( Order.desc(sortIndex).ignoreCase() )
                     break
             }
-        }
+            }
 
-        def totalRows = hosts.totalCount
-        def numberOfPages = Math.ceil(totalRows / maxRows)
+
+        totalRows = hosts.totalCount
+        numberOfPages = Math.ceil(totalRows / maxRows)
 
 //        System.out.println("createCriteria " + TimeCategory.minus(new Date(), timeStart))
 //        timeStart = new Date()
 
-        def results = hosts?.collect { [ cell: [
+        results = hosts?.collect { [ cell: [
                 "${it.hostname}",
-                it.getServerOrClusterLink(), it.type,
-                it.status.toString(), it.os,
-                personService.getSupportPersonLink(it, 'Primary SA'),
+                "<a href='../physicalServer/show?id=${it.asset?.id}'>${it.asset?.itsId}</a>",
+                //'1',
+                it.type,
+                it.getVCenterStateString(),
+                //'1',
                 it.env.toString(),
+                personService.getSupportPersonLink(it, 'Primary SA'),
+                it.os,
                 getApplicationListAsString(it),
                 getServiceListAsString(it),
                 getServiceAdminAsString(it),
+                //'1','1','1',
+                it.getMaxMemoryString(), it.getMaxCpuString(),
+                it.ipAddress,
                 it.generalNote,
 //                "<a href='../asset/show?id=${it.asset?.getRackAssignmentId()}'>${it.asset?.getRackAssignment().toString()}</a>",
 //                assetService.getCurrentLocationLink(it.asset)],
                 ],id: it.id ]}
 
+        }
+        catch(Exception e) {
+            System.out.println(e.message)
+        }
+
 //        System.out.println("collection time: " + TimeCategory.minus(new Date(), timeStart))
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
+      //  System.out.println(jsonData)
         return jsonData
     }
 

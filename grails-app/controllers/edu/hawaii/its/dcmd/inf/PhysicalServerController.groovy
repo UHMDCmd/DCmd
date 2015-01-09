@@ -21,6 +21,7 @@
 package edu.hawaii.its.dcmd.inf
 
 import grails.converters.JSON
+import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsHibernateUtil
 import org.springframework.validation.ObjectError
 import org.springframework.validation.Errors
 import org.springframework.validation.FieldError
@@ -42,7 +43,229 @@ class PhysicalServerController {
 
     def personService
     def assetService
+    def generalService
     def static List<String> supportFilterHostList = new ArrayList()
+
+
+
+    def save = {
+        System.out.println(params)
+        if(params.statusSelect)
+            params.status = generalService.createOrSelectStatus(params)
+
+        if(params.serverType == 'VMWare') {
+            params.asset = null
+            if (params.clusterSelect == 'null')
+                params.cluster = null
+            else
+                params.cluster = Cluster.get(params.clusterSelect)
+        }
+        params.assetType=AssetType.findByAbbreviation("Server")
+
+        def physicalServerInstance = new PhysicalServer(params)
+
+        if (params.globalZone && params.globalZone != 0) {
+            def globalZone = Host.get(params.globalZone)
+            globalZone.asset = physicalServerInstance
+            globalZone.type = params.serverType
+            globalZone.save()
+            params.globalZone = globalZone
+            physicalServerInstance.hostOS = globalZone
+        }
+        else {
+            params.globalZone = null
+            physicalServerInstance.hostOS = null
+        }
+
+        physicalServerInstance.properties = params
+        String saveOption = params.option //selects type of save to do
+
+        if (physicalServerInstance.save(flush: true)) {
+
+            //save options
+            if (saveOption.equals("saveEdit")){
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'physicalServer.label', default: 'Physical Server'), physicalServerInstance.id])}"
+                redirect(url: "/physicalServer/edit?id=${physicalServerInstance.id}")
+            }
+            else if (saveOption.equals("saveList")){
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'physicalServer.label', default: 'Physical Server'), physicalServerInstance.id])}"
+                redirect(url: "/physicalServer/list")
+            }
+            else if (saveOption.equals("saveCreate")){
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'physicalServer.label', default: 'Physical Server'), physicalServerInstance.id])}"
+                redirect(url: "/physicalServer/create")
+            }
+            else{
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'physicalServer.label', default: 'Physical Server'), physicalServerInstance.id])}"
+                redirect(url: "/physicalServer/show?id=${physicalServerInstance.id}")
+            }
+        }
+        else {
+            System.out.println(physicalServerInstance.errors.fieldError.toString())
+            render(view: "create", model: [physicalServerInstance: physicalServerInstance])
+        }
+    }
+    //save options redirected to master save action
+    def saveEdit = {
+        String saveType;
+        forward action: "save", params: [option: "saveEdit"]
+    }
+
+    def saveList = {
+        String saveType;
+        forward action: "save", params: [option: "saveList"]
+    }
+
+    def saveCreate = {
+        String saveType;
+        forward action: "save", params: [option: "saveCreate"]
+    }
+    def discard = {
+        redirect(action:"create")
+    }
+
+    def edit = {
+        cache(false)
+        def physicalServerInstance = PhysicalServer.get(params.id)
+        if (!physicalServerInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'host.label', default: 'PhysicalServer'), params.id])}"
+            redirect(action: "list")
+        }
+        else {
+            return [physicalServerInstance: physicalServerInstance]
+        }
+    }
+
+    def update = {
+//        resetCloneVar()
+
+        //get the instance being updated
+        def physicalServerInstance = PhysicalServer.get(params.id)
+        if(params.statusSelect)
+            params.status = generalService.createOrSelectStatus(params)
+
+        if (params.manufacturerSelect) {
+            params.manufacturer = generalService.createOrSelectManufacturer(params)
+        }
+        if(params.assetSelect) {
+            if (params.assetSelect == 'null')
+                params.asset = null
+            else
+                params.asset = Asset.get(params.assetSelect.toLong())
+        }
+
+        if(params.serverType == 'VMWare') {
+            if (params.clusterSelect == 'null')
+                params.cluster = null
+            else
+                params.cluster = Cluster.get(params.clusterSelect)
+        }
+        else {
+            params.cluster = null
+        }
+        System.out.println(params)
+
+        if (params.globalZone && params.globalZone != 0) {
+            /*
+            def currentGlobalZone = physicalServerInstance.getGlobalZone()
+            if(currentGlobalZone != null) {
+                currentGlobalZone.asset = null
+                currentGlobalZone.save()
+            }
+            */
+            def globalZone = Host.get(params.globalZone)
+
+            def oldGlobalZone = globalZone.asset
+            if (oldGlobalZone != null) {
+                oldGlobalZone.hostOS = null
+                oldGlobalZone.save(flush: true)
+            }
+
+            globalZone.asset = physicalServerInstance
+            globalZone.type = params.serverType
+            System.out.println(globalZone.toString())
+            System.out.println(globalZone.type)
+            globalZone.save()
+            params.globalZone = globalZone
+            physicalServerInstance.hostOS = globalZone
+        }
+        else {
+            params.globalZone = null
+            physicalServerInstance.hostOS = null
+        }
+
+
+        if (physicalServerInstance) {
+
+            log.debug "asset instance not null"
+/*
+            if(Integer.parseInt(params.currentRack) != 0) {
+                if(params.RU_begin)
+                    params.RU_begin = Integer.parseInt(params.RU_begin) + Integer.parseInt(params.RU_size)-1
+            }
+            else
+                params.RU_begin = 0
+
+            if (params.RU_size)
+                params.RU_size = Integer.parseInt(params.RU_size)
+
+            //update the object with the params and remove deleted notes
+            physicalServerInstance.properties = params
+
+            if(params.RU_size == "")
+                params.RU_size = 0
+            if(params.RU_size < 0) {
+                physicalServerInstance.errors.rejectValue('RU_size', 'RU Size must be a positive number.')
+                GrailsHibernateUtil.setObjectToReadyOnly(physicalServerInstance, sessionFactory)
+            }
+            if(Integer.parseInt(params.currentRack) == 0) {
+                System.out.println(params)
+
+                params.assetId = physicalServerInstance.id
+                assetService.removeAsset(params)
+            }
+            else if(params.currentRack != physicalServerInstance.getRackAssignmentId() || params.RU_begin != physicalServerInstance.RU_begin) {
+
+                if((params.RU_begin-params.RU_size+1) < 1 || params.RU_begin > 45) {
+                    physicalServerInstance.errors.rejectValue('RU_begin', 'All RU Positions must be between 1 and 45.')
+                    GrailsHibernateUtil.setObjectToReadyOnly(physicalServerInstance, sessionFactory)
+                }
+                else {
+                    params.assetId = physicalServerInstance.id
+                    assetService.removeAsset(params)
+                    params.id = params.currentRack
+                    params.asset_Id = physicalServerInstance.id
+                    params.addPosition = params.RU_begin
+                    if (assetService.addAssetToRack(params)==-2) {
+                        physicalServerInstance.errors.rejectValue('RU_begin', 'Current Rack position already currently occupied.')
+                        GrailsHibernateUtil.setObjectToReadyOnly(physicalServerInstance, sessionFactory)
+                    }
+                }
+            }
+            */
+            physicalServerInstance.properties = params
+
+            //save and redirect
+            if (!physicalServerInstance.hasErrors() && physicalServerInstance.save(flush: true)) {
+                System.out.println("SAVED SUCCESSFULLY!")
+                System.out.println(physicalServerInstance.errors.errorCount)
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'asset.label', default: 'Asset'), physicalServerInstance.id])}"
+                redirect(url: "/physicalServer/show?id=${physicalServerInstance.id}")
+                //  forward action:  "show", params: [showUrl:"/asset/show?id=${assetInstance.id}"]
+            } else {
+                System.out.println("ERROR FOUND!")
+                render(view: "edit", model: [physicalServerInstance: physicalServerInstance])
+            }
+
+            //asset not found; no edits can be performed; show the list
+        } else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'asset.label', default: 'PhysicalServer'), params.id])}"
+            redirect(action: "list")
+        }
+    }
+
+
+
 
 
     /*****************************************************************/
@@ -276,6 +499,8 @@ class PhysicalServerController {
         render response as JSON
     }
 
+
+
     /*****************************************************************/
     /* Servers Grid
     /*****************************************************************/
@@ -315,6 +540,14 @@ class PhysicalServerController {
         supportFilterHostList = []
         def response = [state: "OK", id: 1]
         render response as JSON
+    }
+
+    def getServerDetails = {
+        System.out.println(params)
+        def server = PhysicalServer.get(params.serverId)
+        def response = [retVal: true, server:server, status:server.status?.abbreviation]
+        render response as JSON
+
     }
 
 }

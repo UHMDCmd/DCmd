@@ -19,18 +19,21 @@
  */
 
 package edu.hawaii.its.dcmd.inf
-
-import com.vmware.vim25.mo.util.MorUtil
-
-import java.rmi.RemoteException
-import com.vmware.vim25.*
-import com.vmware.vim25.mo.*
 //import org.codenarc.rule.logging.PrintlnAstVisitor
 import grails.validation.Validateable
 
+
 @Validateable
 class VMwareController {
+
+    def VMService = new VMService()
+
     def index = {
+
+        System.out.println("In index...")
+        VMService.syncToVCenter()
+
+         /*
         try{
             int count = 0;
             boolean status = true; //status marker to indicate successful connection and update
@@ -44,14 +47,25 @@ class VMwareController {
 
             InventoryNavigator nav = new InventoryNavigator(rootFolder)
 
+            ArrayList<ManagedEntity> servers = new ArrayList<ManagedEntity>()
+            nav.searchManagedEntities("HostSystem").each {
+                servers.add(it)
+            }
+            ArrayList <String> updatedServers = updateServers(servers, si.getServerConnection())
+
+            updatedServers.each {
+                System.out.println(it)
+            }
             ArrayList<ManagedEntity> virtualMachines = new ArrayList<ManagedEntity>()
             nav.searchManagedEntities("VirtualMachine").each {
                 virtualMachines.add(it)
             }
+            ArrayList<String> updatedHosts = updateHosts(virtualMachines, si.getServerConnection())
 
             // newHosts sent to list controller to display updated on modal
-            ArrayList <String> updatedHosts = updateHosts(virtualMachines, si.getServerConnection())
+            //ArrayList <String> updatedHosts = updateHosts(virtualMachines, si.getServerConnection())
 
+            /*
             render "Root folder: ${rootFolder.name} "
             new InventoryNavigator(rootFolder).searchManagedEntities("VirtualMachine").each {
                 render """
@@ -64,20 +78,21 @@ class VMwareController {
 <p>______________________________________________
 """
             }
+              */
 
-
-
+              /*
             si.serverConnection.logout()
-
-            redirect(controller: "host" ,action: "list", params: [updatedHosts:updatedHosts] )
+            render updatedHosts as JSON
+           // redirect(controller: "host" ,action: "list", params: [updatedHosts:updatedHosts] )
         }
         catch(RemoteException e){
             println "Error: ${e.message}"
             session.setAttribute("status",false)
             redirect(controller: "host" ,action: "list" )
         }
+        */
     }
-
+    /*
     // Helper method to get only the first part of the hosts name since vmware returns the full name only.
     // ex. mdb74.pvt.hawaii.edu would return mdb74
     private String getShortenedHostName(String name) {
@@ -86,30 +101,181 @@ class VMwareController {
         parts[0]
     }
 
-    // Have to create a method that updates the current Hosts(Virtual Machines) already in DCMD.
-    // This controller is not to create new Hosts or Assets(HostSystems).
-    private ArrayList<String> updateHosts(ArrayList<ManagedEntity> virtualMachines, ServerConnection sc){
+    // Updates/Creates any PhysicalServers or Clusters
+    private ArrayList<String> updateServers(ArrayList<ManagedEntity> servers, ServerConnection sc) {
+        def tempCluster, tempServer, serverShortName
+        def ArrayList<String> newServers = new ArrayList<String>()
+        def ArrayList<String> updatedServers = new ArrayList<String>()
+        def isChanged = false
 
-        def dcmdHosts = Host.findAll()
+        servers.each { server ->
+            isChanged=false
+            tempCluster = Cluster.findByName(server.getParent().name)
+            if(tempCluster == null) {
+                tempCluster = new Cluster(name: server.getParent().name, dataCenter: server.getParent().getParent().getParent().name)
+                tempCluster.save(flush:true)
+                newServers.add("Cluster " + tempCluster.name + " created")
+            }
 
-        //string list of names for displaying on screen
-        ArrayList <String> hostNames = new ArrayList()
-        for (int x = 0; x < dcmdHosts.size(); x++){
-            hostNames.add(dcmdHosts.get(x).hostname)
-        }
+            serverShortName = getShortenedHostName(server.name)
 
-        ArrayList<String> updatedHosts = new ArrayList<String>()
-        for (ManagedEntity vm: virtualMachines){
-            if ((hostNames.contains(vm.name))){ //if current hosts contains the vmware host
-                //Check against fields that can change: Asset, Status
-                updatedHosts = updatedHosts + checkForChanges(dcmdHosts, vm, sc)
+            tempServer = PhysicalServer.findByItsId(serverShortName)
+            long memSize = Math.round((server.getHardware().getMemorySize()/1000000000))
+            double cpuSpeed = (server.getHardware().getCpuInfo().hz/1000000000.0)
+            cpuSpeed = Math.round(cpuSpeed * 100.0)/100.0
+            def numCores = server.getHardware().getCpuInfo().getNumCpuCores()
+            def numThreads = server.getHardware().getCpuInfo().getNumCpuThreads()
+
+            if(tempServer == null) {
+                tempServer = new PhysicalServer(itsId:serverShortName, cluster:tempCluster, assetType:AssetType.findByAbbreviation("Server"), serverType:"VMWare",
+                                                memorySize:memSize, cpuSpeed:cpuSpeed,numCores:numCores, numThreads:numThreads,
+                                                vendor: server.getHardware().getSystemInfo().vendor, modelDesignation: server.getHardware().getSystemInfo().model) // Add other attributes from VCenter...
+                tempServer.save(flush:true, failOnError: true)
+                newServers.add("Server " + tempServer.itsId + " created")
+            }
+            else {
+                if(tempServer.cluster?.id != tempCluster.id) {
+                    tempServer.cluster = tempCluster
+                    isChanged = true
+                }
+                if(tempServer.memorySize != memSize) {
+                    tempServer.memorySize = memSize
+                    isChanged = true
+                }
+                if(Math.round(tempServer.cpuSpeed) != Math.round(cpuSpeed)) {
+                    tempServer.cpuSpeed = cpuSpeed
+                    isChanged = true
+                }
+                if(tempServer.numCores != numCores) {
+                    tempServer.numCores = numCores
+                    isChanged = true
+                }
+                if(tempServer.numThreads != numThreads) {
+                    tempServer.numThreads = numThreads
+                    isChanged = true
+                }
+                // Check for changes in other attributes from VCenter...
+
+                if(isChanged) {
+                    tempServer.save(flush:true)
+                    updatedServers.add("Server " + tempServer.itsId + " updated")
+                }
             }
         }
+        return newServers + updatedServers
+    }
 
-        session.setAttribute("hostSize", hostNames.size())
-        session.setAttribute("newHosts",hostNames)
+    // Have to create a method that updates the current Hosts(Virtual Machines) already in DCMD.
+    // This controller is not to create new Hosts or Assets(HostSystems).
+    private ArrayList<String> updateHosts(ArrayList<ManagedEntity> virtualMachines, ServerConnection sc) {
 
-        updatedHosts
+        def tempHost
+        def tempServer
+        def tempCluster
+        def dcmdHosts = Host.findAll()
+        def updatedHosts = new ArrayList<String>()
+        def dnsInfo
+        def isChanged=false
+
+        virtualMachines.each{ vm ->
+            isChanged=false
+            // Find name by beginning of dns
+            def dnsName = vm.getGuest()?.getIpStack()?.dnsConfig?.hostName
+            def hostName
+            if(dnsName != null) {
+                hostName = dnsName[0]?.tokenize(".")?.get(0)?.toLowerCase()
+            }
+            else
+                hostName = null
+
+            if(hostName != null) {
+                // Get physical server running it
+                HostSystem vmHost = (HostSystem) MorUtil.createExactManagedEntity(sc, vm.getRuntime().getHost())
+
+                // See if Host already exists in DCmd)
+                tempHost = Host.findByHostname(hostName)
+
+                tempServer = PhysicalServer.findByItsId(getShortenedHostName(vmHost.name))
+                if (tempServer == null)
+                    System.out.println("Server not found. This should never happen...")
+
+                tempCluster = Cluster.findByName(vmHost.getParent().name)
+
+                /*************************
+                 * These stats are what we will use for memory... Find out what to use for CPU....
+                 */
+                  /*
+                if(hostName == 'odb61') {
+                    // Memory info
+                    System.out.println("toolsRunningStatus  " + vm.getGuest().toolsRunningStatus)
+                    System.out.println("state " + vm.getRuntime().connectionState)
+                }
+
+                //System.out.println(vm.name + ", " + getShortenedHostName(vmHost.name) + ", " + hostName + ", " + tempCluster.name)
+
+                if (tempHost == null) { // If doesn't exist, create it
+                    tempHost = new Host(hostname: hostName, type: 'VMWare', asset: tempServer, cluster: tempCluster,
+                            vcName:vm.name, fullDomain:dnsName[0]?.toLowerCase(), ipAddress:vm.getGuest()?.ipAddress, maxMemory: vm.getRuntime().maxMemoryUsage,
+                            maxCpu: vm.getRuntime().maxCpuUsage, vCenterState: String.valueOf(vm.getRuntime().connectionState))
+                    tempHost.save(flush:true, failOnError: true)
+                    updatedHosts.add("VM " + tempHost.hostname + " created")
+                }
+                else { // If it does exist, check for changes
+                    if(tempHost.asset?.id != tempServer.id) {
+                        System.out.println(tempHost.asset?.itsId + " -> " + tempServer.itsId)
+                        tempHost.asset = tempServer
+                        isChanged=true
+                    }
+                    if(tempHost.cluster != tempCluster) {
+                        System.out.println(tempHost.cluster?.name + " -> " + tempCluster.name)
+                        tempHost.cluster = tempCluster
+                        isChanged=true
+                    }
+                    if(tempHost.vcName != vm.name) {
+                        System.out.println(tempHost.vcName + " -> " + vm.name)
+                        tempHost.vcName = vm.name
+                        isChanged=true
+                    }
+                    if(tempHost.fullDomain != dnsName[0]) {
+                        System.out.println(tempHost.fullDomain + " -> " + dnsName[0])
+                        tempHost.fullDomain = dnsName[0]
+                        isChanged=true
+                    }
+                    if(tempHost.ipAddress != vm.getGuest()?.ipAddress) {
+                        System.out.println(tempHost.ipAddress + " -> " + vm.getGuest()?.ipAddress)
+                        tempHost.ipAddress = vm.getGuest()?.ipAddress
+                        isChanged=true
+                    }
+                    if(tempHost.maxCpu != vm.getRuntime().maxCpuUsage) {
+                        System.out.println("Max CPU Changed: " + tempHost.maxCpu + " -> " + vm.getRuntime().maxCpuUsage)
+                        tempHost.maxCpu = vm.getRuntime().maxCpuUsage
+                        isChanged=true
+                    }
+                    if(tempHost.maxMemory != vm.getRuntime().maxMemoryUsage) {
+                        System.out.println("Max Memory Changed: " + tempHost.maxMemory + " -> " + vm.getRuntime().maxMemoryUsage)
+                        tempHost.maxMemory = vm.getRuntime().maxMemoryUsage
+                        isChanged=true
+                    }
+                    if(tempHost.vCenterState != vm.getRuntime().connectionState) {
+                        tempHost.vCenterState = vm.getRuntime().connectionState
+                        isChanged=true
+                    }
+
+                    if(isChanged) {
+                        tempHost.save(flush:true, failOnError: true)
+                        //System.out.println("Saved: " + tempHost.hostname + " - " + tempHost.asset.itsId)
+                        updatedHosts.add("VM " + hostName + " updated, " + tempHost.asset.itsId)
+                    }
+                }
+            }
+            else // dnsName was null, i.e., can't get name of Host
+                System.out.println("Guest named " + vm.name + " dnsName was null, could not determine hostName")
+        }
+
+       // updatedHosts.each {
+        //    System.out.println(it)
+        //}
+        return updatedHosts
 
     }
 
@@ -371,4 +537,11 @@ class VMwareController {
         }
     }
 */
+
+    def testConfig = {
+        System.out.println("IN TEST ACTION")
+        def config = new ConfigSlurper().parse(new File('C:\\Users\\Ben\\Desktop\\configTest.groovy').toURL())
+
+        System.out.println(config.item1.test1)
+    }
 }

@@ -518,7 +518,7 @@ class BootStrap {
                     osamum.save(failOnError:true,flush:true)
                     kc96813= new User(username: 'kc96813', password:'none', enabled: true, userSettings: defaultSettings)
                     kc96813.save(failOnError:true,flush:true)
-                    userKylanh = new User(username: 'kylanh', password:'none', enabled: true)
+                    userKylanh = new User(username: 'kylanh', password:'none', enabled: true, userSettings: defaultSettings)
                     userKylanh.save(failOnError:true,flush:true)
 
                 }
@@ -1012,7 +1012,7 @@ class BootStrap {
                             env: prod,
                             asset: VMCluster2,
                             status: availStatus,
-                            type: 'VMware'
+                            type: 'VMWare'
                     )
                     frm32.save(failOnError: true, flush: true)
                     frm33 = new Host(
@@ -1023,7 +1023,7 @@ class BootStrap {
                             env: prod,
                             asset: VMCluster2,
                             status: availStatus,
-                            type: 'VMware'
+                            type: 'VMWare'
                     )
                     frm33.save(failOnError: true, flush: true)
                     ssa32 = new Host(
@@ -1034,7 +1034,7 @@ class BootStrap {
                             env: prod,
                             asset: VMCluster2,
                             status: availStatus,
-                            type: 'VMware'
+                            type: 'VMWare'
                     )
                     ssa32.save(failOnError: true, flush: true)
                     ssa33 = new Host(
@@ -1045,7 +1045,7 @@ class BootStrap {
                             env: prod,
                             asset: VMCluster2,
                             status: availStatus,
-                            type: 'VMware'
+                            type: 'VMWare'
                     )
                     ssa33.save(failOnError: true, flush: true)
                     odb06 = new Host(
@@ -1056,7 +1056,7 @@ class BootStrap {
                             env: prod,
                             asset: VMCluster2,
                             status: availStatus,
-                            type: 'VMware'
+                            type: 'VMWare'
                     )
                     odb06.save(failOnError: true, flush: true)
 
@@ -1166,7 +1166,7 @@ class BootStrap {
                             env: test,
                             asset: t5k99,
                             status: availStatus,
-                            type: 'VMware'
+                            type: 'VMWare'
                     )
                     mdb74.save(failOnError: true, flush: true)
 

@@ -20,9 +20,17 @@
 
 package edu.hawaii.its.dcmd.inf
 
+
 class PhysicalServer extends Asset{
 
     String serverType
+    Cluster cluster
+    long memorySize
+    float cpuSpeed
+    int numCores
+    int numThreads
+
+    Host hostOS
 
     static hasMany = [
             assetCapacities:AssetCapacity,
@@ -37,6 +45,12 @@ class PhysicalServer extends Asset{
         serverType(nullable:true)
         hosts(nullable: true)
         devicePlugs(nullable:true)
+        cluster(nullable:true)
+        memorySize(nullable:true)
+        cpuSpeed(nullable:true)
+        numCores(nullable:true)
+        numThreads(nullable:true)
+        hostOS(nullable:true)
     }
 
 //    static belongsTo = [hosts: Host]
@@ -48,7 +62,7 @@ class PhysicalServer extends Asset{
 //        discriminator column: "supportableType", value: 'physicalServer'
 //        tablePerHierarchy true
     }
-
+  /*
     Host getGlobalZone() {
         def globalZone
 
@@ -61,4 +75,92 @@ class PhysicalServer extends Asset{
         else
             return globalZone?.first()
     }
+    */
+    Host getGlobalZone() {
+        return hostOS
+    }
+
+    Integer getTotalMemoryUsed() {
+
+        def memUsed = Host.createCriteria().list() {
+            asset {
+                eq('id', this.id)
+            }
+            projections {
+                sum('maxMemory')
+            }
+        }
+        if(memUsed.isEmpty() || memUsed.first() == null)
+            return 0
+        else
+            return memUsed.first()
+    }
+
+    String getTotalGBUsed() {
+        def totalMem = getTotalMemoryUsed()
+        if(totalMem == 0)
+            return 'N/A'
+        else
+            return getTotalMemoryUsed()/1000.0 + " GB"
+    }
+
+
+    String getMemoryPercentUsed() {
+        def memUsed = this.getTotalMemoryUsed()
+        if (memUsed == 0 || this.memorySize == 0)
+            return '0%'
+        else
+            return (Math.round(10.0*(memUsed / this.memorySize)))/100.0 + "%"
+    }
+
+    Integer getTotalCPUUsed() {
+
+        def cpuUsed = Host.createCriteria().list() {
+            asset {
+                eq('id', this.id)
+            }
+            projections {
+                sum('maxCpu')
+            }
+        }
+        if(cpuUsed.isEmpty() || cpuUsed.first() == null)
+            return 0
+        else
+            return cpuUsed.first()
+    }
+
+    String getTotalGhzUsed() {
+        def totalCPU = getTotalCPUUsed()
+        if(totalCPU == 0)
+            return "N/A"
+        else
+            return (totalCPU/1000) + " GHz"
+
+    }
+
+    String getTotalCoresUsed() {
+        def cpuUsed = getTotalCPUUsed()
+        return cpuUsed/cpuSpeed + " Cores"
+    }
+
+
+    String getCPUPercentUsed() {
+        def cpuUsed = this.getTotalCPUUsed()
+        System.out.println(cpuUsed + ", " + cpuSpeed + ", " + this.numCores)
+        if (cpuUsed == 0 || this.numCores == 0)
+            return '0%'
+        else
+            return (Math.round(1000*(cpuUsed/(cpuSpeed*1000.0)/numCores)))/10.0 + "%"
+    }
+
+    String getHostOSLinkString() {
+        if(hostOS == null)
+            return "N/A"
+        else
+            return "<a href='../host/show?id=" + hostOS.id + "'>" + hostOS.hostname + "</a>"
+    }
+
+    //float getCpuUsage() {
+    //    def usage = Host.createCriteria().sum()
+    //}
 }

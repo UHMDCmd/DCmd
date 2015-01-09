@@ -25,6 +25,7 @@ import org.hibernate.Criteria
 class Cluster {
 
     String dataCenter
+    String vCenterHost
     String name
     Date lastUpdated = new Date()
 	Date dateCreated = new Date()
@@ -40,6 +41,7 @@ class Cluster {
 
     static constraints = {
         dataCenter(nullable: true)
+        vCenterHost(nullable:true)
         name(nullable: false)
 		assetSet(nullable: true)
 //        resourceAllocations(nullable: true)

@@ -27,7 +27,7 @@
 
         editOption = false
     }
-    listHostUrl = '../physicalServer/listHosts?assetId=${assetInstance.id}'
+    listHostUrl = '../physicalServer/listHosts?assetId=${physicalServerInstance.id}'
 
     $(document).ready(function() {
 
@@ -40,7 +40,7 @@
                         width:500,
                         //afterSubmit:afterSubmitHostEvent,
                         closeAfterAdd: true,
-                        params:{assetId:${assetInstance.id}},
+                        params:{assetId:${physicalServerInstance.id}},
                         savekey:[true,13]}
 //                                closeModal()
             );
@@ -53,17 +53,17 @@
             caption:'Virtual Host List',
             showPager:'true',
             url:listHostUrl,
-            editurl:'../physicalServer/editHosts?assetId=${assetInstance.id}',
+            editurl:'../physicalServer/editHosts?assetId=${physicalServerInstance.id}',
             datatype: "json",
 
-            colNames: ['', 'Host Name', 'Host Type', 'Environment', 'Status', 'Host SA', 'Host Notes', 'id'],
+            colNames: ['', 'Host Name', 'Status', 'Environment', 'Host SA', 'Max Memory', 'Max CPU', 'Host Notes', 'id'],
             colModel:[
                 {name:'actions', index:'actions', editable:false, required:false, sortable:false, width:"20",
                     formatter: 'actions', hidden:!editOption, formatoptions: {
                         keys: true, editbutton: false }
                     },
                 {name:"hostname", width:120, editable:editOption, formatter: 'showlink', formatoptions: {showAction:'show', baseLinkUrl:'../host/'}},
-                {name:'type', width:100, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"host",action:"listHostTypesAsSelect")}',
+                {name:'status', width:100, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"status",action:"listStatusAsSelect")}',
                     dataInit:function(e){$(e).select2({
                         width: 160
                     })}
@@ -73,16 +73,14 @@
                         width: 160
                     })}
                 }},
-                {name:'status', width:100, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"status",action:"listStatusAsSelect")}',
-                    dataInit:function(e){$(e).select2({
-                        width: 160
-                    })}
-                }},
                 {name:'hostSA', width:100, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person",action:"listAsSelect")}',
                     dataInit:function(e){$(e).select2({
                         width: 160
                     })}
-                }},                {name:'generalNote', width:200, editable:editOption},
+                }},
+                {name:'maxCPU', width:100, editable:false},
+                {name:'maxMemory', width:100, editable:false},
+                {name:'generalNote', width:200, editable:editOption},
                 {name:'id', hidden:true}
             ],
 
@@ -92,7 +90,7 @@
             gridview: true,
             cellEdit:editOption,
             cellsubmit: 'remote',
-            cellurl:'../physicalServer/editHosts?assetId=${assetInstance.id}',
+            cellurl:'../physicalServer/editHosts?assetId=${physicalServerInstance.id}',
             shrinkToFit: true,
             autowidth: true,
 
@@ -108,7 +106,7 @@
                         jQuery.ajax({
                             async: false,
                             url: 'editHosts',
-                            data: { oper:'edit', isFixed: isChecked, assetId: ${assetInstance.id}, id: id },
+                            data: { oper:'edit', isFixed: isChecked, assetId: ${physicalServerInstance.id}, id: id },
                             dataType: 'json',
                             contentType: 'application/json; charset=utf-8'
 
@@ -150,7 +148,7 @@
             jQuery.ajax({
                 async: false,
                 url: 'asset/updateUnassignedByAssignment',
-                data: { assetId: ${assetInstance.id}, rowId: rowId },
+                data: { assetId: ${physicalServerInstance.id}, rowId: rowId },
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function(data) {

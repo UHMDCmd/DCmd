@@ -42,83 +42,85 @@ class AssetService {
         def currentPage = Integer.valueOf(params.page) ?: 1
         def rowOffset = currentPage == 1 ? 0 : (currentPage - 1) * maxRows
 
-
-        def assets = Asset.createCriteria().list(max: maxRows, offset: rowOffset) {
+        def assets
+    try {
+        assets = Asset.createCriteria().list(max: maxRows, offset: rowOffset) {
 // Search Filters
 //            eq('inStorage', params.stored.asBoolean())
+        assetType {
+            ne('abbreviation', "Power")
+        }
+
+        if (params.assetType) {
             assetType {
-                ne('abbreviation', "Power")
+                ilike('abbreviation', "%${params.assetType}%")
             }
-
-            if (params.assetType) {
-                assetType {
-                    ilike('abbreviation', "%${params.assetType}%")
-                }
-            }
-            if (params.itsId) ilike('itsId', "%${params.itsId}%")
-            if (params.assetStatus) {
-                status {
-                    ilike('abbreviation', "%${params.assetStatus}%")
-                }
-            }
-
-            if (params.rack) {
-                def rackCriteria = new DetachedCriteria(RackUnit).build {
-                    isNotNull('filledBy')
-                    onRack {
-                        ilike('itsId', "%${params.rack}%")
-                    }
-                }
-                def rackCollection = rackCriteria.collect()
-
-                if(!rackCollection.isEmpty()) {
-                    if(rackCollection.filledBy != null)
-                        'in'('id', rackCollection.filledBy?.id)
-                }
-                else
-                    eq('id', null)
-            }
-            if (params.isAvailableForParts) eq('isAvailableForParts', Boolean.valueOf(params.isAvailableForParts))
-            if(params.primarySA) {
-                def SACriteria = new DetachedCriteria(SupportRole).build {
-                    roleName {
-                        ilike('roleName', 'Primary SA')
-                    }
-                    person {
-                        ilike('uhName', "%${params.primarySA}%")
-                    }
-                }
-                if(!SACriteria.collect().isEmpty()) {
-                    'in'('id', SACriteria.collect()?.supportedObject?.id)
-
-                }
-                else
-                    eq('id', null)
-            }
-            if (params.serialNo) ilike('serialNo', "%${params.serialNo}%")
-            if (params.generalNote) ilike('generalNote', "%${params.generalNote}%")
-
-// Sort
-            switch(sortIndex) {
-                case 'assetType':
-                    assetType {
-                        order('abbreviation', sortOrder)
-                    }
-                    break;
-                case 'assetStatus':
-                    status {
-                        order('abbreviation', sortOrder)
-                    }
-                    break;
-                case 'primarySA':
-
-                    break;
-                default:
-                    order(sortIndex, sortOrder)
-                    break;
+        }
+        if (params.itsId) ilike('itsId', "%${params.itsId}%")
+        if (params.assetStatus) {
+            status {
+                ilike('abbreviation', "%${params.assetStatus}%")
             }
         }
 
+        if (params.rack) {
+            def rackCriteria = new DetachedCriteria(RackUnit).build {
+                isNotNull('filledBy')
+                onRack {
+                    ilike('itsId', "%${params.rack}%")
+                }
+            }
+            def rackCollection = rackCriteria.collect()
+
+            if (!rackCollection.isEmpty()) {
+                if (rackCollection.filledBy != null)
+                    'in'('id', rackCollection.filledBy?.id)
+            } else
+                eq('id', null)
+        }
+        if (params.isAvailableForParts) eq('isAvailableForParts', Boolean.valueOf(params.isAvailableForParts))
+        if (params.primarySA) {
+            def SACriteria = new DetachedCriteria(SupportRole).build {
+                roleName {
+                    ilike('roleName', 'Primary SA')
+                }
+                person {
+                    ilike('uhName', "%${params.primarySA}%")
+                }
+            }
+            if (!SACriteria.collect().isEmpty()) {
+                'in'('id', SACriteria.collect()?.supportedObject?.id)
+
+            } else
+                eq('id', null)
+        }
+        if (params.serialNo) ilike('serialNo', "%${params.serialNo}%")
+        if (params.generalNote) ilike('generalNote', "%${params.generalNote}%")
+
+// Sort
+        switch (sortIndex) {
+            case 'assetType':
+                assetType {
+                    order('abbreviation', sortOrder)
+                }
+                break;
+            case 'assetStatus':
+                status {
+                    order('abbreviation', sortOrder)
+                }
+                break;
+            case 'primarySA':
+
+                break;
+            default:
+                order(sortIndex, sortOrder)
+                break;
+        }
+    }
+    }
+    catch (Exception e) {
+         System.out.println(e.message)
+    }
         def totalRows = assets.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
@@ -133,7 +135,7 @@ class AssetService {
         }
         else {
         */
-            results = assets?.collect { [ cell: [it.assetType.toString(), it.itsId, it.status.toString(),
+            results = assets?.collect { [ cell: [it.assetType.toString(), it.getItsIdPageLink(), it.status.toString(),
                     "<a href='../location/show?id=${it.location?.id}'>${it.location.toString()}</a>",
                     it.isAvailableForParts,
                     "<a href='../person/show?id=${personService.getAdmin(it)?.id}'>${personService.getAdmin(it).toString()}</a>",
@@ -178,6 +180,10 @@ class AssetService {
 // Search Filters
             if (params.itsId) ilike('itsId', "%${params.itsId}%")
             if (params.serverType) ilike('serverType', "%${params.serverType}%")
+            if (params.cluster)
+                cluster {
+                    ilike('name', "%${params.cluster}%")
+                }
             if (params.assetStatus)
                 status {
                     ilike('abbreviation', "%${params.assetStatus}%")
@@ -219,6 +225,11 @@ class AssetService {
                         order('abbreviation', sortOrder)
                     }
                     break
+                case 'cluster':
+                    cluster {
+                        order('name', sortOrder)
+                    }
+                    break
                 case 'manufacturer':
                     manufacturer {
                         order('name', sortOrder)
@@ -234,10 +245,12 @@ class AssetService {
         def totalRows = physicalServers.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
-
         def results = physicalServers?.collect { [ cell: [
-                "<a href='../asset/show?id=${it.id}'>${it.itsId}</a>",
-                it.serverType, it.status.toString(),
+                //"<a href='../physicalServer/show?id=${it.id}'>${it.itsId}</a>",
+                "<a onclick='openItem(${it.id})'>${it.itsId}</a>",
+                it.serverType, "<a href='../cluster/show?id=${it.cluster?.id}'>${it.cluster?.name}</a>",
+                it.getHostOSLinkString(),
+                it.status.toString(),
                 personService.getSupportPersonLink(it, 'Primary SA'),
                 it.RU_size,
                 "<a href='../asset/show?id=${it.getRackAssignmentId()}'>${it.getRackAssignment()}</a>",
@@ -245,6 +258,10 @@ class AssetService {
                 getCurrentLocationLink(it),
                 it.isAvailableForParts,
                 it.serialNo, it.manufacturer.toString(), it.modelDesignation,
+                it.memorySize,
+                it.getMemoryPercentUsed(),
+                it.numCores,
+                it.getCPUPercentUsed(),
                 it.generalNote], id: it.id ] }
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         return jsonData
@@ -381,10 +398,12 @@ class AssetService {
         }
         def totalRows = hosts.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
+
         def results = hosts?.collect { [ cell: ['',
-            "<a href='../host/show?id=${it.id}'>${it.hostname}</a>", it.type,
-                it.env.toString(), it.status.toString(),
+            "<a href='../host/show?id=${it.id}'>${it.hostname}</a>",
+                it.status.toString(), it.env.toString(),
                 "<a href='../person/show?id=${personService.getAdmin(it)?.id}'>${personService.getAdmin(it).toString()}</a>",
+                it.getMaxMemoryGBString(), it.getCpuMhzCoreString(),
                 it.generalNote], id: it.id ] }
 
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]

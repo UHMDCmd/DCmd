@@ -18,59 +18,28 @@
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-<%@ page import="edu.hawaii.its.dcmd.inf.Asset"%>
+<%@ page import="edu.hawaii.its.dcmd.inf.PhysicalServer"%>
 <html>
 <head>
-
-
     <meta content="main" name="layout" />
-    <g:set var="entityName" value="${message(code: 'asset.edit.label', default: 'Edit Asset')}" />
-    <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <g:set var="entityName" value="${message(code: 'physicalServer.edit.label', default: 'Edit Server')}" />
+    <title><g:message code="default.dcmd.label" /></title>
     <jqDT:resources jqueryUi="true" type="js" />
+    <r:require modules='message_alert' />
+
 </head>
 <body>
 
-<g:form method="post" controller="asset">
+<g:form method="post" controller="physicalServer">
+%{--    <g:set var="physicalServerInstance" value="${physicalServerInstance}" /> --}%
 <%--
-        <g:render template="../nav" model="[entityName: entityName]" />
-        --%>
+    <g:render template="../nav" model="[entityName: entityName]" />
+    --%>
     <div id="container">
-        <section id="secondary_bar">
-
-            <div class="user">
-                <p>Ben Karsin</p>
-            </div>
-
-            <div class="breadcrumbs_container">
-
-                <article class="breadcrumbs">
-
-                    <a class="home_button" href="${createLink(uri: '/')}">DCMD Home</a>
-
-                    <div class="breadcrumb_divider"></div>
-
-
-                    <g:hiddenField name="id" value="${assetInstance?.id}" />
-                    <g:hiddenField name="version" value="${assetInstance?.version}" />
-
-                    <span class="update_button"> <g:actionSubmit class="save"
-                                                                 action="update"
-                                                                 value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                    </span>
-
-
-                    <span class="delete_button"> <g:actionSubmit class="delete"
-                                                                 action="delete"
-                                                                 value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    </span>
-
-
-                </article>
-            </div>
-
-        </section>
-
+        <g:hiddenField name="id" value="${physicalServerInstance?.id}" />
+        <g:hiddenField name="version" value="${physicalServerInstance?.version}" />
+        <g:render template="../show_secondary" model="[pageType:'physicalServer', objectId:physicalServerId, action:'edit', params:params]" />
+        <g:render template="../breadcrumbs" model="[pageType:'physicalServer', action:'edit']"/>
     </div>
 
 
@@ -79,24 +48,34 @@
             <div class="module_content">
 
                 <g:render template="../content_title"
-                          model="[entityName: entityName, code:'default.edit.label']" />
+                          model="[entityName:'Server', code:'default.edit.label']" />
+                <div id="vmWarning" style="font-size:16pt; color:red; position:relative; margin-top:-25px; text-align:center;">*Editing VMWare Host attributes may be overwritten by VCenter</div>
                 <dcmd:requiredInputFieldsReminder />
                 <s:info />
-                <g:hasErrors bean="${assetInstance}">
+                <g:hasErrors bean="${physicalServerInstance}">
                     <s:errorDiv>
-                        <s:renderErrors bean="${assetInstance}" as="list" />
+                        <s:renderErrors bean="${physicalServerInstance}" as="list" />
                     </s:errorDiv>
                 </g:hasErrors>
 
-                <g:render template="dialog" />
+              %{--  <g:render template="../toolTip" /> --}%
+                <g:render template="dialog" model="[action:'edit']"/>
 
-
-                <g:render template="tabs" />
             </div>
         </article>
     </div>
 
 </g:form>
+
+
+<div class="pageBodyNoMargin" style="margin-top:-125px">
+    <article class="module width_full">
+        <div class="module_content">
+            <g:render template="tabs" model="[actionName:'edit']"/>
+        </div>
+    </article>
+</div>
+
 
 </body>
 </html>

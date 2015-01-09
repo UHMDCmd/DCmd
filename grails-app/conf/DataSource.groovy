@@ -2,9 +2,9 @@ dataSource {
     pooled = true
 
     // Un-comment for Test/Production
-   // driverClassName = "com.mysql.jdbc.Driver"
-   // username = "dcmd"
-   // password = "***REMOVED***"
+    //driverClassName = "com.mysql.jdbc.Driver"
+    //username = "dcmd"
+    //password = "***REMOVED***"
 
     // Un-comment for Local Development
     driverClassName = "org.hsqldb.jdbcDriver"

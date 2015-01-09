@@ -73,7 +73,8 @@
 
 /* Interaction Cues
 ----------------------------------*/
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #83a1e7; background: #c7dcff url(images/ui-bg_flat_55_c7dcff_40x100.png) 50% 50% repeat-x; color: #274eaa; }
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #83a1e7; background: #c7dcff url(images/ui-bg_flat_55_c7dcff_40x100.png) 50% 50% repeat-x; color: #274eaa;}
+a .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #83a1e7; background: #c7dcff url(images/ui-bg_flat_55_c7dcff_40x100.png) 50% 50% repeat-x; color: #274eaa;}
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #ffffff; }
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #bc8f93; background: #994d53 url(images/ui-bg_flat_55_994d53_40x100.png) 50% 50% repeat-x; color: #ffffff; }
 .ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #ffffff; }

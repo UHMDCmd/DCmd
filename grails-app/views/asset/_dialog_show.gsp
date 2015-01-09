@@ -46,7 +46,7 @@
                     ${assetInstance.serverType}
                 </td>
             </tr>
-            <g:if test="${assetInstance.serverType == 'VMware Host'}">
+            <g:if test="${assetInstance.serverType == 'VMWare'}">
                 <tr>
                     <td valign="top" class="name">Cluster</td>
                     <td valign="top" class="value">
@@ -54,11 +54,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td valign="top" class="name">VMware Host OS</td>
+                    <td valign="top" class="name">VMWare Host OS</td>
                     <td valign="top" class="value">
                         <a href="../host/show?id=${assetInstance.getGlobalZone()?.id}">${assetInstance.getGlobalZone().toString()}</a>
                     </td>
                 </tr>
+
             </g:if><g:elseif test="${assetInstance.serverType == 'Solaris Global Zone'}">
             <tr>
                 <td valign="top" class="name">Global Zone</td>

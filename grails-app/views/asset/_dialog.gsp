@@ -492,7 +492,7 @@
 }
 </style>
 
-<g:if test="${action != 'create' && assetType == 'Physical Server'}">
+<g:if test="${action != 'create'}">
 <div id="host-dialog-form" title="Create new Host">
     <form>
         <label class="dialogLabel" for="dialogHostname">Host Name</label>

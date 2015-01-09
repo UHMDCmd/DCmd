@@ -37,7 +37,7 @@ class Host extends SupportableObject {
     String planningNote
     Status status
     String os
-    String type = "VMware Guest"
+    String type = "VMWare"
     String serviceContact
 
     //Attributes for exporting to spreadsheet
@@ -48,7 +48,15 @@ class Host extends SupportableObject {
     String location
     String rackAssignment
 
+    // VCenter attributes
     Cluster cluster
+    String vcName
+    String fullDomain
+    String ipAddress
+    boolean isInVCenter
+    Float maxCpu
+    Integer maxMemory
+
 //	List hostSupporters = new ArrayList()
 
     // Possible values:  connected, disconnected, inaccessible, invalid, orphaned
@@ -102,6 +110,12 @@ class Host extends SupportableObject {
         rackAssignment(nullable: true)
 
         vCenterState(nullable: true)
+        vcName(nullable:true)
+        fullDomain(nullable:true)
+        ipAddress(nullable:true)
+        maxCpu(nullable:true)
+        maxMemory(nullable:true)
+        isInVCenter(nullable:true, default:true)
 	}
 
 
@@ -121,11 +135,48 @@ class Host extends SupportableObject {
 
     String getServerOrClusterLink() {
         String buffer = ""
-        if(this.type == 'VMware Guest') {
+        if(this.type == 'VMWare') {
             return "<a href='../cluster/show?id=${this.cluster?.id}'>${this.cluster.toString()}</a>"
         }
         else
             return "<a href='../asset/show?id=${this.asset?.id}'>${this.asset.toString()}</a>"
+    }
+
+    String getMaxMemoryGBString() {
+        if(this.maxMemory == null)
+            return "N/A"
+        else
+            return String.valueOf(maxMemory/1000) + " GB"
+    }
+
+    String getMaxMemoryString() {
+        if(this.maxMemory == null)
+            return "N/A"
+        else
+            return String.valueOf(maxMemory)
+    }
+
+    String getCpuMhzCoreString() {
+        if(this.maxCpu == null)
+            return "N/A"
+        else
+            return String.valueOf(maxCpu) + " MHz (" + String.valueOf((maxCpu/(asset?.cpuSpeed*1000)).round()) + " Cores)"
+    }
+
+    String getMaxCpuString() {
+        if(this.maxCpu == null)
+            return "N/A"
+        else
+            return String.valueOf(maxCpu)
+    }
+    String getVCenterStateString() {
+        if(this.type != 'VMWare')
+            return "N/A"
+        else
+            if(this.vCenterState == null)
+                return "Not Found"
+            else
+                return vCenterState
     }
 
 /*

@@ -25,8 +25,11 @@
 
 <r:require modules='select2' />
 
-<script>
-    $(document).ready(function() { $("#statusSelect${idNum}").select2({
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+
+        $("#statusSelect${idNum}").select2({
 //        placeholder: 'Please Select...',
         maximumInputLength: 20,
         width:150,

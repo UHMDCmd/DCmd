@@ -32,7 +32,7 @@ class Asset extends SupportableObject{
 	Manufacturer manufacturer
 //    Replacement replacementSet
 
-
+    String vendor
 	String itsId
 	String ownershipType = "Perpetual"
 	String productDescription
@@ -102,6 +102,7 @@ class Asset extends SupportableObject{
 		assetType(nullable:false)
 		location(nullable:true)
 
+        vendor(nullable:true)
         cluster(nullable:true)
         itsId (blank: false, nullable:false, maxSize:45)
         ownershipType( blank:false, maxSize:45 )
@@ -166,8 +167,8 @@ class Asset extends SupportableObject{
     }
     String getRackAssignment() {
         if(RUplacement != null) {
-            if (RUplacement.size() > 0) {
-                return RUplacement.first().onRack.toString()
+            if (RUplacement?.size() > 0) {
+                return RUplacement?.first()?.onRack.toString()
             }
             else
                 return "Not Assigned"
@@ -179,8 +180,8 @@ class Asset extends SupportableObject{
     Long getRackAssignmentId() {
         if(itsId!=null) {
             if(!(itsId.isEmpty())){
-                if (RUplacement.size() > 0) {
-                    return RUplacement.first().onRack.id
+                if (RUplacement?.size() > 0) {
+                    return RUplacement?.first()?.onRack.id
                 }
                 else return 0
             }
@@ -250,6 +251,17 @@ class Asset extends SupportableObject{
         }
         else
             return 0
+    }
+
+    String getItsIdPageLink() {
+        String returnString
+        if(assetType.abbreviation == 'Server') {
+            returnString = "<a href='../physicalServer/show?id=${id}'>${itsId}</a>"
+        }
+        else {
+            returnString = "<a href='../asset/show?id=${id}'>${itsId}</a>"
+        }
+        return returnString
     }
 
 }

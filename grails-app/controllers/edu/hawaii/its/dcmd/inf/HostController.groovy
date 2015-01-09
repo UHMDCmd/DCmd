@@ -130,8 +130,7 @@ class HostController {
             else
                 params.asset = Asset.get(params.assetSelect.toLong())
         }
-        if(params.type == 'VMware Guest') {
-            params.asset = null
+        if(params.type == 'VMWare') {
             if (params.clusterSelect == 'null')
                 params.cluster = null
             else
@@ -139,12 +138,6 @@ class HostController {
         }
         else {
             params.cluster = null
-            if(params.assetSelect) {
-                if (params.assetSelect == 'null')
-                    params.asset = null
-                else
-                    params.asset = Asset.get(params.assetSelect.toLong())
-            }
         }
 
         def hostInstance = new Host(params)
@@ -223,9 +216,14 @@ class HostController {
         if(params.environmentSelect)
             params.env = generalService.createOrSelectEnv(params)
 
+        if(params.assetSelect) {
+            if (params.assetSelect == 'null')
+                params.asset = null
+            else
+                params.asset = Asset.get(params.assetSelect.toLong())
+        }
 
-        if(params.type == 'VMware Guest') {
-            params.asset = null
+        if(params.type == 'VMWare') {
             if (params.clusterSelect == 'null')
                 params.cluster = null
             else
@@ -233,12 +231,6 @@ class HostController {
         }
         else {
             params.cluster = null
-            if(params.assetSelect) {
-                if (params.assetSelect == 'null')
-                    params.asset = null
-                else
-                    params.asset = Asset.get(params.assetSelect.toLong())
-            }
         }
 
 
@@ -739,7 +731,7 @@ class HostController {
         StringBuffer buf = new StringBuffer("<select>")
         buf.append("<option value=\'Solaris Global Zone\'>Solaris Global Zone</option>")
         buf.append("<option value=\'Non-Global Zone\'>Non-Global Zone</option>")
-        buf.append("<option value=\'VMware Guest\'>VMware Guest</option>")
+        buf.append("<option value=\'VMWare\'>VMWare</option>")
         buf.append("<option value=\'VMware Host\'>VMware Host OS</option>")
         buf.append("<option value=\'VMware Standalone\'>VMware Standalone OS</option>")
         buf.append("<option value=\'Standalone\'>Standalone OS</option>")

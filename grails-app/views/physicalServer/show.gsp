@@ -21,18 +21,32 @@
 <%@ page import="edu.hawaii.its.dcmd.inf.PhysicalServer"%>
 <html>
 <head>
-    <meta content="main" name="layout" />
-    <title><g:message code="default.dcmd.label" /></title>
+    <g:set var="serverType" value="${fieldValue(bean:physicalServerInstance, field: 'serverType')}" />
     <jqDT:resources jqueryUi="true" type="js" />
+    <title><g:message code="default.dcmd.label" /></title>
+
+    <meta content="main" name="layout" />
+    <script language="javascript" type="text/javascript" src="../js/mustache.js"></script>
+
+
+    <g:applyLayout name="breadcrumb_bar">
+        <g:include controller="person" action="setBreadCrumbForCurrentItem" params="[pageType: 'asset', instance :physicalServerInstance]"/>
+    </g:applyLayout>
+
 
 </head>
 <body>
 
+
 <div id="container">
 
-    <g:render template="../show_secondary" model="[pageType:'asset', objectId:physicalServerInstance.id, action:'show']" />
+    <g:render template="../show_secondary" model="[pageType:'physicalServer', assetType: 'server', objectId:physicalServerId, action:'show', assetName: physicalServerInstance]" />
+
+    <g:render template="../breadcrumbs" model="[pageType:'asset', action:'show']"/>
 
 </div>
+
+
 
 <div class="pageBodyNoMargin">
     <article class="module width_full">
@@ -41,16 +55,19 @@
             <g:render template="../content_title" model="[entityName: 'Physical Server', code:'default.show.label']" />
             <s:info/>
 
-            <g:render template='dialog_show' model="[ assetId: physicalServerInstance.id]"/>
+            <g:render template='dialog_show' model="[physicalServerId: physicalServerInstance.id, serverType:serverType]"/>
             <div class="clear"></div>
 
         </div> <!-- end pagebody -->
 
-    <g:render template="tabs" model="[actionName:'show']"/>
+ <g:render template="tabs" model="[assetType: 'Server', actionName:'show']"/>
 
     </article>
 </div>
 
 </body>
-</html>
 
+
+
+
+</html>

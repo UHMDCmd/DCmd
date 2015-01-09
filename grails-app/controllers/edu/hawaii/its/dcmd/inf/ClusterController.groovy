@@ -322,7 +322,7 @@ class ClusterController {
         if (params.status) params.status = Status.get(params.status)
 
         params.cluster = Cluster.get(params.clusterId)
-        params.type = 'VMware'
+        params.type = 'VMWare'
 
 
         // determine our action
@@ -331,7 +331,7 @@ class ClusterController {
                 // add instruction sent
                 //System.out.println(params)
                 item = new Host(params)
-                item.type = 'VMware Guest'
+                item.type = 'VMWare'
 //                item.main_asset = Asset.get(params.assetId)
                 if (! item.hasErrors() && item.save()) {
                     message = "Created host ${params.hostname}"

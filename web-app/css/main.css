@@ -294,11 +294,13 @@ textarea.cols2rows96 {
     vertical-align: top;
 }
 
+/*
 .ui-widget-content a:link, a:visited, a:hover {
     color: #fff;
     font-weight: bold;
     text-decoration: underline;
 }
+*/
 
 /* TEXT WINDOW */
 
@@ -328,8 +330,21 @@ div.dialog {
 div.show-wrapper {
     float: left;
     width: 400px;
-    padding-left: 100px;
+
+    padding-left: 5%;
+    padding-bottom: 20px;
 }
+
+.item {
+    width:400px;
+    padding-left:2%;
+    padding-bottom:10px;
+    padding-top:10px;
+}
+
+.ObjTitle {font-size:120%; font-weight:bolder}
+
+
 br
 {
     clear: left;
@@ -337,8 +352,9 @@ br
 
 table.floatTables {
     border: 0px;
-    table-layout: fixed;
-    width:400px;
+    /*table-layout: fixed;
+
+    width:400px;          */
 }
 
 td {
