@@ -94,6 +94,8 @@ grails.project.dependency.resolution = {
 
         compile ":quartz:1.0.2"
 
+        compile ":backbonejs:1.0.0"
+
         // 2.1.1 config
 
 

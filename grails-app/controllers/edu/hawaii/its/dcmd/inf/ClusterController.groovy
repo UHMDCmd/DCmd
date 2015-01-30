@@ -146,7 +146,7 @@ class ClusterController {
     /*****************************************************************/
     /* Assets Grid
     /*****************************************************************/
-    def listAssets = {
+    def listServers = {
         def sortIndex = params.sidx ?: 'itsId'
         def sortOrder  = params.sord ?: 'asc'
         def maxRows = Integer.valueOf(params.rows)
@@ -159,11 +159,7 @@ class ClusterController {
 
             // Add Search Filters
             if(params.itsId) ilike('itsId', "%${params.itsId}%")
-            if(params.status) {
-                status {
-                    ilike('abbreviation', "%${params.status}%")
-                }
-            }
+
             if(params.primarySA) {
                 def SACriteria = new DetachedCriteria(SupportRole).build {
                     roleName {
@@ -190,13 +186,11 @@ class ClusterController {
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
         // Calculate total of that resource provided by the asset
-
-        def results = assets?.collect { [ cell: ['',
+        def results = assets?.collect { [ cell: [
                 "<a href='../asset/show?id=${it.id}'>${it.toString()}</a>",
-                it.status.toString(),
                 "<a href='../person/show?id=${personService.getAdmin(it)?.id}'>${personService.getAdmin(it).toString()}</a>",
-                "<a href='../asset/show?id=${it.getRackAssignmentId()}'>${it.getRackAssignment()}</a>",
-                it.position(), assetService.getCurrentLocationLink(it), it.generalNote], id: it.id ] }
+                it.memorySize + " GB", it.getMemoryPercentUsed(), it.numCores, it.getCPUPercentUsed(),
+                it.generalNote], id: it.id ] }
 
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         render jsonData as JSON
@@ -240,7 +234,7 @@ class ClusterController {
     /* Hosts Grid
     /*****************************************************************/
     def listHosts = {
-        def sortIndex = params.sidx ?: 'hostName'
+        def sortIndex = params.sidx ?: 'hostname'
         def sortOrder  = params.sord ?: 'asc'
         def maxRows = Integer.valueOf(params.rows)
         def currentPage = Integer.valueOf(params.page) ?: 1
@@ -298,13 +292,14 @@ class ClusterController {
                     break
             }
         }
-
         def totalRows = hosts.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
-        def results = hosts?.collect { [ cell: ['',
+        def results = hosts?.collect { [ cell: [
                 "<a href='../host/show?id=${it.id}'>${it.hostname}</a>",
-                it.env.toString(), it.status.toString(),
+                "<a href='../physicalServer/show?id=${it.asset?.id}'>${it.asset?.itsId}</a>",
+                it.env.toString(), it.getVCenterStateString(),
                 "<a href='../person/show?id=${personService.getAdmin(it)?.id}'>${personService.getAdmin(it).toString()}</a>",
+                it.getMaxMemoryString(), it.getMaxCpuString(),
                 it.generalNote], id: it.id ] }
 
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]

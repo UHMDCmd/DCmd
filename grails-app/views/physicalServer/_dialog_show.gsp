@@ -108,7 +108,7 @@
                 <td valign="top" class="value">${fieldValue(bean: physicalServerInstance, field: "numCores")}</td>
             </tr>
             <tr>
-                <td valign="top" class="name"><g:message code="asset.numCores.label" default="Total CPU" /></td>
+                <td valign="top" class="name"><g:message code="asset.numCores.label" default="Max Assigned CPU" /></td>
                 <td valign="top" class="value">${physicalServerInstance.getTotalGhzUsed()}</td>
             </tr>
             <tr>

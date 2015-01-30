@@ -44,7 +44,7 @@ height:'auto',
 //caption:'Host List',
 url:'listAll',
             datatype: "json",
-            colNames:['Host', 'Asset', 'Host Type', 'VM State', 'Environment', 'Primary Host SA', 'Host OS', 'Application(s)',
+            colNames:['Hostname', 'Physical Server', 'Host Type', 'VM State', 'Environment', 'Primary Host SA', 'Host OS', 'Application(s)',
                 'Service(s)', 'Service Primary SA(s)','Max. Memory (GB)', 'Max. CPU (MHz)','IP Address', 'General Notes', 'id'],
             colModel:[
                 {name:'hostname', width: 100, formatter: 'showlink', formatoptions: {showAction:'show'}, frozen:true, title:false},
@@ -105,16 +105,19 @@ url:'listAll',
     };
 
     setTooltipsOnColumnHeader($("#allHosts"),0,"ITS name of the Host");
-    setTooltipsOnColumnHeader($("#allHosts"),1,"The Physical Server (or cluster) Host is running on");
+    setTooltipsOnColumnHeader($("#allHosts"),1,"The Physical Server Host is running on");
     setTooltipsOnColumnHeader($("#allHosts"),2,"Virtualizaiton Type (e.g., Global Zone, VMWare, Standalone, etc.)");
-    setTooltipsOnColumnHeader($("#allHosts"),3,"Status e.g. Online, Offline, Standby, etc.");
-    setTooltipsOnColumnHeader($("#allHosts"),4,"The Primary Operating System of this Host");
+    setTooltipsOnColumnHeader($("#allHosts"),3,"State from VCenter sync (not found if not in VCenter, N/A of non-VMWare Host)");
+    setTooltipsOnColumnHeader($("#allHosts"),4,"The Environment of the Host. e.g. Prod, Test, Dev, etc.");
     setTooltipsOnColumnHeader($("#allHosts"),5,"The Primary System Administrator for this Host");
-    setTooltipsOnColumnHeader($("#allHosts"),6,"The Environment Assigned to the Host. e.g. Prod, Test, Dev, etc.");
+    setTooltipsOnColumnHeader($("#allHosts"),6,"The Primary Operating System of this Host");
     setTooltipsOnColumnHeader($("#allHosts"),7,"The Applications depending on this Host");
     setTooltipsOnColumnHeader($("#allHosts"),8,"Services running on the Host");
     setTooltipsOnColumnHeader($("#allHosts"),9,"Primary SA for each running Service");
-    setTooltipsOnColumnHeader($("#allHosts"),10,"General Notes about Host");
+    setTooltipsOnColumnHeader($("#allHosts"),10,"Maximum Memory Assigned to this Virtual Host");
+    setTooltipsOnColumnHeader($("#allHosts"),11,"Maximum CPU MHz Allocated to this Virtual Host");
+    setTooltipsOnColumnHeader($("#allHosts"),12,"IP Address of the Virtual Host");
+    setTooltipsOnColumnHeader($("#allHosts"),13,"General Notes about Host");
 
 
     jQuery("#allHosts").jqGrid('jqGridExport');

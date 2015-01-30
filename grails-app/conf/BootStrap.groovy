@@ -484,7 +484,7 @@ class BootStrap {
 
 
                 def userKarsin, userElfalan, userHodges, kawachi, ckawano, jonathan, czane, steven, garry, thang, romeot,
-                    anicasm, nakadoma, vyoshida, osamum, kc96813, userKylanh
+                    anicasm, nakadoma, vyoshida, osamum, kc96813, userKylanh, userJshima
                 if(!User.count()) {
                     userKarsin = new User(username: 'karsin', password:'none', enabled: true, userSettings: defaultSettings)
                     userKarsin.save(failOnError:true,flush:true)
@@ -520,6 +520,8 @@ class BootStrap {
                     kc96813.save(failOnError:true,flush:true)
                     userKylanh = new User(username: 'kylanh', password:'none', enabled: true, userSettings: defaultSettings)
                     userKylanh.save(failOnError:true,flush:true)
+                    userJshima = new User(username: 'jshima', password:'none', enabled: true, userSettings: defaultSettings)
+                    userJshima.save(failOnError:true,flush:true)
 
                 }
                 def rolesKarsin, rolesElfalan, rolesHodges, rolesKawachi, rolesCkawano, rolesJonathan, rolesCzane,

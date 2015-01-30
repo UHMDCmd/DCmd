@@ -1,7 +1,99 @@
 
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+<script src="../js/handlebars.js"></script>
+
+<g:render template="details"/>
+
 <script type="text/javascript">
 
+   // (function($){
+
+        var PhyServer = Backbone.Model.extend({
+            url:'/its/dcmd/physicalServer/getServerDetails',
+
+            defaults: function() {
+                return {
+                    itsId: 'empty',
+                    status: 'empty'
+                };
+            },
+            getData: function() {
+
+            },
+            saveData: function() {
+
+            }
+        });
+        var theServer = new PhyServer();
+
+        var template;
+
+        var ServerView = Backbone.View.extend({
+
+            model: theServer,
+
+//            template: _.template($("#server_template").html()),
+//            el: $("#server_dialog"),
+
+            events: {
+                "click #unlock": "unlockAll",
+                "click #lock": "lockAll",
+                "click .discard": "discardChanges"
+            },
+
+            initialize: function () {
+                _.bindAll(this, 'render', 'unlockAll', 'lockAll', 'discardChanges', 'loadData');
+                template = Handlebars.compile($("#server_template").html());
+            //    this.model.on("change", this.render);
+            },
+
+            render: function() {
+                //this.$el.html(this.template(this.model.toJSON()));
+                console.log(this.model.toJSON());
+                var context = {data: this.model.toJSON()};
+                this.$el.html(template(context));
+//                $("#server_dialog").append(this.el);
+                return this;
+            },
+
+            unlockAll: function() {
+                this.$el.addClass('editing');
+
+                this.render();
+            },
+            lockAll: function() {
+                this.$el.removeClass('editing');
+                console.log($('.value input[type="text"]'));
+                $('.value input[type="text"]').prop("disabled", true);
+            //    console.log(this.$el.('input[type="text"] .edit'));
+            //    this.render();
+            },
+            discardChanges: function() {
+            },
+            loadData: function(serverId) {
+                this.model.fetch({data: $.param({serverId:serverId}), success: this.render});
+            }
+
+        });
+
+   var openItem = function(serverId) {
+       var serverView = new ServerView({ el: $("#server_dialog") });
+       serverView.loadData(serverId);
+       $("#server_dialog").dialog("open");
+   };
+
+  //  })(jQuery);
+%{--</script>
+
+
+<script type="text/javascript">--}%
+/*
 function openItem(serverId) {
+
+    alert(task.get("title"));
+
     jQuery.ajax({
         async: false,
         url: '/its/dcmd/physicalServer/getServerDetails?serverId='+serverId,
@@ -18,17 +110,12 @@ function openItem(serverId) {
         },
         error: function () { alert('Error retrieving elog info'); }
     });
-
-
     //$( "#item_dialog").dialog({appendTo: ""});
     $("#item_dialog").dialog("open");
 }
-
+  */
 function unlock() {
-    $('.locked').position = 'absolute';
-    $('.locked').hide();
-    $('.unlocked').position = 'relative';
-    $('.unlocked').show();
+
 }
 
 function lock() {
@@ -40,7 +127,7 @@ function lock() {
 
 
 $(document).ready(function() {
-    $( "#item_dialog" ).dialog({
+    $( "#server_dialog" ).dialog({
         autoOpen: false,
         width: 800,
         height: 400,
@@ -93,11 +180,12 @@ height:'auto',
 width:'1000',
 url:'listAllPhyServer',
             datatype: "json",
-            colNames:['ITS Id', 'Server Type', 'VM Cluster', 'Host OS', 'Status', 'Primary SA', 'RU Size', 'Current Rack', 'Current Position', 'Current Location',
-                'Avail. for parts', 'Serial #', 'Manufacturer', 'Model', 'Total Memory', 'Memory Assigned', 'Total Cores', 'Max CPU Assigned', 'General Notes', 'id'],
+            colNames:['ITS Id', 'Server Type', 'VCenter', 'VM Cluster', 'OS Host', 'Status', 'Primary SA', 'RU Size', 'Current Rack', 'Current Position', 'Current Location',
+                'Avail. for parts', 'Serial #', 'Vendor', 'Model', 'Total Memory', 'Memory Assigned', 'Total Cores', 'Max CPU Assigned', 'General Notes', 'id'],
             colModel:[
                 {name:'itsId', width:100, editable:false, frozen:true, title:false},
                 {name:'serverType', width:120, editable:false, frozen:true, title:false},
+                {name:'vcenter', width:120, editable:false, title:false},
                 {name:'cluster', width:120, editable:false, title:false},
                 {name:'hostOS', width:120, editable:false, title:false},
                 {name:'assetStatus', width:100, editable:false, title:false},
@@ -111,7 +199,7 @@ url:'listAllPhyServer',
                 {name:'manufacturer', width:120, editable:false, title:false},
                 {name:'modelDesignation', width:120, editable:false, title:false},
                 {name:'memorySize', width:120, editable:false, title:false},
-                {name:'memoryAssigned', width:120, editable:false, title:false},
+                {name:'memoryAssigned', width:150, editable:false, title:false},
                 {name:'numCores', width:120, editable:false, title:false},
                 {name:'cpuAssigned', width:120, editable:false, title:false},
                 {name:'generalNote', width:400,title:false},
@@ -152,17 +240,23 @@ url:'listAllPhyServer',
 
     setTooltipsOnColumnHeader($("#allPhyServer"),0,"A unique ITS Id given to the Entity");
     setTooltipsOnColumnHeader($("#allPhyServer"),1,"Virtualization method of Server (e.g., Solaris, VMWare, etc.)");
-    setTooltipsOnColumnHeader($("#allPhyServer"),2,"Status e.g. Online, Offline, Standby, etc.");
-    setTooltipsOnColumnHeader($("#allPhyServer"),3,"The Primary System Administrator for this Server");
-    setTooltipsOnColumnHeader($("#allPhyServer"),4,"Amount of space the Physical Server occupies on a Rack");
-    setTooltipsOnColumnHeader($("#allPhyServer"),5,"The current Physical Rack the Server is mounted on");
-    setTooltipsOnColumnHeader($("#allPhyServer"),6,"Current position the Server is mounted in the Rack");
-    setTooltipsOnColumnHeader($("#allPhyServer"),7,"The Physical Location of the Rack currently mounted on");
-    setTooltipsOnColumnHeader($("#allPhyServer"),8,"Parts Availability");
-    setTooltipsOnColumnHeader($("#allPhyServer"),9,"Serial #");
-    setTooltipsOnColumnHeader($("#allPhyServer"),10,"Manufacturer Name");
-    setTooltipsOnColumnHeader($("#allPhyServer"),11,"Model Designation");
-    setTooltipsOnColumnHeader($("#allPhyServer"),12,"Last Update of Record");
+    setTooltipsOnColumnHeader($("#allPhyServer"),2,"VMWare Cluster the Server hardware is assigned to (N/A if not a VMWare server)");
+    setTooltipsOnColumnHeader($("#allPhyServer"),3,"Host that is the primary OS of this Server (e.g. Global Zone for Solaris)");
+    setTooltipsOnColumnHeader($("#allPhyServer"),4,"Status of the Server (Available, Offline, Retired, etc.)");
+    setTooltipsOnColumnHeader($("#allPhyServer"),5,"The Primary System Administrator assigned to this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),6,"Amount of space the Physical Server occupies on a Rack");
+    setTooltipsOnColumnHeader($("#allPhyServer"),7,"The current Physical Rack the Server is mounted on");
+    setTooltipsOnColumnHeader($("#allPhyServer"),8,"Current position the Server is mounted in the Rack");
+    setTooltipsOnColumnHeader($("#allPhyServer"),9,"The Physical Location of the Rack currently mounted on");
+    setTooltipsOnColumnHeader($("#allPhyServer"),10,"Parts Availability");
+    setTooltipsOnColumnHeader($("#allPhyServer"),11,"Serial #");
+    setTooltipsOnColumnHeader($("#allPhyServer"),12,"Vendor Name");
+    setTooltipsOnColumnHeader($("#allPhyServer"),13,"Model Designation");
+    setTooltipsOnColumnHeader($("#allPhyServer"),14,"Total RAM Memory provided by this Server in Gigabytes");
+    setTooltipsOnColumnHeader($("#allPhyServer"),15,"Percent of Total Memory that is assigned to Hosts running on this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),16,"Total number of CPU Cores provided by this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),17,"Percent of Total CPU that is assigned to hosts running on this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),18,"General notes about this Server");
 
 
 
@@ -225,9 +319,29 @@ url:'listAllPhyServer',
 <div id="allServerPager"></div>
 
 
-<div id="item_dialog" title="Item Details">
+<div id="server_dialog" title="Server Details">
+    %{--
     <g:render template="details"/>
     <br>
     <input type="button" onclick="lock()" value="Lock"/>
     <input type="button" onclick="unlock()" value="Unlock"/>
+    --}%
 </div>
+
+<script type="text/javascript">
+    function testExtern() {
+        jQuery.ajax({
+            async: false,
+            url: '/its/dcmd/physicalServer/testExtern',
+            type:'POST',
+            dataType:'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                alert(data);
+            },
+            error: function () { alert('Error retrieving elog info'); }
+        });
+    }
+</script>
+
+<input type="button" value="test" onclick="testExtern()"/>

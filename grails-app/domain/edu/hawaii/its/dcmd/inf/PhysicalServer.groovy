@@ -104,13 +104,12 @@ class PhysicalServer extends Asset{
             return getTotalMemoryUsed()/1000.0 + " GB"
     }
 
-
     String getMemoryPercentUsed() {
         def memUsed = this.getTotalMemoryUsed()
         if (memUsed == 0 || this.memorySize == 0)
-            return '0%'
+            return '0'
         else
-            return (Math.round(10.0*(memUsed / this.memorySize)))/100.0 + "%"
+            return (Math.round(memUsed/100)/10) + " GB (" + (Math.round(10.0*(memUsed / this.memorySize)))/100.0 + "%)"
     }
 
     Integer getTotalCPUUsed() {
@@ -135,7 +134,6 @@ class PhysicalServer extends Asset{
             return "N/A"
         else
             return (totalCPU/1000) + " GHz"
-
     }
 
     String getTotalCoresUsed() {
@@ -143,10 +141,9 @@ class PhysicalServer extends Asset{
         return cpuUsed/cpuSpeed + " Cores"
     }
 
-
     String getCPUPercentUsed() {
         def cpuUsed = this.getTotalCPUUsed()
-        System.out.println(cpuUsed + ", " + cpuSpeed + ", " + this.numCores)
+//        System.out.println(cpuUsed + ", " + cpuSpeed + ", " + this.numCores)
         if (cpuUsed == 0 || this.numCores == 0)
             return '0%'
         else
@@ -155,9 +152,23 @@ class PhysicalServer extends Asset{
 
     String getHostOSLinkString() {
         if(hostOS == null)
-            return "N/A"
+            return "Not Assigned"
         else
             return "<a href='../host/show?id=" + hostOS.id + "'>" + hostOS.hostname + "</a>"
+    }
+
+    String getClusterLinkString() {
+        if(serverType != 'VMWare')
+            return "N/A"
+        else
+            return "<a href='../cluster/show?id=" + cluster?.id + "'>" + cluster?.name + "</a>"
+    }
+
+    String getDatacenterLinkString() {
+        if(serverType != 'VMWare')
+            return "N/A"
+        else
+            return cluster?.dataCenter
     }
 
     //float getCpuUsage() {

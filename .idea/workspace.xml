@@ -1,56 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9bad73d8-a70a-4e27-9fa4-de56eb5ddaf6" name="Default" comment="1.6.0 with prototype of loadless pages.  VMWare sync disabled and loadless pages are enabled.  Starting point for jared to start working with ajax and fleshing out the loadless pages system.">
+    <list default="true" id="9bad73d8-a70a-4e27-9fa4-de56eb5ddaf6" name="Default" comment="1.6.0 version ready for final testing once all VCenter accounts are setup.  Includes external config files.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/conf/QuartzConfig.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/js/handlebars.js" />
+      <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\grails-app\views\cluster\_serversGrid.gsp" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\stacktrace.log" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\target\stacktrace.log" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\web-app\images\dcmd-theme\uh-logo-white.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\web-app\images\dcmd-theme\uh-logo2.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Asset.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Asset.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/AssetController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/AssetController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Cluster.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Cluster.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/ClusterController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/ClusterController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/Config.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/dcmd/DcimUpdateJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/dcmd/DcimUpdateJob.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/GeneralService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/GeneralService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Host.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Host.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/HostController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/HostController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/HostService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/HostService.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/PhysicalServer.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/PhysicalServer.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/PhysicalServerController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/PhysicalServerController.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sitar-inf-grailsPlugins.iml" afterPath="$PROJECT_DIR$/Sitar-inf-grailsPlugins.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sitar-inf.iml" afterPath="$PROJECT_DIR$/Sitar-inf.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/VMwareController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/VMwareController.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/asset/_dialog.gsp" afterPath="$PROJECT_DIR$/grails-app/views/asset/_dialog.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/host/_dialog.gsp" afterPath="$PROJECT_DIR$/grails-app/views/host/_dialog.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/_dialog.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/_dialog.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/asset/_dialog_show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/asset/_dialog_show.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/host/_dialog_show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/host/_dialog_show.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/cluster/_assetsGrid.gsp" afterPath="$PROJECT_DIR$/grails-app/views/cluster/_assetsGrid.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/cluster/_dialog_show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/cluster/_dialog_show.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/_dialog_show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/_dialog_show.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/_hostGrid.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/_hostGrid.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/cluster/_hostGrid.gsp" afterPath="$PROJECT_DIR$/grails-app/views/cluster/_hostGrid.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/host/_listGrid.gsp" afterPath="$PROJECT_DIR$/grails-app/views/host/_listGrid.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/service/_listGrid.gsp" afterPath="$PROJECT_DIR$/grails-app/views/service/_listGrid.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_show_secondary.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_show_secondary.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_statusSelect.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_statusSelect.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/_tabs.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/_tabs.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/js/asset.js" afterPath="$PROJECT_DIR$/web-app/js/asset.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/create.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/create.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/host/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/host/edit.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/edit.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/index.gsp" afterPath="$PROJECT_DIR$/grails-app/views/index.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/grape-theme/jquery-ui-1.8.15.custom.css" afterPath="$PROJECT_DIR$/web-app/css/grape-theme/jquery-ui-1.8.15.custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/admin_theme/layout.css" afterPath="$PROJECT_DIR$/web-app/css/admin_theme/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/grape-theme/admin_theme/layout.css" afterPath="$PROJECT_DIR$/web-app/css/grape-theme/admin_theme/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/host/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/host/list.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/list.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/rack/list.gsp" afterPath="$PROJECT_DIR$/grails-app/views/rack/list.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/main.css" afterPath="$PROJECT_DIR$/web-app/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" afterPath="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/show.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/show.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sitar-inf.iws" />
@@ -80,21 +53,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_dialog.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_dialog.gsp">
+      <file leaf-file-name="VMWareJob.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/jobs/dcmd/VMWareJob.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.204082" vertical-offset="3206" max-vertical-offset="7616">
-              <caret line="218" column="30" selection-start-line="218" selection-start-column="12" selection-end-line="218" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+              <caret line="15" column="58" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VMWareJob.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/jobs/dcmd/VMWareJob.groovy">
+      <file leaf-file-name="VMService.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-              <caret line="19" column="52" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.5984252" vertical-offset="708" max-vertical-offset="5729">
+              <caret line="64" column="73" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+              <folding>
+                <element signature="e#33#70#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Host.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Host.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="8.1" vertical-offset="1153" max-vertical-offset="3281">
+              <caret line="62" column="21" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PhysicalServerController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/PhysicalServerController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-20.73913" vertical-offset="8737" max-vertical-offset="9486">
+              <caret line="558" column="67" selection-start-line="555" selection-start-column="0" selection-end-line="558" selection-end-column="24" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_listGrid.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.734694" vertical-offset="5214" max-vertical-offset="5984">
+              <caret line="329" column="93" selection-start-line="329" selection-start-column="0" selection-end-line="329" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -103,68 +113,51 @@
       <file leaf-file-name="_details.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_details.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="5865">
-              <caret line="30" column="115" selection-start-line="30" selection-start-column="94" selection-end-line="30" selection-end-column="94" />
+            <state vertical-scroll-proportion="-4.5510206" vertical-offset="2106" max-vertical-offset="6035">
+              <caret line="137" column="43" selection-start-line="137" selection-start-column="12" selection-end-line="137" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_listGrid.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp">
+      <file leaf-file-name="PhysicalServer.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/PhysicalServer.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="4063">
-              <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+            <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="2788">
+              <caret line="40" column="78" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataSource.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
+              <caret line="1" column="75" selection-start-line="1" selection-start-column="75" selection-end-line="1" selection-end-column="75" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PhysicalServerController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/PhysicalServerController.groovy">
+      <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="9350" max-vertical-offset="9520">
-              <caret line="550" column="52" selection-start-line="550" selection-start-column="5" selection-end-line="550" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="5797">
+              <caret line="129" column="28" selection-start-line="129" selection-start-column="28" selection-end-line="129" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HostController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/HostController.groovy">
+      <file leaf-file-name="_dialog_show.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_dialog_show.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4692" max-vertical-offset="15351">
-              <caret line="276" column="8" selection-start-line="276" selection-start-column="8" selection-end-line="276" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HostService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/HostService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="14110">
-              <caret line="46" column="43" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VMService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="4913">
-              <caret line="25" column="60" selection-start-line="25" selection-start-column="60" selection-end-line="25" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssetService.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4390244" vertical-offset="3383" max-vertical-offset="15691">
-              <caret line="236" column="50" selection-start-line="236" selection-start-column="25" selection-end-line="236" selection-end-column="25" />
+            <state vertical-scroll-proportion="-5.428571" vertical-offset="1604" max-vertical-offset="4165">
+              <caret line="110" column="97" selection-start-line="110" selection-start-column="97" selection-end-line="110" selection-end-column="97" />
               <folding />
             </state>
           </provider>
@@ -188,59 +181,62 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web-app/js/isotope.pkgd.min.js" />
-        <option value="$PROJECT_DIR$/web-app/js/asset.js" />
-        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_hostGrid.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/HostService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/host/show.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_tabs.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/physicalServer/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/jobs/dcmd/DcimUpdateJob.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMWareService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/host/list.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/host/edit.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/AssetController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/ClusterController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/GeneralService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/asset/_dialog_show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/host/_dialog_show.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/host/_listGrid.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/RackController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_details.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/asset/_dialog.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/physicalServer/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/_statusSelect.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/list.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Asset.groovy" />
-        <option value="$PROJECT_DIR$/web-app/css/grape-theme/jquery-ui-1.8.15.custom.css" />
         <option value="$PROJECT_DIR$/web-app/css/main.css" />
         <option value="$PROJECT_DIR$/web-app/css/grape-theme/admin_theme/layout.css" />
         <option value="$PROJECT_DIR$/web-app/css/admin_theme/layout.css" />
         <option value="$PROJECT_DIR$/grails-app/views/physicalServer/edit.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/PhysicalServer.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_dialog_show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_dialog.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/_show_secondary.gsp" />
         <option value="$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/quartz-1.0.2/grails-app/conf/DefaultQuartzConfig.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/QuartzConfig.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VmwareService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/VMwareController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Host.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/host/_dialog.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/HostController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy" />
+        <option value="$PROJECT_DIR$/web-app/css/grape-theme/jquery-ui-1.8.15.custom.css" />
+        <option value="$PROJECT_DIR$/grails-app/views/host/_listGrid.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/service/_listGrid.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/list.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_details.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_dialog_show.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/PhysicalServer.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/cluster/_dialog_show.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/cluster/_serversGrid.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/cluster/_tabs.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/cluster/_assetsGrid.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/_show_secondary.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/ClusterController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/cluster/_hostGrid.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/PhysicalServerController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/jobs/dcmd/VMWareJob.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-9" />
@@ -277,7 +273,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -311,6 +306,78 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sitar-inf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesseDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sitar-inf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesseDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sitar-inf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesseDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grape-theme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sitar-inf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesseDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="target" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -396,6 +463,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sitar-inf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesseDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="physicalServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -419,6 +508,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sitar-inf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesseDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="host" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sitar-inf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JesseDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cluster" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -644,6 +777,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -665,13 +799,13 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="210" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="207" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="243" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="240" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="244" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="240" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1151" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1148" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="222" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
@@ -687,6 +821,7 @@
       <recent name="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\grails-app\views\physicalServer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\web-app\js" />
       <recent name="C:\Users\Ben\Desktop\intellij-projects\JesseDemo\web-app\images\dcmd-theme" />
     </key>
   </component>
@@ -923,7 +1058,8 @@
       <workItem from="1418427762818" duration="40152000" />
       <workItem from="1420239103377" duration="28040000" />
       <workItem from="1420845021968" duration="259000" />
-      <workItem from="1420846405259" duration="1155000" />
+      <workItem from="1420846405259" duration="16918000" />
+      <workItem from="1421275687883" duration="36366000" />
     </task>
     <task id="LOCAL-00001" summary="Changes before Demo:&#10;- changes to Rack List page with new entities&#10;- font changes in theme affect show pages&#10;">
       <created>1410392927517</created>
@@ -937,11 +1073,15 @@
       <created>1420767245370</created>
       <updated>1420767245370</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="1.6.0 with prototype of loadless pages.  VMWare sync disabled and loadless pages are enabled.  Starting point for jared to start working with ajax and fleshing out the loadless pages system.">
+      <created>1420847732002</created>
+      <updated>1420847732002</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="218701000" />
+    <option name="totallyTimeSpent" value="293518000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1170" extended-state="6" />
@@ -957,28 +1097,28 @@
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39785993" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29474708" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1325536" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1512247" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36673152" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35380116" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32358673" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3998935" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32358673" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1005,7 +1145,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="4" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1013,83 +1153,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/ClusterController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.913043" vertical-offset="5048" max-vertical-offset="6120">
-          <caret line="333" column="35" selection-start-line="333" selection-start-column="35" selection-end-line="333" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/GeneralService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4667" max-vertical-offset="7820">
-          <caret line="305" column="46" selection-start-line="305" selection-start-column="46" selection-end-line="305" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/asset/_dialog_show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.0" vertical-offset="756" max-vertical-offset="3774">
-          <caret line="56" column="53" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/host/_listGrid.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.4897957" vertical-offset="1616" max-vertical-offset="2975">
-          <caret line="108" column="91" selection-start-line="108" selection-start-column="91" selection-end-line="108" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/host/list.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.163265" vertical-offset="2380" max-vertical-offset="3519">
-          <caret line="152" column="46" selection-start-line="152" selection-start-column="46" selection-end-line="152" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/spring-security-core-2.0-RC2/src/java/grails/plugin/springsecurity/web/authentication/RequestHolderAuthenticationFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="109" max-vertical-offset="1071">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/host/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.122449" vertical-offset="463" max-vertical-offset="1496">
-          <caret line="42" column="92" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/host/show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22596964" vertical-offset="563" max-vertical-offset="1258">
-          <caret line="41" column="44" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/host/reports.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.2040815" vertical-offset="1173" max-vertical-offset="3145">
-          <caret line="84" column="43" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/rack/_rackTab.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.591837" vertical-offset="2061" max-vertical-offset="7395">
-          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/RackController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="26.695652" vertical-offset="801" max-vertical-offset="3927">
-          <caret line="40" column="46" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/asset/_dialog.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.3265305" vertical-offset="808" max-vertical-offset="8806">
@@ -1104,24 +1167,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/list.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1003">
-          <caret line="31" column="49" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/create.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="407" max-vertical-offset="1122">
           <caret line="26" column="61" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2134" max-vertical-offset="30634">
-          <caret line="170" column="21" selection-start-line="170" selection-start-column="21" selection-end-line="170" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1132,16 +1181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Asset.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3281" max-vertical-offset="4641">
-          <caret line="193" column="47" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2704" max-vertical-offset="10693">
@@ -1149,48 +1188,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/grape-theme/jquery-ui-1.8.15.custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="9707">
-          <caret line="66" column="65" selection-start-line="66" selection-start-column="65" selection-end-line="66" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/grape-theme/admin_theme/layout.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="299" max-vertical-offset="21097">
-          <caret line="26" column="9" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-app/css/admin_theme/layout.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="21131">
           <caret line="4" column="77" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5102043" vertical-offset="19" max-vertical-offset="1479">
-          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_dialog_show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.938775" vertical-offset="1400" max-vertical-offset="4165">
-          <caret line="111" column="90" selection-start-line="111" selection-start-column="90" selection-end-line="111" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/PhysicalServer.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-37.4" vertical-offset="0" max-vertical-offset="2601">
-          <caret line="128" column="100" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -1205,13 +1206,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.5" vertical-offset="2242" max-vertical-offset="3740">
           <caret line="151" column="48" selection-start-line="151" selection-start-column="48" selection-end-line="151" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/_show_secondary.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.307692" vertical-offset="2514" max-vertical-offset="6800">
-          <caret line="182" column="63" selection-start-line="182" selection-start-column="63" selection-end-line="182" selection-end-column="63" />
         </state>
       </provider>
     </entry>
@@ -1275,56 +1269,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Host.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.04" vertical-offset="1845" max-vertical-offset="3281">
-          <caret line="159" column="58" selection-start-line="159" selection-start-column="31" selection-end-line="159" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="5814">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.64" vertical-offset="510" max-vertical-offset="1989">
-          <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2244">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/host/_dialog_show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.0" vertical-offset="1606" max-vertical-offset="2635">
-          <caret line="106" column="51" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/host/_dialog.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2736" max-vertical-offset="4352">
           <caret line="175" column="96" selection-start-line="175" selection-start-column="92" selection-end-line="175" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4777">
-          <caret line="25" column="60" selection-start-line="25" selection-start-column="60" selection-end-line="25" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -1337,42 +1285,254 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/HostService.groovy">
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_06/src.zip!/java/util/concurrent/ThreadPoolExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2193" max-vertical-offset="13668">
-          <caret line="46" column="43" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.33222038" vertical-offset="9236" max-vertical-offset="33983">
+          <caret line="602" column="0" selection-start-line="602" selection-start-column="0" selection-end-line="602" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/grape-theme/jquery-ui-1.8.15.custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5041051" vertical-offset="934" max-vertical-offset="9724">
+          <caret line="73" column="106" selection-start-line="73" selection-start-column="19" selection-end-line="73" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/PhysicalServerController.groovy">
+    <entry file="file://$PROJECT_DIR$/web-app/css/grape-theme/admin_theme/layout.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9350" max-vertical-offset="9520">
-          <caret line="550" column="52" selection-start-line="550" selection-start-column="5" selection-end-line="550" selection-end-column="5" />
+        <state vertical-scroll-proportion="1.6752411" vertical-offset="7441" max-vertical-offset="21097">
+          <caret line="499" column="122" selection-start-line="499" selection-start-column="27" selection-end-line="499" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_details.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/service/_listGrid.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="5865">
-          <caret line="30" column="115" selection-start-line="30" selection-start-column="94" selection-end-line="30" selection-end-column="94" />
+        <state vertical-scroll-proportion="0.33162394" vertical-offset="1591" max-vertical-offset="2312">
+          <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="4063">
-          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+        <state vertical-scroll-proportion="-14.28" vertical-offset="1003" max-vertical-offset="2023">
+          <caret line="80" column="69" selection-start-line="80" selection-start-column="33" selection-end-line="80" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/list.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6938776" vertical-offset="357" max-vertical-offset="1003">
+          <caret line="19" column="90" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.163265" vertical-offset="0" max-vertical-offset="1479">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_dialog.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.204082" vertical-offset="3206" max-vertical-offset="7616">
-          <caret line="218" column="30" selection-start-line="218" selection-start-column="12" selection-end-line="218" selection-end-column="12" />
+        <state vertical-scroll-proportion="-4.6530614" vertical-offset="350" max-vertical-offset="7616">
+          <caret line="34" column="34" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Asset.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.72" vertical-offset="408" max-vertical-offset="4318">
+          <caret line="51" column="59" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/host/_dialog_show.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37947494" vertical-offset="1881" max-vertical-offset="2635">
+          <caret line="120" column="86" selection-start-line="120" selection-start-column="58" selection-end-line="120" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/host/_listGrid.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.2040815" vertical-offset="0" max-vertical-offset="3026">
+          <caret line="15" column="99" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/cluster/_listGrid.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66167665" vertical-offset="153" max-vertical-offset="1666">
+          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/cluster/show.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3877552" vertical-offset="459" max-vertical-offset="1190">
+          <caret line="23" column="67" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/cluster/_dialog_show.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.897959" vertical-offset="408" max-vertical-offset="1377">
+          <caret line="41" column="73" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/cluster/_tabs.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.020409" vertical-offset="204" max-vertical-offset="1241">
+          <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/cluster/_assetsGrid.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.632653" vertical-offset="816" max-vertical-offset="2805">
+          <caret line="70" column="98" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_show_secondary.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.269231" vertical-offset="2539" max-vertical-offset="6715">
+          <caret line="162" column="79" selection-start-line="162" selection-start-column="74" selection-end-line="162" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/HostService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2244" max-vertical-offset="13668">
+          <caret line="69" column="49" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3650" max-vertical-offset="15929">
+          <caret line="265" column="45" selection-start-line="265" selection-start-column="42" selection-end-line="265" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/ClusterController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="23.130434" vertical-offset="4255" max-vertical-offset="6035">
+          <caret line="243" column="82" selection-start-line="243" selection-start-column="81" selection-end-line="243" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/cluster/_hostGrid.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.6530614" vertical-offset="726" max-vertical-offset="2890">
+          <caret line="59" column="57" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
+          <folding>
+            <marker date="1421964921766" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_dialog_show.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.428571" vertical-offset="1604" max-vertical-offset="4165">
+          <caret line="110" column="97" selection-start-line="110" selection-start-column="97" selection-end-line="110" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/PhysicalServer.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="2788">
+          <caret line="40" column="78" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_details.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.5510206" vertical-offset="2106" max-vertical-offset="6035">
+          <caret line="137" column="43" selection-start-line="137" selection-start-column="12" selection-end-line="137" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7923" max-vertical-offset="30668">
+          <caret line="510" column="5" selection-start-line="510" selection-start-column="5" selection-end-line="510" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="5797">
+          <caret line="129" column="28" selection-start-line="129" selection-start-column="28" selection-end-line="129" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
+          <caret line="1" column="75" selection-start-line="1" selection-start-column="75" selection-end-line="1" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/edu/hawaii/its/dcmd/inf/Host.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.1" vertical-offset="1153" max-vertical-offset="3281">
+          <caret line="62" column="21" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/PhysicalServerController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.73913" vertical-offset="8737" max-vertical-offset="9486">
+          <caret line="558" column="67" selection-start-line="555" selection-start-column="0" selection-end-line="558" selection-end-column="24" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.734694" vertical-offset="5214" max-vertical-offset="5984">
+          <caret line="329" column="93" selection-start-line="329" selection-start-column="0" selection-end-line="329" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1380,16 +1540,18 @@
     <entry file="file://$PROJECT_DIR$/grails-app/jobs/dcmd/VMWareJob.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <caret line="19" column="52" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <caret line="15" column="58" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4390244" vertical-offset="3383" max-vertical-offset="15691">
-          <caret line="236" column="50" selection-start-line="236" selection-start-column="25" selection-end-line="236" selection-end-column="25" />
-          <folding />
+        <state vertical-scroll-proportion="0.5984252" vertical-offset="708" max-vertical-offset="5729">
+          <caret line="64" column="73" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+          <folding>
+            <element signature="e#33#70#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1400,8 +1562,8 @@
         <entry key="Sitar-inf">
           <value>
             <GrailsSettings>
-              <option name="buildConfigCrc" value="-1656307124" />
-              <option name="pluginDependenciesCrc" value="38262378" />
+              <option name="buildConfigCrc" value="1777184847" />
+              <option name="pluginDependenciesCrc" value="712860415" />
               <option name="properties">
                 <map>
                   <entry key="grails.global.plugins.dir" value="C:\Users\Ben\.grails\2.3.8\global-plugins" />

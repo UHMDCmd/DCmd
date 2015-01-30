@@ -36,6 +36,7 @@ import edu.hawaii.its.dcmd.inf.Person
 import grails.gorm.DetachedCriteria
 import org.hibernate.criterion.Restrictions
 import de.andreasschmitt.export.taglib.util.RenderUtils
+import groovy.json.JsonSlurper
 
 class PhysicalServerController {
 
@@ -545,9 +546,22 @@ class PhysicalServerController {
     def getServerDetails = {
         System.out.println(params)
         def server = PhysicalServer.get(params.serverId)
-        def response = [retVal: true, server:server, status:server.status?.abbreviation]
-        render response as JSON
+        //def response = [retVal: true, itsId:server.itsId, status:server.status?.abbreviation]
+        //render response as JSON
+        render server as JSON
 
+    }
+
+    def testExtern = {
+        def inputFile = new File("C:\\Users\\Ben\\.grails\\testFile.txt")
+        def jsonSlurper = new JsonSlurper()
+        def InputJSON = jsonSlurper.parseText(inputFile.text)
+        InputJSON.each {
+            println it.url
+            println it.username
+            println it.password
+        }
+        render InputJSON as JSON
     }
 
 }

@@ -56,29 +56,16 @@
             editurl:'../cluster/editHosts?clusterId=${clusterInstance.id}',
             datatype: "json",
 
-            colNames: ['', 'Host Name', 'Environment', 'Status', 'Host SA', 'Host Notes', 'id'],
+            colNames: ['Hostname', 'Physical Server', 'Environment', 'VM Status', 'Primary SA', 'Max. Memory (GB)', 'Max CPU (MHz)', 'Notes', 'id'],
             colModel:[
-                {name:'actions', index:'actions', editable:false, required:false, sortable:false, width:"20",
-                    formatter: 'actions', hidden:!editOption, formatoptions: {
-                        keys: true, editbutton: false }
-                    },
-                {name:"hostname", width:120, editable:editOption, formatter: 'showlink', formatoptions: {showAction:'show', baseLinkUrl:'../host/'}},
-                {name:'hostEnv', width:100, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"environment",action:"listEnvsAsSelect")}',
-                    dataInit:function(e){$(e).select2({
-                        width: 160
-                    })}
-                }},
-                {name:'status', width:100, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"status",action:"listStatusAsSelect")}',
-                    dataInit:function(e){$(e).select2({
-                        width: 160
-                    })}
-                }},
-                {name:'hostSA', width:100, sortable:false, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person", action:"listAsSelect")}',
-                    dataInit:function(e){$(e).select2({
-                        width: 160
-                    })}
-                }},
-                {name:'generalNote', edittype:'textarea',width:250, editable:editOption},
+                {name:"hostname", width:40, editable:editOption, formatter: 'showlink', formatoptions: {showAction:'show', baseLinkUrl:'../host/'}},
+                {name:'server', width:40, editable:false},
+                {name:'hostEnv', width:40, editable:false},
+                {name:'vmstatus', width:40, editable:false},
+                {name:'hostSA', width:50, sortable:false, editable:false},
+                {name:'memory', width:50, editable:false},
+                {name:'cpu', width:50, editable:false},
+                {name:'hostNote', width:200, editable:false},
                 {name:'id', hidden:true}
             ],
             rowNum: 10,

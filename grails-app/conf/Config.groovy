@@ -118,8 +118,8 @@ grails.plugin.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
 grails.plugin.springsecurity.cas.serviceUrl = 'http://localhost:8080/its/dcmd/j_spring_cas_security_check'
 grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/its/dcmd/secure/receptor'
 grails.plugin.springsecurity.logout.afterLogoutUrl =
-    'https://cas-test.its.hawaii.edu/cas/logout?url=http://localhost:8080/its/dcmd/'
-grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.edu/cas/'
+    'https://login.its.hawaii.edu/cas/logout?url=http://localhost:8080/its/dcmd/'
+grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://login.its.hawaii.edu/cas/'
 
 /***************************************************************************************
  * Un-comment this for Test
@@ -177,8 +177,7 @@ environments {
     }
     development {
 
-
-        grails.serverURL = "http://localhost:8080/its/${appName}"
+        grails.config.locations = ["file:${userHome}/.grails/${appName}Config.groovy"]
         /*
         log4j {
         logger {

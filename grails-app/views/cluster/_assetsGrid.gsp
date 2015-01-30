@@ -27,7 +27,7 @@
     else {
         editOption = false
     }
-    listAssetUrl = 'listAssets?clusterId=${clusterInstance.id}'
+    listAssetUrl = 'listServers?clusterId=${clusterInstance.id}'
 
 
     function Init() {
@@ -62,24 +62,15 @@
             datatype: "json",
 
 
-        colNames:['','Asset', 'Status', 'Primary SA', 'Current Rack', 'Rack Position', 'Rack Location', 'Notes', 'id'],
+            colNames:['itsId', 'Primary SA', 'Total Memory', 'Memory Assigned', 'Total Cores', 'Max CPU Assigned', 'Notes', 'id'],
             colModel:[
-                {name:'actions', index:'actions', editable:false, required:false, search:false, sortable:false, width:"20",
-                    formatter: 'actions', hidden:!editOption, formatoptions: {
-                    keys: true, editbutton: false }
-                },
-                {name:'itsId', width:80, editable:editOption, edittype:'select', editoptions: {dataUrl:'${createLink(controller:"physicalServer",action:"listAvailServers")}',
-                    dataInit:function(e){$(e).select2({
-                        width: 160
-                    })}
-                }},
-                {name:'status', width:50, editable:false, sortable:false},
-                {name:'primarySA', width:50, editable:false, sortable:false},
-                {name:'currentRack', width:50, editable:false, search:false, sortable:false},
-                {name:'rackPosition', width:50, editable:false, search:false, sortable:false},
-                {name:'rackLocation', width:50, editable:false, search:false, sortable:false},
-
-                {name:'generalNote',editable:false},
+                {name:'itsId', width:30, editable:false},
+                {name:'primarySA', width:50, editable:false},
+                {name:'totalMem', width:40, editable:false},
+                {name:'assignedMem', width:50, editable:false},
+                {name:'totalCores', width:40, editable:false},
+                {name:'assignedCPU', width:50, editable:false},
+                {name:'serverNotes',editable:false},
                 {name:'id', hidden:true}
             ],
 

@@ -111,14 +111,14 @@
             jQuery("tr.ui-jqgrid-labels th:eq(" + iColumn + ")", thd).attr("title", text);
         };
 
-        setTooltipsOnColumnHeader($("#allServices"),0,"Expand to see associated Software Instances");
-        setTooltipsOnColumnHeader($("#allServices"),1,"The Name of the Service");
-        setTooltipsOnColumnHeader($("#allServices"),2,"The Application this Service is associated with");
-        setTooltipsOnColumnHeader($("#allServices"),3,"The Environment Assigned to the Application. e.g. Prod, Test, Dev, etc.");
-        setTooltipsOnColumnHeader($("#allServices"),4,"A Brief Description of the function of this Application");
-        setTooltipsOnColumnHeader($("#allServices"),5,"The Status of this Application. e.g . Available, Disabled, etc.");
-        setTooltipsOnColumnHeader($("#allServices"),6,"The Primary System Administrator assigned to this Service");
-        setTooltipsOnColumnHeader($("#allServices"),7,"The Primary System Administrator assigned to the Application");
+//        setTooltipsOnColumnHeader($("#allServices"),0,"Expand to see associated Software Instances");
+        setTooltipsOnColumnHeader($("#allServices"),0,"The Name of the Service");
+        setTooltipsOnColumnHeader($("#allServices"),1,"The Application this Service is associated with");
+        setTooltipsOnColumnHeader($("#allServices"),2,"The Environment Assigned to the Application. e.g. Prod, Test, Dev, etc.");
+        setTooltipsOnColumnHeader($("#allServices"),3,"A Brief Description of the function of this Application");
+        setTooltipsOnColumnHeader($("#allServices"),4,"The Status of this Application. e.g . Available, Disabled, etc.");
+        setTooltipsOnColumnHeader($("#allServices"),5,"The Primary System Administrator assigned to this Service");
+        setTooltipsOnColumnHeader($("#allServices"),6,"The Primary System Administrator assigned to the Application");
         
         jQuery(window).bind('resize', function() {
             dynamicListSize('#allServices');

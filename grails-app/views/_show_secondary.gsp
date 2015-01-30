@@ -110,13 +110,8 @@
             <div class="menu_item" onclick="location.href='/its/dcmd/application/list';" style="cursor:pointer">Applications</div>
             <div class="menu_item" onclick="location.href='/its/dcmd/service/list';" style="cursor:pointer">Services</div>
 
-
-            <div class="menu_item" onclick="location.href='/its/dcmd/asset/list';" style="cursor:pointer">Assets
-                <a href="/its/dcmd/asset/list" class="submenu_item">All Assets</a>
-                <a href="/its/dcmd/physicalServer/list" class="submenu_item">Physical Servers</a>
-                <a href="/its/dcmd/rack/list" class="submenu_item">Racks</a>
-                <a href="/its/dcmd/location/list" class="submenu_item">Locations</a>
-            </div>
+            <div class="menu_item" onclick="location.href='/its/dcmd/asset/list';" style="cursor:pointer">All Assets</div>
+            <div class="menu_item" onclick="location.href='/its/dcmd/physicalServer/list';" style="cursor:pointer">Physical Servers</div>
 
             <div class="menu_item" onclick="location.href='/its/dcmd/person/list';" style="cursor:pointer">Staff
                 <a href="/its/dcmd/person/list" class="submenu_item">All Staff</a>
@@ -125,7 +120,7 @@
             </div>
 
             <div class="menu_item" onclick="location.href='/its/dcmd/host/reports';" style="cursor:pointer">Reports</div>
-            <div class="menu_item" onclick="location.href='/its/dcmd/power/list';" style="cursor:pointer">Power</div>
+%{--            <div class="menu_item" onclick="location.href='/its/dcmd/power/list';" style="cursor:pointer">Power</div> --}%
             <div class="menu_item" onclick="location.href='/its/dcmd/audit/list';" style="cursor:pointer">Audit Log</div>
             <div class="menu_item" onclick="location.href='/its/dcmd/user/list';" style="cursor:pointer">DCmd Access</div>
 
@@ -170,7 +165,7 @@
                 <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
                 <div class="actions_divider"></div>
 
-                <g:if test="${pageType != 'denied' && assetType != 'Rack' && pageType != 'asset'}">
+                <g:if test="${pageType != 'denied' && assetType != 'Rack' && pageType != 'asset' && pageType != 'cluster'}">
                     <g:actionSubmit controller="${pageType}" class="create_button" action="create" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 
                     <g:actionSubmit controller="${pageType}" class="edit_button" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />

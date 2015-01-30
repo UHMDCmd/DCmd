@@ -22,6 +22,7 @@ package edu.hawaii.its.dcmd.inf
 
 import grails.gorm.DetachedCriteria
 import org.hibernate.Criteria
+import org.hibernate.criterion.Projections
 
 class AssetService {
 
@@ -170,6 +171,7 @@ class AssetService {
             createAlias('supporters.roleName', 'supporters.roleName', Criteria.LEFT_JOIN)
             createAlias('manufacturer', 'manufacturer', Criteria.LEFT_JOIN)
             createAlias('RUplacement.onRack', 'RUplacement.onRack', Criteria.LEFT_JOIN)
+
             cache true
         }
 
@@ -235,12 +237,23 @@ class AssetService {
                         order('name', sortOrder)
                     }
                     break
+
+                case 'memoryAssigned':
+                    //       hosts {
+                    //           projections{
+                    //               sum('maxMemory').as('memoryAssigned')
+                    //           }
+                    setProjection(Projections.sum('hosts.maxMemory'))
+                    createAlias('hosts.maxMemory', 'memoryAssigned')
+                    order('memoryAssigned', sortOrder)
+            //}
+                    break
+
                 default:
                     order(sortIndex, sortOrder)
                     break
             }
         }
-
 
         def totalRows = physicalServers.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
@@ -248,7 +261,9 @@ class AssetService {
         def results = physicalServers?.collect { [ cell: [
                 //"<a href='../physicalServer/show?id=${it.id}'>${it.itsId}</a>",
                 "<a onclick='openItem(${it.id})'>${it.itsId}</a>",
-                it.serverType, "<a href='../cluster/show?id=${it.cluster?.id}'>${it.cluster?.name}</a>",
+                it.serverType,
+                it.getDatacenterLinkString(),
+                it.getClusterLinkString(),
                 it.getHostOSLinkString(),
                 it.status.toString(),
                 personService.getSupportPersonLink(it, 'Primary SA'),
@@ -257,8 +272,8 @@ class AssetService {
                 it.position(),
                 getCurrentLocationLink(it),
                 it.isAvailableForParts,
-                it.serialNo, it.manufacturer.toString(), it.modelDesignation,
-                it.memorySize,
+                it.serialNo, it.vendor, it.modelDesignation,
+                it.memorySize + " GB",
                 it.getMemoryPercentUsed(),
                 it.numCores,
                 it.getCPUPercentUsed(),
