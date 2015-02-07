@@ -74,7 +74,7 @@ class VMService {
                     virtualMachines.add(it)
                 }
 
-                ArrayList<String> updatedServers = updateServers(servers)
+                ArrayList<String> updatedServers = updateServers(servers, url.host.tokenize(".")?.get(0)?.toLowerCase())
                 println("Updated Servers")
 
                 updatedServers.each {
@@ -133,7 +133,7 @@ class VMService {
     }
 
     // Updates/Creates any PhysicalServers or Clusters
-    ArrayList<String> updateServers(ArrayList<ManagedEntity> servers) {
+    ArrayList<String> updateServers(ArrayList<ManagedEntity> servers, String vcName) {
         def tempCluster, tempServer, serverShortName
         def ArrayList<String> newServers = new ArrayList<String>()
         def ArrayList<String> updatedServers = new ArrayList<String>()
@@ -143,7 +143,7 @@ class VMService {
             isChanged=false
             tempCluster = Cluster.findByName(server.getParent().name)
             if(tempCluster == null) {
-                tempCluster = new Cluster(name: server.getParent().name, dataCenter: server.getParent().getParent().getParent().name)
+                tempCluster = new Cluster(name: server.getParent().name, dataCenter: vcName)
                 tempCluster.save(flush:true)
                 newServers.add("Cluster " + tempCluster.name + " created")
             }

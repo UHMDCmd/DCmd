@@ -27,7 +27,7 @@
     else {
         editOption = false
     }
-    listAssetUrl = 'listServers?clusterId=${clusterInstance.id}'
+    listAssetUrl = 'listAssets?clusterId=${clusterInstance.id}'
 
 
     function Init() {
@@ -74,7 +74,7 @@
                 {name:'id', hidden:true}
             ],
 
-            rowNum: 10,
+            rowNum: 20,
             rowList: [5, 10, 20, 50, 100],
             pager: '#assetListPager',
             viewrecords: true,

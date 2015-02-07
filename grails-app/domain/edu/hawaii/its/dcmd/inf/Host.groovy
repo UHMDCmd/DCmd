@@ -56,6 +56,7 @@ class Host extends SupportableObject {
     boolean isInVCenter
     Float maxCpu
     Integer maxMemory
+    Integer security_migration_priority
 
 //	List hostSupporters = new ArrayList()
 
@@ -116,6 +117,7 @@ class Host extends SupportableObject {
         maxCpu(nullable:true)
         maxMemory(nullable:true)
         isInVCenter(nullable:true, default:true)
+        security_migration_priority(nullable:true)
 	}
 
 
@@ -144,28 +146,28 @@ class Host extends SupportableObject {
 
     String getMaxMemoryGBString() {
         if(this.maxMemory == null)
-            return "N/A"
+            return "Not Provided"
         else
             return String.valueOf(maxMemory/1000) + " GB"
     }
 
     String getMaxMemoryString() {
         if(this.maxMemory == null)
-            return "N/A"
+            return "Not Provided"
         else
             return String.valueOf(maxMemory)
     }
 
     String getCpuMhzCoreString() {
         if(this.maxCpu == null)
-            return "N/A"
+            return "Not Provided"
         else
             return String.valueOf(maxCpu) + " MHz (" + String.valueOf((maxCpu/(asset?.cpuSpeed*1000)).round()) + " Cores)"
     }
 
     String getMaxCpuString() {
         if(this.maxCpu == null)
-            return "N/A"
+            return "Not Provided"
         else
             return String.valueOf(maxCpu)
     }

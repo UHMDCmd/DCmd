@@ -374,7 +374,9 @@ class PhysicalServerController {
             def tempVals = [
                     'ITS Id': theRow.cell[0].replaceAll("\\<.*?>",""),
                     'Server Type': theRow.cell[1],
-                    Status: theRow.cell[2],
+                    'VCenter': theRow.cell[2],
+                    'VM Cluster':theRow.cell[3].replaceAll("\\<.*?>",""),
+                    'OS Host': theRow.cell[4].replaceAll("\\<.*?>",""),
                     'Primary SA': theRow.cell[3].replaceAll("\\<.*?>",""),
                     'RU Size': theRow.cell[4],
                     'Current Rack': theRow.cell[5].replaceAll("\\<.*?>",""),
@@ -562,6 +564,17 @@ class PhysicalServerController {
             println it.password
         }
         render InputJSON as JSON
+    }
+
+    def getServerTypes = {
+        def typeList = []
+
+        typeList.add(['id':'Solaris Global Zone', 'text':'Solaris Global Zone'])
+        typeList.add(['id':'VMWare', 'text':'VMWare'])
+        typeList.add(['id':'Windows Server', 'text':'Windows Server'])
+        typeList.add(['id':'Standalone', 'text':'Standalone'])
+
+        render typeList as JSON
     }
 
 }

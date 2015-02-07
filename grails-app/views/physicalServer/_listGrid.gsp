@@ -10,16 +10,31 @@
 
    // (function($){
 
+        var ServerType = Backbone.Model.extend();
+        var ServerTypes = Backbone.Collection.extend({
+            url:'../physicalServer/getServerTypes',
+            model: ServerType,
+            initialize: function() {
+                this.fetch();
+            }
+        });
+
+   var serverTypes = new ServerTypes();
+
         var PhyServer = Backbone.Model.extend({
             url:'/its/dcmd/physicalServer/getServerDetails',
-
+            initialize: function() {
+                this.set('sTypes', new ServerTypes);
+            },
             defaults: function() {
                 return {
-                    itsId: 'empty',
-                    status: 'empty'
+                    itsId: 'empty'
                 };
             },
             getData: function() {
+
+            },
+            getListData: function() {
 
             },
             saveData: function() {
@@ -27,6 +42,7 @@
             }
         });
         var theServer = new PhyServer();
+
 
         var template;
 
@@ -52,9 +68,13 @@
             render: function() {
                 //this.$el.html(this.template(this.model.toJSON()));
                 console.log(this.model.toJSON());
-                var context = {data: this.model.toJSON()};
+                var context = {server:this.model.toJSON(),sTypes:serverTypes.toJSON()};
+
+
                 this.$el.html(template(context));
 //                $("#server_dialog").append(this.el);
+                console.log("CONTEXT:");
+                console.log(context);
                 return this;
             },
 
@@ -82,6 +102,7 @@
        var serverView = new ServerView({ el: $("#server_dialog") });
        serverView.loadData(serverId);
        $("#server_dialog").dialog("open");
+    //   console.log(test.toJSON());
    };
 
   //  })(jQuery);

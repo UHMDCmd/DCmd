@@ -292,21 +292,24 @@ class HostController {
 
             if(!theRow.cell[4])
                 theRow.cell[4] = ""
-            if(!theRow.cell[10])
-                theRow.cell[10] = ""
+            if(!theRow.cell[13])
+                theRow.cell[13] = ""
 
             def tempVals = [
-                    Host: theRow.cell[0],
-                    Asset: theRow.cell[1]?.replaceAll("\\<.*?>",""),
+                    'Hostname': theRow.cell[0]?.replaceAll("\\<.*?>",""),
+                    'Physical Server': theRow.cell[1]?.replaceAll("\\<.*?>",""),
                     'Host Type': theRow.cell[2],
-                    Status:  theRow.cell[3],
-                    'Host OS': theRow.cell[4],
+                    'VM State':  theRow.cell[3],
+                    'Environment': theRow.cell[4],
                     'Primary Host SA': theRow.cell[5]?.replaceAll("\\<.*?>",""),
-                    Environment: theRow.cell[6],
+                    'Host OS': theRow.cell[6],
                     'Application(s)': theRow.cell[7]?.replaceAll("\\<.*?>",""),
                     'Service(s)': theRow.cell[8]?.replaceAll("\\<.*?>",""),
                     'Service Primary SA(s)': theRow.cell[9]?.replaceAll("\\<.*?>",""),
-                    'General Notes': theRow.cell[10]
+                    'Max. Memory (GB)': theRow.cell[10],
+                    'Max. CPU (MHz)': theRow.cell[11],
+                    'IP Address': theRow.cell[12],
+                    'General Notes': theRow.cell[13]
             ]
             theList.add(tempVals)
         }

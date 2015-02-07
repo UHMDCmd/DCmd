@@ -29,6 +29,7 @@ class PhysicalServer extends Asset{
     float cpuSpeed
     int numCores
     int numThreads
+    String vendor
 
     Host hostOS
 
@@ -51,6 +52,7 @@ class PhysicalServer extends Asset{
         numCores(nullable:true)
         numThreads(nullable:true)
         hostOS(nullable:true)
+        vendor(nullable:true)
     }
 
 //    static belongsTo = [hosts: Host]
@@ -99,7 +101,7 @@ class PhysicalServer extends Asset{
     String getTotalGBUsed() {
         def totalMem = getTotalMemoryUsed()
         if(totalMem == 0)
-            return 'N/A'
+            return 'Not Provided'
         else
             return getTotalMemoryUsed()/1000.0 + " GB"
     }
@@ -131,7 +133,7 @@ class PhysicalServer extends Asset{
     String getTotalGhzUsed() {
         def totalCPU = getTotalCPUUsed()
         if(totalCPU == 0)
-            return "N/A"
+            return "Not Provided"
         else
             return (totalCPU/1000) + " GHz"
     }
@@ -145,14 +147,14 @@ class PhysicalServer extends Asset{
         def cpuUsed = this.getTotalCPUUsed()
 //        System.out.println(cpuUsed + ", " + cpuSpeed + ", " + this.numCores)
         if (cpuUsed == 0 || this.numCores == 0)
-            return '0%'
+            return '0 %'
         else
             return (Math.round(1000*(cpuUsed/(cpuSpeed*1000.0)/numCores)))/10.0 + "%"
     }
 
     String getHostOSLinkString() {
         if(hostOS == null)
-            return "Not Assigned"
+            return "Not Provided"
         else
             return "<a href='../host/show?id=" + hostOS.id + "'>" + hostOS.hostname + "</a>"
     }

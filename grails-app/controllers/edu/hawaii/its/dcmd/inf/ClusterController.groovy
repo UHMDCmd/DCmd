@@ -146,7 +146,7 @@ class ClusterController {
     /*****************************************************************/
     /* Assets Grid
     /*****************************************************************/
-    def listServers = {
+    def listAssets = {
         def sortIndex = params.sidx ?: 'itsId'
         def sortOrder  = params.sord ?: 'asc'
         def maxRows = Integer.valueOf(params.rows)

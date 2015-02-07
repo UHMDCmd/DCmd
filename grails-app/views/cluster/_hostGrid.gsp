@@ -53,12 +53,12 @@
             width:'1000',
             caption:'Virtual Host List',
             url:listHostUrl,
-            editurl:'../cluster/editHosts?clusterId=${clusterInstance.id}',
+ //           editurl:'../cluster/editHosts?clusterId=${clusterInstance.id}',
             datatype: "json",
 
             colNames: ['Hostname', 'Physical Server', 'Environment', 'VM Status', 'Primary SA', 'Max. Memory (GB)', 'Max CPU (MHz)', 'Notes', 'id'],
             colModel:[
-                {name:"hostname", width:40, editable:editOption, formatter: 'showlink', formatoptions: {showAction:'show', baseLinkUrl:'../host/'}},
+                {name:"hostname", width:40, editable:false},
                 {name:'server', width:40, editable:false},
                 {name:'hostEnv', width:40, editable:false},
                 {name:'vmstatus', width:40, editable:false},
@@ -68,9 +68,8 @@
                 {name:'hostNote', width:200, editable:false},
                 {name:'id', hidden:true}
             ],
-            rowNum: 10,
+            rowNum: 20,
             rowList: [5, 10, 20, 50, 100],
-            afterSaveCell: afterSubmitHostEvent,
             sortname: 'hostname',
             sortorder: 'asc',
             searchOnEnter:true,
@@ -79,9 +78,6 @@
             pager:'#hostListPager',
             viewrecords: true,
             gridview: true,
-            cellEdit:editOption,
-            cellsubmit: 'remote',
-            cellurl:'../cluster/editHosts?clusterId=${clusterInstance.id}',
             shrinkToFit: true,
             autowidth: true,
 

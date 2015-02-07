@@ -680,7 +680,7 @@ class PersonController {
         }
         StringBuffer assetString = new StringBuffer()
         assets.each {
-            assetString.append("<a href=\'../asset/show?id=${it.id}\'>${it.toString()}</a><br>")
+            assetString.append("<a href=\'../physicalServer/show?id=${it.id}\'>${it.toString()}</a><br>")
         }
         if (assets.size() == maxRows)
             assetString.append("More than ${maxRows} found......<br>")
