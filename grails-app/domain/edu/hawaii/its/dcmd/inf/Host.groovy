@@ -25,7 +25,7 @@ class Host extends SupportableObject {
 
 	String hostname
 	Integer solarisFssShare
-	boolean nwaccScan = false
+	Boolean nwaccScan = false
 	Environment env
 	Date dateCreated = new Date()
 	Date lastUpdated = new Date()
@@ -53,17 +53,18 @@ class Host extends SupportableObject {
     String vcName
     String fullDomain
     String ipAddress
-    boolean isInVCenter
-    Float maxCpu
-    Integer maxMemory
+    Boolean isInVCenter
+    Float maxCpu=0.0
+    Integer maxMemory=0
     Integer security_migration_priority
+
 
 //	List hostSupporters = new ArrayList()
 
     // Possible values:  connected, disconnected, inaccessible, invalid, orphaned
     String vCenterState
 
-    static auditable = true
+    static auditable = [ignore:['version','lastUpdated','vCenterState']]
 
     static belongsTo = [asset: Asset]
 
@@ -82,6 +83,7 @@ class Host extends SupportableObject {
     static mapping = {
 //        asset cascade: 'save-update'
         tiers cascade: 'all-delete-orphan'
+
     }
 
 	static constraints = {

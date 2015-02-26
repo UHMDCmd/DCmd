@@ -78,6 +78,7 @@ class HostService {
             cache true
         }
 
+        //System.out.println(params)
         def hosts
         def totalRows, numberOfPages
         def results
@@ -131,6 +132,8 @@ class HostService {
                     }
                 }
             }
+            if (params.vCenterState) ilike('vCenterState', "%${params.vCenterState}%")
+            if (params.ip) ilike('ipAddress', "%${params.ip}%")
             if (params.generalNote) ilike('generalNote', "%${params.generalNote}%")
 
             // Sort

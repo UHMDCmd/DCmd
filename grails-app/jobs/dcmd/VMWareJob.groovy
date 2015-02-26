@@ -8,7 +8,7 @@ class VMWareJob {
     def VMService = new VMService()
 
     static triggers = {
- //             simple name: 'mySimpleTrigger', startDelay: 20000,  repeatInterval: 100000, repeatCount: 0
+              simple name: 'mySimpleTrigger', startDelay: 180000,  repeatInterval: 3600000, repeatCount: 0
 
         //fire every weekday mon-fri at 4:04 pm
         //  cron name: 'cronTrigger', cronExpression: "0 4 16 ? * MON-FRI"

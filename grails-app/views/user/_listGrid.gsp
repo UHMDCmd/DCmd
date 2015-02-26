@@ -1,34 +1,4 @@
-<script type="text/javascript">
-
-    $(document).ready(function() {
-
-        $("#btnAdd").click(function(){
-            $("#user_list").jqGrid("editGridRow","new",
-                    {addCaption:'Add new User Access',
-                        closeAfterAdd: true,
-                        savekey:[true,13]}
-//                                closeModal()
-            );
-        });
-
-        jQuery("#user_list").jqGrid({
-
-            height:'240',
-            width:'400',
-            caption:'User Access List',
-            showPager:'false',
-            url:'listUsers',
-            editurl:'editUsers',
-
-            datatype: "json",
-            colNames:['', 'Username', 'Role', 'id'],
-            colModel:[
-                {name:'actions', index:'actions', search:false, sortable:false, title:false, editable:false, required:false, sortable:false, width:"20",
-                    formatter: 'actions', hidden:false, formatoptions: {
-                        keys: true, editbutton: false, delbutton: true}
-                    },
-                {name:'username', width:120, editable:true,title:false},
-                {name:'role', width:100, editable:true, search:false, sortable:false, title:false, edittype:'select', editoptions: {dataUrl:'%{--
+%{--
   - Copyright (c) 2014 University of Hawaii
   -
   - This file is part of DataCenter metadata (DCmd) project.
@@ -48,18 +18,56 @@
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-${createLink(controller:"user",action:"listRolesAsSelect")}'}},
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $("#btnAdd").click(function(){
+            $("#user_list").jqGrid("editGridRow","new",
+                    {addCaption:'Add new User Access',
+                        closeAfterAdd: true,
+                        savekey:[true,13]}
+//                                closeModal()
+            );
+        });
+
+        jQuery("#user_list").jqGrid({
+
+            height:'auto',
+            width:'1000',
+            caption:'User Access List',
+            url:'listUsers',
+            editurl:'editUsers',
+            datatype: "json",
+            colNames:['', 'Username', 'Role', 'Account Locked?', 'id'],
+            colModel:[
+                {name:'actions', index:'actions', search:false, sortable:false, title:false, editable:false, required:false, sortable:false, width:"20",
+                    formatter: 'actions', hidden:false, formatoptions: {
+                    keys: true, editbutton: false, delbutton: true}
+                },
+                {name:'username', width:120, editable:true,title:false},
+                {name:'role', width:100, editable:true, search:false, sortable:false, title:false, edittype:'select', editoptions: {dataUrl:'${createLink(controller:"user",action:"listRolesAsSelect")}'}},
+                {name:'locked', width:100, editable:true, edittype:'checkbox', editoptions:{value:"true:false"}, sortable:false, search:false},
                 {name:'id', hidden:true}
             ],
 
-            rowNum:1000,
-            viewrecords: true,
+            sortname: 'username',
+            sortorder: 'asc',
+            rowNum: 100,
+            rowList: [10, 20, 50, 100],
+
             gridview: true,
+            viewrecords: true,
+            autowidth:true,
+            shrinkToFit: true,
+            searchOnEnter:true,
             cellEdit:true,
             cellsubmit: 'remote',
 //            afterSaveCell: afterSubmitHostEvent,
             cellurl:'editUsers',
+            pager: '#allUserPager',
             scrollOffset:20
+
         });
 
         var setTooltipsOnColumnHeader = function (grid, iColumn, text) {
@@ -79,6 +87,7 @@ ${createLink(controller:"user",action:"listRolesAsSelect")}'}},
 </script>
 
 <table id="user_list"></table>
+<div id="allUserPager"></div>
 
     <div style="margin-top:5px">
         <input class="ui-corner-all" id="btnAdd" type="button" value="Add New User Access"/>

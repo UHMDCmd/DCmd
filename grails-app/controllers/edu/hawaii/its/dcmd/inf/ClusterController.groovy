@@ -187,7 +187,7 @@ class ClusterController {
 
         // Calculate total of that resource provided by the asset
         def results = assets?.collect { [ cell: [
-                "<a href='../asset/show?id=${it.id}'>${it.toString()}</a>",
+                "<a href='../physicalServer/show?id=${it.id}'>${it.toString()}</a>",
                 "<a href='../person/show?id=${personService.getAdmin(it)?.id}'>${personService.getAdmin(it).toString()}</a>",
                 it.memorySize + " GB", it.getMemoryPercentUsed(), it.numCores, it.getCPUPercentUsed(),
                 it.generalNote], id: it.id ] }

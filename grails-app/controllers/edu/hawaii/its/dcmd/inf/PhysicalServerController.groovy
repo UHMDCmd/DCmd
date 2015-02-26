@@ -363,6 +363,10 @@ class PhysicalServerController {
         def jsonData = assetService.listAllPhyServer(params)
         def theList = []
         jsonData.rows.each { theRow ->
+            for(def i=0; i<19; i++) {
+                if(!theRow.cell[i]) theRow.cell[i]=""
+            }
+            /*
             if(!theRow.cell[1]) theRow.cell[1] = ""
             if(!theRow.cell[2]) theRow.cell[2] = ""
             if(!theRow.cell[6]) theRow.cell[6] = ""
@@ -370,22 +374,28 @@ class PhysicalServerController {
             if(!theRow.cell[9]) theRow.cell[9] = ""
             if(!theRow.cell[11]) theRow.cell[11] = ""
             if(!theRow.cell[12]) theRow.cell[12] = ""
-
+            */
             def tempVals = [
                     'ITS Id': theRow.cell[0].replaceAll("\\<.*?>",""),
                     'Server Type': theRow.cell[1],
                     'VCenter': theRow.cell[2],
                     'VM Cluster':theRow.cell[3].replaceAll("\\<.*?>",""),
                     'OS Host': theRow.cell[4].replaceAll("\\<.*?>",""),
-                    'Primary SA': theRow.cell[3].replaceAll("\\<.*?>",""),
-                    'RU Size': theRow.cell[4],
-                    'Current Rack': theRow.cell[5].replaceAll("\\<.*?>",""),
-                    'Current Position': "\'${theRow.cell[6]}\'",
-                    'Current Location': theRow.cell[7].replaceAll("\\<.*?>",""),
-                    'Serial #': theRow.cell[9],
-                    'Manufacturer': theRow.cell[10],
-                    'Model': theRow.cell[11],
-                    'General Notes': theRow.cell[12]
+                    'Status': theRow.cell[5],
+                    'Primary SA': theRow.cell[6].replaceAll("\\<.*?>",""),
+                    'RU Size': theRow.cell[7],
+                    'Current Rack': theRow.cell[8].replaceAll("\\<.*?>",""),
+                    'Current Position': theRow.cell[9],
+                    'Current Location': theRow.cell[10].replaceAll("\\<.*?>",""),
+                    'Avail. for parts': theRow.cell[11],
+                    'Serial #': theRow.cell[12],
+                    'Vendor': theRow.cell[13],
+                    'Model': theRow.cell[14],
+                    'Total Memory': theRow.cell[15],
+                    'Memory Assigned': theRow.cell[16],
+                    'Total Cores': theRow.cell[17],
+                    'Max CPU Assigned': theRow.cell[18],
+                    'General Notes': theRow.cell[19]
             ]
 
             theList.add(tempVals)

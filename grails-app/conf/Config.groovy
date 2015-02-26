@@ -106,15 +106,16 @@ grails.plugin.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
 /***************************************************************************************
  * Un-comment this for Production
  ***************************************************************************************/
-//grails.plugins.springsecurity.cas.serviceUrl = 'https://www.hawaii.edu/its/dcmd/j_spring_cas_security_check'
-//grails.plugins.springsecurity.cas.proxyCallbackUrl = 'http://www.hawaii.edu/its/dcmd/secure/receptor'
-//grails.plugins.springsecurity.logout.afterLogoutUrl =
+//grails.plugin.springsecurity.cas.serviceUrl = 'https://www.hawaii.edu/its/dcmd/j_spring_cas_security_check'
+//grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://www.hawaii.edu/its/dcmd/secure/receptor'
+//grails.plugin.springsecurity.logout.afterLogoutUrl =
 //    'https://authn.hawaii.edu/cas/logout?url=https://www.hawaii.edu/its/dcmd/'
 //grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://authn.hawaii.edu/cas/'
 
 /***************************************************************************************
  * Un-comment this for Local Development
  ***************************************************************************************/
+
 grails.plugin.springsecurity.cas.serviceUrl = 'http://localhost:8080/its/dcmd/j_spring_cas_security_check'
 grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/its/dcmd/secure/receptor'
 grails.plugin.springsecurity.logout.afterLogoutUrl =
@@ -127,7 +128,7 @@ grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.
 //grails.plugin.springsecurity.cas.serviceUrl = 'http:///dcm51.its.hawaii.edu:8080/its/dcmd/j_spring_cas_security_check'
 //grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http:///dcm51.its.hawaii.edu:8080/its/dcmd/secure/receptor'
 //grails.plugin.springsecurity.logout.afterLogoutUrl =
-//    'https://login.its.hawaii.edu/cas/logout?url=http:///dcm51.its.hawaii.edu:8080/its/dcmd/'
+//    'https://cas-test.its.hawaii.edu/cas/logout?url=http://dcm51.its.hawaii.edu:8080/its/dcmd/'
 //grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.edu/cas/'
 
 

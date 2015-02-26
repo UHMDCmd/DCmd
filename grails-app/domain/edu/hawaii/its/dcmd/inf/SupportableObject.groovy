@@ -30,6 +30,7 @@ class SupportableObject {
 
 	Long id
 	String supportableType
+//    Long Version
 
     static hasMany = [
         supporters: SupportRole

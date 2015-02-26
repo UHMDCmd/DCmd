@@ -122,8 +122,9 @@
 %{-- <g:form controller="VMware">
     <g:actionSubmit id='btn_update_hosts' value="Update Hosts" action="index"/>
 </g:form>
-                  --}%
+
 <input class="ui-corner-all" id="btn_update_hosts"  type="button" value="Update Hosts"/>
+--}%
 
     <div class="loadingModal" id="loadingModal"></div>
 

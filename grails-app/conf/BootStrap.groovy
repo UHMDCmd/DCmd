@@ -326,7 +326,7 @@ class BootStrap {
                     returnArray['Name'] = it.name
                     return returnArray
                 }
-
+                     /*
                 def powerType
                 powerType = new AssetType(
                         name: 'Power',
@@ -364,6 +364,7 @@ class BootStrap {
                     strip2 = new PowerStrip(itsId:'XZ', capacity:10, breaker:Breaker1, powerUsed:10, assetType:powerType, type: PSType1).save(failOnError:true)
                     strip3 = new PowerStrip(itsId:'YZ', capacity:10, breaker:Breaker1, powerUsed:10, assetType:powerType).save(failOnError:true)
                 }
+                */
             }
 
             development {
@@ -526,7 +527,7 @@ class BootStrap {
                 }
                 def rolesKarsin, rolesElfalan, rolesHodges, rolesKawachi, rolesCkawano, rolesJonathan, rolesCzane,
                         rolesSteven, rolesGarry, rolesThang, rolesRomeot, rolesAnicasm, rolesNakadoma, rolesVyoshida,
-                        rolesOsamum, rolesKc96813, rolesKylanh
+                        rolesOsamum, rolesKc96813, rolesKylanh, rolesJshima
                 if(!UserRole.count()) {
                     rolesKarsin = new UserRole(user: userKarsin, role: ROLE_ADMIN)
                     rolesKarsin.save(failOnError:true,flush:true)
@@ -548,6 +549,7 @@ class BootStrap {
                     rolesOsamum= new UserRole(user: osamum, role: ROLE_READ).save(failOnError:true,flush:true)
                     rolesKc96813= new UserRole(user: kc96813, role: ROLE_READ).save(failOnError:true,flush:true)
                     rolesKylanh= new UserRole(user: userKylanh, role: ROLE_ADMIN).save(failOnError:true,flush:true)
+                    rolesJshima= new UserRole(user: userJshima, role: ROLE_ADMIN).save(failOnError:true,flush:true)
 
                 }
 

@@ -182,6 +182,10 @@ class AssetService {
 // Search Filters
             if (params.itsId) ilike('itsId', "%${params.itsId}%")
             if (params.serverType) ilike('serverType', "%${params.serverType}%")
+            if (params.vcenter)
+                cluster {
+                    ilike('dataCenter', "%${params.vcenter}")
+                }
             if (params.cluster)
                 cluster {
                     ilike('name', "%${params.cluster}%")
@@ -232,6 +236,11 @@ class AssetService {
                         order('name', sortOrder)
                     }
                     break
+                case 'vcenter' :
+                    cluster {
+                        order('dataCenter', sortOrder)
+                    }
+                     break
                 case 'manufacturer':
                     manufacturer {
                         order('name', sortOrder)
@@ -259,8 +268,8 @@ class AssetService {
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
         def results = physicalServers?.collect { [ cell: [
-                //"<a href='../physicalServer/show?id=${it.id}'>${it.itsId}</a>",
-                "<a onclick='openItem(${it.id})'>${it.itsId}</a>",
+                "<a href='../physicalServer/show?id=${it.id}'>${it.itsId}</a>",
+                //"<a onclick='openItem(${it.id})'>${it.itsId}</a>",
                 it.serverType,
                 it.getDatacenterLinkString(),
                 it.getClusterLinkString(),

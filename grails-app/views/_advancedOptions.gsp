@@ -94,9 +94,13 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 data: postdata,
+                beforeSend: function() {
+                },
                 success: function(data) {
 //                    console.log(data);
                     JSONToCSVConvertor(data, "${pageType} list", true);
+                },
+                complete: function(data) {
                     document.getElementById("loadingModal").style.display="none";
                 },
                 error: function () { console.log('Error updating list'); }

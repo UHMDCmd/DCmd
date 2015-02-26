@@ -33,6 +33,7 @@ class VMService {
 //            String password = "***REMOVED***"
 
             def inputFile = new File("C:\\Users\\Ben\\.grails\\testFile.txt")
+//            def inputFile = new File("dcmdConfig/vcenters.txt")
             def jsonSlurper = new JsonSlurper()
             def InputJSON = jsonSlurper.parseText(inputFile.text)
             InputJSON.each {
@@ -51,7 +52,7 @@ class VMService {
                 username = it.username
                 password = it.password
 
-                println(url.host + " " + username.toString() + " " + password.toString())
+                println(url.host)
 
                 si = new ServiceInstance(url, username, password, true)
                 rootFolder = si.rootFolder
@@ -75,7 +76,7 @@ class VMService {
                 }
 
                 ArrayList<String> updatedServers = updateServers(servers, url.host.tokenize(".")?.get(0)?.toLowerCase())
-                println("Updated Servers")
+                //println("Updated Servers")
 
                 updatedServers.each {
                     //   System.out.println(it)
@@ -83,9 +84,9 @@ class VMService {
 
                 // uUpdate DCmd with all virtual Hosts from all VCenters
                 ArrayList<String> updatedHosts = updateHosts(virtualMachines, si.serverConnection)
-                println("Updated VMs")
+               // println("Updated VMs")
 
-                println("Added VMs")
+                //println("Added VMs")
                 si.serverConnection.logout()
 
             }
@@ -128,7 +129,6 @@ class VMService {
     // ex. mdb74.pvt.hawaii.edu would return mdb74
     String getShortenedHostName(String name) {
         def parts = name.split("\\.")
-
         parts[0]
     }
 
@@ -223,6 +223,7 @@ class VMService {
             def hostName
             if(dnsName != null) {
                 hostName = dnsName[0]?.tokenize(".")?.get(0)?.toLowerCase()
+            //    println("DNSname[0]: " + dnsName[0] + ", Hostname: " + hostName + ", contains? " + dnsName[0].contains('.'))
             }
             else
                 hostName = null
@@ -254,8 +255,10 @@ class VMService {
                 //}
 
                 //System.out.println(vm.name + ", " + getShortenedHostName(vmHost.name) + ", " + hostName + ", " + tempCluster.name)
-
                 if (tempHost == null) { // If doesn't exist, create it
+                    if(hostName == 'adreset') {
+                        println("creating adreset")
+                    }
                     tempHost = new Host(hostname: hostName, type: 'VMWare', asset: tempServer, cluster: tempCluster,
                             vcName:vm.name, fullDomain:dnsName[0]?.toLowerCase(), ipAddress:vm.getGuest()?.ipAddress, maxMemory: vm.getRuntime().maxMemoryUsage,
                             maxCpu: vm.getRuntime().maxCpuUsage, vCenterState: String.valueOf(vm.getRuntime().connectionState),
@@ -315,8 +318,9 @@ class VMService {
                     }
                 }
             }
-            else // dnsName was null, i.e., can't get name of Host
-                System.out.println("Guest named " + vm.name + " dnsName was null, could not determine hostName")
+//            else // dnsName was null, i.e., can't get name of Host
+                //System.out.println("Guest named " + vm.name + " dnsName was null, could not determine hostName")
+ //               System.out.println(vm.name)
         }
 
         // updatedHosts.each {

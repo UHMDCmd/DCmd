@@ -110,7 +110,7 @@
             <div class="menu_item" onclick="location.href='/its/dcmd/application/list';" style="cursor:pointer">Applications</div>
             <div class="menu_item" onclick="location.href='/its/dcmd/service/list';" style="cursor:pointer">Services</div>
 
-            <div class="menu_item" onclick="location.href='/its/dcmd/asset/list';" style="cursor:pointer">All Assets</div>
+ %{--           <div class="menu_item" onclick="location.href='/its/dcmd/asset/list';" style="cursor:pointer">All Assets</div>--}%
             <div class="menu_item" onclick="location.href='/its/dcmd/physicalServer/list';" style="cursor:pointer">Physical Servers</div>
 
             <div class="menu_item" onclick="location.href='/its/dcmd/person/list';" style="cursor:pointer">Staff
@@ -118,7 +118,7 @@
                 <a href="/its/dcmd/host/supportList" class="submenu_item">Host Support</a>
                 <a href="/its/dcmd/application/supportList" class="submenu_item">Application Support</a>
             </div>
-
+            <div class="menu_item" onclick="location.href='/its/dcmd/cluster/list';" style="cursor:pointer">VM Clusters</div>
             <div class="menu_item" onclick="location.href='/its/dcmd/host/reports';" style="cursor:pointer">Reports</div>
 %{--            <div class="menu_item" onclick="location.href='/its/dcmd/power/list';" style="cursor:pointer">Power</div> --}%
             <div class="menu_item" onclick="location.href='/its/dcmd/audit/list';" style="cursor:pointer">Audit Log</div>
@@ -272,10 +272,13 @@
     <a class ="breadcrumbTrash_button" id ="bctrash"></a>
     </article>--}%
     <g:if test="${pageType != 'login'}">
-        <article class="actionsbar" style="float:right; margin-right: 0">
-    <a class ="settings_button" id ="settings" title="Settings" href="/its/dcmd/uisettings"></a>
+    %{--
+<article class="actionsbar" style="float:right; margin-right: 0">
+
+<a class ="settings_button" id ="settings" title="Settings" href="/its/dcmd/uisettings"></a>
     </article>
 
+--}%
     <article class="actionsbar" style="float:right; margin-right: 0">
 
         %{--BreadCrumbs button--}%

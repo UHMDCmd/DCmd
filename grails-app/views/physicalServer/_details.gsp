@@ -41,7 +41,7 @@ def genService = grailsApplication.classLoader.loadClass('edu.hawaii.its.dcmd.in
                 callback(data);
             }
         }).select2('val', 'VMWare');
-    }
+//    }
         %{--
         $("#clusterSelect").select2({
             placeholder: 'Please Select...',

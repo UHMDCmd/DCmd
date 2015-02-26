@@ -49,7 +49,7 @@ url:'listAllCluster',
     autowidth:true,
     shrinkToFit: true,
     searchOnEnter:true,
-    pager: '#allPersonPager',
+    pager: '#allClusterPager',
     scrollOffset:0
 
 

@@ -22,12 +22,17 @@
 <%@ page import="edu.hawaii.its.dcmd.inf.User" %>
 <html>
 <head>
-
     <meta content="main" name="layout" />
     <g:set var="entityName" value="${message(code: 'host.label', default: 'User')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
     <jqDT:resources jqueryUi="true" type="js" />
 
+<script language="javascript" type="text/javascript" src="../js/mustache.js"></script>
+
+
+<g:applyLayout name="breadcrumb_bar">
+    <g:include controller="person" action="setBreadCrumbForCurrentItem" params="[pageType: 'physicalServer', instance :physicalServerInstance]"/>
+</g:applyLayout>
 
 </head>
 <body>

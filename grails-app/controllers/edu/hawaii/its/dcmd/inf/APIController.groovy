@@ -238,8 +238,10 @@ class APIController {
             if(params.serviceName || params.appEnv || params.appName) {
                 params.application = Application.findByApplicationTitle(params.appName)
                 params.service = Service.findByServiceTitleAndEnvAndApplication(params.serviceName, Environment.findByAbbreviation(params.appEnv), params.application)
-                if(params.service == null)
+                if(params.service == null) {
                     errorMessage.add("Service not found (requires valid appName, appEnv, and serviceName)")
+                    errorMessage.add(params.serviceName + ", " + Environment.findByAbbreviation(params.appEnv)+ ", " + params.application)
+                }
             }
 //            if (params.serviceName || params.serviceEnv) {
 //                params.service = Service.findByServiceTitleAndEnv(params.serviceName, Environment.findByAbbreviation(params.serviceEnv))

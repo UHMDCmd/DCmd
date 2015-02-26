@@ -1,5 +1,5 @@
 
-
+%{--
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
 <script src="../js/handlebars.js"></script>
@@ -107,9 +107,9 @@
 
   //  })(jQuery);
 %{--</script>
+                               --}%
 
-
-<script type="text/javascript">--}%
+<script type="text/javascript">
 /*
 function openItem(serverId) {
 
@@ -219,10 +219,10 @@ url:'listAllPhyServer',
                 {name:'serialNo', width:180, editable:false, title:false},
                 {name:'manufacturer', width:120, editable:false, title:false},
                 {name:'modelDesignation', width:120, editable:false, title:false},
-                {name:'memorySize', width:120, editable:false, title:false},
-                {name:'memoryAssigned', width:150, editable:false, title:false},
-                {name:'numCores', width:120, editable:false, title:false},
-                {name:'cpuAssigned', width:120, editable:false, title:false},
+                {name:'memorySize', width:120, editable:false, title:false, search:false},
+                {name:'memoryAssigned', width:150, editable:false, title:false, search:false, sortable:false},
+                {name:'numCores', width:120, editable:false, title:false, search:false, sortable:false},
+                {name:'cpuAssigned', width:120, editable:false, title:false, search:false, sortable:false},
                 {name:'generalNote', width:400,title:false},
                 {name:'id', hidden:true}
             ],
@@ -365,4 +365,4 @@ url:'listAllPhyServer',
     }
 </script>
 
-<input type="button" value="test" onclick="testExtern()"/>
+%{--<input type="button" value="test" onclick="testExtern()"/> --}%

@@ -52,7 +52,8 @@ class UserController {
         def totalRows = users.size()
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
-        def results = users?.collect { [ cell: ['', it.username, it.authorities.first().authority], id: it.id]}
+        def results = users?.collect { [ cell: ['', it.username, it.authorities?.first()?.getAuthority(),
+        it.accountLocked], id: it.id]}
 
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         render jsonData as JSON
@@ -70,16 +71,23 @@ class UserController {
         switch (params.oper) {
             case 'add':
                 params.role = Role.get(params.role)
-                item = new User(username: params.username, password:'1', enabled:true)
+                def uiSetting = new Uisettings(themeVal:1, header:1, font:11, background:1).save()
+//                params.accountLocked = (params.locked=='true')
+                item = new User(username: params.username, userSettings: uiSetting, accountLocked: (params.locked=='true'), password: '1', enabled: true)
 //                item.main_asset = Asset.get(params.assetId)
-                if (! item.hasErrors() && item.save()) {
+                if (!item.hasErrors() && item.save()) {
                     def roles = UserRole.create(item, params.role)
-                    if(! roles.hasErrors() && roles.save()) {
+                    if (!roles.hasErrors() && roles.save()) {
 
                         id = item.id
                         state = "OK"
                     }
+                    else {
+                        System.out.println("1")
+                        message = item.errors.errorCount
+                    }
                 } else {
+                    System.out.println(item.errors.fieldError)
                     message = item.errors.errorCount
                 }
                 break;
@@ -108,6 +116,13 @@ class UserController {
                 }
                 if(params.username) {
                     item.username = params.username
+                    if(! item.hasErrors() && item.save()) {
+                        id = item.id
+                        state = "OK"
+                    }
+                }
+                if(params.locked) {
+                    item.accountLocked = (params.locked == 'true')
                     if(! item.hasErrors() && item.save()) {
                         id = item.id
                         state = "OK"

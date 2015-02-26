@@ -25,10 +25,10 @@ class PhysicalServer extends Asset{
 
     String serverType
     Cluster cluster
-    long memorySize
-    float cpuSpeed
-    int numCores
-    int numThreads
+    Long memorySize=0
+    Float cpuSpeed=0.0
+    Integer numCores=0
+    Integer numThreads =0
     String vendor
 
     Host hostOS
@@ -47,10 +47,10 @@ class PhysicalServer extends Asset{
         hosts(nullable: true)
         devicePlugs(nullable:true)
         cluster(nullable:true)
-        memorySize(nullable:true)
-        cpuSpeed(nullable:true)
-        numCores(nullable:true)
-        numThreads(nullable:true)
+        memorySize(nullable:false)
+        cpuSpeed(nullable:false)
+        numCores(nullable:false)
+        numThreads(nullable:false)
         hostOS(nullable:true)
         vendor(nullable:true)
     }
@@ -145,11 +145,11 @@ class PhysicalServer extends Asset{
 
     String getCPUPercentUsed() {
         def cpuUsed = this.getTotalCPUUsed()
-//        System.out.println(cpuUsed + ", " + cpuSpeed + ", " + this.numCores)
+       // System.out.println(cpuUsed + ", " + cpuSpeed + ", " + this.numCores)
         if (cpuUsed == 0 || this.numCores == 0)
             return '0 %'
         else
-            return (Math.round(1000*(cpuUsed/(cpuSpeed*1000.0)/numCores)))/10.0 + "%"
+            return (Math.round(10000*(cpuUsed/(cpuSpeed*1000.0)/numCores)))/100.0 + "%"
     }
 
     String getHostOSLinkString() {
