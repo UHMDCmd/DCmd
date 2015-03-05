@@ -6,7 +6,7 @@ dataSource {
     // Un-comment for Test/Production
     //driverClassName = "com.mysql.jdbc.Driver"
     //username = "dcmd"
-    //password = "***REMOVED***"
+    //password = ****REMOVE****
 
     // Un-comment for Local Development
     driverClassName = "org.hsqldb.jdbcDriver"
@@ -76,7 +76,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:mysql://mdb74.pvt.hawaii.edu:3306/dcmd?autoReconnect=true"
             username = "dcmd"
-            password = "***REMOVED***"
+            password = ****REMOVED****
 //            logSql = true
 
             properties {
@@ -104,7 +104,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:mysql://mdb40.pvt.hawaii.edu:3306/dcmd?autoReconnect=true"
             username = "dcmd"
-            password = "***REMOVED***"
+            password = ***REMOVED***
 
             properties {
                 maxActive = 50
