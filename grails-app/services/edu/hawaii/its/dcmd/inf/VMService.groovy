@@ -28,10 +28,6 @@ class VMService {
             String username
             String password
 
-//            url = new URL("https://10.1.9.91/sdk")
-//            username = "***REMOVED***"
-//            String password = "***REMOVED***"
-
             def inputFile = new File("C:\\Users\\Ben\\.grails\\testFile.txt")
 //            def inputFile = new File("dcmdConfig/vcenters.txt")
             def jsonSlurper = new JsonSlurper()
