@@ -34,7 +34,9 @@ class APIController {
 
     //  def scaffold = true
     def hostList() {
-        respond Host.list()
+        JSON.use('hostAPI') {
+            respond Host.list()
+        }
     }
     def hostShow() {
         //System.out.println(params.id.getClass())
@@ -172,10 +174,12 @@ class APIController {
                 errorMessage.add("Primary SA person not found")
         }
         if(params.serviceName || params.appEnv || params.appName) {
-            params.application = Application.findByApplicationTitle(params.appName)
-            params.service = Service.findByServiceTitleAndEnvAndApplication(params.serviceName, Environment.findByAbbreviation(params.appEnv), params.application)
-            if(params.service == null)
+            params.application = Application.findByApplicationTitleAndEnv(params.appName, Environment.findByAbbreviation(params.appEnv))
+            params.service = Service.findByServiceTitleAndApplication(params.serviceName, params.application)
+            if(params.service == null) {
+                errorMessage.add("Service:" + params.serviceName + ", appEnv:" + params.appEnv + ", appName:" + params.appName)
                 errorMessage.add("Service not found (requires valid appName, appEnv, and serviceName)")
+            }
         }
 
         if(errorMessage.empty) {
@@ -353,9 +357,8 @@ class APIController {
         def typeList = [
                 [Name:'Solaris Global Zone'],
                 [Name:'Non-Global Zone'],
-                [Name:'VMware Host'],
-                [Name:'VMware Guest'],
-                [Name:'VMware Standalone'],
+                [Name:'VMWare'],
+                [Name:'VMWare Host'],
                 [Name:'Standalone']
         ]
 

@@ -587,5 +587,14 @@ class PhysicalServerController {
         render typeList as JSON
     }
 
+    def getClustersAsSelect = {
+        def theList = []
+        Cluster.getAll().each { cluster ->
+            theList.add(['id':cluster.id, 'text':cluster.name])
+        }
+
+        render theList as JSON
+    }
+
 }
 

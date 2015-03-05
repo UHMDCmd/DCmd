@@ -41,6 +41,136 @@ class BootStrap {
         environments {
 
              production {
+
+
+                 JSON.createNamedConfig("hostAPI") {
+                     it.registerObjectMarshaller(Host) { Host host, JSON json ->
+                         def returnArray = [:]
+                         returnArray['Hostname'] = host.hostname
+                         returnArray['DCmd_ID'] = host.id
+                         returnArray['Environment'] = host.env?.abbreviation
+                         returnArray['Status'] = host.status?.abbreviation
+                         returnArray['Type'] = host.type
+                         returnArray['PhysicalServer'] = host.asset?.itsId
+                         returnArray['OS'] = host.os
+                         returnArray['Services'] = host.tiers
+                         returnArray['SupportStaff'] = host.supporters
+
+                         return returnArray
+                     }
+                 }
+                 JSON.createNamedConfig("serverHostGrid") {
+                     it.registerObjectMarshaller(Host) { Host host, JSON json ->
+                         def returnArray = [:]
+                         returnArray['Hostname'] = host.hostname
+                         returnArray['DCmd_ID'] = host.id
+                         returnArray['env'] = host.env?.abbreviation
+                         returnArray['status'] = host.status?.abbreviation
+                         returnArray['primarySA'] = host.supporters.find { it.roleName.roleName == 'Primary SA'}?.person?.uhName
+                         returnArray['maxMemory'] = host.maxMemory
+                         returnArray['maxCPU'] = host.maxCpu
+
+                         return returnArray
+                     }
+                 }
+                 /*
+                 JSON.registerObjectMarshaller(Host) {
+                     def returnArray = [:]
+                     returnArray['Hostname'] = it.hostname
+                     returnArray['DCmd_ID'] = it.id
+                     returnArray['Environment'] = it.env?.abbreviation
+                     returnArray['Status'] = it.status?.abbreviation
+                     returnArray['Type'] = it.type
+                     returnArray['PhysicalServer'] = it.asset?.itsId
+                     returnArray['OS'] = it.os
+                     returnArray['Services'] = it.tiers
+                     returnArray['SupportStaff'] = it.supporters
+
+                     return returnArray
+                 }
+                 */
+                 JSON.registerObjectMarshaller(SupportRole) {
+                     def returnArray = [:]
+                     returnArray['Role'] = it.roleName?.roleName
+                     returnArray['Person'] = it.person?.uhName
+                     return returnArray
+                 }
+
+                 JSON.registerObjectMarshaller(Tier){
+                     System.out.println(it.instanceDependencies?.first()?.service?.serviceTitle)
+
+                     def returnArray = [:]
+                     returnArray['ServiceName'] = it.instanceDependencies?.first()?.service?.serviceTitle
+                     returnArray['Application'] = it.mainApp
+                     return returnArray
+
+                 }
+
+                 JSON.createNamedConfig('applicationAll') {
+                     it.registerObjectMarshaller(Application) { Application app, JSON json ->
+                         def returnArray = [:]
+                         returnArray['AppName'] = app.applicationTitle
+                         returnArray['Environment'] = app.env?.abbreviation
+                         returnArray['Services'] = app.services
+                         return returnArray
+                     }
+                 }
+
+                 JSON.registerObjectMarshaller(Application) {
+                     def returnArray = [:]
+                     returnArray['AppName'] = it.applicationTitle
+                     returnArray['Environment'] = it.env?.abbreviation
+                     return returnArray
+                 }
+
+                 JSON.registerObjectMarshaller(RoleType) {
+                     def returnArray = [:]
+                     returnArray['Name'] = it.roleName
+                     return returnArray
+                 }
+
+                 JSON.registerObjectMarshaller(Environment) {
+                     def returnArray = [:]
+                     returnArray['Name'] = it.abbreviation
+                     return returnArray
+                 }
+
+                 JSON.registerObjectMarshaller(Status) {
+                     def returnArray = [:]
+                     returnArray['Name'] = it.abbreviation
+                     return returnArray
+                 }
+
+                 JSON.registerObjectMarshaller(Person) {
+                     def returnArray = [:]
+                     returnArray['uhName'] = it.uhName
+                     return returnArray
+                 }
+
+                 JSON.createNamedConfig('personAll') {
+                     it.registerObjectMarshaller(Person) { Person person, JSON json ->
+                         def returnArray = [:]
+                         returnArray['uhName'] = person.uhName
+                         returnArray['firstName'] = person.firstName
+                         returnArray['lastName'] = person.lastName
+                         returnArray['uhNumber'] = person.uhNumber
+                         return returnArray
+                     }
+                 }
+
+                 JSON.registerObjectMarshaller(Service) {
+                     def returnArray = [:]
+                     returnArray['ServiceName'] = it.serviceTitle
+                     returnArray['Environment'] = it.env?.abbreviation
+                     return returnArray
+                 }
+
+                 JSON.registerObjectMarshaller(Cluster) {
+                     def returnArray = [:]
+                     returnArray['Name'] = it.name
+                     return returnArray
+                 }
+
                 def ROLE_USER
                 if (!Role.count()) {
                     ROLE_USER = new Role(authority: 'ROLE_USER')
@@ -230,6 +360,38 @@ class BootStrap {
 
             test {
 
+
+                JSON.createNamedConfig("hostAPI") {
+                    it.registerObjectMarshaller(Host) { Host host, JSON json ->
+                        def returnArray = [:]
+                        returnArray['Hostname'] = host.hostname
+                        returnArray['DCmd_ID'] = host.id
+                        returnArray['Environment'] = host.env?.abbreviation
+                        returnArray['Status'] = host.status?.abbreviation
+                        returnArray['Type'] = host.type
+                        returnArray['PhysicalServer'] = host.asset?.itsId
+                        returnArray['OS'] = host.os
+                        returnArray['Services'] = host.tiers
+                        returnArray['SupportStaff'] = host.supporters
+
+                        return returnArray
+                    }
+                }
+                JSON.createNamedConfig("serverHostGrid") {
+                    it.registerObjectMarshaller(Host) { Host host, JSON json ->
+                        def returnArray = [:]
+                        returnArray['Hostname'] = host.hostname
+                        returnArray['DCmd_ID'] = host.id
+                        returnArray['env'] = host.env?.abbreviation
+                        returnArray['status'] = host.status?.abbreviation
+                        returnArray['primarySA'] = host.supporters.find { it.roleName.roleName == 'Primary SA'}?.person?.uhName
+                        returnArray['maxMemory'] = host.maxMemory
+                        returnArray['maxCPU'] = host.maxCpu
+
+                        return returnArray
+                    }
+                }
+                /*
                 JSON.registerObjectMarshaller(Host) {
                     def returnArray = [:]
                     returnArray['Hostname'] = it.hostname
@@ -244,6 +406,7 @@ class BootStrap {
 
                     return returnArray
                 }
+                */
 
                 JSON.registerObjectMarshaller(SupportRole) {
                     def returnArray = [:]
@@ -369,6 +532,37 @@ class BootStrap {
 
             development {
 
+                JSON.createNamedConfig("hostAPI") {
+                    it.registerObjectMarshaller(Host) { Host host, JSON json ->
+                        def returnArray = [:]
+                        returnArray['Hostname'] = host.hostname
+                        returnArray['DCmd_ID'] = host.id
+                        returnArray['Environment'] = host.env?.abbreviation
+                        returnArray['Status'] = host.status?.abbreviation
+                        returnArray['Type'] = host.type
+                        returnArray['PhysicalServer'] = host.asset?.itsId
+                        returnArray['OS'] = host.os
+                        returnArray['Services'] = host.tiers
+                        returnArray['SupportStaff'] = host.supporters
+
+                        return returnArray
+                    }
+                }
+                JSON.createNamedConfig("serverHostGrid") {
+                    it.registerObjectMarshaller(Host) { Host host, JSON json ->
+                        def returnArray = [:]
+                        returnArray['Hostname'] = host.hostname
+                        returnArray['DCmd_ID'] = host.id
+                        returnArray['env'] = host.env?.abbreviation
+                        returnArray['status'] = host.status?.abbreviation
+                        returnArray['primarySA'] = host.supporters.find { it.roleName.roleName == 'Primary SA'}?.person?.uhName
+                        returnArray['maxMemory'] = host.maxMemory
+                        returnArray['maxCPU'] = host.maxCpu
+
+                        return returnArray
+                    }
+                }
+                /*
                 JSON.registerObjectMarshaller(Host) {
                     def returnArray = [:]
                     returnArray['Hostname'] = it.hostname
@@ -383,6 +577,7 @@ class BootStrap {
 
                     return returnArray
                 }
+                */
 
                 JSON.registerObjectMarshaller(SupportRole) {
                     def returnArray = [:]

@@ -1,41 +1,65 @@
-
 %{--
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+<script src="../js/underscore.js"></script>
+<script src="../js/backbone.js"></script>
 <script src="../js/handlebars.js"></script>
 
-<g:render template="details"/>
 
 <script type="text/javascript">
 
    // (function($){
 
-        var ServerType = Backbone.Model.extend();
-        var ServerTypes = Backbone.Collection.extend({
-            url:'../physicalServer/getServerTypes',
-            model: ServerType,
-            initialize: function() {
-                this.fetch();
-            }
-        });
+   var Host = Backbone.Model.extend();
+   var Hosts = Backbone.Collection.extend({
+       url:'../host/getHostsByServer',
+       model: Host
+   });
 
-   var serverTypes = new ServerTypes();
+    var ServerType = Backbone.Model.extend({
+        defaults: function() {
+            return {
+                selected: ""
+            };
+        }
+    });
+
+    var ServerTypes = Backbone.Collection.extend({
+        url:'../physicalServer/getServerTypes',
+        model: ServerType,
+        initialize: function() {
+            this.fetch();
+        }
+    });
+
+    var serverTypes = new ServerTypes();
+
+    var Cluster = Backbone.Model.extend({
+       defaults: function() {
+           return {
+               selected: ""
+           };
+       }
+    });
+
+    var Clusters = Backbone.Collection.extend({
+       url:'../physicalServer/getClustersAsSelect',
+       model: Cluster,
+       initialize: function() {
+           this.fetch();
+       }
+    });
+
+    var clusters = new Clusters();
 
         var PhyServer = Backbone.Model.extend({
             url:'/its/dcmd/physicalServer/getServerDetails',
+
             initialize: function() {
-                this.set('sTypes', new ServerTypes);
+                this.set('hostList', new Hosts);
             },
             defaults: function() {
                 return {
                     itsId: 'empty'
                 };
-            },
-            getData: function() {
-
-            },
-            getListData: function() {
-
             },
             saveData: function() {
 
@@ -60,33 +84,50 @@
             },
 
             initialize: function () {
-                _.bindAll(this, 'render', 'unlockAll', 'lockAll', 'discardChanges', 'loadData');
+                _.bindAll(this, 'render', 'unlockAll', 'lockAll', 'discardChanges', 'loadData', 'renderHostGrid');
                 template = Handlebars.compile($("#server_template").html());
             //    this.model.on("change", this.render);
             },
 
             render: function() {
-                //this.$el.html(this.template(this.model.toJSON()));
-                console.log(this.model.toJSON());
-                var context = {server:this.model.toJSON(),sTypes:serverTypes.toJSON()};
-
+                var context = {server:this.model.toJSON(),sTypes:serverTypes.toJSON(), clusterList: clusters.toJSON()};
 
                 this.$el.html(template(context));
-//                $("#server_dialog").append(this.el);
-                console.log("CONTEXT:");
-                console.log(context);
+
+                // Set all dropdowns to SELECT2 and set their values
+                $('.value select').each(function() {
+                    var attribute = $(this).context.id;
+                    var selectedVal;
+                    switch(attribute) {
+                        case 'cluster':
+                            selectedVal = theServer.attributes[attribute].id;
+                            break;
+                        default:
+                            selectedVal = theServer.attributes[attribute];
+                    }
+                    $(this).select2({
+                        width:150
+                    }).select2('val', selectedVal);
+                });
+
+                // Set everything to initially locked
+                $('.value input[type="text"]').prop("disabled", true);
+                $('.value select').prop("disabled", true);
+
                 return this;
             },
 
             unlockAll: function() {
                 this.$el.addClass('editing');
-
-                this.render();
+                $('.value input[type="text"]').prop("disabled", false);
+                $('.value select').prop("disabled",false);
+//                this.render();
             },
             lockAll: function() {
                 this.$el.removeClass('editing');
-                console.log($('.value input[type="text"]'));
+//                console.log($('.value input[type="text"]'));
                 $('.value input[type="text"]').prop("disabled", true);
+                $('.value select').prop("disabled", true);
             //    console.log(this.$el.('input[type="text"] .edit'));
             //    this.render();
             },
@@ -94,20 +135,44 @@
             },
             loadData: function(serverId) {
                 this.model.fetch({data: $.param({serverId:serverId}), success: this.render});
+                this.model.attributes.hostList.fetch({data: $.param({serverId:serverId}), success:this.renderHostGrid});
+            },
+            renderHostGrid: function() {
+                console.log(this.model.attributes.hostList.toJSON());
+                $("#hostsList").GridUnload();
+                jQuery("#hostsList").jqGrid({
+                    height:'auto',
+                    autowidth:true,
+                    datatype: 'local',
+                    data:this.model.attributes.hostList.toJSON(),
+                    width:'100%',
+                    colNames:['Hostname', 'Status', 'Environment', 'Host SA', 'Max Memory', 'Max CPU'],
+                    colModel:[  {name:'Hostname', align:'left'},
+                                {name:'status', align:'left'},
+                                {name:'env', align:'left'},
+                                {name:'primarySA', align:'left'},
+                                {name:'maxMemory', align:'left'},
+                                {name:'maxCPU', align:'left'}],
+                    loadComplete : function(data) {
+                        //alert('grid loading completed ' + data);
+                    },
+                    loadError : function(xhr, status, error) {
+                        alert('grid loading error' + error);
+                    }
+                });
             }
-
         });
 
    var openItem = function(serverId) {
-       var serverView = new ServerView({ el: $("#server_dialog") });
+       var serverView = new ServerView({ el: $("#server_attributes") });
        serverView.loadData(serverId);
        $("#server_dialog").dialog("open");
     //   console.log(test.toJSON());
    };
 
   //  })(jQuery);
-%{--</script>
-                               --}%
+</script>
+  --}%
 
 <script type="text/javascript">
 /*
@@ -145,7 +210,6 @@ function lock() {
     $('.unlocked').position = 'absolute';
     $('.unlocked').hide();;
 }
-
 
 $(document).ready(function() {
     $( "#server_dialog" ).dialog({
@@ -339,14 +403,12 @@ url:'listAllPhyServer',
 <table id="allPhyServer"></table>
 <div id="allServerPager"></div>
 
-
+%{--
+<g:render template="details"/>
 <div id="server_dialog" title="Server Details">
-    %{--
-    <g:render template="details"/>
-    <br>
-    <input type="button" onclick="lock()" value="Lock"/>
-    <input type="button" onclick="unlock()" value="Unlock"/>
-    --}%
+    <div id="server_attributes"></div>
+    <g:render template="popup-tabs"/>
+
 </div>
 
 <script type="text/javascript">

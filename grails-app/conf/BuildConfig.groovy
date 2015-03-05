@@ -51,8 +51,8 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        // runtime 'mysql:mysql-connector-java:5.1.13'
-        runtime "hsqldb:hsqldb:1.8.0.10"
+         runtime 'mysql:mysql-connector-java:5.1.13'
+        // runtime "hsqldb:hsqldb:1.8.0.10"
         compile 'com.vmware:vijava:5.1'
 
 

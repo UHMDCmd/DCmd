@@ -896,5 +896,17 @@ class HostController {
         render response as JSON
     }
 
+    /*****************************************************************************************************************
+     * BACKBONE API MENTHODS
+    /*****************************************************************************************************************/
 
+    def getHostsByServer = {
+
+        def hosts = Host.createCriteria().list() {
+            eq('asset.id', params.serverId.toLong())
+        }
+        JSON.use("serverHostGrid") {
+            respond hosts
+        }
+    }
 }

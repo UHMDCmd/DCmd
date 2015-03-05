@@ -12,7 +12,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ *                                       e
  * You should have received a copy of the GNU General Public License
  * along with DCmd.  It is contained in the DCmd release as LICENSE.txt
  * If not, see <http://www.gnu.org/licenses/>.
@@ -482,12 +482,13 @@ class ApplicationService {
         def item = null
         def message = ""
         def state = "FAIL"
-        def id
         def role = null
+        def id
 
         // determine our action
         switch (params.oper) {
             case 'add':
+                params.id=null
                 if(params.serviceEnv)
                     params.env = Environment.get(params.serviceEnv)
                 if(params.serviceStatus)

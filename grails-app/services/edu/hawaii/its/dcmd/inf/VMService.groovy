@@ -28,12 +28,8 @@ class VMService {
             String username
             String password
 
-//            url = new URL("https://10.1.9.91/sdk")
-//            username = "***REMOVED***"
-//            String password = "***REMOVED***"
-
-            def inputFile = new File("C:\\Users\\Ben\\.grails\\testFile.txt")
-//            def inputFile = new File("dcmdConfig/vcenters.txt")
+//            def inputFile = new File("C:\\Users\\Ben\\.grails\\vcenters.txt")
+            def inputFile = new File("dcmdConfig/vcenters.txt")
             def jsonSlurper = new JsonSlurper()
             def InputJSON = jsonSlurper.parseText(inputFile.text)
             InputJSON.each {
@@ -43,10 +39,6 @@ class VMService {
                 ArrayList<ManagedEntity> servers = new ArrayList<ManagedEntity>()
                 ArrayList<ManagedEntity> virtualMachines = new ArrayList<ManagedEntity>()
                 InventoryNavigator nav
-
-                //url = new URL("https://10.1.9.91/sdk")
-                //username = "***REMOVED***"
-                //password = "***REMOVED***"
 
                 url = new URL(it.url)
                 username = it.username
