@@ -38,10 +38,6 @@ class VMwareController {
             int count = 0;
             boolean status = true; //status marker to indicate successful connection and update
 
-            URL url = new URL("https://10.1.9.91/sdk")
-            String username = "***REMOVED***"
-            String password = "***REMOVED***"
-
             def si = new ServiceInstance(url, username, password, true)
             def rootFolder = si.rootFolder
 
