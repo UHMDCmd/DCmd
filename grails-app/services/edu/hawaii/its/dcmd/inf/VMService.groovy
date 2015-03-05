@@ -40,10 +40,6 @@ class VMService {
                 ArrayList<ManagedEntity> virtualMachines = new ArrayList<ManagedEntity>()
                 InventoryNavigator nav
 
-                //url = new URL("https://10.1.9.91/sdk")
-                //username = "***REMOVED***"
-                //password = "***REMOVED***"
-
                 url = new URL(it.url)
                 username = it.username
                 password = it.password
