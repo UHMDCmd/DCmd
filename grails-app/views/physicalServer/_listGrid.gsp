@@ -1,4 +1,4 @@
-%{--
+
 <script src="../js/underscore.js"></script>
 <script src="../js/backbone.js"></script>
 <script src="../js/handlebars.js"></script>
@@ -172,7 +172,7 @@
 
   //  })(jQuery);
 </script>
-  --}%
+
 
 <script type="text/javascript">
 /*
@@ -403,28 +403,28 @@ url:'listAllPhyServer',
 <table id="allPhyServer"></table>
 <div id="allServerPager"></div>
 
-%{--
+
 <g:render template="details"/>
 <div id="server_dialog" title="Server Details">
     <div id="server_attributes"></div>
     <g:render template="popup-tabs"/>
 
 </div>
-
+%{--
 <script type="text/javascript">
-    function testExtern() {
-        jQuery.ajax({
-            async: false,
-            url: '/its/dcmd/physicalServer/testExtern',
-            type:'POST',
-            dataType:'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function(data) {
-                alert(data);
-            },
-            error: function () { alert('Error retrieving elog info'); }
-        });
-    }
+   function testExtern() {
+       jQuery.ajax({
+           async: false,
+           url: '/its/dcmd/physicalServer/testExtern',
+           type:'POST',
+           dataType:'json',
+           contentType: 'application/json; charset=utf-8',
+           success: function(data) {
+               alert(data);
+           },
+           error: function () { alert('Error retrieving elog info'); }
+       });
+   }
 </script>
 
 %{--<input type="button" value="test" onclick="testExtern()"/> --}%

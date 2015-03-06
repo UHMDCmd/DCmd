@@ -28,8 +28,8 @@ class VMService {
             String username
             String password
 
-//            def inputFile = new File("C:\\Users\\Ben\\.grails\\vcenters.txt")
-            def inputFile = new File("dcmdConfig/vcenters.txt")
+            def inputFile = new File("${System.properties['user.home']}/.grails/vcenters.txt")
+//            def inputFile = new File("dcmdConfig/vcenters.txt")
             def jsonSlurper = new JsonSlurper()
             def InputJSON = jsonSlurper.parseText(inputFile.text)
             InputJSON.each {

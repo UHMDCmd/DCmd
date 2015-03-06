@@ -149,8 +149,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="grails-2.3.8" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="vijava5120121125" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="grails-2.3.8" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (Sitar-inf-grailsPlugins)">
         <CLASSES>
@@ -208,7 +208,6 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.tomcat/tomcat-catalina-ant/jars/tomcat-catalina-ant-7.0.52.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.tomcat.embed/tomcat-embed-core/jars/tomcat-embed-core-7.0.52.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.vmware/vijava/jars/vijava-5.1.jar!/" />
-          <root url="jar://$USER_HOME$/.grails/ivy-cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.13.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
