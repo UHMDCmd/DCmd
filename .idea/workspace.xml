@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9bad73d8-a70a-4e27-9fa4-de56eb5ddaf6" name="Default" comment="production 1.6.0 bug fixes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/dcmd-theme/uh-logo-white.gif" />
+    <list default="true" id="9bad73d8-a70a-4e27-9fa4-de56eb5ddaf6" name="Default" comment="">
       <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\clean\target\classes\DataSource$_run_closure1.class" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\clean\target\classes\DataSource$_run_closure2.class" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\clean\target\classes\DataSource$_run_closure3.class" afterPath="" />
@@ -39,14 +38,7 @@
       <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\clean\target\classes\edu\hawaii\its\dcmd\inf\HostController$_getPrimarySA_closure37.class" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\clean\target\classes\edu\hawaii\its\dcmd\inf\HostController$_getPrimarySA_closure37_closure69.class" afterPath="" />
       <change type="DELETED" beforePath="C:\Users\Ben\Desktop\intellij-projects\clean\target\classes\edu\hawaii\its\dcmd\inf\PhysicalServerController$_closure8_closure25.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/Config.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sitar-inf-grailsPlugins.iml" afterPath="$PROJECT_DIR$/Sitar-inf-grailsPlugins.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sitar-inf.iml" afterPath="$PROJECT_DIR$/Sitar-inf.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/dcmd/VMWareJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/dcmd/VMWareJob.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp" afterPath="$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sitar-inf.iws" />
@@ -96,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_listGrid.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_listGrid.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8633441" vertical-offset="6518" max-vertical-offset="7395">
-              <caret line="415" column="37" selection-start-line="415" selection-start-column="20" selection-end-line="415" selection-end-column="20" />
+            <state vertical-scroll-proportion="-4.367347" vertical-offset="6722" max-vertical-offset="7395">
+              <caret line="408" column="83" selection-start-line="408" selection-start-column="38" selection-end-line="408" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -141,16 +133,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="applicationContext.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
           <provider selected="true" editor-type-id="text-editor">
@@ -163,11 +145,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataSource.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DataSource.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
-              <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.048991356" vertical-offset="0" max-vertical-offset="694">
+              <caret line="2" column="56" selection-start-line="2" selection-start-column="56" selection-end-line="2" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -235,7 +217,6 @@
         <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/ApplicationService.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/edu/hawaii/its/dcmd/inf/VMwareController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy" />
@@ -243,6 +224,7 @@
         <option value="$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/AssetService.groovy" />
         <option value="$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1/web-app/js/jqgrid/jquery.jqGrid.min.js" />
         <option value="$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
       </list>
     </option>
   </component>
@@ -1040,7 +1022,7 @@
       <workItem from="1425596516245" duration="1049000" />
       <workItem from="1425597619154" duration="210000" />
       <workItem from="1425597934426" duration="57000" />
-      <workItem from="1425599491777" duration="3423000" />
+      <workItem from="1425599491777" duration="4759000" />
     </task>
     <task id="LOCAL-00001" summary="Changes before Demo:&#10;- changes to Rack List page with new entities&#10;- font changes in theme affect show pages&#10;">
       <created>1410392927517</created>
@@ -1070,11 +1052,15 @@
       <created>1425595650328</created>
       <updated>1425595650328</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="changes for dev:&#10;- dev single-page on physicalServer grid&#10;- locations for config files on local machine">
+      <created>1425603791891</created>
+      <updated>1425603791891</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="408315000" />
+    <option name="totallyTimeSpent" value="409651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1170" extended-state="6" />
@@ -1102,6 +1088,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1112,7 +1099,6 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32163742" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1137,7 +1123,8 @@
     <MESSAGE value="backbone work for single-page prototype." />
     <MESSAGE value="production 1.6.0 release" />
     <MESSAGE value="production 1.6.0 bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="production 1.6.0 bug fixes" />
+    <MESSAGE value="changes for dev:&#10;- dev single-page on physicalServer grid&#10;- locations for config files on local machine" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes for dev:&#10;- dev single-page on physicalServer grid&#10;- locations for config files on local machine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1431,40 +1418,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1581" max-vertical-offset="6120">
-          <caret line="109" column="105" selection-start-line="109" selection-start-column="102" selection-end-line="109" selection-end-column="102" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.84" vertical-offset="941" max-vertical-offset="2023">
-          <caret line="61" column="18" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136">
-          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/edu/hawaii/its/dcmd/inf/VMService.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5508">
@@ -1546,8 +1499,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/physicalServer/_listGrid.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8633441" vertical-offset="6518" max-vertical-offset="7395">
-          <caret line="415" column="37" selection-start-line="415" selection-start-column="20" selection-end-line="415" selection-end-column="20" />
+        <state vertical-scroll-proportion="-4.367347" vertical-offset="6722" max-vertical-offset="7395">
+          <caret line="408" column="83" selection-start-line="408" selection-start-column="38" selection-end-line="408" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/WEB-INF/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45603576" vertical-offset="0" max-vertical-offset="671">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.84" vertical-offset="941" max-vertical-offset="2023">
+          <caret line="61" column="18" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1581" max-vertical-offset="6120">
+          <caret line="109" column="105" selection-start-line="109" selection-start-column="102" selection-end-line="109" selection-end-column="102" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.048991356" vertical-offset="0" max-vertical-offset="694">
+          <caret line="2" column="56" selection-start-line="2" selection-start-column="56" selection-end-line="2" selection-end-column="56" />
           <folding />
         </state>
       </provider>
