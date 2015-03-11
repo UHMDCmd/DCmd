@@ -909,4 +909,11 @@ class HostController {
             respond hosts
         }
     }
+
+    def getHostDetails ={
+        def host = Host.get(params.hostId)
+        //def response = [retVal: true, itsId:server.itsId, status:server.status?.abbreviation]
+        //render response as JSON
+        render host as JSON
+    }
 }

@@ -8,10 +8,10 @@
 
    // (function($){
 
-   var Host = Backbone.Model.extend();
-   var Hosts = Backbone.Collection.extend({
+   var ServerHost = Backbone.Model.extend();
+   var ServerHosts = Backbone.Collection.extend({
        url:'../host/getHostsByServer',
-       model: Host
+       model: ServerHost
    });
 
     var ServerType = Backbone.Model.extend({
@@ -54,7 +54,7 @@
             url:'/its/dcmd/physicalServer/getServerDetails',
 
             initialize: function() {
-                this.set('hostList', new Hosts);
+                this.set('hostList', new ServerHosts);
             },
             defaults: function() {
                 return {
@@ -200,22 +200,12 @@ function openItem(serverId) {
     $("#item_dialog").dialog("open");
 }
   */
-function unlock() {
-
-}
-
-function lock() {
-    $('.locked').position = 'relative';
-    $('.locked').show();
-    $('.unlocked').position = 'absolute';
-    $('.unlocked').hide();;
-}
 
 $(document).ready(function() {
     $( "#server_dialog" ).dialog({
         autoOpen: false,
         width: 800,
-        height: 400,
+        height: 600,
         show: {
             effect: "blind",
             duration: 1000
