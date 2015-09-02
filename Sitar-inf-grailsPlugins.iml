@@ -72,6 +72,10 @@
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/csv-0.3.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/csv-0.3.1/grails-app/i18n" isTestSource="false" />
     </content>
+    <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/directory-service-0.10.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/directory-service-0.10.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/directory-service-0.10.1/grails-app/services" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5/grails-app/services" isTestSource="false" />
@@ -149,8 +153,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="vijava5120121125" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="grails-2.3.8" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="unboundid-ldapsdk-2.3" level="project" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (Sitar-inf-grailsPlugins)">
         <CLASSES>
@@ -208,6 +212,7 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.tomcat/tomcat-catalina-ant/jars/tomcat-catalina-ant-7.0.52.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.tomcat.embed/tomcat-embed-core/jars/tomcat-embed-core-7.0.52.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.vmware/vijava/jars/vijava-5.1.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/com.unboundid/unboundid-ldapsdk/jars/unboundid-ldapsdk-2.3.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

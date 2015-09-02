@@ -75,7 +75,7 @@
                         }
                     }
                 },
-                {name:"tierService", width:200, editable:editOption ,edittype:'select', editoptions: {dataUrl:"listServicesForAppAsSelect?appId=${applicationInstance.id}",
+                {name:"tierService", width:200, editable:false ,edittype:'select', editoptions: {dataUrl:"listServicesForAppAsSelect?appId=${applicationInstance.id}",
                     dataInit:function(e){$(e).select2({
                         width: 200
                     })}
@@ -94,7 +94,7 @@
             rowNum:1000,
             viewrecords: true,
             gridview: true,
-            cellEdit:false,
+            cellEdit:editOption,
             cellsubmit: 'remote',
 //            afterSubmit: afterSubmitSIEvent,
             afterSaveCell: afterSubmitSIEvent,

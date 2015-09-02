@@ -384,7 +384,7 @@ class HostService {
                 "<a href='../application/show?id=${it.service?.application?.id}'>${it.service?.application?.toString()}</a>",
                 "<a href='../service/show?id=${it.service?.id}'>${it.service.toString()}</a>",
                 personService.getSupportPersonLink(it.service, 'Primary SA'),
-                it.tier.loadBalanced, it.tier.type.toString(),
+                it.tier.loadBalanced,
                 it.tier.generalNote], id: it.id ] }
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         return jsonData
@@ -407,7 +407,6 @@ class HostService {
         // determine our action
         switch (params.oper) {
             case 'add':
-                System.out.println(params)
                 item = new Tier(params)
 
                 if (! item.hasErrors() && item.save()) {
@@ -474,7 +473,6 @@ class HostService {
             order("applicationTitle")
         }
 
-        System.out.println(applicationList)
         if(applicationList.size() > 0) {
             applicationList.unique()
             applicationList.each { app ->

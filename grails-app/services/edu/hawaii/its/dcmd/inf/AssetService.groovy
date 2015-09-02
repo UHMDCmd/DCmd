@@ -268,8 +268,8 @@ class AssetService {
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
         def results = physicalServers?.collect { [ cell: [
-                //"<a href='../physicalServer/show?id=${it.id}'>${it.itsId}</a>",
-                "<a onclick='openItem(${it.id})'>${it.itsId}</a>",
+                "<a href='../physicalServer/show?id=${it.id}'>${it.itsId}</a>",
+                //"<a onclick='openItem(${it.id})'>${it.itsId}</a>",
                 it.serverType,
                 it.getDatacenterLinkString(),
                 it.getClusterLinkString(),

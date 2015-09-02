@@ -342,6 +342,12 @@ class PersonController {
         render jsonData as JSON
     }
 
+    def getRoleTypes = {
+        JSON.use('roleTypeOptions')
+        def typeList = RoleType.getAll()
+        render typeList as JSON
+    }
+
     /*****************************************************************/
     /* Technical Support Staff Grid
     /*****************************************************************/
@@ -368,6 +374,92 @@ class PersonController {
     def editFunctionalSupport = {
         def jsonData = personService.editFunctionalSupport(params)
         render jsonData as JSON
+    }
+
+    /******************************************************
+     * List and Edit fcns for single-page version
+     *****************************************************/
+    def listSupportStaffSinglePage = {
+        def sortIndex = params.sidx ?: 'roleName'
+        def sortOrder  = params.sord ?: 'asc'
+        def maxRows = Integer.valueOf(params.rows)
+        def currentPage = Integer.valueOf(params.page) ?: 1
+        def rowOffset = currentPage == 1 ? 0 : (currentPage - 1) * maxRows
+        def currentObject = SupportableObject.get(params.objectId.toLong())
+
+        def supportStaff = SupportRole.createCriteria().list(max: maxRows, offset: rowOffset) {
+            like("supportedObject.id", currentObject.id)
+        }
+        def totalRows = supportStaff.totalCount
+        def numberOfPages = Math.ceil(totalRows / maxRows)
+        def results = supportStaff?.collect { [ cell: ['', it.roleName.toString(),
+                                                       it.person.uhName,
+                                                       it.person.id,
+                                                       it.person.primaryEmail(), it.person.primaryPhone(), it.supportRoleNotes], id: it.id ] }
+        def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
+
+        render jsonData as JSON
+    }
+
+    def editSupportStaffSinglePage = {
+        println(params)
+        def item = null
+        def message = ""
+        def state = "FAIL"
+        def id
+
+        if(params.roleName)
+            params.roleName = RoleType.get(params.roleName.toLong())
+        if(params.person)
+            params.person = Person.get(params.person)
+        if(params.objectId)
+            params.supportedObject = SupportableObject.get(params.objectId)
+        params.roleType = 'Functional'
+
+        def response = [state:"FAIL"]
+        // determine our action
+        switch (params.oper) {
+            case 'add':
+                item = new SupportRole(params)
+                if (! item.hasErrors() && item.save()) {
+                    response.id = item.id
+                    response.object = item.properties
+                    response.state = "OK"
+                } else {
+                    response.message = item.errors.fieldErrors[0]
+                    println(item.errors.fieldErrors[0])
+                }
+                break;
+            case 'edit':
+                item = SupportRole.get(params.id)
+                item.properties = params
+                if (! item.hasErrors() && item.save()) {
+                    response.id = item.id
+                    response.state = "OK"
+                } else {
+                    response.message = item.errors.errorCount
+                }
+                break;
+            case 'del':
+                item = SupportRole.get(params.id)
+                if (item) {
+                    response.id = item.id
+                    if (! item.hasErrors() && item.delete()) {
+//                        message = "Replacement ${params.replacement} for Asset ${params.main_asset} Deleted."
+                        response.state = "OK"
+                    }
+                }
+                break;
+        }
+//        response = [message:message,state:state,id:id]
+
+        render response as JSON
+    }
+
+
+    def getPersonOptions = {
+        JSON.use('personOptions')
+        render Person.getAll() as JSON
     }
 
 
@@ -400,7 +492,7 @@ class PersonController {
 //                 println("original size: " +persons.size())
          for (int i = 0; i < Person.all.size(); i++){
 
-             persons.get(i).properties['uhNumber','uhName','title','lastName','firstName','midInit','telephone','primaryEmail']=  updatedList.get(i).properties['uhNumber','uhName','title','lastName','firstName','midInit','telephone','primaryEmail']
+             persons.get(i).properties['uhName','title','lastName','firstName','midInit','telephone','primaryEmail']=  updatedList.get(i).properties['uhName','title','lastName','firstName','midInit','telephone','primaryEmail']
 
 //                     println(Person.all.get(i).properties['uhNumber','uhName','title','lastName','firstName','midInit','telephone','primaryEmail'])
 

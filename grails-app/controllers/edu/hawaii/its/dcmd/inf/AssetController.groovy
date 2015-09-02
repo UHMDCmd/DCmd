@@ -618,4 +618,8 @@ class AssetController {
     }
 
 
+    def getAllAssetOptions = {
+        JSON.use('assetOptions')
+        render Asset.getAll() as JSON
+    }
 }

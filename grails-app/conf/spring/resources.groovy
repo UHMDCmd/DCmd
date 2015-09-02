@@ -30,8 +30,7 @@ beans = {
 }
 
 
-//beans = {
-//    userDetailsService(edu.hawaii.its.dcmd.inf.EmptyUserDetailsService)
-//
-//
-//}
+beans = {
+    userDetailsService(edu.hawaii.its.dcmd.inf.EmptyUserDetailsService)
+
+}

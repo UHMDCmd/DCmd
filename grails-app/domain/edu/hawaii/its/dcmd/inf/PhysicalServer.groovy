@@ -33,6 +33,8 @@ class PhysicalServer extends Asset{
 
     Host hostOS
 
+    Date eoslDate
+
     static hasMany = [
             assetCapacities:AssetCapacity,
             hosts: Host,
@@ -42,15 +44,16 @@ class PhysicalServer extends Asset{
     static auditable = true
 
     static constraints = {
+        eoslDate(nullable:true)
 //        globalZone(nullable:true)
         serverType(nullable:true)
         hosts(nullable: true)
         devicePlugs(nullable:true)
         cluster(nullable:true)
-        memorySize(nullable:false)
-        cpuSpeed(nullable:false)
-        numCores(nullable:false)
-        numThreads(nullable:false)
+        memorySize(nullable:true)
+        cpuSpeed(nullable:true)
+        numCores(nullable:true)
+        numThreads(nullable:true)
         hostOS(nullable:true)
         vendor(nullable:true)
     }

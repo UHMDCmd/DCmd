@@ -386,7 +386,7 @@ class PersonService {
                 String email = attrMap.get("mail")
                 //println("email: " + email)
 
-                personInstance = new Person(uhName: name,uhNumber: id,title: title,firstName: firstName, telephone: phone,primaryEmail: email,
+                personInstance = new Person(uhName: name,title: title,firstName: firstName, telephone: phone,primaryEmail: email,
                 lastName: lastName)
             }
 

@@ -34,11 +34,14 @@
 
     <script>
         $(document).ready(function() {
+         //   console.log(${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString()))});
+
             try{
-                <g:set var="themeVal" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.themeVal}"/>
+                %{--
+               <g:set var="themeVal" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.themeVal}"/>
                 <g:set var="background" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.background}"/>
                 <g:set var="font_size" value="${(edu.hawaii.its.dcmd.inf.User.findByUsername(sec.username().toString())).userSettings.font}"/>
-
+                --}%
             }
             catch(err){
                 console.log("themeVal error caught")
@@ -147,7 +150,7 @@
 
             <h1 class="site_title">
 
-                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.gif')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.6.0</sub></font></a>
+                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.gif')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.7.0</sub></font></a>
             </h1>
             <g:set var="currentMode" value="${session.getAttribute("modeType")}"/>
 

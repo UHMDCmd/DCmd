@@ -265,6 +265,22 @@ class PhysicalServerController {
         }
     }
 
+    def delete() {
+        def theServer = PhysicalServer.get(params.id)
+        def itsId = theServer.itsId
+        def relatedHosts = Host.createCriteria().list {
+            eq('asset.id', theServer.id)
+        }
+        relatedHosts.each {
+            it.asset = null
+            it.save()
+        }
+
+        theServer.delete()
+        flash.message = "Host " + itsId + " deleted."
+        redirect(action:'list')
+    }
+
 
 
 
@@ -276,6 +292,7 @@ class PhysicalServerController {
     def listAsSelect={
 
         def lst = PhysicalServer.findAll()
+
 
 //        println (lst.size())
         StringBuffer buf = new StringBuffer("<select>")
@@ -594,6 +611,22 @@ class PhysicalServerController {
         }
 
         render theList as JSON
+    }
+
+    def getPhysicalServerList = {
+        def lst = PhysicalServer.createCriteria().list {
+            order('itsId', 'asc')
+        }
+
+        StringBuffer buf = new StringBuffer("<select>")
+        lst.each{
+            buf.append("<option value=\"${it.id}\">")
+            buf.append(it.toString())
+            buf.append("</option>")
+        }
+        buf.append("</select>")
+
+        render buf.toString()
     }
 
 }

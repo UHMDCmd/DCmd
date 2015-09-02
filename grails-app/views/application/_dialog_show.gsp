@@ -49,6 +49,10 @@
     <div class="show-wrapper">
         <table class="floatTables">
             <tr>
+                <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Maintenance Window" /></td>
+                <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "maintenanceWindow")}</td>
+            </tr>
+            <tr>
                 <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Date Created" /></td>
                 <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "dateCreated")}</td>
             </tr>

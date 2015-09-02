@@ -20,6 +20,8 @@
 
 import grails.converters.JSON
 
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.util.Date;
 
 import edu.hawaii.its.dcmd.inf.*
@@ -41,7 +43,6 @@ class BootStrap {
         environments {
 
              production {
-
 
                  JSON.createNamedConfig("hostAPI") {
                      it.registerObjectMarshaller(Host) { Host host, JSON json ->
@@ -89,6 +90,7 @@ class BootStrap {
                      return returnArray
                  }
                  */
+
                  JSON.registerObjectMarshaller(SupportRole) {
                      def returnArray = [:]
                      returnArray['Role'] = it.roleName?.roleName
@@ -127,6 +129,15 @@ class BootStrap {
                      def returnArray = [:]
                      returnArray['Name'] = it.roleName
                      return returnArray
+                 }
+
+                 JSON.createNamedConfig('roleTypeOptions') {
+                     it.registerObjectMarshaller(RoleType) { RoleType type, JSON json ->
+                         def returnArray = [:]
+                         returnArray['Name'] = type.roleName
+                         returnArray['id'] = type.id
+                         return returnArray
+                     }
                  }
 
                  JSON.registerObjectMarshaller(Environment) {
@@ -169,6 +180,178 @@ class BootStrap {
                      def returnArray = [:]
                      returnArray['Name'] = it.name
                      return returnArray
+                 }
+
+
+                 /*
+     JSON.registerObjectMarshaller(Purchase) {
+         def returnArray = [:]
+         returnArray['fiscalYear'] = it.fiscalYear
+         returnArray['uhContractTitle'] = uhContractTitle
+         returnArray['vendorName'] = vendorName
+         returnArray['purchaseType'] = it.purchaseType
+         returnArray['purchaseTypeName'] = it.purchaseType?.abbreviation
+         returnArray['paymentType'] = it.paymentType
+         returnArray['paymentStatus'] = it.paymentStatus
+         returnArray['periodBeginDate'] = it.periodBeginDate
+         returnArray['periodEndDate'] = it.periodEndDate
+         returnArray['uhContractBeginDate'] = it.uhContractBeginDate
+         returnArray['uhContractEndDate'] = it.uhContractEndDate
+         returnArray['pcard'] = it.pcard
+         returnArray['requisition'] = it.requisition
+         returnArray['vendorCustomerId'] = it.vendorCustomerId
+     }
+     */
+
+                 JSON.registerObjectMarshaller(Purchase) {
+                     def returnArray = [:]
+                     returnArray['id'] = it.id
+                     returnArray['fiscalYear'] = it.fiscalYear
+                     returnArray['uhContractTitle'] = it.uhContractTitle
+                     returnArray['uhContractBeginDate'] = it.uhContractBeginDate?.format('MM/dd/yyyy')
+                     returnArray['uhContractEndDate'] = it.uhContractEndDate?.format('MM/dd/yyyy')
+//                    returnArray['periodBeginDate'] = it.periodBeginDate?.format('mm/dd/yyyy')
+//                    returnArray['periodEndDate'] = it.periodEndDate?.format('mm/dd/yyyy')
+                     returnArray['anniversary'] = it.anniversary?.format('MM/dd')
+                     returnArray['purchaseType'] = it.purchaseType?.id
+                     returnArray['purchaseStatus'] = it.purchaseStatus
+                     returnArray['paymentType'] = it.paymentType
+                     returnArray['hawaiiTaxRate'] = it.hawaiiTaxRate
+//                    returnArray['hasSupportRenewal'] = it.hasSupportRenewal
+                     returnArray['vendorName'] = it.vendorName
+                     returnArray['vendorCustomerId'] = it.vendorCustomerId
+                     returnArray['vendorContractId'] = it.vendorContractId
+                     returnArray['multiyear'] = it.multiyear
+//                    returnArray['requisition'] = it.requisition
+//                    returnArray['pcard'] = it.pcard
+//                    returnArray['superQuoteId'] = it.superQuoteId
+                     returnArray['generalNote'] = it.generalNote
+                     return returnArray
+                 }
+
+                 JSON.registerObjectMarshaller(PurchaseItem) {
+                     NumberFormat formatter = new DecimalFormat("0.00")
+                     def returnArray = [:]
+                     returnArray['id'] = it.id
+                     returnArray['purchase'] = it.purchase.id
+                     returnArray['itemType'] = it.itemType
+                     returnArray['description'] = it.description
+                     returnArray['quantity'] = it.quantity
+                     returnArray['asset'] = it.asset?.id
+                     returnArray['itemUnitListPrice'] = it.getUnitPriceString()
+                     returnArray['itemsCostBeforeTax'] = it.getPreTaxString()
+                     returnArray['itemsCostTaxOnly'] = it.getTaxCostString()
+                     returnArray['itemsCost'] = it.getTotalCostString()
+                     returnArray['assetName'] = it.asset.toString()
+                     return returnArray
+                 }
+                 JSON.createNamedConfig('assetOptions') {
+                     it.registerObjectMarshaller(Asset) { Asset asset, JSON json ->
+                         def returnArray = [:]
+                         returnArray['id'] = asset.id
+                         returnArray ['itsId'] = asset.itsId
+                         returnArray ['type'] = asset.assetType?.abbreviation
+                         return returnArray
+                     }
+                 }
+
+                 JSON.createNamedConfig('personOptions') {
+                     it.registerObjectMarshaller(Person) { Person person, JSON json ->
+                         def returnArray = [:]
+                         returnArray['id'] = person.id
+                         returnArray ['uhName'] = person.uhName
+                         return returnArray
+                     }
+                 }
+                 /*
+            def powerType
+            powerType = new AssetType(
+                    name: 'Power',
+                    description: 'Power entities',
+                    abbreviation: 'Power'
+            )
+            powerType.save(failOnError:true)
+
+            def PSU1
+            if(!PowerSource.count()) {
+                PSU1 = new PowerSource(itsId:'PSU1', capacity:100, assetType:powerType).save(failOnError:true)
+            }
+
+            def Bus1
+            if(!PowerPanel.count()) {
+                Bus1 = new PowerPanel(itsId:'Bus1', capacity:50, source:PSU1, assetType:powerType, breaker_poles:16).save(failOnError:true)
+            }
+            def Breaker1
+            if(!PowerBreaker.count()) {
+                Breaker1 = new PowerBreaker(itsId:'Breaker1', label: 'A01-a', capacity:30, panel:Bus1, assetType:powerType, voltage: 110).save(failOnError:true)
+            }
+            def connector1
+            if (! PowerConnector.count() ) {
+                connector1 = new PowerConnector(name:'C1').save(failOnError: true, flush:true)
+            }
+
+            def PSType1
+            if (! PowerStripType.count()) {
+                PSType1 = new PowerStripType(name:'PSType1', connectors: [connector1]).save(failOnError: true, flush:true)
+            }
+
+            def strip1, strip2, strip3
+            if(!PowerStrip.count()) {
+                strip1 = new PowerStrip(itsId:'XY', capacity:10, breaker:Breaker1, powerUsed:6, assetType:powerType, type: PSType1).save(failOnError:true)
+                strip2 = new PowerStrip(itsId:'XZ', capacity:10, breaker:Breaker1, powerUsed:10, assetType:powerType, type: PSType1).save(failOnError:true)
+                strip3 = new PowerStrip(itsId:'YZ', capacity:10, breaker:Breaker1, powerUsed:10, assetType:powerType).save(failOnError:true)
+            }
+            */
+                 def RFQ, RFP, IFB, SoleSource
+                 if(!PurchaseType.count()) {
+                     RFP = new PurchaseType(
+                             abbreviation:'RFP',
+                             fullName:''
+                     ).save(failOnError:true)
+                     RFQ = new PurchaseType(
+                             abbreviation:'RFQ/SQ',
+                             fullName:''
+                     ).save(failOnError:true)
+                     IFB = new PurchaseType(
+                             abbreviation:'IFB',
+                             fullName:''
+                     ).save(failOnError:true)
+                     SoleSource = new PurchaseType(
+                             abbreviation:'Sole Source',
+                             fullName:''
+                     ).save(failOnError:true)
+                 }
+
+                 def purchase1, purchase2
+                 if(!Purchase.count()) {
+                     purchase1 = new Purchase(
+                             purchaseType:RFP,
+                             paymentType:'Contract mod',
+                             purchaseStatus:'Draft',
+                             hasSupportRenewal:false,
+                             hawaiiTaxRate:4.5,
+                             vendorName:'VendorTest',
+                             vendorCustomerId:1,
+                             verdorContractId:2,
+                             superQuoteId:3,
+                             uhContractTitle:'C130103',
+                             fiscalYear:2012,
+                             currentPurchase:true
+                     ).save(failOnError:true)
+                     purchase2 = new Purchase(
+                             purchaseType:RFQ,
+                             paymentType:'PO',
+                             purchaseStatus:'Draft',
+                             hasSupportRenewal:false,
+                             hawaiiTaxRate:4.5,
+                             vendorName:'VendorTest',
+                             vendorCustomerId:1,
+                             verdorContractId:2,
+                             superQuoteId:3,
+                             uhContractTitle:'C130205',
+                             fiscalYear:2012,
+                             currentPurchase:true
+                     ).save(failOnError:true)
                  }
 
                 def ROLE_USER
@@ -359,8 +542,6 @@ class BootStrap {
             }
 
             test {
-
-
                 JSON.createNamedConfig("hostAPI") {
                     it.registerObjectMarshaller(Host) { Host host, JSON json ->
                         def returnArray = [:]
@@ -448,6 +629,15 @@ class BootStrap {
                     return returnArray
                 }
 
+                JSON.createNamedConfig('roleTypeOptions') {
+                    it.registerObjectMarshaller(RoleType) { RoleType type, JSON json ->
+                        def returnArray = [:]
+                        returnArray['Name'] = type.roleName
+                        returnArray['id'] = type.id
+                        return returnArray
+                    }
+                }
+
                 JSON.registerObjectMarshaller(Environment) {
                     def returnArray = [:]
                     returnArray['Name'] = it.abbreviation
@@ -489,6 +679,88 @@ class BootStrap {
                     returnArray['Name'] = it.name
                     return returnArray
                 }
+
+
+                /*
+    JSON.registerObjectMarshaller(Purchase) {
+        def returnArray = [:]
+        returnArray['fiscalYear'] = it.fiscalYear
+        returnArray['uhContractTitle'] = uhContractTitle
+        returnArray['vendorName'] = vendorName
+        returnArray['purchaseType'] = it.purchaseType
+        returnArray['purchaseTypeName'] = it.purchaseType?.abbreviation
+        returnArray['paymentType'] = it.paymentType
+        returnArray['paymentStatus'] = it.paymentStatus
+        returnArray['periodBeginDate'] = it.periodBeginDate
+        returnArray['periodEndDate'] = it.periodEndDate
+        returnArray['uhContractBeginDate'] = it.uhContractBeginDate
+        returnArray['uhContractEndDate'] = it.uhContractEndDate
+        returnArray['pcard'] = it.pcard
+        returnArray['requisition'] = it.requisition
+        returnArray['vendorCustomerId'] = it.vendorCustomerId
+    }
+    */
+
+                JSON.registerObjectMarshaller(Purchase) {
+                    def returnArray = [:]
+                    returnArray['id'] = it.id
+                    returnArray['fiscalYear'] = it.fiscalYear
+                    returnArray['uhContractTitle'] = it.uhContractTitle
+                    returnArray['uhContractBeginDate'] = it.uhContractBeginDate?.format('MM/dd/yyyy')
+                    returnArray['uhContractEndDate'] = it.uhContractEndDate?.format('MM/dd/yyyy')
+//                    returnArray['periodBeginDate'] = it.periodBeginDate?.format('mm/dd/yyyy')
+//                    returnArray['periodEndDate'] = it.periodEndDate?.format('mm/dd/yyyy')
+                    returnArray['anniversary'] = it.anniversary?.format('MM/dd')
+                    returnArray['purchaseType'] = it.purchaseType?.id
+                    returnArray['purchaseStatus'] = it.purchaseStatus
+                    returnArray['paymentType'] = it.paymentType
+                    returnArray['hawaiiTaxRate'] = it.hawaiiTaxRate
+//                    returnArray['hasSupportRenewal'] = it.hasSupportRenewal
+                    returnArray['vendorName'] = it.vendorName
+                    returnArray['vendorCustomerId'] = it.vendorCustomerId
+                    returnArray['vendorContractId'] = it.vendorContractId
+                    returnArray['multiyear'] = it.multiyear
+//                    returnArray['requisition'] = it.requisition
+//                    returnArray['pcard'] = it.pcard
+//                    returnArray['superQuoteId'] = it.superQuoteId
+                    returnArray['generalNote'] = it.generalNote
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(PurchaseItem) {
+                    NumberFormat formatter = new DecimalFormat("0.00")
+                    def returnArray = [:]
+                    returnArray['id'] = it.id
+                    returnArray['purchase'] = it.purchase.id
+                    returnArray['itemType'] = it.itemType
+                    returnArray['description'] = it.description
+                    returnArray['quantity'] = it.quantity
+                    returnArray['asset'] = it.asset?.id
+                    returnArray['itemUnitListPrice'] = it.getUnitPriceString()
+                    returnArray['itemsCostBeforeTax'] = it.getPreTaxString()
+                    returnArray['itemsCostTaxOnly'] = it.getTaxCostString()
+                    returnArray['itemsCost'] = it.getTotalCostString()
+                    returnArray['assetName'] = it.asset.toString()
+                    return returnArray
+                }
+                JSON.createNamedConfig('assetOptions') {
+                    it.registerObjectMarshaller(Asset) { Asset asset, JSON json ->
+                        def returnArray = [:]
+                        returnArray['id'] = asset.id
+                        returnArray ['itsId'] = asset.itsId
+                        returnArray ['type'] = asset.assetType?.abbreviation
+                        return returnArray
+                    }
+                }
+
+                JSON.createNamedConfig('personOptions') {
+                    it.registerObjectMarshaller(Person) { Person person, JSON json ->
+                        def returnArray = [:]
+                        returnArray['id'] = person.id
+                        returnArray ['uhName'] = person.uhName
+                        return returnArray
+                    }
+                }
                      /*
                 def powerType
                 powerType = new AssetType(
@@ -528,6 +800,73 @@ class BootStrap {
                     strip3 = new PowerStrip(itsId:'YZ', capacity:10, breaker:Breaker1, powerUsed:10, assetType:powerType).save(failOnError:true)
                 }
                 */
+                def RFQ, RFP, IFB, SoleSource
+                if(!PurchaseType.count()) {
+                    RFP = new PurchaseType(
+                            abbreviation:'RFP',
+                            fullName:''
+                    ).save(failOnError:true)
+                    RFQ = new PurchaseType(
+                            abbreviation:'RFQ/SQ',
+                            fullName:''
+                    ).save(failOnError:true)
+                    IFB = new PurchaseType(
+                            abbreviation:'IFB',
+                            fullName:''
+                    ).save(failOnError:true)
+                    SoleSource = new PurchaseType(
+                            abbreviation:'Sole Source',
+                            fullName:''
+                    ).save(failOnError:true)
+                }
+
+                def purchase1, purchase2
+                if(!Purchase.count()) {
+                    purchase1 = new Purchase(
+                            purchaseType:RFP,
+                            paymentType:'Contract mod',
+                            purchaseStatus:'Draft',
+                            hasSupportRenewal:false,
+                            hawaiiTaxRate:4.5,
+                            vendorName:'VendorTest',
+                            vendorCustomerId:1,
+                            verdorContractId:2,
+                            superQuoteId:3,
+                            uhContractTitle:'C130103',
+                            fiscalYear:2012,
+                            currentPurchase:true
+                    ).save(failOnError:true)
+                    purchase2 = new Purchase(
+                            purchaseType:RFQ,
+                            paymentType:'PO',
+                            purchaseStatus:'Draft',
+                            hasSupportRenewal:false,
+                            hawaiiTaxRate:4.5,
+                            vendorName:'VendorTest',
+                            vendorCustomerId:1,
+                            verdorContractId:2,
+                            superQuoteId:3,
+                            uhContractTitle:'C130205',
+                            fiscalYear:2012,
+                            currentPurchase:true
+                    ).save(failOnError:true)
+                }
+                                   /*
+                def purchaseSupport1, purchaseSupport2, purchaseSupport3
+                purchaseSupport1 = new SupportRole(roleName:rolePrimarySA, roleType:'Technical', person:stevenSakata, supportedObject:purchase1).save(failOnError:true)
+                purchaseSupport2 = new SupportRole(roleName:roleDBA, roleType:'Functional', person:michaelHodges, supportedObject:purchase1).save(failOnError:true)
+                purchaseSupport3 = new SupportRole(roleName:rolePrimarySA, roleType:'Technical', person:mitchellAnicas, supportedObject:purchase2).save(failOnError:true)
+
+                def pi1, pi2, pi3, pi4, pi5, pi6
+                if(!PurchaseItem.count()) {
+                    pi1 = new PurchaseItem(description:'DellServer1', itemType:'Server', quantity:1, itemUnitListPrice: 2000, itemsCostBeforeTax: 2000, itemsCostTaxOnly: 90, itemsCost: 2090, asset:t5k99, purchase:purchase1).save(failOnError:true)
+                    pi2 = new PurchaseItem(description:'DellServer1', itemType:'Server', quantity:1, itemUnitListPrice: 2000, itemsCostBeforeTax: 2000, itemsCostTaxOnly: 90, itemsCost: 2090, asset:t5k99, purchase:purchase1).save(failOnError:true)
+                    pi3 = new PurchaseItem(description:'DellServer2', itemType:'Server', quantity:1, itemUnitListPrice: 1000, itemsCostBeforeTax: 1000, itemsCostTaxOnly: 45, itemsCost: 1045, asset:t2k40, purchase:purchase1).save(failOnError:true)
+                    pi4 = new PurchaseItem(description:'DellServer2', itemType:'Server', quantity:1, itemUnitListPrice: 1000, itemsCostBeforeTax: 1000, itemsCostTaxOnly: 45, itemsCost: 1045, asset:t2k40, purchase:purchase1).save(failOnError:true)
+                    pi5 = new PurchaseItem(description:'MiscItems1', itemType:'Misc', quantity:10, itemUnitListPrice: 3000, itemsCostBeforeTax: 3000, itemsCostTaxOnly: 45, itemsCost: 3045, purchase:purchase2).save(failOnError:true)
+                    pi6 = new PurchaseItem(description:'MiscItems2', itemType:'Misc', quantity:20, itemUnitListPrice: 4000, itemsCostBeforeTax: 4000, itemsCostTaxOnly: 45, itemsCost: 4045, purchase:purchase2).save(failOnError:true)
+                }
+                   */
             }
 
             development {
@@ -619,6 +958,15 @@ class BootStrap {
                     return returnArray
                 }
 
+                JSON.createNamedConfig('roleTypeOptions') {
+                    it.registerObjectMarshaller(RoleType) { RoleType type, JSON json ->
+                        def returnArray = [:]
+                        returnArray['Name'] = type.roleName
+                        returnArray['id'] = type.id
+                        return returnArray
+                    }
+                }
+
                 JSON.registerObjectMarshaller(Environment) {
                     def returnArray = [:]
                     returnArray['Name'] = it.abbreviation
@@ -659,6 +1007,90 @@ class BootStrap {
                     def returnArray = [:]
                     returnArray['Name'] = it.name
                     return returnArray
+                }
+
+
+                            /*
+                JSON.registerObjectMarshaller(Purchase) {
+                    def returnArray = [:]
+                    returnArray['fiscalYear'] = it.fiscalYear
+                    returnArray['uhContractTitle'] = uhContractTitle
+                    returnArray['vendorName'] = vendorName
+                    returnArray['purchaseType'] = it.purchaseType
+                    returnArray['purchaseTypeName'] = it.purchaseType?.abbreviation
+                    returnArray['paymentType'] = it.paymentType
+                    returnArray['paymentStatus'] = it.paymentStatus
+                    returnArray['periodBeginDate'] = it.periodBeginDate
+                    returnArray['periodEndDate'] = it.periodEndDate
+                    returnArray['uhContractBeginDate'] = it.uhContractBeginDate
+                    returnArray['uhContractEndDate'] = it.uhContractEndDate
+                    returnArray['pcard'] = it.pcard
+                    returnArray['requisition'] = it.requisition
+                    returnArray['vendorCustomerId'] = it.vendorCustomerId
+                }
+                */
+
+                JSON.registerObjectMarshaller(Purchase) {
+                    def returnArray = [:]
+                    returnArray['id'] = it.id
+                    returnArray['fiscalYear'] = it.fiscalYear
+                    returnArray['uhContractTitle'] = it.uhContractTitle
+                    returnArray['uhContractBeginDate'] = it.uhContractBeginDate?.format('MM/dd/yyyy')
+                    returnArray['uhContractEndDate'] = it.uhContractEndDate?.format('MM/dd/yyyy')
+//                    returnArray['periodBeginDate'] = it.periodBeginDate?.format('mm/dd/yyyy')
+//                    returnArray['periodEndDate'] = it.periodEndDate?.format('mm/dd/yyyy')
+                    returnArray['anniversary'] = it.anniversary?.format('MM/dd')
+                    returnArray['purchaseType'] = it.purchaseType?.id
+                    returnArray['purchaseStatus'] = it.purchaseStatus
+                    returnArray['paymentType'] = it.paymentType
+                    returnArray['hawaiiTaxRate'] = it.hawaiiTaxRate
+//                    returnArray['hasSupportRenewal'] = it.hasSupportRenewal
+                    returnArray['vendorName'] = it.vendorName
+                    returnArray['vendorCustomerId'] = it.vendorCustomerId
+                    returnArray['vendorContractId'] = it.vendorContractId
+                    returnArray['multiyear'] = it.multiyear
+//                    returnArray['requisition'] = it.requisition
+//                    returnArray['pcard'] = it.pcard
+//                    returnArray['superQuoteId'] = it.superQuoteId
+//                    returnArray['facilitatedBy'] = it.facilitatedBy?.id
+//                    returnArray['requestedBy'] = it.requestedBy?.id
+                    returnArray['generalNote'] = it.generalNote
+                    return returnArray
+                }
+
+                JSON.registerObjectMarshaller(PurchaseItem) {
+                    NumberFormat formatter = new DecimalFormat("0.00")
+                    def returnArray = [:]
+                    returnArray['id'] = it.id
+                    returnArray['purchase'] = it.purchase.id
+                    returnArray['itemType'] = it.itemType
+                    returnArray['description'] = it.description
+                    returnArray['quantity'] = it.quantity
+                    returnArray['asset'] = it.asset.id
+                    returnArray['itemUnitListPrice'] = formatter.format(it.itemUnitListPrice)
+                    returnArray['itemsCostBeforeTax'] = formatter.format(it.itemsCostBeforeTax)
+                    returnArray['itemsCostTaxOnly'] = formatter.format(it.itemsCostTaxOnly)
+                    returnArray['itemsCost'] = formatter.format(it.itemsCost)
+                    returnArray['assetName'] = it.asset.toString()
+                    return returnArray
+                }
+                JSON.createNamedConfig('assetOptions') {
+                    it.registerObjectMarshaller(Asset) { Asset asset, JSON json ->
+                        def returnArray = [:]
+                        returnArray['id'] = asset.id
+                        returnArray ['itsId'] = asset.itsId
+                        returnArray ['type'] = asset.assetType?.abbreviation
+                        return returnArray
+                    }
+                }
+
+                JSON.createNamedConfig('personOptions') {
+                    it.registerObjectMarshaller(Person) { Person person, JSON json ->
+                        def returnArray = [:]
+                        returnArray['id'] = person.id
+                        returnArray ['uhName'] = person.uhName
+                        return returnArray
+                    }
                 }
 
                 def ROLE_READ, ROLE_WRITE, ROLE_ADMIN, ROLE_USER
@@ -1402,6 +1834,9 @@ class BootStrap {
 
                 }
                     System.out.println("AFTER HOST")
+
+
+
                 /*
                 def aphrodite_alloc1, aphrodite_alloc2, apx01_alloc1, apx01_alloc2, app72_alloc1, app72_alloc2, its99_alloc1, its99_alloc2, mdb74_alloc1, mdb74_alloc2
                 def max98_alloc1,max98_alloc2, max99_alloc1,max99_alloc2, odb71_alloc1, odb71_alloc2, odb72_alloc1, odb72_alloc2, odb95_alloc1, odb95_alloc2
@@ -1836,7 +2271,7 @@ class BootStrap {
                 }
 
                 def rolePrimarySA, roleDBA, roleFuncLead, roleLeadDev,roleLeadTech, roleProjMan, roleSecondSA, roleThirdSA, roleServLead
-                def rolePrimaryDBA, roleSecondDBA, roleThirdDBA
+                def rolePrimaryDBA, roleSecondDBA, roleThirdDBA, roleFacilitator, roleRequestor
                 if (!RoleType.count()) {
                     roleDBA = new RoleType(roleName:'Database Administrator').save(failOnError:true)
                     roleFuncLead = new RoleType(roleName:'Functional Lead').save(failOnError:true)
@@ -1850,6 +2285,8 @@ class BootStrap {
                     roleSecondDBA = new RoleType(roleName:'Secondary DBA').save(failOnError:true)
                     roleThirdDBA = new RoleType(roleName:'Tertiary DBA').save(failOnError:true)
                     roleServLead = new RoleType(roleName:'Service Lead').save(failOnError:true)
+                    roleFacilitator = new RoleType(roleName:'Facilitator').save(failOnError:true)
+                    roleRequestor = new RoleType(roleName:'Requestor').save(failOnError:true)
 
                 }
 
@@ -2017,10 +2454,74 @@ class BootStrap {
                     plug4 = new DevicePlug(strip:strip3, device:t2k07).save(failOnError:true)
                 }
 
+                def RFQ, RFP, IFB, SoleSource
+                if(!PurchaseType.count()) {
+                    RFP = new PurchaseType(
+                            abbreviation:'RFP',
+                            fullName:''
+                    ).save(failOnError:true)
+                    RFQ = new PurchaseType(
+                            abbreviation:'RFQ/SQ',
+                            fullName:''
+                    ).save(failOnError:true)
+                    IFB = new PurchaseType(
+                            abbreviation:'IFB',
+                            fullName:''
+                    ).save(failOnError:true)
+                    SoleSource = new PurchaseType(
+                            abbreviation:'Sole Source',
+                            fullName:''
+                    ).save(failOnError:true)
+                }
+
+                def purchase1, purchase2
+                if(!Purchase.count()) {
+                    purchase1 = new Purchase(
+                            purchaseType:RFP,
+                            paymentType:'Contract mod',
+                            purchaseStatus:'Draft',
+                            hasSupportRenewal:false,
+                            hawaiiTaxRate:4.5,
+                            vendorName:'VendorTest',
+                            vendorCustomerId:1,
+                            verdorContractId:2,
+                            superQuoteId:3,
+                            uhContractTitle:'C130103',
+                            fiscalYear:2012,
+                            currentPurchase:true
+                    ).save(failOnError:true)
+                    purchase2 = new Purchase(
+                            purchaseType:RFQ,
+                            paymentType:'PO',
+                            purchaseStatus:'Draft',
+                            hasSupportRenewal:false,
+                            hawaiiTaxRate:4.5,
+                            vendorName:'VendorTest',
+                            vendorCustomerId:1,
+                            verdorContractId:2,
+                            superQuoteId:3,
+                            uhContractTitle:'C130205',
+                            fiscalYear:2012,
+                            currentPurchase:true
+                    ).save(failOnError:true)
+                }
+
+                def purchaseSupport1, purchaseSupport2, purchaseSupport3
+                purchaseSupport1 = new SupportRole(roleName:rolePrimarySA, roleType:'Technical', person:stevenSakata, supportedObject:purchase1).save(failOnError:true)
+                purchaseSupport2 = new SupportRole(roleName:roleDBA, roleType:'Functional', person:michaelHodges, supportedObject:purchase1).save(failOnError:true)
+                purchaseSupport3 = new SupportRole(roleName:rolePrimarySA, roleType:'Technical', person:mitchellAnicas, supportedObject:purchase2).save(failOnError:true)
+
+                def pi1, pi2, pi3, pi4, pi5, pi6
+                if(!PurchaseItem.count()) {
+                    pi1 = new PurchaseItem(description:'DellServer1', itemType:'Server', quantity:1, itemUnitListPrice: 2000.21, itemsCostBeforeTax: 2000.20, itemsCostTaxOnly: 90.20, itemsCost: 2090.40, asset:t5k99, purchase:purchase1).save(failOnError:true)
+                    pi2 = new PurchaseItem(description:'DellServer1', itemType:'Server', quantity:1, itemUnitListPrice: 2000.35, itemsCostBeforeTax: 2000.35, itemsCostTaxOnly: 90.22, itemsCost: 2090.43, asset:t5k99, purchase:purchase1).save(failOnError:true)
+                    pi3 = new PurchaseItem(description:'DellServer2', itemType:'Server', quantity:1, itemUnitListPrice: 1000.44, itemsCostBeforeTax: 1000.44, itemsCostTaxOnly: 45.31, itemsCost: 1045.1, asset:t2k40, purchase:purchase1).save(failOnError:true)
+                    pi4 = new PurchaseItem(description:'DellServer2', itemType:'Server', quantity:1, itemUnitListPrice: 1000.53, itemsCostBeforeTax: 1000.53, itemsCostTaxOnly: 45.30, itemsCost: 1045.20, asset:t2k40, purchase:purchase1).save(failOnError:true)
+                    pi5 = new PurchaseItem(description:'MiscItems1', itemType:'Misc', quantity:10, itemUnitListPrice: 3000.66, itemsCostBeforeTax: 3000.66, itemsCostTaxOnly: 45.00, itemsCost: 3045, purchase:purchase2).save(failOnError:true)
+                    pi6 = new PurchaseItem(description:'MiscItems2', itemType:'Misc', quantity:20, itemUnitListPrice: 4000.21, itemsCostBeforeTax: 4000.21, itemsCostTaxOnly: 45.20, itemsCost: 4045, purchase:purchase2).save(failOnError:true)
+                }
+
             }
         }
-    }
-
-    def destroy = {
     }
 }

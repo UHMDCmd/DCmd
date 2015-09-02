@@ -49,7 +49,7 @@
 //            var name = document.getElementById('tierName');
 //            name.value = generateName();
         });
-
+        var lastSel;
         jQuery("#tier_list").jqGrid({
 
             height:'auto',
@@ -59,24 +59,24 @@
             editurl:'editTierDependencies?serviceId=${serviceInstance.id}',
             datatype: "json",
 
-        colNames:['','Host', 'Host Primary SA', 'Load Balanced', 'Instance Type', 'Instance Notes', 'id'],
+        colNames:['','Host', 'Host Primary SA', 'Load Balanced', 'Instance Notes', 'id'],
             colModel:[
                 {name:'actions', index:'actions', editable:false, required:false, sortable:false, width:20,
                     formatter: 'actions', hidden:!editOption, formatoptions: {
                     keys: true, editbutton: false }
                 },
-                {name:"host", width:100, editable:editOption ,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"host",action:"listHostsAsSelect")}',
+                {name:"host", width:100, editable:editOption ,edittype:'select',  editoptions: {dataUrl:'${createLink(controller:"host",action:"listHostsAsSelect")}',
                     dataInit:function(e){$(e).select2({
                         width: 200
                     })}
                 }},
                 {name:'hostSA', width:100, editable:false},
                 {name:'loadBalanced', width:70, edittype:'checkbox', editable:editOption},
-                {name:"tierType", width:100, editable:editOption ,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"tier",action:"listTierTypesAsSelect")}',
-                    dataInit:function(e){$(e).select2({
-                        width: 200
-                    })}
-                }},
+//                {name:"tierType", width:100, editable:editOption ,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"tier",action:"listTierTypesAsSelect")}',
+//                    dataInit:function(e){$(e).select2({
+//                        width: 200
+//                    })}
+//                }},
                 {name:'generalNote', width:200 , editable:editOption, editrules:{required:false}, editoptions:{size:40}},
                 {name:'id', hidden:true}
             ],
@@ -88,12 +88,17 @@
             rowNum:1000,
             viewrecords: true,
             gridview: true,
-            cellEdit: false,
+            cellEdit: editOption,
             cellsubmit: 'remote',
 //            afterSaveCell: afterSubmitHostEvent,
             cellurl:'editTierDependencies?serviceId=${serviceInstance.id}',
             autowidth:true,
-            scrollOffset:20
+            scrollOffset:20,
+            afterEditCell : function(rowid, cellname, value, iRow, iCol) {
+                if(iCol == 1) {
+                    $("#tier_list").restoreCell(iRow, iCol);
+                }
+            }
         });
         jQuery(window).bind('resize', function() {
             dynamicGridSize('#tier_list');

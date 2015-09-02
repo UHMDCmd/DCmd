@@ -144,7 +144,7 @@ grails.plugin.springsecurity.useSecurityEventListener = true
 
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 
-//grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.rejectIfNoRule = true
 //grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 
 
@@ -156,7 +156,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/**/js/**':       ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
         '/**/css/**':      ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
         '/**/images/**':   ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
-
+        '/css/**': ['IS_AUTHENTICATED_REMEMBERED', 'IS_AUTHENTICATED_ANONYMOUSLY'],
     //        '/**': ['ROLE_USER']
 
     //        '/audit/**': ['ROLE_ADMIN'],
@@ -331,7 +331,7 @@ grails.plugin.springsecurity.authority.className = 'edu.hawaii.its.dcmd.inf.Role
 //grails.plugin.cookiesession.springsecuritycompatibility = true
 // Uncomment and edit the following lines to start using Grails encoding & escaping improvements
 
-/* remove this line 
+/* remove this line
 // GSP settings
 grails {
 views {

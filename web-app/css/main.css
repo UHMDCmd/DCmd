@@ -58,7 +58,8 @@ textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-    border: 1px solid #b2d1ff;
+/*   border: 1px solid #b2d1ff; */
+    border: none;
 }
 
 .body {

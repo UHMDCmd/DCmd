@@ -256,6 +256,22 @@ class HostController {
         }
     }
 
+    def delete() {
+        def theHost = Host.get(params.id)
+        def hostname = theHost.hostname
+        def mainServer = PhysicalServer.createCriteria().list {
+            eq('hostOS.id', theHost.id)
+        }
+        mainServer.each {
+            it.hostOS = null
+            it.save()
+        }
+
+        theHost.delete()
+        flash.message = "Host " + hostname + " deleted."
+        redirect(action:'list')
+    }
+
 
 
     /*********************************************************

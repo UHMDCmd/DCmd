@@ -238,21 +238,41 @@ class VMService {
                  * These stats are what we will use for memory... Find out what to use for CPU....
                  */
 
-                //if(hostName == 'odb61') {
-                    // Memory info
-                 //   System.out.println("toolsRunningStatus  " + vm.getGuest().toolsRunningStatus)
-                 //   System.out.println("state " + vm.getRuntime().connectionState)
-                 //   System.out.println("OS1 " + vm.getGuest().guestId)
-                 //   System.out.println("OS2 " + vm.getGuest().guestFullName)
-                //}
+                if(hostName == 'adreset') {
+                    // Can get all of the IPs from each host...
+//                    System.out.println("net: " + vm.getGuest().net)
+
+//                    vm.getGuest().net.each {
+//                        System.out.println(it.ipAddress[0])
+//                    }
+
+                    //System.out.println("net[0].idAddress " + vm.getGuest().net[0].ipAddress)
+                    //System.out.println("net[1].idAddress " + vm.getGuest().net[1].ipAddress)
+                }
+
+                def ipAddrs = ""
+                if(vm.getGuest()?.net.size() > 1) {
+
+                    vm.getGuest()?.net?.each {
+                        if(it.ipAddress != null)
+                            ipAddrs += it?.ipAddress[0] + ", "
+                    }
+                    if (ipAddrs != "")
+                        ipAddrs = ipAddrs.substring(0, ipAddrs.length() - 2)
+
+                    if(vm.getGuest()?.ipAddress != null)
+                        if(!ipAddrs.contains(vm.getGuest()?.ipAddress))
+                            ipAddrs = vm.getGuest()?.ipAddress + ", " + ipAddrs
+                }
+                else
+                    ipAddrs = vm.getGuest()?.ipAddress
+
 
                 //System.out.println(vm.name + ", " + getShortenedHostName(vmHost.name) + ", " + hostName + ", " + tempCluster.name)
                 if (tempHost == null) { // If doesn't exist, create it
-                    if(hostName == 'adreset') {
-                        println("creating adreset")
-                    }
+
                     tempHost = new Host(hostname: hostName, type: 'VMWare', asset: tempServer, cluster: tempCluster,
-                            vcName:vm.name, fullDomain:dnsName[0]?.toLowerCase(), ipAddress:vm.getGuest()?.ipAddress, maxMemory: vm.getRuntime().maxMemoryUsage,
+                            vcName:vm.name, fullDomain:dnsName[0]?.toLowerCase(), ipAddress:ipAddrs, maxMemory: vm.getRuntime().maxMemoryUsage,
                             maxCpu: vm.getRuntime().maxCpuUsage, vCenterState: String.valueOf(vm.getRuntime().connectionState),
                             os:vm.getGuest().guestFullName)
                     tempHost.save(flush:true, failOnError: true)
@@ -279,9 +299,9 @@ class VMService {
                         tempHost.fullDomain = dnsName[0]
                         isChanged=true
                     }
-                    if(tempHost.ipAddress != vm.getGuest()?.ipAddress) {
+                    if(tempHost.ipAddress != ipAddrs) {
                       //  System.out.println(tempHost.ipAddress + " -> " + vm.getGuest()?.ipAddress)
-                        tempHost.ipAddress = vm.getGuest()?.ipAddress
+                        tempHost.ipAddress = ipAddrs
                         isChanged=true
                     }
                     if(tempHost.maxCpu != vm.getRuntime().maxCpuUsage) {

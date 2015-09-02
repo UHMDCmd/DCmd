@@ -272,6 +272,39 @@ article.actionsbar_logout {
     line-height: 23px;
 }
 
+.dialog_buttons {
+    background:white;
+    border-radius:5px;
+    display:inline-block;
+    border:1px solid #CCCCCC;
+    box-shadow: 1px #CCCCCC;
+}
+
+.dialog_buttons input {
+    display: inline-block;
+    color: #333;
+    padding-left: 25px;
+    float: left;
+    height: 24px;
+    line-height: 23px;
+    border:none;
+}
+
+.dialog_buttons input:focus{
+    border:none;
+}
+
+.dialog_edit_button {
+    background: url(images/icon_25.png) center left no-repeat;
+}
+.dialog_save_button {
+    background: url(images/icon_52.png) center left no-repeat;
+}
+.dialog_discard_button {
+    background: url(images/discard.png) center left no-repeat;
+    background-size: 26px 26px;
+}
+
 .actionsbar span .delete_button{/*for submit form*/
     display: inline-block;
     background: url(images/icon_26.png) center left no-repeat;

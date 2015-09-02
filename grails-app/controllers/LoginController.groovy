@@ -19,6 +19,7 @@
  */
 
 import grails.converters.JSON
+import org.springframework.security.access.annotation.Secured
 
 import javax.servlet.http.HttpServletResponse
 
@@ -33,6 +34,7 @@ import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import edu.hawaii.its.dcmd.inf.User
 
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class LoginController {
 
     /**
@@ -87,6 +89,7 @@ class LoginController {
      * Show denied page.
      */
     def denied = {
+        println(params.username)
         params.username = springSecurityService.authentication.name
         if (springSecurityService.isLoggedIn() &&
                 authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
@@ -111,7 +114,7 @@ class LoginController {
      * Callback after a failed login. Redirects to the auth page with a warning message.
      */
     def authfail = {
-
+        println("TEST")
         def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
         String msg = ''
         def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]

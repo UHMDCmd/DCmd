@@ -71,7 +71,12 @@
 
     <div class="show-wrapper">
         <table class="floatTables">
-
+            <tr>
+                <td valign="top" class="name"><g:message code="application.applicationDescription.label" default="Maintenance Window" /></td>
+                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'maintenanceWindow', 'errors')}">
+                    <g:textField name="maintenanceWindow" value="${applicationInstance?.maintenanceWindow}" />
+                </td>
+            </tr>
             <g:if test="${pageType != 'create'}">
             <tr>
                 <td valign="top" class="name"><g:message code="application.dateCreated.label" default="Date Created" /></td>

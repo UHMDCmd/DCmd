@@ -58,7 +58,6 @@
                                 data: appData
                             }).select2('val', '0');
                             $("#application").on('change', function(e) {
-                                console.log(e);
                                 jQuery.ajax({
                                     async:false,
                                     url: '../service/listServicesOfAppAsSelect',
@@ -114,7 +113,7 @@
                 $('input',elem).val(value);
             }
         }
-
+        var lastSel;
         jQuery("#tier_list").jqGrid({
 
             height:'auto',
@@ -125,7 +124,7 @@
             editurl:'editTiers?hostId=${hostInstance.id}',
             datatype: "json",
 
-            colNames:['','Application', 'Service', 'Service Primary SA', 'Load Balanced', 'Instance Type', 'Instance Notes', 'id'],
+            colNames:['','Application', 'Service', 'Service Primary SA', 'Load Balanced', 'Instance Notes', 'id'],
             colModel:[
                 {name:'actions', index:'actions', editable:false, required:false, sortable:false, width:20,
                     formatter: 'actions', hidden:!editOption, formatoptions: {
@@ -150,19 +149,21 @@
                     })}
                 }},
 */
-                {name:'application', width:160, editable:editOption, edittype:'custom', editoptions: {
+                {name:'application', width:160, editable:true, edittype:'custom', editoptions: {
                     custom_element: myelem, custom_value:myvalue
                 }},
-                {name:'service', width:160, editable:editOption, edittype:'custom', editoptions: {
+                {name:'service', width:160, editable:true, edittype:'custom', editoptions: {
                     custom_element: myelem, custom_value:myvalue
                 }},
                 {name:'servAdmin', width:100, editable:false},
                 {name:'loadBalanced', width:100, edittype:'checkbox', editable:editOption},
+                    /*
                 {name:"tierType", width:100, editable:editOption ,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"tier",action:"listTierTypesAsSelect")}',
                     dataInit:function(e){$(e).select2({
                         width: 200
                     })}
                 }},
+                */
                 {name:'generalNote', width:300, editable:true,  editrules:{required:false}, editoptions:{size:40}},
                 {name:'id', hidden:true}
             ],
@@ -172,11 +173,16 @@
             viewrecords: true,
             gridview: true,
             editurl:'editTiers?hostId=${hostId}',
-//            cellurl:'editTiers?hostId=${hostId}',
-            cellEdit:false,
+            cellurl:'editTiers?hostId=${hostId}',
+            cellEdit:editOption,
             cellsubmit: 'remote',
             shrinkToFit: true,
             autowidth: true,
+            afterEditCell : function(rowid, cellname, value, iRow, iCol) {
+                if(iCol == 1 || iCol == 2) {
+                    $("#tier_list").restoreCell(iRow, iCol);
+                }
+            }
             /*
             afterEditCell: function(rowid, cellname, value, iRow, iCol) {
                 var myData;

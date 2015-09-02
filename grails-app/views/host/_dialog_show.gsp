@@ -114,11 +114,11 @@
                 </td>
             </tr>
             <tr>
-                <td valign="top" class="name">Max Memory</td>
+                <td valign="top" class="name">Max Memory (MB)</td>
                 <td valign="top" class="value">${hostInstance.maxMemory}</td>
             </tr>
             <tr>
-                <td valign="top" class="name">Max CPU</td>
+                <td valign="top" class="name">Max CPU (MHz)</td>
                 <td valign="top" class="value">${hostInstance.maxCpu}</td>
             </tr>
             <tr>

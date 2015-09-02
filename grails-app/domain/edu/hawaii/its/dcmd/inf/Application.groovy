@@ -34,6 +34,8 @@ class Application extends SupportableObject {
     Status status
     Environment env
 
+    String maintenanceWindow
+
 	String supportableType = "application"
 	
 	static hasMany = [
@@ -60,8 +62,8 @@ class Application extends SupportableObject {
         status(nullable: true, default:"Available")
         services(nullable: true)
         env(nullable: true)
-
-	} \
+        maintenanceWindow(nullable:true)
+    }
 
     static auditable = true
 

@@ -68,7 +68,7 @@ class Asset extends SupportableObject{
     Integer RU_planned_begin
     Boolean rackable = true
     Boolean inStorage = false
-
+  //  PurchaseItem purchaseItem
     Cluster cluster
 
     static auditable = true
@@ -101,7 +101,7 @@ class Asset extends SupportableObject{
 	static constraints = {
 		assetType(nullable:false)
 		location(nullable:true)
-
+      //  purchaseItem(nullable:true)
         vendor(nullable:true)
         cluster(nullable:true)
         itsId (blank: false, nullable:false, maxSize:45)
@@ -262,6 +262,32 @@ class Asset extends SupportableObject{
             returnString = "<a href='../asset/show?id=${id}'>${itsId}</a>"
         }
         return returnString
+    }
+
+    String getPurchaseLink() {
+        String returnString = ""
+        def items = PurchaseItem.createCriteria().list() {
+            eq('asset.id', id)
+        }
+
+        PurchaseItem item = items.max { it.purchase.fiscalYear }
+
+        if(item) {
+            returnString = "<a href='../purchase/show?id=" + item.purchase.id + "'>" + item.purchase.toString() + "</a>"
+        }
+        return returnString
+    }
+
+    String getEOSL() {
+        def items = PurchaseItem.createCriteria().list() {
+            eq('asset.id', id)
+        }
+        PurchaseItem item = items.max { it.purchase.fiscalYear }
+
+        if(item)
+            return item.purchase.uhContractEndDate?.format('mm/dd/yyyy')
+        else
+            return ""
     }
 
 }

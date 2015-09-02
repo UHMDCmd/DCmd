@@ -60,6 +60,44 @@
         $("${gridId}").trigger("reloadGrid");
     }
 
+    /***********************************************************************************
+     * Functions for ElapsingFilter
+     ***********************************************************************************/
+    function clearElapsingFilter() {
+        $("#uploadField").val("");
+        var url="${createLink(controller:"${pageType}",action:'clearElapsingFilter')}";
+        jQuery.ajax({
+            async: false,
+            url: url,
+            type:'POST',
+            processData:false,
+            contentType: false,
+            success: function(data) {
+                $("${gridId}").trigger("reloadGrid");
+            },
+            error: function () { alert('Error retrieving elog info'); }
+        });
+    }
+
+    function setElapsingFilter() {
+        var oData = new FormData(document.forms.namedItem("fileinfo"));
+
+        var url="${createLink(controller:"${pageType}",action:'setElapsingFilter')}";
+        var fileData;
+        jQuery.ajax({
+            async: false,
+            url: url,
+            type:'POST',
+            data: oData,
+            processData:false,
+            contentType: false,
+            success: function(data) {
+            },
+            error: function () { alert('Error retrieving elog info'); }
+        });
+        $("${gridId}").trigger("reloadGrid");
+    }
+
     $( "#btnFilterByHostFile" ).click(function() {
         addFileFilter();
     });
@@ -179,6 +217,19 @@ body.loading .modal {
             <center><input class="ui-corner-all" id="btnExportExcel"  type="button" value="Export"/></center>
         </div>
     </g:if>
+
+    %{-- Elapsing Purchases Filter --}%
+        <g:if test="${elapsePurchaseFilter}">
+            <div class='theCell'>
+                <g:form enctype="multipart/form-data" class="upload" name="fileinfo" id="fileinfo" style="padding-top:5px;">
+                    <center><b>Elapsing Purchases Filter</b></center>
+                    <p>Filter by only Purchases/Contracts that are elapsing within 3 months (9 months for multi-year):</p>
+                    <center><input class="ui-corner-all" onclick="setElapsingFilter()"  type="button" value="Apply Filter"/>
+                        <input class="ui-corner-all" onclick="clearElapsingFilter()" type="button" value="Clear Filter"/>
+                    </center>
+                </g:form>
+            </div>
+        </g:if>
         <div class='theCell bigCell'></div>
         </div>
     </div>

@@ -165,7 +165,12 @@
                 </td>
             </tr>
             --}%
-
+            <tr>
+                <td valign="top" class="name">Purchase</td>
+                <td valign="top" class="value">
+                    ${physicalServerInstance.getPurchaseLink()}
+                </td>
+            </tr>
             <tr>
                 <td valign="top" class="name"><g:message code="asset.vendor.label" default="Vendor" /></td>
                 <td valign="top" class="value">${fieldValue(bean: physicalServerInstance, field: "vendor")}</td>
@@ -189,6 +194,10 @@
             <tr>
                 <td valign="top" class="name"><g:message code="asset.vendorSupportLevel.label" default="Vendor Support Level" /></td>
                 <td valign="top" class="value">${fieldValue(bean: physicalServerInstance, field: "vendorSupportLevel")}</td>
+            </tr>
+            <tr>
+                <td valign="top" class="name">End of Service Life (EOSL)</td>
+                <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${physicalServerInstance?.eoslDate}"/></td>
             </tr>
         </table>
     </div>
@@ -230,7 +239,7 @@
                 --}%
             <tr>
                 <td valign="top" class="name"><g:message code="asset.lastUpdated.label" default="Last Updated" /></td>
-                <td valign="top" class="value"><g:formatDate date="${physicalServerInstance?.lastUpdated}" /></td>
+                <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${physicalServerInstance?.lastUpdated}" /></td>
             </tr>
         </table>
     </div>

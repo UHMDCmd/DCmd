@@ -124,6 +124,8 @@
             $("#host-dialog-form").dialog("close");
         });
 
+    //    $("#eoslDate").datepicker();
+
     });
 
 
@@ -328,7 +330,13 @@
 <div class="item">
 
     <table class="floatTables" style="border:1px solid #CCCCCC;">
-        <tr><td colspan="2"><center><b>Hardware Information</b></center></td></tr>
+        <tr><td colspan="2"><center><b>Vendor Information</b></center></td></tr>
+        <tr>
+            <td valign="top" class="name">Purchase</td>
+            <td valign="top" class="value">
+                ${physicalServerInstance.getPurchaseLink()}
+            </td>
+        </tr>
         <tr>
             <td valign="top" class="name"><g:message code="asset.vendor.label" default="Vendor" /></td>
             <td valign="top" class="value ${hasErrors(bean: physicalServerInstance, field: 'vendor', 'errors')}">
@@ -363,6 +371,12 @@
             <td valign="top" class="name"><g:message code="asset.vendorSupportLevel.label" default="Vendor Support Level" /></td>
             <td valign="top" class="value ${hasErrors(bean: physicalServerInstance, field: 'vendorSupportLevel', 'errors')}">
                 <g:textField name="vendorSupportLevel" maxlength="45" value="${physicalServerInstance?.vendorSupportLevel}" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.eosl.label" default="End of Service Life (EOSL)" /></td>
+            <td valign="top" class="value ${hasErrors(bean: physicalServerInstance, field: 'eoslDate', 'errors')}">
+                <g:datePicker name="eoslDate" value="${physicalServerInstance?.eoslDate}" precision="day" />
             </td>
         </tr>
     </table>

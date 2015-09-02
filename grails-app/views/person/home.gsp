@@ -56,11 +56,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
-
+  %{--
     <g:applyLayout name="breadcrumb_bar">
         <g:include controller="person" action="setBreadCrumbForCurrentItem" params="[pageType: 'person']"/>
     </g:applyLayout>
-
+  --}%
 
 
 

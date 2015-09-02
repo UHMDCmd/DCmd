@@ -127,6 +127,7 @@ class ApplicationService {
                     }
                 }
             }
+            if (params.maintenanceWindow) ilike('maintenanceWindow', "%${params.maintenanceWindow}%")
             if (params.generalNote) ilike('generalNote', "%${params.generalNote}%")
 
 // Sort
@@ -159,6 +160,7 @@ class ApplicationService {
         def results = applications?.collect { [ cell: [it.applicationTitle, it.env.toString(), it.applicationDescription,
                 it.status.toString(),
                 personService.getSupportPersonLink(it, 'Primary SA'),
+                it.maintenanceWindow,
                 it.generalNote], id: it.id ] }
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         return jsonData

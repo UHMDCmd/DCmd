@@ -39,6 +39,7 @@ grails.project.dependency.resolution = {
         // from public Maven repositories
           mavenLocal()
           mavenCentral()
+          mavenRepo "https://repo.grails.org/grails/plugins"
           mavenRepo "http://snapshots.repository.codehaus.org"
           mavenRepo "http://repository.codehaus.org"
           mavenRepo "http://download.java.net/maven/2/"
@@ -55,7 +56,6 @@ grails.project.dependency.resolution = {
          runtime "hsqldb:hsqldb:1.8.0.10"
         compile 'com.vmware:vijava:5.1'
 
-
     }
 
 
@@ -64,11 +64,9 @@ grails.project.dependency.resolution = {
         build ":tomcat:7.0.52.1"
         runtime ":hibernate:3.6.10.14"
 
-
         runtime ':jquery:1.7'
-        runtime:':jquery-ui:1.8.11'
+        runtime:':jquery-ui:1.10.4'
         runtime ':jqgrid:3.8.0.1'
-
 
         runtime ':breadcrumbs:0.5.2'
         runtime ':export:1.5'
@@ -96,8 +94,9 @@ grails.project.dependency.resolution = {
 
         compile ":backbonejs:1.0.0"
 
-        // 2.1.1 config
+        runtime ":directory-service:0.10.1"
 
+        // 2.1.1 config
 
 //        //2.3.8 config
 //        build ':tomcat:7.0.52.1'
@@ -106,8 +105,5 @@ grails.project.dependency.resolution = {
 //        runtime ':database-migration:1.4.0'
 //        compile ":eclipse-scripts:1.0.7"
 //
-
-
-
     }
 }

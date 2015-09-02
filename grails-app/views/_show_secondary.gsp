@@ -112,6 +112,7 @@
 
  %{--           <div class="menu_item" onclick="location.href='/its/dcmd/asset/list';" style="cursor:pointer">All Assets</div>--}%
             <div class="menu_item" onclick="location.href='/its/dcmd/physicalServer/list';" style="cursor:pointer">Physical Servers</div>
+            <div class="menu_item" onclick="location.href='/its/dcmd/purchase/list';" style="cursor:pointer">Purchases</div>
 
             <div class="menu_item" onclick="location.href='/its/dcmd/person/list';" style="cursor:pointer">Staff
                 <a href="/its/dcmd/person/list" class="submenu_item">All Staff</a>
@@ -145,8 +146,12 @@
         <g:if test="${action == 'reports'}">
             <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
         </g:if>
+            <g:if test="${action == 'singlepage'}">
+                <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
+            </g:if>
 
-        <g:if test="${action == 'list'}">
+
+            <g:if test="${action == 'list'}">
             <g:form controller="${pageType}">
 
                 <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>

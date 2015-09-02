@@ -66,6 +66,11 @@ class UrlMappings {
         "/api/hostType" (controller:"API", action:"hostTypeList", method:'GET', parseRequest:true)
 
         //"/api/host"(resources:'APIHost')
+        // Actions for backbone...
+
+        "/bb/purchase" (controller:"purchase", action:"editPurchase", method:'PUT')
+        "/bb/purchase/$id" (controller:"purchase", action:"getPurchaseDetails", method:'GET', parseRequest:true)
+        "/bb/purchase" (controller:"purchase", action:"getPurchaseDetails", method:'GET', parseRequest:true)
 
 	}
 }

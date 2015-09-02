@@ -184,7 +184,7 @@ class ServiceService {
                 "<a href='../host/show?id=${it.host?.id}'>${it.host.toString()}</a>",
                 "<a href='../person/show?id=${personService.getAdmin(it.host).id}'>${personService.getAdmin(it.host).toString()}</a>",
                 it.loadBalanced,
-                it.type.toString(), it.generalNote], id: it.id ] }
+                it.generalNote], id: it.id ] }
 
         def jsonData = [rows: results, page: 1, records: totalRows, total: numberOfPages]
         return jsonData
