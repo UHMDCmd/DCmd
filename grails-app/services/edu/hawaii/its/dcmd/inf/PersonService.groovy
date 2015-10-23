@@ -26,6 +26,7 @@ import com.unboundid.ldap.sdk.SearchScope
 import com.unboundid.ldap.sdk.SearchResultEntry
 import com.unboundid.ldap.sdk.LDAPSearchException
 import grails.converters.JSON
+import org.codehaus.groovy.grails.plugins.orm.auditable.AuditLogEvent
 
 class PersonService {
 
@@ -405,4 +406,143 @@ class PersonService {
         return personInstance
     }
 
+
+    def staffChangeReport() {
+
+        println("Starting staff change report")
+
+        Date today = new Date().clearTime()
+        Date yesterday = today-1
+        def auditEntries = AuditLogEvent.createCriteria().list() {
+            ilike('eventName', 'UPDATE')
+            ilike('className', 'Person')
+            or {
+                ilike('propertyName', 'primaryPhone')
+                ilike('propertyName', 'secondPhone')
+            }
+
+            ge('lastUpdated', yesterday)
+        }
+
+        def report = auditEntries.collect {
+            [Person.get(it.persistedObjectId)?.uhName, it.propertyName, it.oldValue, it.newValue, it.actor, it.dateCreated.toLocaleString()]
+        }
+
+
+        if(!report.isEmpty()) {
+            def reportString = "<h2>UPDATED Staff Phone number info</h2><br><table border=1>"
+            reportString += "<TH>uhName</TH><TH>Attribute</TH><TH>Old Value</TH><TH>New Value</TH><TH>Edited By</TH><TH>Edit Timestamp</TH>"
+            report.each {
+                reportString += "<TR>"
+                it.each {
+                    reportString +="<TD>"
+                    reportString += it.toString()
+                    reportString +="</TD>"
+                }
+                reportString += "</TR>"
+            }
+            reportString+="</table>"
+
+            // Change based on file location, commented out is path on test/prod servers.
+//            def inputFile = new File("${System.properties['user.home']}/.grails/reportemails.txt")
+            def inputFile = new File("dcmdConfig/reportemails.txt")
+
+            def emails = []
+            inputFile.eachLine { line ->
+                emails.add(line)
+            }
+
+            sendMail {
+                to emails
+                from "dcmd@hawaii.edu"
+                subject "DCmd Staff Info Change Report"
+                html reportString
+            }
+        }
+        else
+            System.out.println("Nothing to report")
+
+        return report
+    }
+
+    def roleChangeReport() {
+        println("Starting role change report")
+        Date today = new Date().clearTime()
+        Date yesterday = today-1
+
+        // Collect UPDATES in the last 24h
+        def auditUpdateEntries = AuditLogEvent.createCriteria().list() {
+            ilike('className', 'SupportRole')
+            ilike('eventName', 'UPDATE')
+            ge('lastUpdated', yesterday)
+        }
+
+        def updateReport = auditUpdateEntries.collect {
+            [SupportRole.get(it.persistedObjectId)?.supportedObject?.supportableType, SupportRole.get(it.persistedObjectId)?.supportedObject?.toString(), SupportRole.get(it.persistedObjectId)?.roleName?.roleName, it.propertyName, it.oldValue, it.newValue, it.actor, it.dateCreated.toLocaleString()]
+        }
+
+        // Collect INSERT in the last 24h
+        def auditInsertEntries = AuditLogEvent.createCriteria().list() {
+            ilike('className', 'SupportRole')
+            ilike('eventName', 'INSERT')
+            ge('lastUpdated', yesterday)
+        }
+
+        def insertReport = auditInsertEntries.collect {
+            [SupportRole.get(it.persistedObjectId)?.supportedObject?.supportableType, SupportRole.get(it.persistedObjectId)?.supportedObject?.toString(), SupportRole.get(it.persistedObjectId)?.person?.toString(), SupportRole.get(it.persistedObjectId)?.roleName?.roleName, it.actor, it.dateCreated.toLocaleString()]
+        }
+
+        def reportString = ""
+        if(!updateReport.isEmpty()) {
+            reportString += "<h2>UPDATED Support Roles</h2><br> <table border=1>"
+            reportString += "<TH>Supported Object Type</TH><TH>Supported Object</TH><TH>Role</TH><TH>Attribute</TH><TH>Old Value</TH><TH>New Value</TH><TH>Edited By</TH><TH>Edit Timestamp</TH>"
+            updateReport.each {
+                reportString += "<TR>"
+                it.each {
+                    reportString += "<TD>"
+                    reportString += it.toString()
+                    reportString += "</TD>"
+                }
+                reportString += "</TR>"
+            }
+            reportString += "</table><br>"
+        }
+// Table for INSERTS
+        if(!insertReport.isEmpty()) {
+            reportString += "<h2>NEW Support Roles</h2><br> <table border=1>"
+            reportString += "<TH>Supported Object Type</TH><TH>Supported Object</TH><TH>Person</TH><TH>Role</TH><TH>Inserted By</TH><TH>Insert Timestamp</TH>"
+            insertReport.each {
+                reportString += "<TR>"
+                it.each {
+                    reportString += "<TD>"
+                    reportString += it.toString()
+                    reportString += "</TD>"
+                }
+                reportString += "</TR>"
+            }
+            reportString += "</table>"
+        }
+        if(reportString != "") {
+            // Change based on file location, commented out is path on test/prod servers.
+//            def inputFile = new File("${System.properties['user.home']}/.grails/reportemails.txt")
+            def inputFile = new File("dcmdConfig/reportemails.txt")
+
+            def emails = []
+            inputFile.eachLine { line ->
+                emails.add(line)
+                println(emails)
+            }
+            sendMail {
+                to emails
+                from "dcmd@hawaii.edu"
+                subject "DCmd Support Role Change Report"
+                html reportString
+            }
+            println(reportString)
+        }
+        else
+            System.out.println("Nothing to report")
+
+        return updateReport
+    }
 }

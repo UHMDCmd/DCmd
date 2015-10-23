@@ -13,9 +13,6 @@
     <facet type="web" name="GrailsWeb">
       <configuration>
         <webroots>
-          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-ui-1.8.11/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-datatables-1.7.5/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-1.7/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/cache-headers-1.1.5/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/tooltip-0.7/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/tooltip-0.7/grails-app/views" relative="/" />
@@ -24,8 +21,6 @@
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/resources-1.2.8/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/cookie-session-2.0.14/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/audit-logging-1.0.0/grails-app/views" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1/grails-app/views" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/breadcrumbs-0.5.2/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/breadcrumbs-0.5.2/grails-app/views" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/calendar-1.2.1/web-app" relative="/" />
@@ -34,6 +29,12 @@
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/backbonejs-1.0.0/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/underscore-1.4.4/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mail-1.0.7/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-datatables-1.7.5/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-ui-1.8.11/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-1.7/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -104,6 +105,12 @@
     <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-ui-1.8.11">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-ui-1.8.11/grails-app/i18n" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-ui-1.8.11/grails-app/taglib" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mail-1.0.7">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mail-1.0.7/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mail-1.0.7/grails-app/i18n" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mail-1.0.7/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mail-1.0.7/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mysql-connectorj-5.1.22.1" />
     <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/quartz-1.0.2">
@@ -223,4 +230,3 @@
     </orderEntry>
   </component>
 </module>
-

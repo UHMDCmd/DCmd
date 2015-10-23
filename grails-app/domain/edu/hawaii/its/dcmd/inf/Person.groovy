@@ -39,6 +39,9 @@ class Person{
     String primaryEmail
     String telephone
 
+    String primaryPhone
+    String secondPhone
+
     String generalNote
     String changeNote
     String planningNote
@@ -74,6 +77,9 @@ class Person{
 
         primaryEmail(maxSize: 45, nullable:true)
         telephone(maxSize: 45, nullable:true)
+
+        primaryPhone(maxSize: 45, nullable:true)
+        secondPhone(maxSize: 45, nullable:true)
 
         midInit(maxSize: 45, nullable: true)
         generalNote(nullable: true, maxSize: 1024)

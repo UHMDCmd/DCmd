@@ -1,13 +1,4 @@
-<div class="dialog">
-    <table>
-        <tbody>
-
-        <tr class="prop">
-            <td valign="top"class="name">
-                UH Username
-            </td>
-            <td valign="top"
-                class="value %{--
+%{--
   - Copyright (c) 2014 University of Hawaii
   -
   - This file is part of DataCenter metadata (DCmd) project.
@@ -27,7 +18,15 @@
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-${hasErrors(bean: personInstance, field: 'uhName', 'errors')}">
+<div class="dialog">
+    <table>
+        <tbody>
+
+        <tr class="prop">
+            <td valign="top"class="name">
+                UH Username
+            </td>
+            <td valign="top" class="value ${hasErrors(bean: personInstance, field: 'uhName', 'errors')}">
                 <g:textField name="uhName" maxlength="45"
                              value="${personInstance?.uhName}" title="Please Specify the unique UH Username for this Person." />
             </td>
@@ -100,11 +99,31 @@ ${hasErrors(bean: personInstance, field: 'uhName', 'errors')}">
         </tr>
         <tr class="prop">
             <td valign="top"class="name">
-                Primary Phone
+                LDAP Phone
             </td>
             <td valign="top"
                 class="value ${hasErrors(bean: personInstance, field: 'telephone', 'errors')}">
                 ${fieldValue(bean:personInstance, field: "telephone")}
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top"class="name">
+                Primary Phone
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: personInstance, field: 'primaryPhone', 'errors')}">
+                <g:textField name="primaryPhone" maxlength="45"
+                             value="${personInstance?.primaryPhone}" title="Primary Private phone number" />
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top"class="name">
+                Secondary Phone
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: personInstance, field: 'secondPhone', 'errors')}">
+                <g:textField name="secondPhone" maxlength="45"
+                             value="${personInstance?.secondPhone}" title="Secondary Private phone number." />
             </td>
         </tr>
 

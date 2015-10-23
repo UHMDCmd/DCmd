@@ -17,7 +17,7 @@
 - along with DCmd.  It is contained in the DCmd release as LICENSE.txt
 - If not, see <http://www.gnu.org/licenses/>.
 --}%
-
+%{--<script type="text/javascript" src="../js/jquery.jqGrid-4.4.3/js/jquery.jqGrid.min.js"></script>--}%
 <script language="javascript" type="text/javascript" src="../js/mustache.js">
     </script>
 

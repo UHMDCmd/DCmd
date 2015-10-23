@@ -23,6 +23,7 @@ package edu.hawaii.its.dcmd.inf
 import grails.converters.JSON
 import edu.hawaii.its.dcmd.inf.Person
 import edu.hawaii.its.dcmd.inf.SupportRole
+import org.codehaus.groovy.grails.plugins.orm.auditable.AuditLogEvent
 import org.springframework.security.core.context.SecurityContextHolder
 import grails.gorm.DetachedCriteria
 
@@ -536,12 +537,36 @@ class PersonController {
         def totalRows = persons.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
-        def results = persons?.collect { [ cell: [it.uhName, it.lastName, it.firstName, it.midInit, it.title, it.telephone, it.primaryEmail, it.uhNumber, it.generalNote], id: it.id ] }
+        def results = persons?.collect { [ cell: ['', it.uhName, it.lastName, it.firstName, it.midInit, it.title, it.telephone,
+                                                  it.primaryPhone, it.secondPhone, it.primaryEmail, it.uhNumber, it.generalNote], id: it.id ] }
 
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         render jsonData as JSON
 
 //        refresh = true;
+    }
+
+    def editAllPerson = {
+        def state='FAIL'
+        def id
+        def message
+        def item = Person.get(params.id)
+        if(params.primaryPhone)
+        item.primaryPhone = params.primaryPhone
+        if(params.secondPhone)
+        item.secondPhone = params.secondPhone
+
+        if (! item.hasErrors() && item.save()) {
+//                    message = "Capacity ${item.toString()} Updated for ${params.asset.toString()}"
+            id = item.id
+            state = "OK"
+        } else {
+            message = item.errors.errorCount
+        }
+
+        def response = [state:state,id:id]
+
+        render response as JSON
     }
 
     /*****************************************************************/
@@ -817,5 +842,14 @@ class PersonController {
         render jsonData as JSON
     }
 
+    def staffChangeReport = {
+        def report = personService.staffChangeReport()
+        render report as JSON
+    }
+
+    def roleChangeReport = {
+        def report = personService.roleChangeReport()
+        render report as JSON
+    }
 
 }

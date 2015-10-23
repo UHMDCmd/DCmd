@@ -97,11 +97,29 @@ ${fieldValue(bean: personInstance, field: 'uhName')}
         </tr>
         <tr class="prop">
             <td valign="top"class="name">
-                Primary Phone
+                LDAP Phone
             </td>
             <td valign="top"
                 class="value ${hasErrors(bean: personInstance, field: 'telephone', 'errors')}">
                 ${fieldValue(bean:personInstance, field: "telephone")}
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top"class="name">
+                Primary Phone
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: personInstance, field: 'primaryPhone', 'errors')}">
+                ${fieldValue(bean:personInstance, field: "primaryPhone")}
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top"class="name">
+                Secondary Phone
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: personInstance, field: 'secondPhone', 'errors')}">
+                ${fieldValue(bean:personInstance, field: "secondPhone")}
             </td>
         </tr>
 

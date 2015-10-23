@@ -20,6 +20,35 @@
 
 <script type="text/javascript">
 
+    function changeReport() {
+        jQuery.ajax({
+            async:false,
+            url:  "../person/roleChangeReport",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                console.log(data);
+            },
+            complete: function(data) {
+
+            },
+            error: function () { console.log('Error Adding Row'); }
+        });
+        jQuery.ajax({
+            async:false,
+            url:  "../person/staffChangeReport",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function(data) {
+                console.log(data);
+            },
+            complete: function(data) {
+
+            },
+            error: function () { console.log('Error Adding Row'); }
+        });
+    }
+
 $(document).ready(function() {
 
 jQuery("#allPerson").jqGrid({
@@ -28,21 +57,26 @@ height:'auto',
 width:'1000',
 caption:'Staff List',
 url:'listAllPerson',
-            datatype: "json",
-            colNames:['UH Username', 'Last Name', 'First Name', 'MI', 'Title', 'Phone #', 'E-Mail', 'UH ID', 'General Notes', 'id'],
-            colModel:[
-                {name:'uhName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
-                {name:'lastName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
-                {name:'firstName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
-                {name:'midInit', editable:false, width:25,title:false},
-                {name:'title', editable:false,title:false},
-                {name:'telephone', editable:false,title:false},
-                {name:'primaryEmail', editable:false, width: 200,title:false},
-                {name:'uhNumber', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'}, width: 80,title:false},
-                {name:'generalNote', width:'400', editable:false,title:false},
-                {name:'id', hidden:true}
-            ],
-
+editurl:'editAllPerson',
+        datatype: "json",
+        colNames:['','UH Username', 'Last Name', 'First Name', 'MI', 'Title', 'LDAP Phone', 'Primary Phone', 'Secondary Phone', 'E-Mail', 'UH ID', 'General Notes', 'id'],
+        colModel:[
+            {name:'actions', index:'actions', editable:false, search:false, required:false, sortable:false, width:50, fixed:true,
+                formatter: 'actions', hidden:false,formatoptions: {
+                keys: true, editbutton: true, delbutton:false }},
+            {name:'uhName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
+            {name:'lastName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
+            {name:'firstName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
+            {name:'midInit', editable:false, width:25,title:false},
+            {name:'title', editable:false,title:false},
+            {name:'telephone', editable:false,title:false},
+            {name:'primaryPhone', editable:true,title:false},
+            {name:'secondPhone', editable:true,title:false},
+            {name:'primaryEmail', editable:false, width: 200,title:false},
+            {name:'uhNumber', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'}, width: 80,title:false},
+            {name:'generalNote', width:'400', editable:false,title:false},
+            {name:'id', hidden:true}
+        ],
     rowNum: 50,
     rowList: [10, 20, 50, 100, 200],
 
@@ -57,7 +91,9 @@ url:'listAllPerson',
     cmTemplate: { title: false },
     pager: '#allPersonPager',
     scrollOffset:0,
-
+    gridComplete: function() {
+        dynamicListSize("#allPerson");
+    }
 });
         jQuery('#allPerson').filterToolbar({id:'allPerson', searchOnEnter:true});
         $("#allPerson").jqGrid('navGrid','#allPersonPager',{
@@ -98,3 +134,6 @@ url:'listAllPerson',
 </script>
 <table id="allPerson"></table>
 <div id="allPersonPager"></div>
+
+%{--<input type="button" id="changeReport" onclick="changeReport()" value="Report"/>
+<g:form action="changeReport"><input type="submit"/></g:form>--}%

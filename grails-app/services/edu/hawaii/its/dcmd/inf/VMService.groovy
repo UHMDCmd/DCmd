@@ -28,8 +28,8 @@ class VMService {
             String username
             String password
 
-            def inputFile = new File("${System.properties['user.home']}/.grails/vcenters.txt")
-//            def inputFile = new File("dcmdConfig/vcenters.txt")
+//            def inputFile = new File("${System.properties['user.home']}/.grails/vcenters.txt")
+            def inputFile = new File("dcmdConfig/vcenters.txt")
             def jsonSlurper = new JsonSlurper()
             def InputJSON = jsonSlurper.parseText(inputFile.text)
             InputJSON.each {
@@ -267,6 +267,10 @@ class VMService {
                 else
                     ipAddrs = vm.getGuest()?.ipAddress
 
+                def tempOs = vm.getGuest().guestFullName
+                if(tempOs == 'Microsoft Windows Server 2012 (64-bit)')
+                    tempOs = 'Microsoft Windows Server 2012/2012R2 (64-bit)'
+
 
                 //System.out.println(vm.name + ", " + getShortenedHostName(vmHost.name) + ", " + hostName + ", " + tempCluster.name)
                 if (tempHost == null) { // If doesn't exist, create it
@@ -274,7 +278,7 @@ class VMService {
                     tempHost = new Host(hostname: hostName, type: 'VMWare', asset: tempServer, cluster: tempCluster,
                             vcName:vm.name, fullDomain:dnsName[0]?.toLowerCase(), ipAddress:ipAddrs, maxMemory: vm.getRuntime().maxMemoryUsage,
                             maxCpu: vm.getRuntime().maxCpuUsage, vCenterState: String.valueOf(vm.getRuntime().connectionState),
-                            os:vm.getGuest().guestFullName)
+                            os:tempOs)
                     tempHost.save(flush:true, failOnError: true)
                     updatedHosts.add("VM " + tempHost.hostname + " created")
                 }
@@ -318,8 +322,8 @@ class VMService {
                         tempHost.vCenterState = vm.getRuntime().connectionState
                         isChanged=true
                     }
-                    if(tempHost.os != vm.getGuest()?.guestFullName) {
-                        tempHost.os = vm.getGuest()?.guestFullName
+                    if(tempHost.os != tempOs) {
+                        tempHost.os = tempOs
                         isChanged=true
                     }
 

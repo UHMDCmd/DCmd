@@ -65,7 +65,8 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:3.6.10.14"
 
         runtime ':jquery:1.7'
-        runtime:':jquery-ui:1.10.4'
+        runtime ':jquery-datatables:1.7.5'
+//        runtime':jquery-ui:1.10.4'
         runtime ':jqgrid:3.8.0.1'
 
         runtime ':breadcrumbs:0.5.2'
@@ -77,7 +78,6 @@ grails.project.dependency.resolution = {
         runtime ':codenarc:0.12'
 
         // compile ':tooltip:0.8'
-        runtime ':jquery-datatables:1.7.5'
         runtime ':jquery-ui:1.8.11'
         runtime ':mysql-connectorj:5.1.22.1'
         runtime ':resources:1.2.8'
@@ -95,6 +95,8 @@ grails.project.dependency.resolution = {
         compile ":backbonejs:1.0.0"
 
         runtime ":directory-service:0.10.1"
+
+        compile ":mail:1.0.7"
 
         // 2.1.1 config
 
