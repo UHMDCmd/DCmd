@@ -45,7 +45,7 @@
                 <td valign="top" class="value">${fieldValue(bean: serviceInstance, field: "status")}</td>
             </tr>
             <tr>
-                <td valign="top" class="name"><g:message code="service.application.label" default="Application" /></td>
+                <td valign="top" class="name"><g:message code="service.application.label" default="Parent Application" /></td>
                 <td>
                     <a href="../application/show?id=${serviceInstance.application?.id}">
                         ${serviceInstance?.application?.toString().encodeAsHTML()}</a></td>

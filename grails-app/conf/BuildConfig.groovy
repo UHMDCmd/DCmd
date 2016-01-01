@@ -52,9 +52,13 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        // runtime 'mysql:mysql-connector-java:5.1.13'
-         runtime "hsqldb:hsqldb:1.8.0.10"
         compile 'com.vmware:vijava:5.1'
+
+        // Config for test/production
+        // runtime 'mysql:mysql-connector-java:5.1.13'
+
+        // Config for development
+         runtime "hsqldb:hsqldb:1.8.0.10"
 
     }
 
@@ -98,6 +102,7 @@ grails.project.dependency.resolution = {
 
         compile ":mail:1.0.7"
 
+        compile ":excel-import:1.1.0.BUILD-SNAPSHOT"
         // 2.1.1 config
 
 //        //2.3.8 config

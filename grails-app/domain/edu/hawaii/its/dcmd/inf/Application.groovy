@@ -33,6 +33,9 @@ class Application extends SupportableObject {
     String planningNote
     Status status
     Environment env
+    Integer incidentServiceLevel
+    String incidentEmailList
+    String url
 
     String maintenanceWindow
 
@@ -63,6 +66,9 @@ class Application extends SupportableObject {
         services(nullable: true)
         env(nullable: true)
         maintenanceWindow(nullable:true)
+        url(nullable:true)
+        incidentEmailList(nullable:true)
+        incidentServiceLevel(nullable:true)
     }
 
     static auditable = true

@@ -86,7 +86,7 @@
             </tr>
             <tr>
                 <td valign="top" class="name">
-                    <label for="application"><g:message code="service.application.label" default="Application" /></label>
+                    <label for="application"><g:message code="service.application.label" default=" Parent Application" /></label>
                 </td>
                 <td valign="top" class="value ${hasErrors(bean: serviceInstance, field: 'application', 'errors')}">
                     <input type="hidden" name="applicationSelect" id="applicationSelect" />

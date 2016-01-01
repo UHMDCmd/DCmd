@@ -188,7 +188,7 @@ editurl:'editAllSupportList',
     });
 
 </script>
-<g:render template="../advancedOptions" model="[pageType:'application', gridId:'#allSupportedApps', export:true,exportAction:'exportSupportList', hostFilter:true]" />
+<g:render template="../advancedOptions" model="[pageType:'application', gridId:'#allSupportedApps', export:true,exportAction:'exportSupportList', importOption:true, importAction: 'importSupportList', hostFilter:true]" />
 
 <table id="allSupportedApps"></table>
 <div id="supportedAppAllPager"></div>

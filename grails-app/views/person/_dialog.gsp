@@ -17,6 +17,29 @@
   - along with DCmd.  It is contained in the DCmd release as LICENSE.txt
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
+<%@  page import="edu.hawaii.its.dcmd.inf.PersonService" %>
+<%
+    def personService = grailsApplication.classLoader.loadClass('edu.hawaii.its.dcmd.inf.PersonService').newInstance()
+%>
+<r:require modules='select2' />
+
+<script>
+    $(document).ready(function() { $("#managerSelect").select2({
+        placeholder: 'Not Assigned',
+        maximumInputLength: 20,
+        width:150,
+        initSelection: function(element, callback) {
+            var data = {id: "${personInstance.manager?.id}", text: "${personInstance.manager.toString()}"};
+            callback(data);
+        },
+        data: [${personService.listPersonAsSelectWithNull()}]
+    }).select2('val', '0');
+
+    });
+
+</script>
+
+
 
 <div class="dialog">
     <table>
@@ -80,6 +103,15 @@
 
         <tr class="prop">
             <td valign="top" class="name"><g:message
+                    code="person.manager.label" default="Manager" /></td>
+
+            <td valign="top" class="value">
+                <input type="hidden" name="managerSelect" id="managerSelect" />
+            </td>
+        </tr>
+
+        <tr class="prop">
+            <td valign="top" class="name"><g:message
                     code="person.uhNum.label" default="UH ID" /></td>
 
             <td valign="top" class="value">
@@ -99,7 +131,17 @@
         </tr>
         <tr class="prop">
             <td valign="top"class="name">
-                LDAP Phone
+                Alternate Email
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: personInstance, field: 'alternateEmail', 'errors')}">
+                <g:textField name="alternateEmail" maxlength="45"
+                             value="${personInstance?.alternateEmail}" title="Alternate Email address" />
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top"class="name">
+                Office Phone
             </td>
             <td valign="top"
                 class="value ${hasErrors(bean: personInstance, field: 'telephone', 'errors')}">

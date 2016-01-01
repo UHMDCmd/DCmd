@@ -75,7 +75,7 @@ height:'auto',
 url:"listAllSupportList",
 editurl:'editAllSupportList',
             datatype: "json",
-            colNames:['', 'Host', 'Status', 'Primary SA', 'Secondary SA', 'Tertiary SA', 'Service Lead',
+            colNames:['', 'Host', 'Primary SA', 'Secondary SA', 'Tertiary SA', 'Service Lead', 'Primary DBA', 'Secondary DBA', 'Tertiary DBA',
                  'General Notes','id'],
             colModel:[
                 {name:'actions', index:'actions', editable:false, required:false, sortable:false, search:false, width:40,
@@ -83,11 +83,6 @@ editurl:'editAllSupportList',
                     keys: true, editbutton: true, delbutton:false }
                 },
                 {name:'hostname', width: 100, formatter: 'showlink', formatoptions: {showAction:'show'}, title:false, editable:true},
-                {name:"status", width:100, editable:true, sortable:false,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"status",action:"listStatusAsSelect")}',
-                    dataInit:function(e){
-                        getStatus(e);
-                    }
-                }},
                 {name:"primarySA", width:100, editable:true, sortable:false,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person",action:"listAsSelectWithNull")}',
                     dataInit:function(e){
                         getPerson(e, 'Primary SA');
@@ -106,6 +101,21 @@ editurl:'editAllSupportList',
                 {name:"servLead", width:100, editable:true, sortable:false,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person",action:"listAsSelectWithNull")}',
                     dataInit:function(e){
                         getPerson(e, 'Service Lead');
+                    }
+                }},
+                {name:"primaryDBA", width:100, editable:true, sortable:false,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person",action:"listAsSelectWithNull")}',
+                    dataInit:function(e){
+                        getPerson(e, 'Primary DBA');
+                    }
+                }},
+                {name:"secondDBA", width:100, editable:true, sortable:false,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person",action:"listAsSelectWithNull")}',
+                    dataInit:function(e){
+                        getPerson(e, 'Secondary DBA');
+                    }
+                }},
+                {name:"thirdDBA", width:100, editable:true, sortable:false,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person",action:"listAsSelectWithNull")}',
+                    dataInit:function(e){
+                        getPerson(e, 'Tertiary DBA');
                     }
                 }},
                 {name:'generalNote', width:200, editable:true},
@@ -171,6 +181,7 @@ editurl:'editAllSupportList',
 
 </script>
 
-<g:render template="../advancedOptions" model="[pageType:'host', gridId:'#allSupportedHosts', export:true, exportAction:'exportSupportList', hostFilter:true]" />
+<g:render template="../advancedOptions" model="[pageType:'host', gridId:'#allSupportedHosts', importOption:true, importAction: 'importSupportList', export:true, exportAction:'exportSupportList', hostFilter:true]" />
 <table id="allSupportedHosts"></table>
 <div id="supportedHostAllPager"></div>
+

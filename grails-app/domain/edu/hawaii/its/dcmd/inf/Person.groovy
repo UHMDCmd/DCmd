@@ -37,6 +37,7 @@ class Person{
 	String midInit = ""
 
     String primaryEmail
+    String alternateEmail
     String telephone
 
     String primaryPhone
@@ -46,6 +47,7 @@ class Person{
     String changeNote
     String planningNote
 
+    Person manager
 
 
 
@@ -76,6 +78,7 @@ class Person{
 		firstName(maxSize: 45, nullable:true)
 
         primaryEmail(maxSize: 45, nullable:true)
+        alternateEmail(maxSize:45, nullable:true)
         telephone(maxSize: 45, nullable:true)
 
         primaryPhone(maxSize: 45, nullable:true)
@@ -85,6 +88,7 @@ class Person{
         generalNote(nullable: true, maxSize: 1024)
         changeNote(nullable: true, maxSize: 1024)
         planningNote(nullable: true, maxSize: 1024)
+        manager(nullable:true)
 	}
 
 	String toString(){
@@ -97,6 +101,16 @@ class Person{
 }
     String primaryEmail(){
        return primaryEmail
+    }
+    String alternateEmail(){
+        return alternateEmail
+    }
+
+    String getManagerLink() {
+        if(manager == null)
+            return ''
+        else
+            return "<a href='../person/show?id=${manager?.id}'>${manager.toString()}</a>"
     }
 /*    String primaryPhone() {
         for (info in contactInfos) {

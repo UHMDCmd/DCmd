@@ -21,8 +21,13 @@
 package edu.hawaii.its.dcmd.inf
 
 import grails.converters.JSON
+import org.apache.commons.io.FilenameUtils
+import org.apache.poi.ss.usermodel.Workbook
+import org.apache.poi.ss.usermodel.WorkbookFactory
+import org.grails.plugins.excelimport.AbstractCsvImporter
 import org.hibernate.criterion.Order
 import de.andreasschmitt.export.taglib.util.RenderUtils
+import org.grails.plugins.excelimport.*
 
 class ApplicationController {
 
@@ -30,6 +35,7 @@ class ApplicationController {
     def generalService
     def serviceService
     def personService
+    def excelImportService
 
     def scaffold = Application
 
@@ -457,6 +463,103 @@ class ApplicationController {
         supportFilterHostList = []
         def response = [state: "OK", id: 1]
         render response as JSON
+    }
+
+    static Map CSV_SA_MAP= [
+            startRow : 2,
+            columnMap: [0: 'application',
+                        1: 'env',
+                        2: 'projectManager',
+                        3: 'functionalLead',
+                        4: 'developerLead',
+                        5: 'technicalLead',
+                        6: 'primarySA',
+                        7: 'secondSA',
+                        8: 'tertiarySA',
+                        9: 'primaryDBA',
+                        10: 'secondDBA',
+                        11: 'tertiaryDBA',
+                        12: 'generalNote'
+            ]
+    ]
+    static Map XLS_SA_MAP= [
+            sheet:'Sheet1',
+            startRow : 2,
+            columnMap: ['A': 'application',
+                        'B': 'env',
+                        'C': 'projectManager',
+                        'D': 'functionalLead',
+                        'E': 'developerLead',
+                        'F': 'technicalLead',
+                        'G': 'primarySA',
+                        'H': 'secondSA',
+                        'I': 'tertiarySA',
+                        'J': 'primaryDBA',
+                        'K': 'secondDBA',
+                        'L': 'tertiaryDBA',
+                        'M': 'generalNote'
+            ]
+    ]
+
+    def importSupportList = {
+
+        def status='Success'
+        def warnings=new ArrayList<String>()
+        def result
+        def reportString = new ArrayList<String>()
+
+        InputStream is = params.excelFile?.getInputStream()
+//        println(is.readLines())
+        String extension = FilenameUtils.getExtension(params.excelFile?.getOriginalFilename())
+        def dataList
+        println(extension)
+        if (extension == 'csv') { // Collect data from CSV format file
+            AbstractCsvImporter csvbook = new AbstractCsvImporter() {}.readFromStream(is)
+            dataList = csvbook.getData(CSV_SA_MAP)
+//            dataList = is.toCsvReader().readAll()
+            println(dataList)
+        } else if (extension == 'xls') { // Collect data from XLS format file
+            Workbook workbook = WorkbookFactory.create(is)
+            dataList = excelImportService.columns(workbook, XLS_SA_MAP)
+        } else {
+            status = 'Fail'
+            reportString.add('Wrong file type (' + extension + "). Must be either .csv or .xls (Microsoft Excel 97/2000/XP)");
+            result = [status:status, warnings:warnings, message:reportString]
+        }
+
+        // Step through each row of spreadsheet
+        def theApp
+        def theEnv
+        def thePerson
+        def theRoleName
+        def theSupportRole
+        dataList.each { row ->
+            // Ignore blank or header rows
+            theEnv = Environment.findByAbbreviation(row.env)
+            if(row.application != 'Application' && row.application != null && theEnv != null) {
+                theApp = Application.findByApplicationTitleAndEnv(row.application, theEnv) // Lookup host
+                if(theApp == null)
+                    warnings.add("Application - " + row.application + " (Env=" + row.env + ")  not found.")
+                else {
+                    personService.checkAndUpdateSupportRole(theApp, 'Project Manager', row.projectManager, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Functional Lead', row.functionalLead, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Developer Lead', row.developerLead, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Technical Lead', row.technicalLead, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Primary SA', row.primarySA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Secondary SA', row.secondSA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Tertiary SA', row.tertiarySA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Primary DBA', row.primaryDBA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Secondary DBA', row.secondDBA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theApp, 'Tertiary DBA', row.tertiaryDBA, warnings, reportString)
+                    if(theApp.generalNote != row.generalNote) {
+                        theApp.generalNote = row.generalNote
+                        theApp.save()
+                    }
+                }
+            }
+        }
+        result = [status:status, warnings:warnings, message:reportString]
+        render result as JSON
     }
 
 }

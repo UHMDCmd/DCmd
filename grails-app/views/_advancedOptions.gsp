@@ -60,6 +60,74 @@
         $("${gridId}").trigger("reloadGrid");
     }
 
+
+
+    function importExcel() {
+        //document.getElementById("loadingModal").style.display="inline";
+
+        $("#loadingModal").css('display',"inline");
+        var oData = new FormData(document.forms.namedItem("excelfile"));
+
+        var url="${createLink(controller:"${pageType}",action:"${importAction}")}";
+        var fileData;
+        jQuery.ajax({
+            async: true,
+            url: url,
+            type:'POST',
+            data: oData,
+            processData:false,
+            contentType: false,
+            success: function(data) {
+                $("#loadingModal").css('display', 'none');
+
+                $("#importReportDialog").empty();
+                var statusText = "<h2><center>Import Excel - " + data.status + "</center></h2><br>";
+                $("#importReportDialog").append(statusText);
+
+                var warningAccordion;
+                if(data.warnings != '') {
+                    warningAccordion = "<div id='importWarningsAccordion'><h3><a href='#'>Warnings</a></h3><div><ul>";
+                    data.warnings.forEach( function(s) {
+                        warningAccordion += "<li>" + s + "</li>";
+                    });
+                    warningAccordion += "</ul></div></div>";
+
+                    $("#importReportDialog").append(warningAccordion);
+                    $("#importWarningsAccordion").accordion({
+                        collapsible:true,
+                        width:100,
+                        active:false,
+                        autoHeight:false
+                        //heightStyle:'content'
+                    });
+                }
+
+                if(data.message != '' ) {
+                    var detailsAccordion = "<div id='importDetailsAccordion'><h3><a href='#'>Details</a></h3><div><ul>";
+                    data.message.forEach(function (s) {
+                        detailsAccordion += "<li>" + s + "</li>";
+                    });
+                    detailsAccordion += "</ul></div></div>";
+                    $("#importReportDialog").append(detailsAccordion);
+                    $("#importDetailsAccordion").accordion({
+                        collapsible: true,
+                        width: 100,
+                        active: false,
+                        autoHeight: false
+                        //heightStyle:'content'
+                    });
+                }
+
+                $( "#importReportDialog").dialog( "open" );
+                $("${gridId}").trigger("reloadGrid");
+            },
+            error: function () {
+                alert('Error retrieving elog info');
+                $("#loadingModal").css('display', 'none');
+            }
+        });
+    }
+
     /***********************************************************************************
      * Functions for ElapsingFilter
      ***********************************************************************************/
@@ -103,6 +171,7 @@
     });
 
     $(document).ready(function() {
+
         if(${hostFilter}) {
             clearFileField();
         }
@@ -114,6 +183,24 @@
             active:false
         });
 
+        // Dialog to report results of import function
+        $("#importReportDialog").dialog({
+            autoOpen: false,
+            width: 800,
+            height: 400,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "blind",
+                duration: 1000
+            },
+            open: function(){
+                $("#importDetailsAccordion").accordion("refresh"); // Refresh after opening dialog so height is properly set
+                $("#importWarningsAccordion").accordion("refresh");
+            }
+        });
     });
 
 
@@ -127,7 +214,7 @@
             var postdata = $("${gridId}").jqGrid('getGridParam', 'postData');
             var url="${createLink(controller:"${pageType}",action:"${exportAction}")}";
             jQuery.ajax({
-                async:false,
+                async:true,
                 url: url,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -141,7 +228,10 @@
                 complete: function(data) {
                     document.getElementById("loadingModal").style.display="none";
                 },
-                error: function () { console.log('Error updating list'); }
+                error: function () {
+                    console.log('Error updating list');
+                    $("#loadingModal").css('display', 'none');
+                }
             });
         });
     });
@@ -213,8 +303,20 @@ body.loading .modal {
     <g:if test="${export}">
         <div class='theCell'>
             <center><b>Export</b></center>
-            <p>Export all pages of <b>filtered</b> grid data to Excel:</p>
+            <p>Export <u>all pages</u> of <b>filtered</b> grid data to Excel:</p>
             <center><input class="ui-corner-all" id="btnExportExcel"  type="button" value="Export"/></center>
+        </div>
+    </g:if>
+
+%{-- Import --}%
+    <g:if test="${importOption}">
+        <div class='theCell'>
+            <g:form enctype="multipart/form-data" class="upload" name="excelfile" id="excelfile" style="padding-top:5px;">
+                <center><b>Import Excel Data</b></center>
+                <p><b>Import an Excel/CSV</b> file with columns matching the below Grid to update data:</p>
+                <input name="excelFile" id="excelFile" type="file" style="color:#000000;" value="">
+                <input class="ui-corner-all" id="btnImportExcel" type="button" onclick="importExcel()" value="Update Data"/>
+            </g:form>
         </div>
     </g:if>
 
@@ -235,4 +337,10 @@ body.loading .modal {
     </div>
 </div>
 
+<div class="importReportDialog" id="importReportDialog" title="Import Report">
+    <h2 id="importStatus"></h2>
+</div>
+
 <div class="loadingModal" id="loadingModal"></div>
+
+

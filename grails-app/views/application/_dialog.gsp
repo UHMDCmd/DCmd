@@ -1,8 +1,3 @@
-<div class="dialog">
-
-    <div class="show-wrapper">
-        <table class="floatTables">
-
             %{--
   - Copyright (c) 2014 University of Hawaii
   -
@@ -23,12 +18,25 @@
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-<g:if test="${pageType != 'create'}">
-                <tr>
-                    <td valign="top" class="name"><g:message code="application.id.label" default="Id" /></td>
-                    <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "id")}</td>
-                </tr>
-            </g:if>
+            <script language="javascript" type="text/javascript" src="../js/isotope.pkgd.min.js"></script>
+            <script language="javascript" type="text/javascript">
+                var container = document.querySelector("#container");
+                var iso = new Isotope( container, {
+                    itemSelector:'.item',
+                    layoutMode:'fitRows'
+                });
+                $(document).ready(function() {
+                    $("#incidentServiceLevel").select2();
+                });
+            </script>
+
+<div class="dialog">
+
+    <div id="container" class="js-isotope" data-isotope-options='{ "columnWidth":400}'>
+
+    <div class="item">
+        <table class="floatTables" style="border:1px solid #CCCCCC;">
+            <tr><td colspan="2"><center><b>General Information</b></center></td></tr>
             <tr>
                 <td valign="top" class="name"><g:message code="application.title.label" default="Application Name" /></td>
 
@@ -63,14 +71,47 @@
                     <g:textArea name="applicationDescription" style="width:18em; height:4em" cols="30" rows="2" value="${applicationInstance?.applicationDescription}" />
                 </td>
             </tr>
+            <tr>
+                <td valign="top" class="name"><g:message code="application.url.label" default="Application URL" /></td>
+                <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'url', 'errors')}">
+                    <g:textField name="url" maxLength="60" value="${applicationInstance?.url}" />
+                </td>
+            </tr>
+            <g:if test="${pageType == 'create'}">
+                <tr class="prop">
+                    <td valign="top" class="name"><label for="primarySA"><g:message
+                            code="host.primarySA.label" default="Primary SA" /></label></td>
+                    <td valign="top" class="value">
+                        <g:render template="../personSelect" model="[objectInstance:applicationInstance]"/>
 
-
+                    </td>
+                </tr>
+            </g:if>
 
         </table>
     </div>
 
-    <div class="show-wrapper">
-        <table class="floatTables">
+            <div class="item">
+                <table class="floatTables" style="border:1px solid #CCCCCC;">
+                    <tr><td colspan="2"><center><b>Incident Information</b></center></td></tr>
+                    <tr>
+                        <td valign="top" class="name"><g:message code="application.applicationDescription.label" default="Incident Service Level" /></td>
+                        <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'incidentServiceLevel', 'errors')}">
+                            <g:select id="incidentServiceLevel" name="incidentServiceLevel" from="[1,2,3,4,5]" value="${applicationInstance?.incidentServiceLevel}">${applicationInstance?.incidentServiceLevel}</g:select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" class="name"><g:message code="application.applicationDescription.label" default="Incident EMail List" /></td>
+                        <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'incidentEmailList', 'errors')}">
+                            <g:textField name="incidentEmailList" value="${applicationInstance?.incidentEmailList}" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="item">
+                <table class="floatTables" style="border:1px solid #CCCCCC;">
+                    <tr><td colspan="2"><center><b>Dates</b></center></td></tr>
             <tr>
                 <td valign="top" class="name"><g:message code="application.applicationDescription.label" default="Maintenance Window" /></td>
                 <td valign="top" class="value ${hasErrors(bean: applicationInstance, field: 'maintenanceWindow', 'errors')}">
@@ -86,16 +127,6 @@
                 <td valign="top" class="name"><g:message code="application.lastUpdated.label" default="Last Updated" /></td>
                 <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "lastUpdated")}</td>
             </tr>
-            </g:if>
-            <g:if test="${pageType == 'create'}">
-                <tr class="prop">
-                    <td valign="top" class="name"><label for="primarySA"><g:message
-                            code="host.primarySA.label" default="Primary SA" /></label></td>
-                    <td valign="top" class="value">
-                <g:render template="../personSelect" model="[objectInstance:applicationInstance]"/>
-
-                    </td>
-                </tr>
             </g:if>
         </table>
 

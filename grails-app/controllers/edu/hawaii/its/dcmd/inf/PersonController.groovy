@@ -181,11 +181,19 @@ class PersonController {
         def personInstance = personService.personLDAP(params.uhName)
 //        def personInstance = new Person(params)
 
+
         if (!personInstance)
             personInstance = new Person(params)
+        else
+            personInstance.properties = params
         //selects type of save to do
         String saveOption = params.option
 
+        if(params.managerSelect != '0') {
+            personInstance.manager = Person.get(params.managerSelect)
+        }
+        else
+            personInstance.manager=null
         // find the contactInfos that were added then deleted in same form submission...
         //	def _toBeRemoved = personInstance.contactInfos.findAll {it == null}
 
@@ -239,10 +247,16 @@ class PersonController {
     }
 
     def update = {
+        println(params)
 
         //get the instance being updated
         def personInstance = Person.get(params.id)
 
+        if(params.managerSelect != '0') {
+            params.manager = Person.get(params.managerSelect)
+        }
+        else
+            params.manager=null
         if (personInstance) {
             //update the object with the params and remove deleted notes
             personInstance.properties = params
@@ -251,10 +265,20 @@ class PersonController {
             if(newPerson)
                 personInstance.properties = newPerson.properties
 
+            if(params.primaryPhone)
+                personInstance.primaryPhone = params.primaryPhone
+            if(params.secondPhone)
+                personInstance.secondPhone = params.secondPhone
+            if(params.alternateEmail)
+                personInstance.alternateEmail = params.alternateEmail
+            if(params.manager)
+                personInstance.manager = params.manager
+
             //save and redirect
             if (!personInstance.hasErrors() && personInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])}"
                 redirect(url: "/person/show?id=${personInstance.id}")
+                println(personInstance.primaryPhone)
             } else {
                 render(view: "edit", model: [personInstance: personInstance])
             }
@@ -537,8 +561,9 @@ class PersonController {
         def totalRows = persons.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
-        def results = persons?.collect { [ cell: ['', it.uhName, it.lastName, it.firstName, it.midInit, it.title, it.telephone,
-                                                  it.primaryPhone, it.secondPhone, it.primaryEmail, it.uhNumber, it.generalNote], id: it.id ] }
+        def results = persons?.collect { [ cell: ['', it.uhName, it.lastName, it.firstName, it.midInit, it.title, it.getManagerLink(),
+                                                  it.telephone,it.primaryPhone, it.secondPhone, it.primaryEmail, it.uhNumber, it.generalNote], id: it.id ] }
+
 
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         render jsonData as JSON
@@ -552,9 +577,15 @@ class PersonController {
         def message
         def item = Person.get(params.id)
         if(params.primaryPhone)
-        item.primaryPhone = params.primaryPhone
+            item.primaryPhone = params.primaryPhone
         if(params.secondPhone)
-        item.secondPhone = params.secondPhone
+            item.secondPhone = params.secondPhone
+        if(params.generalNote)
+            item.generalNote = params.generalNote
+        if(params.manager != 0)
+            item.manager = Person.get(params.manager)
+        else
+            item.manager=null
 
         if (! item.hasErrors() && item.save()) {
 //                    message = "Capacity ${item.toString()} Updated for ${params.asset.toString()}"
@@ -771,6 +802,17 @@ class PersonController {
         render jsonData as JSON
     }
 
+    def getManagerId = {
+        def jsonData
+        def thePerson = Person.get(params.personId.toLong())
+        if(thePerson.manager == null)
+            jsonData = [retVal:true, managerId: 0]
+        else
+            jsonData = [retVal:true, managerId: thePerson.manager?.id]
+
+        render jsonData as JSON
+    }
+
 
     /*****************************************************************/
     /* QuickSearch Functions
@@ -784,11 +826,15 @@ class PersonController {
             order('hostname', 'asc')
         }
         StringBuffer hostString = new StringBuffer()
-        hosts.each {
-            hostString.append("<a href=\'../host/show?id=${it.id}\'>${it.toString()}</a><br>")
+        if (hosts.size() == 0)
+            hostString.append("No Results Found")
+        else {
+            hosts.each {
+                hostString.append("<a href=\'../host/show?id=${it.id}\'>${it.toString()}</a><br>")
+            }
+            if (hosts.size() == maxRows)
+                hostString.append("More than ${maxRows} found......<br>")
         }
-        if (hosts.size() == maxRows)
-            hostString.append("More than ${maxRows} found......<br>")
 
 
         def assets = PhysicalServer.createCriteria().list(max: maxRows) {
@@ -796,11 +842,15 @@ class PersonController {
             order('itsId', 'asc')
         }
         StringBuffer assetString = new StringBuffer()
-        assets.each {
-            assetString.append("<a href=\'../physicalServer/show?id=${it.id}\'>${it.toString()}</a><br>")
+        if (assets.size() == 0)
+            assetString.append("No Results Found")
+        else {
+            assets.each {
+                assetString.append("<a href=\'../physicalServer/show?id=${it.id}\'>${it.toString()}</a><br>")
+            }
+            if (assets.size() == maxRows)
+                assetString.append("More than ${maxRows} found......<br>")
         }
-        if (assets.size() == maxRows)
-            assetString.append("More than ${maxRows} found......<br>")
 
 
         def apps = Application.createCriteria().list(max: maxRows) {
@@ -808,11 +858,15 @@ class PersonController {
             order('applicationTitle', 'asc')
         }
         StringBuffer appString = new StringBuffer()
-        apps.each {
-            appString.append("<a href=\'../application/show?id=${it.id}\'>${it.toString()}</a><br>")
+        if (apps.size() == 0)
+            appString.append("No Results Found")
+        else {
+            apps.each {
+                appString.append("<a href=\'../application/show?id=${it.id}\'>${it.toString()}</a><br>")
+            }
+            if (apps.size() == maxRows)
+                appString.append("More than ${maxRows} found......<br>")
         }
-        if (apps.size() == maxRows)
-            appString.append("More than ${maxRows} found......<br>")
 
 
         def services = Service.createCriteria().list(max: maxRows) {
@@ -820,22 +874,30 @@ class PersonController {
             order('serviceTitle', 'asc')
         }
         StringBuffer serviceString = new StringBuffer()
-        services.each {
-            serviceString.append("<a href=\'../service/show?id=${it.id}\'>${it.toString()}</a><br>")
+        if (services.size() == 0)
+            serviceString.append("No Results Found")
+        else {
+            services.each {
+                serviceString.append("<a href=\'../service/show?id=${it.id}\'>${it.toString()}</a><br>")
+            }
+            if (services.size() == maxRows)
+                serviceString.append("More than ${maxRows} found......<br>")
         }
-        if (services.size() == maxRows)
-            serviceString.append("More than ${maxRows} found......<br>")
 
         def staff = Person.createCriteria().list(max: maxRows) {
             ilike('uhName', "%${params.searchString}%")
             order('uhName', 'asc')
         }
         StringBuffer staffString = new StringBuffer()
-        staff.each {
-            staffString.append("<a href=\'../person/show?id=${it.id}\'>${it.toString()}</a><br>")
+        if (staff.size() == 0)
+            staffString.append("No Results Found")
+        else {
+            staff.each {
+                staffString.append("<a href=\'../person/show?id=${it.id}\'>${it.toString()}</a><br>")
+            }
+            if (staff.size() == maxRows)
+                staffString.append("More than ${maxRows} found......<br>")
         }
-        if (staff.size() == maxRows)
-            staffString.append("More than ${maxRows} found......<br>")
 
 
         def jsonData = [retVal: true, hostList:hostString.toString(), assetList:assetString.toString(), appList:appString.toString(), serviceList:serviceString.toString(), staffList:staffString.toString()]

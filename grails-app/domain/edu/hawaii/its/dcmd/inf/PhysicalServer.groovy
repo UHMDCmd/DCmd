@@ -34,6 +34,7 @@ class PhysicalServer extends Asset{
     Host hostOS
 
     Date eoslDate
+    Date maintenanceDate
 
     static hasMany = [
             assetCapacities:AssetCapacity,
@@ -45,6 +46,7 @@ class PhysicalServer extends Asset{
 
     static constraints = {
         eoslDate(nullable:true)
+        maintenanceDate(nullable:true)
 //        globalZone(nullable:true)
         serverType(nullable:true)
         hosts(nullable: true)

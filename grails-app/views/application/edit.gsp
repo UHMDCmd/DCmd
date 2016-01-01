@@ -23,7 +23,7 @@
 <head>
 
     <meta content="main" name="layout" />
-    <g:set var="entityName" value="${message(code: 'application.edit.label', default: 'Application')}" />
+    <g:set var="entityName" value="${message(code: 'application.edit.label', default: 'Parent Application')}" />
     <title><g:message code="default.dcmd.label" /></title>
     <jqDT:resources jqueryUi="true" type="js" />
 </head>

@@ -20,6 +20,25 @@
 
 <script type="text/javascript">
 
+
+
+    function getManager(e) {
+        var rowId= e.id.split("_")[0];
+        jQuery.ajax({
+            async:false,
+            url: '../person/getManagerId',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: {personId: rowId},
+            success: function(data) {
+                $(e).select2({
+                    width:200
+                }).select2('val', data.managerId);
+            },
+            error: function (e) { console.log(e); }
+        });
+    }
+
     function changeReport() {
         jQuery.ajax({
             async:false,
@@ -59,7 +78,7 @@ caption:'Staff List',
 url:'listAllPerson',
 editurl:'editAllPerson',
         datatype: "json",
-        colNames:['','UH Username', 'Last Name', 'First Name', 'MI', 'Title', 'LDAP Phone', 'Primary Phone', 'Secondary Phone', 'E-Mail', 'UH ID', 'General Notes', 'id'],
+        colNames:['','UH Username', 'Last Name', 'First Name', 'MI', 'Title', 'Manager', 'Office Phone', 'Primary Phone', 'Secondary Phone', 'E-Mail', 'UH ID', 'General Notes', 'id'],
         colModel:[
             {name:'actions', index:'actions', editable:false, search:false, required:false, sortable:false, width:50, fixed:true,
                 formatter: 'actions', hidden:false,formatoptions: {
@@ -69,12 +88,18 @@ editurl:'editAllPerson',
             {name:'firstName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
             {name:'midInit', editable:false, width:25,title:false},
             {name:'title', editable:false,title:false},
+            {name:'manager', editable:true, sortable:false,edittype:'select', editoptions: {
+                dataUrl: '${createLink(controller:"person",action:"listAsSelectWithNull")}',
+                dataInit: function (e) {
+                    getManager(e);
+                }
+            }},
             {name:'telephone', editable:false,title:false},
             {name:'primaryPhone', editable:true,title:false},
             {name:'secondPhone', editable:true,title:false},
             {name:'primaryEmail', editable:false, width: 200,title:false},
             {name:'uhNumber', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'}, width: 80,title:false},
-            {name:'generalNote', width:'400', editable:false,title:false},
+            {name:'generalNote', width:'400', editable:true,title:false},
             {name:'id', hidden:true}
         ],
     rowNum: 50,
@@ -119,9 +144,10 @@ editurl:'editAllPerson',
     setTooltipsOnColumnHeader($("#allPerson"),2,"First Name");
     setTooltipsOnColumnHeader($("#allPerson"),3,"Middle Initial");
     setTooltipsOnColumnHeader($("#allPerson"),4,"Professional Title");
-    setTooltipsOnColumnHeader($("#allPerson"),5,"Primary Phone Contact");
-    setTooltipsOnColumnHeader($("#allPerson"),6,"Primary Email Contact");
-    setTooltipsOnColumnHeader($("#allPerson"),7,"Unique Campus Wide Id");
+    setTooltipsOnColumnHeader($("#allPerson"),5,"Manager uhName");
+    setTooltipsOnColumnHeader($("#allPerson"),6,"Primary Phone Contact");
+    setTooltipsOnColumnHeader($("#allPerson"),7,"Primary Email Contact");
+    setTooltipsOnColumnHeader($("#allPerson"),8,"Unique Campus Wide Id");
 
 
 

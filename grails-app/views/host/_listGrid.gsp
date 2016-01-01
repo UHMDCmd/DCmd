@@ -164,7 +164,7 @@ url:'listAll',
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-<g:render template="../advancedOptions" model="[pageType:'host', gridId:'#allHosts', export:true, exportAction:'exportListAll', hostFilter:true]" />
+<g:render template="../advancedOptions" model="[pageType:'host', gridId:'#allHosts', export:true, importOptions:true, exportAction:'exportListAll', hostFilter:true]" />
 
 
 

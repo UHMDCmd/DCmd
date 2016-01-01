@@ -39,10 +39,10 @@
             <center><h3>Permission Denied</h3>
             <br><br>
             <g:if test="${params.username == 'anonymousUser'}">
-                <h3>User not permitted access to DCmd.  Contact karsin@hawaii.edu to gain access.</h3>
+                <h3>User not permitted access to DCmd.  Contact mhodges@hawaii.edu to gain access.</h3>
             </g:if>
             <g:if test="${params.username != 'anonymousUser'}">
-                <h3>User not permitted to view this page.  Contact karsin@hawaii.edu to gain access.</h3>
+                <h3>User not permitted to view this page.  Contact mhodges@hawaii.edu to gain access.</h3>
             </g:if>
 
             </center>

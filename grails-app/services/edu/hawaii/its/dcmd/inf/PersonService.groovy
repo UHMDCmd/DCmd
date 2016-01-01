@@ -196,6 +196,19 @@ class PersonService {
     }
 
 
+    def listPersonAsSelectWithNull() {
+        def lst = Person.findAll()
+
+        StringBuffer buf = new StringBuffer("{id:0,text:'Not Assigned'},")
+        lst.each{
+            buf.append("{id:\'${it.id}\',text:'")
+            buf.append(it.toString())
+            buf.append("'},")
+        }
+
+        return buf.toString()
+    }
+
     def getAdmin(Application myApp) {
         if(myApp == null)
             return new Person(uhName: "")
@@ -425,25 +438,23 @@ class PersonService {
         }
 
         def report = auditEntries.collect {
-            [Person.get(it.persistedObjectId)?.uhName, it.propertyName, it.oldValue, it.newValue, it.actor, it.dateCreated.toLocaleString()]
+            [Person.get(it.persistedObjectId)?.uhName, it.propertyName, it.oldValue, it.newValue, it.actor, it.dateCreated.timeString]
         }
 
 
         if(!report.isEmpty()) {
-            def reportString = "<h2>UPDATED Staff Phone number info</h2><br><table border=1>"
-            reportString += "<TH>uhName</TH><TH>Attribute</TH><TH>Old Value</TH><TH>New Value</TH><TH>Edited By</TH><TH>Edit Timestamp</TH>"
+            def reportString = "UPDATED Staff Phone number info\r\n"
+            reportString += "uhName, Attribute, OldValue, NewValue, EditedBy, EditTime\r\n"
             report.each {
-                reportString += "<TR>"
                 it.each {
-                    reportString +="<TD>"
                     reportString += it.toString()
-                    reportString +="</TD>"
+                    reportString +=", "
                 }
-                reportString += "</TR>"
+                reportString = reportString.substring(0, reportString.length()-2)
+                reportString += "\r\n"
             }
-            reportString+="</table>"
 
-            // Change based on file location, commented out is path on test/prod servers.
+            // Change based on file location, commented out is path on local dev environment.
 //            def inputFile = new File("${System.properties['user.home']}/.grails/reportemails.txt")
             def inputFile = new File("dcmdConfig/reportemails.txt")
 
@@ -456,7 +467,7 @@ class PersonService {
                 to emails
                 from "dcmd@hawaii.edu"
                 subject "DCmd Staff Info Change Report"
-                html reportString
+                body reportString
             }
         }
         else
@@ -478,7 +489,7 @@ class PersonService {
         }
 
         def updateReport = auditUpdateEntries.collect {
-            [SupportRole.get(it.persistedObjectId)?.supportedObject?.supportableType, SupportRole.get(it.persistedObjectId)?.supportedObject?.toString(), SupportRole.get(it.persistedObjectId)?.roleName?.roleName, it.propertyName, it.oldValue, it.newValue, it.actor, it.dateCreated.toLocaleString()]
+            [SupportRole.get(it.persistedObjectId)?.supportedObject?.supportableType, SupportRole.get(it.persistedObjectId)?.supportedObject?.toString(), SupportRole.get(it.persistedObjectId)?.roleName?.roleName, it.propertyName, it.oldValue, it.newValue, it.actor, it.dateCreated.timeString]
         }
 
         // Collect INSERT in the last 24h
@@ -489,38 +500,37 @@ class PersonService {
         }
 
         def insertReport = auditInsertEntries.collect {
-            [SupportRole.get(it.persistedObjectId)?.supportedObject?.supportableType, SupportRole.get(it.persistedObjectId)?.supportedObject?.toString(), SupportRole.get(it.persistedObjectId)?.person?.toString(), SupportRole.get(it.persistedObjectId)?.roleName?.roleName, it.actor, it.dateCreated.toLocaleString()]
+            [SupportRole.get(it.persistedObjectId)?.supportedObject?.supportableType, SupportRole.get(it.persistedObjectId)?.supportedObject?.toString(), SupportRole.get(it.persistedObjectId)?.person?.toString(), SupportRole.get(it.persistedObjectId)?.roleName?.roleName, it.actor, it.dateCreated.timeString]
         }
 
         def reportString = ""
         if(!updateReport.isEmpty()) {
-            reportString += "<h2>UPDATED Support Roles</h2><br> <table border=1>"
-            reportString += "<TH>Supported Object Type</TH><TH>Supported Object</TH><TH>Role</TH><TH>Attribute</TH><TH>Old Value</TH><TH>New Value</TH><TH>Edited By</TH><TH>Edit Timestamp</TH>"
+            reportString += "UPDATED Support Roles\r\n"
+            reportString += "SupportedObjectType, SupportedObject, Role, Attribute, OldValue, NewValue, EditedBy, EditTime\r\n"
             updateReport.each {
-                reportString += "<TR>"
                 it.each {
-                    reportString += "<TD>"
                     reportString += it.toString()
-                    reportString += "</TD>"
+                    reportString += ", "
                 }
-                reportString += "</TR>"
+                reportString = reportString.substring(0, reportString.length()-2)
+
+                reportString += "\r\n"
             }
-            reportString += "</table><br>"
+            reportString+="\r\n"
         }
 // Table for INSERTS
         if(!insertReport.isEmpty()) {
-            reportString += "<h2>NEW Support Roles</h2><br> <table border=1>"
-            reportString += "<TH>Supported Object Type</TH><TH>Supported Object</TH><TH>Person</TH><TH>Role</TH><TH>Inserted By</TH><TH>Insert Timestamp</TH>"
+            reportString += "NEW Support Roles\r\n"
+            reportString += "SupportedObjectType, SupportedObject, Person, Role, InsertedBy, InsertTime\r\n"
             insertReport.each {
-                reportString += "<TR>"
                 it.each {
-                    reportString += "<TD>"
                     reportString += it.toString()
-                    reportString += "</TD>"
+                    reportString += ", "
                 }
-                reportString += "</TR>"
+                reportString = reportString.substring(0, reportString.length()-2)
+
+                reportString += "\r\n"
             }
-            reportString += "</table>"
         }
         if(reportString != "") {
             // Change based on file location, commented out is path on test/prod servers.
@@ -536,7 +546,7 @@ class PersonService {
                 to emails
                 from "dcmd@hawaii.edu"
                 subject "DCmd Support Role Change Report"
-                html reportString
+                body reportString
             }
             println(reportString)
         }
@@ -544,5 +554,39 @@ class PersonService {
             System.out.println("Nothing to report")
 
         return updateReport
+    }
+
+    /*****************************
+     Import File functions
+     /****************************/
+    def checkAndUpdateSupportRole(SupportableObject theObject, String roleName, String personName, ArrayList<String> warnings, ArrayList<String> reportString) {
+        if (personName != '' && personName != null) {
+            def thePerson = Person.findByUhName(personName)
+            def theRoleName = RoleType.findByRoleName(roleName)
+            def theSupportRole = SupportRole.findBySupportedObjectAndRoleName(theObject, theRoleName)
+            if((personName == 'Unassigned' || personName =='Unassign' || personName == 'unassigned' || personName == 'unassign' || personName == 'Not Assigned')) {
+                if(theSupportRole != null) {
+                    theSupportRole.delete(flush: true)
+                    reportString.add(roleName + " for " + theObject.toString() + " deleted.")
+                }
+                else
+                    reportString.add(roleName + " for " + theObject.toString() + " not found, no delete needed.")
+
+            }
+            else if (thePerson == null) {
+                warnings.add(roleName + " assignment for " + theObject.toString() + " failed - Person " + personName + " not found.")
+            } else {
+                if (theSupportRole == null) {
+                    theSupportRole = new SupportRole(supportedObject: theObject, roleName: theRoleName, person: thePerson, roleType: 'Technical')
+                    theSupportRole.save(flush:true)
+                    reportString.add(roleName + " for " + theObject.toString() + " set to " + thePerson.uhName)
+                } else if(theSupportRole.person?.id != thePerson?.id){
+                    reportString.add(roleName + " for " + theObject.toString() + " set to " + theSupportRole.person?.uhName + " (changed from " + thePerson.uhName + ")")
+                    theSupportRole.person = thePerson
+                    theSupportRole.save(flush:true)
+                }
+            }
+        }
+        return 0
     }
 }

@@ -106,21 +106,21 @@ grails.plugin.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
 /***************************************************************************************
  * Un-comment this for Production
  ***************************************************************************************/
-grails.plugin.springsecurity.cas.serviceUrl = 'https://www.hawaii.edu/its/dcmd/j_spring_cas_security_check'
-grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://www.hawaii.edu/its/dcmd/secure/receptor'
-grails.plugin.springsecurity.logout.afterLogoutUrl =
-    'https://authn.hawaii.edu/cas/logout?url=https://www.hawaii.edu/its/dcmd/'
-grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://authn.hawaii.edu/cas/'
+//grails.plugin.springsecurity.cas.serviceUrl = 'https://www.hawaii.edu/its/dcmd/j_spring_cas_security_check'
+//grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://www.hawaii.edu/its/dcmd/secure/receptor'
+//grails.plugin.springsecurity.logout.afterLogoutUrl =
+//    'https://authn.hawaii.edu/cas/logout?url=https://www.hawaii.edu/its/dcmd/'
+//grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://authn.hawaii.edu/cas/'
 
 /***************************************************************************************
  * Un-comment this for Local Development
  ***************************************************************************************/
 
-//grails.plugin.springsecurity.cas.serviceUrl = 'http://localhost:8080/its/dcmd/j_spring_cas_security_check'
-//grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/its/dcmd/secure/receptor'
-//grails.plugin.springsecurity.logout.afterLogoutUrl =
-//    'https://cas-test.its.hawaii.edu/cas/logout?url=http://localhost:8080/its/dcmd/'
-//grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.edu/cas/'
+grails.plugin.springsecurity.cas.serviceUrl = 'http://localhost:8080/its/dcmd/j_spring_cas_security_check'
+grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/its/dcmd/secure/receptor'
+grails.plugin.springsecurity.logout.afterLogoutUrl =
+    'https://cas-test.its.hawaii.edu/cas/logout?url=http://localhost:8080/its/dcmd/'
+grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.edu/cas/'
 
 /***************************************************************************************
  * Un-comment this for Test

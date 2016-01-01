@@ -373,12 +373,7 @@
                 <g:textField name="vendorSupportLevel" maxlength="45" value="${physicalServerInstance?.vendorSupportLevel}" />
             </td>
         </tr>
-        <tr>
-            <td valign="top" class="name"><g:message code="asset.eosl.label" default="End of Service Life (EOSL)" /></td>
-            <td valign="top" class="value ${hasErrors(bean: physicalServerInstance, field: 'eoslDate', 'errors')}">
-                <g:datePicker name="eoslDate" value="${physicalServerInstance?.eoslDate}" precision="day" />
-            </td>
-        </tr>
+
     </table>
 </div>
 
@@ -414,6 +409,24 @@
             <td valign="top" class="name"><g:message code="asset.postMigrationStatus.label" default="Post Migration Status" /></td>
             <td valign="top" class="value ${hasErrors(bean: physicalServerInstance, field: 'postMigrationStatus', 'errors')}">
                 <g:textField name="postMigrationStatus" maxlength="45" value="${physicalServerInstance?.postMigrationStatus}" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="item">
+
+    <table class="floatTables" style="border:1px solid #CCCCCC;">
+        <tr><td colspan="2"><center><b>Dates</b></center></td></tr>
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.eosl.label" default="End of Service Life (EOSL)" /></td>
+            <td valign="top" class="value ${hasErrors(bean: physicalServerInstance, field: 'eoslDate', 'errors')}">
+                <g:datePicker name="eoslDate" value="${physicalServerInstance?.eoslDate}" precision="day" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.eosl.label" default="Maintenance Date" /></td>
+            <td valign="top" class="value ${hasErrors(bean: physicalServerInstance, field: 'maintenanceDate', 'errors')}">
+                <g:datePicker name="maintenanceDate" value="${physicalServerInstance?.maintenanceDate}" precision="day" />
             </td>
         </tr>
         <tr>

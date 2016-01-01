@@ -76,6 +76,11 @@ ${fieldValue(bean: personInstance, field: 'uhName')}
                 ${fieldValue(bean: personInstance, field: "title")}
             </td>
         </tr>
+        <tr class="prop">
+            <td valign="top" class="name"><g:message
+                    code="person.manager.label" default="Manager" /></td>
+            <td valign="top" class="value">${personInstance.manager?.uhName}</td>
+        </tr>
 
         <tr class="prop">
             <td valign="top" class="name"><g:message
@@ -97,7 +102,16 @@ ${fieldValue(bean: personInstance, field: 'uhName')}
         </tr>
         <tr class="prop">
             <td valign="top"class="name">
-                LDAP Phone
+                Alternate Email
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: personInstance, field: 'alternateEmail', 'errors')}">
+                ${fieldValue(bean:personInstance, field: "alternateEmail")}
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top"class="name">
+                Office Phone
             </td>
             <td valign="top"
                 class="value ${hasErrors(bean: personInstance, field: 'telephone', 'errors')}">

@@ -34,6 +34,7 @@ class GeneralService {
     }
 
     def createOrEditRole(params, theRole) {
+
         def theSupportRole = SupportRole.createCriteria().list() {
             eq('supportedObject.id', params.theObject.id)
             roleName {
@@ -51,7 +52,7 @@ class GeneralService {
         }
         else {
             if(theSupportRole)
-                theSupportRole.first().delete()
+                theSupportRole.first().delete(flush:true)
         }
     }
 
@@ -469,4 +470,5 @@ def listLocationsAsSelect() {
 
         return buf.toString()
     }
+
 }

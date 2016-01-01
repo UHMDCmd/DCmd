@@ -158,13 +158,14 @@ class ApplicationService {
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
         def results = applications?.collect { [ cell: [it.applicationTitle, it.env.toString(), it.applicationDescription,
-                it.status.toString(),
+                it.status.toString(), it.url,
                 personService.getSupportPersonLink(it, 'Primary SA'),
                 it.maintenanceWindow,
                 it.generalNote], id: it.id ] }
         def jsonData = [rows: results, page: currentPage, records: totalRows, total: numberOfPages]
         return jsonData
     }
+
 
     def listAllServiceSubGrid(params) {
         def sortIndex = params.sidx ?: 'id'

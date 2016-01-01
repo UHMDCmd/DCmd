@@ -28,6 +28,14 @@ import grails.gorm.DetachedCriteria
 import org.springframework.security.core.context.SecurityContextHolder
 import de.andreasschmitt.export.taglib.util.RenderUtils
 import grails.rest.*
+import org.springframework.web.multipart.MultipartHttpServletRequest
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.grails.plugins.excelimport.*
+import org.apache.commons.io.FilenameUtils;
+
 
 
 class HostController {
@@ -36,7 +44,8 @@ class HostController {
     static requestFormats = ['application/json', 'xml']
 
     def scaffold = true
-	
+
+    def excelImportService
 	def hostService
     def generalService
     def personService
@@ -354,21 +363,110 @@ class HostController {
         def jsonData = hostService.listAllSupportList(params)
         jsonData.rows.each { theRow ->
 
-            if(!theRow.cell[7])
-                theRow.cell[7] = ""
+            if(!theRow.cell[9])
+                theRow.cell[9] = ""
 
             def tempVals = [
                     Host: theRow.cell[1].replaceAll("\\<.*?>",""),
-                    Status: theRow.cell[2],
-                    'Primary SA': theRow.cell[3].replaceAll("\\<.*?>",""),
-                    'Secondary SA':  theRow.cell[4].replaceAll("\\<.*?>",""),
-                    'Tertiary SA': theRow.cell[5].replaceAll("\\<.*?>",""),
-                    'Service Lead': theRow.cell[6]?.replaceAll("\\<.*?>",""),
-                    'General note': theRow.cell[7]
+                    'Primary SA': theRow.cell[2].replaceAll("\\<.*?>",""),
+                    'Secondary SA':  theRow.cell[3].replaceAll("\\<.*?>",""),
+                    'Tertiary SA': theRow.cell[4].replaceAll("\\<.*?>",""),
+                    'Service Lead': theRow.cell[5]?.replaceAll("\\<.*?>",""),
+                    'Primary DBA': theRow.cell[6].replaceAll("\\<.*?>",""),
+                    'Secondary DBA':  theRow.cell[7].replaceAll("\\<.*?>",""),
+                    'Tertiary DBA': theRow.cell[8].replaceAll("\\<.*?>",""),
+                    'General note': theRow.cell[9]
             ]
             theList.add(tempVals)
         }
         render theList as JSON
+    }
+
+    static Map CSV_SA_MAP= [
+            startRow : 2,
+            columnMap: [0: 'host',
+                        1: 'primarySA',
+                        2: 'secondarySA',
+                        3: 'tertiarySA',
+                        4: 'serviceLead',
+                        5: 'primaryDBA',
+                        6: 'secondaryDBA',
+                        7: 'tertiaryDBA',
+                        8: 'generalNote'
+            ]
+    ]
+    static Map XLS_SA_MAP= [
+            sheet:'Sheet1',
+            startRow : 2,
+            columnMap: ['A': 'host',
+                        'B': 'primarySA',
+                        'C': 'secondarySA',
+                        'D': 'tertiarySA',
+                        'E': 'serviceLead',
+                        'F': 'primaryDBA',
+                        'G': 'secondaryDBA',
+                        'H': 'tertiaryDBA',
+                        'I': 'generalNote'
+                    ]
+    ]
+
+    static int counted
+    def importSupportList = {
+
+        def status='Success'
+        def warnings=new ArrayList<String>()
+        def message
+        def result
+
+        InputStream is = params.excelFile?.getInputStream()
+//        println(is.readLines())
+        String extension = FilenameUtils.getExtension(params.excelFile?.getOriginalFilename())
+        def dataList
+        println(extension)
+        if (extension == 'csv') { // Collect data from CSV format file
+            AbstractCsvImporter csvbook = new AbstractCsvImporter() {}.readFromStream(is)
+            dataList = csvbook.getData(CSV_SA_MAP)
+//            dataList = is.toCsvReader().readAll()
+            println(dataList)
+        } else if (extension == 'xls') { // Collect data from XLS format file
+            Workbook workbook = WorkbookFactory.create(is)
+            dataList = excelImportService.columns(workbook, XLS_SA_MAP)
+        } else {
+            status = 'Fail'
+            message = 'Wrong file type'
+            result = [status:status, warnings:warnings, message:message]
+            render result as JSON
+        }
+
+        // Step through each row of spreadsheet
+        def theHost
+        def thePerson
+        def theRoleName
+        def theSupportRole
+        def reportString = new ArrayList<String>()
+        dataList.each { row ->
+            // Ignore blank or header rows
+            if(row.host != 'Host' && row.host != null) {
+                theHost = Host.findByHostname(row.host) // Lookup host
+                if(theHost == null)
+                    warnings.add("Host - " + row.host + " - not found.")
+                else {
+                    personService.checkAndUpdateSupportRole(theHost, 'Primary SA', row.primarySA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theHost, 'Secondary SA', row.secondarySA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theHost, 'Tertiary SA', row.tertiarySA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theHost, 'Service Lead', row.serviceLead, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theHost, 'Primary DBA', row.primaryDBA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theHost, 'Secondary DBA', row.secondaryDBA, warnings, reportString)
+                    personService.checkAndUpdateSupportRole(theHost, 'Tertiary DBA', row.tertiaryDBA, warnings, reportString)
+                    if(theHost.generalNote != row.generalNote) {
+                        theHost.generalNote = row.generalNote
+                        theHost.save()
+                    }
+                }
+            }
+        }
+        result = [status:status, warnings:warnings, message:reportString]
+        render result as JSON
     }
 
     /*****************************************************************/

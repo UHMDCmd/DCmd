@@ -150,7 +150,7 @@
 
             <h1 class="site_title">
 
-                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.gif')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.7.0</sub></font></a>
+                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.gif')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.7.2</sub></font></a>
             </h1>
             <g:set var="currentMode" value="${session.getAttribute("modeType")}"/>
 

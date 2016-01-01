@@ -99,8 +99,6 @@ class BootStrap {
                  }
 
                  JSON.registerObjectMarshaller(Tier){
-                     System.out.println(it.instanceDependencies?.first()?.service?.serviceTitle)
-
                      def returnArray = [:]
                      returnArray['ServiceName'] = it.instanceDependencies?.first()?.service?.serviceTitle
                      returnArray['Application'] = it.mainApp
@@ -597,7 +595,6 @@ class BootStrap {
                 }
 
                 JSON.registerObjectMarshaller(Tier){
-                    System.out.println(it.instanceDependencies?.first()?.service?.serviceTitle)
 
                     def returnArray = [:]
                     returnArray['ServiceName'] = it.instanceDependencies?.first()?.service?.serviceTitle
@@ -926,7 +923,6 @@ class BootStrap {
                 }
 
                 JSON.registerObjectMarshaller(Tier){
-                    System.out.println(it.instanceDependencies?.first()?.service?.serviceTitle)
 
                     def returnArray = [:]
                     returnArray['ServiceName'] = it.instanceDependencies?.first()?.service?.serviceTitle

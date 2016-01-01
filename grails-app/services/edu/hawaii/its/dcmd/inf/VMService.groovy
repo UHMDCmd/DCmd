@@ -8,8 +8,11 @@ import com.vmware.vim25.mo.ServiceInstance
 import com.vmware.vim25.mo.util.MorUtil
 import grails.converters.JSON
 import groovy.json.JsonSlurper
+import org.apache.commons.lang.time.DateUtils
+import org.codehaus.groovy.grails.plugins.orm.auditable.AuditLogEvent
 
 import java.rmi.RemoteException
+import groovy.time.TimeCategory
 
 class VMService {
 
@@ -28,8 +31,8 @@ class VMService {
             String username
             String password
 
-//            def inputFile = new File("${System.properties['user.home']}/.grails/vcenters.txt")
-            def inputFile = new File("dcmdConfig/vcenters.txt")
+            def inputFile = new File("${System.properties['user.home']}/.grails/vcenters.txt") // uncomment for development
+//            def inputFile = new File("dcmdConfig/vcenters.txt")  // uncomment for test/production
             def jsonSlurper = new JsonSlurper()
             def InputJSON = jsonSlurper.parseText(inputFile.text)
             InputJSON.each {
@@ -81,38 +84,13 @@ class VMService {
                 //println("Added VMs")
                 si.serverConnection.logout()
 
+                clearLogEntries()
             }
 
-            // Update DCmd with all servers from all VCenters
 
-
-            // newHosts sent to list controller to display updated on modal
-            //ArrayList <String> updatedHosts = updateHosts(virtualMachines, si.getServerConnection())
-
-            /*
-            render "Root folder: ${rootFolder.name} "
-            new InventoryNavigator(rootFolder).searchManagedEntities("VirtualMachine").each {
-                render """
-<p>Name: ${it.name}
-<p>Guest OS: ${it.config.guestFullName}
-<p>Multiple snapshots supported?: ${it.capability.isMultipleSnapshotsSupported()}
-<p> parent: ${it.parent}
-<p> MOR type: ${it.MOR.type}
-<p> count: ${++count}
-<p>______________________________________________
-"""
-            }
-              */
-            /*
-            render updatedHosts as JSON
-            // redirect(controller: "host" ,action: "list", params: [updatedHosts:updatedHosts] )
-        }
-        */
         }
         catch(RemoteException e){
             println "Error: ${e.message}"
- //           session.setAttribute("status",false)
-//            redirect(controller: "host" ,action: "list" )
         }
         System.out.println("VMware Sync Completed.")
     }
@@ -347,5 +325,20 @@ class VMService {
     }
 
 
+    // Method to remove the flood of log entries caused by VMWare sync.  Removes all entries from 'system' in the past 10 minute
+    def clearLogEntries() {
+        Date thisMinute = new Date()
+        thisMinute = DateUtils.addMinutes(thisMinute, -10)
+
+        println(thisMinute)
+        def logEntries = AuditLogEvent.createCriteria().list {
+            like('actor', 'system')
+            ge('lastUpdated',thisMinute)
+
+        }
+        logEntries.each {
+            it.delete()
+        }
+    }
 
 }

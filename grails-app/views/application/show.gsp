@@ -23,7 +23,7 @@
 <head>
 
     <meta content="main" name="layout" />
-    <g:set var="entityName" value="${message(code: 'application.show.label', default: 'Application')}" />
+    <g:set var="entityName" value="${message(code: 'application.show.label', default: 'Parent Application')}" />
     <title><g:message code="default.dcmd.label" /></title>
     <jqDT:resources jqueryUi="true" type="js" />
     <script language="javascript" type="text/javascript" src="../js/mustache.js">

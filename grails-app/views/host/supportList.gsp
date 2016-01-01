@@ -34,13 +34,13 @@
         </g:applyLayout>
 
 
+
     </head>
       <body>
     
    <div id="container">
        <g:render template="../show_secondary" model="[pageType:'supportList', objectId:0, action:'supportList']" />
        <g:render template="../breadcrumbs" model="[pageType:'host', action:'list']"/>
-
 
    </div>
  <div class="pageBody" id="outerElement">
@@ -50,7 +50,5 @@
 
  </div>
 
-
-		
 </body>
 	</html>

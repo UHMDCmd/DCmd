@@ -20,6 +20,12 @@
 
 <r:require modules='select2' />
 
+<style>
+.ui-jqgrid tr.jqgrow td {
+    white-space: normal !important;
+}
+</style>
+
 
 <script type="text/javascript">
     if('${action}'=='edit')
@@ -49,7 +55,7 @@
         jQuery("#service_list").jqGrid({
 
             height:'auto',
-            caption:'Service List',
+            caption:'Child Services List',
             showPager:'true',
             url:listDependencyUrl,
             editurl:'editServiceGrid?applicationId=${applicationInstance.id}',

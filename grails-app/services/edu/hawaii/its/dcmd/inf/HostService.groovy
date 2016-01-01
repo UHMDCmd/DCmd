@@ -29,6 +29,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane
 import org.hibernate.criterion.CriteriaSpecification
 import groovy.time.*
 import org.hibernate.criterion.Projections
+import org.grails.plugins.excelimport.*
 
 class HostService {
 
@@ -214,7 +215,6 @@ class HostService {
             projections {
                 distinct('id')
             }
-            createAlias('status', 'status', Criteria.LEFT_JOIN)
             //createAlias('supporters', 'supporters', Criteria.LEFT_JOIN)
             createAlias('supporters.person', 'supporters.person', Criteria.LEFT_JOIN)
             createAlias('supporters.roleName', 'supporters.roleName', Criteria.LEFT_JOIN)
@@ -230,11 +230,6 @@ class HostService {
 
 // Search Filters
             if (params.hostname) ilike('hostname', "%${params.hostname}%")
-            if (params.status) {
-                status {
-                    ilike('abbreviation', "%${params.status}%")
-                }
-            }
             if(params.primarySA) {
                 supporters {
                     roleName {
@@ -275,6 +270,36 @@ class HostService {
                     }
                 }
             }
+            if(params.primaryDBA) {
+                supporters {
+                    roleName {
+                        like('roleName', 'Primary DBA')
+                    }
+                    person {
+                        ilike('uhName', "%${params.primaryDBA}%")
+                    }
+                }
+            }
+            if(params.secondDBA) {
+                supporters {
+                    roleName {
+                        like('roleName', 'Secondary DBA')
+                    }
+                    person {
+                        ilike('uhName', "%${params.secondDBA}%")
+                    }
+                }
+            }
+            if(params.thirdDBA) {
+                supporters {
+                    roleName {
+                        like('roleName', 'Tertiary DBA')
+                    }
+                    person {
+                        ilike('uhName', "%${params.thirdDBA}%")
+                    }
+                }
+            }
             if (params.generalNote) ilike('generalNote', "%${params.generalNote}%")
 
 // Sort
@@ -299,11 +324,13 @@ class HostService {
 
         def results = hosts?.collect { [ cell: ['',
                 "${it.hostname}",
-                it.status?.abbreviation,
                 personService.getSupportPersonLink(it, 'Primary SA'),
                 personService.getSupportPersonLink(it, 'Secondary SA'),
                 personService.getSupportPersonLink(it, 'Tertiary SA'),
                 personService.getSupportPersonLink(it, 'Service Lead'),
+                personService.getSupportPersonLink(it, 'Primary DBA'),
+                personService.getSupportPersonLink(it, 'Secondary DBA'),
+                personService.getSupportPersonLink(it, 'Tertiary DBA'),
                 it.generalNote],
                 id: it.id ] }
 
@@ -322,8 +349,6 @@ class HostService {
 
         if(params.hostname)
             params.theObject.hostname = params.hostname
-        if(params.status)
-            params.theObject.status = Status.get(params.status)
 
         if(params.primarySA && params.primarySA != null) {
             params.thePerson = Person.get(params.primarySA)
@@ -344,6 +369,21 @@ class HostService {
             params.thePerson = Person.get(params.servLead)
             params.roleType = 'Functional'
             generalService.createOrEditRole(params, 'Service Lead')
+        }
+        if(params.primaryDBA && params.primaryDBA != null) {
+            params.thePerson = Person.get(params.primaryDBA)
+            params.roleType = 'Technical'
+            generalService.createOrEditRole(params, 'Primary DBA')
+        }
+        if(params.secondDBA && params.secondDBA != null) {
+            params.thePerson = Person.get(params.secondDBA)
+            params.roleType = 'Technical'
+            generalService.createOrEditRole(params, 'Secondary DBA')
+        }
+        if(params.thirdDBA && params.thirdDBA != null) {
+            params.thePerson = Person.get(params.thirdDBA)
+            params.roleType = 'Technical'
+            generalService.createOrEditRole(params, 'Tertiary DBA')
         }
         if(params.generalNote)
             params.theObject.generalNote = params.generalNote
@@ -740,6 +780,7 @@ class HostService {
         }
         return buf.toString()
     }
+
 
 
     /*****************************

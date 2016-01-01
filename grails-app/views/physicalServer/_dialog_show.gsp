@@ -195,10 +195,7 @@
                 <td valign="top" class="name"><g:message code="asset.vendorSupportLevel.label" default="Vendor Support Level" /></td>
                 <td valign="top" class="value">${fieldValue(bean: physicalServerInstance, field: "vendorSupportLevel")}</td>
             </tr>
-            <tr>
-                <td valign="top" class="name">End of Service Life (EOSL)</td>
-                <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${physicalServerInstance?.eoslDate}"/></td>
-            </tr>
+
         </table>
     </div>
 
@@ -237,11 +234,25 @@
                                     ${physicalServerInstance?.maintenanceContract?.encodeAsHTML()}</g:link></td>
                             </tr>
                 --}%
-            <tr>
-                <td valign="top" class="name"><g:message code="asset.lastUpdated.label" default="Last Updated" /></td>
-                <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${physicalServerInstance?.lastUpdated}" /></td>
-            </tr>
         </table>
+    </div>
+    <div class="item">
+
+    <table class="floatTables" style="border:1px solid #CCCCCC;">
+        <tr><td colspan="2"><center><b>Dates</b></center></td></tr>
+        <tr>
+            <td valign="top" class="name">End of Service Life (EOSL)</td>
+            <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${physicalServerInstance?.eoslDate}"/></td>
+        </tr>
+        <tr>
+            <td valign="top" class="name">Maintenance Date</td>
+            <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${physicalServerInstance?.maintenanceDate}"/></td>
+        </tr>
+        <tr>
+            <td valign="top" class="name"><g:message code="asset.lastUpdated.label" default="Last Updated" /></td>
+            <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${physicalServerInstance?.lastUpdated}" /></td>
+        </tr>
+    </table>
     </div>
 </div>
     <br />
