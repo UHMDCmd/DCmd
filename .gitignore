@@ -2,6 +2,9 @@ target/stacktrace.log
 .idea/workspace.xmlv
 .DS_Store
 Thumbs.db
+deleteme.txt
+
+.svn/*
 
 # https://github.com/github/gitignore/
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
