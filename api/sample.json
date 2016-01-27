@@ -1,0 +1,11 @@
+{
+    hostname:new99,
+    status: Available,
+    type:"VMware Guest",
+    cluster:"VMware Cluster 2",
+    os:RHEL5,
+    primarySA:steven,
+    appName:"Banner",
+    appEnv:prod,
+    serviceName:"Banner Forms",
+}
