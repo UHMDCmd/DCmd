@@ -1426,7 +1426,7 @@
       <workItem from="1444862171900" duration="8509000" />
       <workItem from="1444957147881" duration="5733000" />
       <workItem from="1445387668177" duration="13083000" />
-      <workItem from="1453766049466" duration="4100000" />
+      <workItem from="1453766049466" duration="4699000" />
     </task>
     <task id="LOCAL-00001" summary="Changes before Demo:&#10;- changes to Rack List page with new entities&#10;- font changes in theme affect show pages&#10;">
       <created>1410392927517</created>
@@ -1492,7 +1492,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="864588000" />
+    <option name="totallyTimeSpent" value="865187000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />

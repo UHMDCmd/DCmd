@@ -5,6 +5,8 @@ Thumbs.db
 deleteme.txt
 
 .svn/*
+target/*
+target-eclipse/*
 
 # https://github.com/github/gitignore/
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
