@@ -65,7 +65,6 @@
           <root url="file://$MODULE_DIR$/lib" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/net.sf.opencsv/opencsv/jars/opencsv-2.3.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/opensymphony/sitemesh/jars/sitemesh-2.4.jar!/" />
-          <root url="jar://$USER_HOME$/.grails/ivy-cache/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/javax.transaction/jta/jars/jta-1.1.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/commons-lang/commons-lang/jars/commons-lang-2.6.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/commons-collections/commons-collections/jars/commons-collections-3.2.1.jar!/" />
@@ -115,6 +114,10 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.tomcat.embed/tomcat-embed-core/jars/tomcat-embed-core-7.0.52.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.vmware/vijava/jars/vijava-5.1.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.unboundid/unboundid-ldapsdk/jars/unboundid-ldapsdk-2.3.1.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/joda-time/joda-time/jars/joda-time-2.3.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.poi/poi-ooxml-schemas/jars/poi-ooxml-schemas-3.8.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.poi/poi-ooxml/jars/poi-ooxml-3.8.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.poi/poi/jars/poi-3.8.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.sun.mail/javax.mail/jars/javax.mail-1.5.1.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/javax.activation/activation/jars/activation-1.1.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/javax.mail/javax.mail-api/jars/javax.mail-api-1.5.1.jar!/" />

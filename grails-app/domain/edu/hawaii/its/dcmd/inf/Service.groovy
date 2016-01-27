@@ -58,7 +58,6 @@ class Service extends SupportableObject {
         sla(nullable: true)
         env(nullable: true)
         tiers(nullable:true)
-
     }
 
     static mappedBy = [dependencySet: 'service']

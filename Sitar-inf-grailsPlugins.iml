@@ -35,6 +35,7 @@
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1/grails-app/views" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-ui-1.8.11/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jquery-1.7/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/joda-time-1.5/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -77,6 +78,10 @@
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/directory-service-0.10.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/directory-service-0.10.1/grails-app/services" isTestSource="false" />
     </content>
+    <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/excel-import-1.1.0.BUILD-SNAPSHOT">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/excel-import-1.1.0.BUILD-SNAPSHOT/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/excel-import-1.1.0.BUILD-SNAPSHOT/grails-app/services" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5/grails-app/services" isTestSource="false" />
@@ -89,6 +94,10 @@
     <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/hibernate-3.6.10.14">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/hibernate-3.6.10.14/src/java" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/hibernate-3.6.10.14/grails-app/i18n" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/joda-time-1.5">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/joda-time-1.5/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/joda-time-1.5/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/jqgrid-3.8.0.1/grails-app/taglib" isTestSource="false" />
@@ -220,10 +229,12 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.tomcat.embed/tomcat-embed-core/jars/tomcat-embed-core-7.0.52.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.vmware/vijava/jars/vijava-5.1.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/com.unboundid/unboundid-ldapsdk/jars/unboundid-ldapsdk-2.3.1.jar!/" />
+          <root url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/excel-import-1.1.0.BUILD-SNAPSHOT/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/codenarc-0.12/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/excel-import-1.1.0.BUILD-SNAPSHOT/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/export-1.5/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME$/.grails/2.3.8/projects/dcmd/plugins/mysql-connectorj-5.1.22.1/lib" recursive="false" />
       </library>
