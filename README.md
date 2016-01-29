@@ -6,8 +6,6 @@ DCmd is being developed on the Grails framework, and leverages the technologies 
 
 ![Image of Home Page](/media/images/DCmdGUIScreenShot.PNG)
 
-![Image of Search Results](/media/images/DCmdGUISearchResults.PNG)
-
 ##API
 For API usage, consult the [API page](https://github.com/UHMDCmd/DCmd/tree/master/api).
 
