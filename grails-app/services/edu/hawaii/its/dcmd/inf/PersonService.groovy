@@ -302,10 +302,10 @@ class PersonService {
     }
 
     def searchJSON(String searchTerm, Integer maxRows) {
-		
+
 		log.debug "search term: ${searchTerm}"
 		log.debug "max rows: ${maxRows}"
-		
+
 		//build the criteria
 		def crit = Person.createCriteria()
 		def people = crit.list(){
@@ -316,21 +316,21 @@ class PersonService {
 			}
 			maxResults(maxRows)
 		}
-		
+
 		log.debug "people: ${people.inspect()}"
-		
+
 		//build the return array
 		def returned = []
 		people.each{
 			returned << [id:it.id, name:it.toString()]
 		}
-		
+
 		log.debug "returned: ${returned.inspect()}"
 		returned
     }
 
     /**
-     * personLDAP: is a def created to create ldap connections to UHM ldap test server ldap1.its.hawaii.edu
+     * personLDAP: is a def created to create ldap connections to UHM ldap test server
      * Connection is made anonymously with no authentication -- using Java Unboundid SDK
      * Search is made by UHusername, LDAP returns the information of the user, and a new Person instance is created to replace the old
      *
