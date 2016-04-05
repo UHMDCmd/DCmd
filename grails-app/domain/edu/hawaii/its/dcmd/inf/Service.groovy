@@ -52,7 +52,7 @@ class Service extends SupportableObject {
 
     static constraints = {
         serviceTitle(nullable:false, blank:false)
-        serviceDescription(nullable:true)
+        serviceDescription(nullable:false)
         status(nullable:true)
         generalNote(nullable: true, maxSize: 1024)
         sla(nullable: true)

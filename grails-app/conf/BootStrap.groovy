@@ -2135,16 +2135,16 @@ class BootStrap {
                 def serviceLDAP1, serviceLDAP2, serviceLDAP3, serviceLDAP4
                 def BannerDBB, BannerForms, BannerSS, BannerFA, AssocODS
                 if(!Service.count()) {
-                    serviceLDAP1 = new Service(serviceTitle:'Sun LDAP', application: appLDAP, env:prod, status:availStatus).save(failOnError: true, flush: true)
-                    serviceLDAP2 = new Service(serviceTitle:'Sun LDAP Anonymous Queries', env:prod, status:availStatus, application: appLDAP).save(failOnError: true, flush: true)
-                    serviceLDAP3 = new Service(serviceTitle:'389ds ldapmaster', application: appLDAP, env:prod, status:availStatus).save(failOnError: true, flush: true)
-                    serviceLDAP4 = new Service(serviceTitle:'389ds ldap.hawaii.edu', application: appLDAP, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    serviceLDAP1 = new Service(serviceTitle:'Sun LDAP', serviceDescription: "Invalid", application: appLDAP, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    serviceLDAP2 = new Service(serviceTitle:'Sun LDAP Anonymous Queries', serviceDescription: "Invalid", env:prod, status:availStatus, application: appLDAP).save(failOnError: true, flush: true)
+                    serviceLDAP3 = new Service(serviceTitle:'389ds ldapmaster', serviceDescription: "Invalid", application: appLDAP, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    serviceLDAP4 = new Service(serviceTitle:'389ds ldap.hawaii.edu', serviceDescription: "Invalid", application: appLDAP, env:prod, status:availStatus).save(failOnError: true, flush: true)
 
-                    BannerDBB = new Service(serviceTitle:'Banner Database and Batch', application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
-                    BannerForms = new Service(serviceTitle:'Banner Forms', application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
-                    BannerSS = new Service(serviceTitle:'Banner Self Service', application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
-                    BannerFA = new Service(serviceTitle:'Banner Financial Aid', application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
-                    AssocODS = new Service(serviceTitle:'Banner Associated ODS', application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    BannerDBB = new Service(serviceTitle:'Banner Database and Batch', serviceDescription: "Invalid", application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    BannerForms = new Service(serviceTitle:'Banner Forms', serviceDescription: "Invalid", application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    BannerSS = new Service(serviceTitle:'Banner Self Service', serviceDescription: "Invalid", application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    BannerFA = new Service(serviceTitle:'Banner Financial Aid', serviceDescription: "Invalid", application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
+                    AssocODS = new Service(serviceTitle:'Banner Associated ODS', serviceDescription: "Invalid", application: BannerUH, env:prod, status:availStatus).save(failOnError: true, flush: true)
 
 
 
