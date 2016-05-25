@@ -838,8 +838,15 @@ class PersonController {
 
 
         def assets = PhysicalServer.createCriteria().list(max: maxRows) {
-            ilike('itsId', "%${params.searchString}%")
+           or {
+               ilike('itsId', "%${params.searchString}%")
+               ilike('serialNo', "%${params.searchString}%")
+               ilike('decalNo',"%${params.searchString}%")
+           }
             order('itsId', 'asc')
+            order('serialNo', 'asc')
+            order('decalNo', 'asc')
+
         }
         StringBuffer assetString = new StringBuffer()
         if (assets.size() == 0)
