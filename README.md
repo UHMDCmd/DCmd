@@ -9,6 +9,8 @@ DCmd is being developed on the Grails framework, and leverages the technologies 
 ##API
 For API usage, consult the [API page](https://github.com/UHMDCmd/DCmd/tree/master/api).
 
+
+##JQGrid
 Important information when pulling the repositiory.
 Once you pull the DCmd source code, you have to follow these instructions to ensure that some of the functions for the jqgrid works.
   1. Navigate to directory DCmd[Sitar-inf] > .links_to_grails_plugins > jqgrid-3.8.0.1 > web-app > js > jqgrid 
