@@ -93,7 +93,7 @@
 %{--        ${generalService.quickSearchSelect()}  <br><br> --}%
 
 Quick Search - Search for anything (substrings welcomed)<br>
-<input type="text" name="searchBox" id="searchBox" onchange="doQuickSearch()" />
+<input type="text" name="searchBox" id="searchBox" onchange="doQuickSearch()" autofocus/>
 <input class="ui-corner-all" id="btnSearch" type="button" value="Search"/>
 
 <table>
