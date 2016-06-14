@@ -29,6 +29,8 @@ class Host extends SupportableObject {
 	Environment env
 	Date dateCreated = new Date()
 	Date lastUpdated = new Date()
+    Date lastScanned
+    String scannedResult
 	Integer updatedById
 	String supportableType = "host"
 //    Asset asset
@@ -120,6 +122,8 @@ class Host extends SupportableObject {
         maxMemory(nullable:true)
         isInVCenter(nullable:true, default:true)
         security_migration_priority(nullable:true)
+        lastScanned(nullable: true)
+        scannedResult(nullable: true, maxSize: 1024)
 	}
 
 

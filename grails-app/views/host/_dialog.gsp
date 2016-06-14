@@ -237,7 +237,17 @@
         <td valign="top" class="value"><g:formatDate
                 date="${hostInstance?.lastUpdated}" /></td>
     </tr>
-
+    <tr>
+        <td valign="top" class="name"><g:message code="host.lastScanned.label" default="Last Scanned" /></td>
+        <td valign="top" class="value ${hasErrors(bean: hostInstance, field: 'lastScanned', 'errors')}">
+            <g:datePicker name="lastScanned" value="${hostInstance?.lastScanned}" precision="day" />
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" class="name"><label for="scannedResult"><g:message code="host.scannedResult.label" default="Scanned Result" /></label></td>
+        <td><g:textField name="scannedResult" maxlength="45" value="${hostInstance?.scannedResult}"/></td>
+    </td>
+    </tr>
 </table>
 </div>
 </div>

@@ -144,6 +144,14 @@
                         date="${hostInstance?.lastUpdated}" /></td>
 
             </tr>
+            <tr>
+                <td valign="top" class="name">Last Scanned</td>
+                <td valign="top" class="value"><g:formatDate format="MM/dd/yyyy" date="${hostInstance?.lastScanned}"/></td>
+            </tr>
+            <tr>
+                <td valign="top" class="name">Scanned Result</td>
+                <td valign="top" class="value">${hostInstance.scannedResult}</td>
+            </tr>
         </table>
     </div>
 </div>
