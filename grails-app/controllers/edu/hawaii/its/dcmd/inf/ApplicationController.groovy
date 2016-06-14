@@ -212,16 +212,18 @@ class ApplicationController {
         def jsonData = applicationService.listAll(params)
         def theList = []
         jsonData.rows.each { theRow ->
-            if(!theRow.cell[6])
-                theRow.cell[6] = ""
+            if(!theRow.cell[5])
+                theRow.cell[5] = ""
+            if(!theRow.cell[7])
+                theRow.cell[7] = ""
 
             def tempVals = [
                     Application: theRow.cell[0].replaceAll("\\<.*?>",""),
                     Environment: theRow.cell[1],
                     Description: theRow.cell[2],
                     Status:  theRow.cell[3],
-                    'Application Primary SA': theRow.cell[4].replaceAll("\\<.*?>",""),
-                    'General note': theRow.cell[6]
+                    'App Admin': theRow.cell[5].replaceAll("\\<.*?>",""),
+                    'General note': theRow.cell[7]
             ]
             theList.add(tempVals)
         }
