@@ -86,7 +86,7 @@ editurl:'editAllPerson',
             {name:'uhName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
             {name:'lastName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
             {name:'firstName', editable:false, formatter: 'showlink', formatoptions: {showAction:'show'},title:false},
-            {name:'midInit', editable:false, width:25,title:false},
+            {name:'midInit', editable:false, width:45,title:false},
             {name:'title', editable:false,title:false},
             {name:'manager', editable:true, sortable:false,edittype:'select', editoptions: {
                 dataUrl: '${createLink(controller:"person",action:"listAsSelectWithNull")}',
