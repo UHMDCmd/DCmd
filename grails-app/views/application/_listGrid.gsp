@@ -63,6 +63,8 @@ url:'listAll',
             width:'100%',
             height:'100%',
             viewrecords: true,
+            sortorder: 'asc',
+            sortname: 'serviceTitle',
             autowidth:true,
             shrinkToFit: true,
             gridview: true
@@ -94,7 +96,10 @@ url:'listAll',
     setTooltipsOnColumnHeader($("#allApplications"),2,"The Environment of the Application  (e.g., Prod, Test, Dev.");
     setTooltipsOnColumnHeader($("#allApplications"),3,"A Brief Description of the function of this Application");
     setTooltipsOnColumnHeader($("#allApplications"),4,"The Status of this Application. e.g . Available, Disabled, etc.");
-    setTooltipsOnColumnHeader($("#allApplications"),5,"The Primary System Administrator assigned to this Application");
+    setTooltipsOnColumnHeader($("#allApplications"),5,"The URL of the Application");
+    setTooltipsOnColumnHeader($("#allApplications"),6,"The Primary System Administrator assigned to this Application");
+    setTooltipsOnColumnHeader($("#allApplications"),7,"Maintenance Window");
+    setTooltipsOnColumnHeader($("#allApplications"),8,"General Notes about the applications");
 
     jQuery(window).bind('resize', function() {
         dynamicListSize('#allApplications');
