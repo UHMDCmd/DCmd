@@ -334,23 +334,24 @@ url:'listAllPhyServer',
 
     setTooltipsOnColumnHeader($("#allPhyServer"),0,"A unique ITS Id given to the Entity");
     setTooltipsOnColumnHeader($("#allPhyServer"),1,"Virtualization method of Server (e.g., Solaris, VMWare, etc.)");
-    setTooltipsOnColumnHeader($("#allPhyServer"),2,"VMWare Cluster the Server hardware is assigned to (N/A if not a VMWare server)");
-    setTooltipsOnColumnHeader($("#allPhyServer"),3,"Host that is the primary OS of this Server (e.g. Global Zone for Solaris)");
-    setTooltipsOnColumnHeader($("#allPhyServer"),4,"Status of the Server (Available, Offline, Retired, etc.)");
-    setTooltipsOnColumnHeader($("#allPhyServer"),5,"The Primary System Administrator assigned to this Server");
-    setTooltipsOnColumnHeader($("#allPhyServer"),6,"Amount of space the Physical Server occupies on a Rack");
-    setTooltipsOnColumnHeader($("#allPhyServer"),7,"The current Physical Rack the Server is mounted on");
-    setTooltipsOnColumnHeader($("#allPhyServer"),8,"Current position the Server is mounted in the Rack");
-    setTooltipsOnColumnHeader($("#allPhyServer"),9,"The Physical Location of the Rack currently mounted on");
-    setTooltipsOnColumnHeader($("#allPhyServer"),10,"Parts Availability");
-    setTooltipsOnColumnHeader($("#allPhyServer"),11,"Serial #");
-    setTooltipsOnColumnHeader($("#allPhyServer"),12,"Vendor Name");
-    setTooltipsOnColumnHeader($("#allPhyServer"),13,"Model Designation");
-    setTooltipsOnColumnHeader($("#allPhyServer"),14,"Total RAM Memory provided by this Server in Gigabytes");
-    setTooltipsOnColumnHeader($("#allPhyServer"),15,"Percent of Total Memory that is assigned to Hosts running on this Server");
-    setTooltipsOnColumnHeader($("#allPhyServer"),16,"Total number of CPU Cores provided by this Server");
-    setTooltipsOnColumnHeader($("#allPhyServer"),17,"Percent of Total CPU that is assigned to hosts running on this Server");
-    setTooltipsOnColumnHeader($("#allPhyServer"),18,"General notes about this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),2,"VCenter Instance");
+    setTooltipsOnColumnHeader($("#allPhyServer"),3,"VMWare Cluster the Server hardware is assigned to (N/A if not a VMWare server)");
+    setTooltipsOnColumnHeader($("#allPhyServer"),4,"Host that is the primary OS of this Server (e.g. Global Zone for Solaris)");
+    setTooltipsOnColumnHeader($("#allPhyServer"),5,"Status of the Server (Available, Offline, Retired, etc.)");
+    setTooltipsOnColumnHeader($("#allPhyServer"),6,"The Primary System Administrator assigned to this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),7,"Amount of space the Physical Server occupies on a Rack");
+    setTooltipsOnColumnHeader($("#allPhyServer"),8,"The current Physical Rack the Server is mounted on");
+    setTooltipsOnColumnHeader($("#allPhyServer"),9,"Current position the Server is mounted in the Rack");
+    setTooltipsOnColumnHeader($("#allPhyServer"),10,"The Physical Location of the Rack currently mounted on");
+    setTooltipsOnColumnHeader($("#allPhyServer"),11,"Parts Availability");
+    setTooltipsOnColumnHeader($("#allPhyServer"),12,"Serial #");
+    setTooltipsOnColumnHeader($("#allPhyServer"),13,"Vendor Name");
+    setTooltipsOnColumnHeader($("#allPhyServer"),14,"Model Designation");
+    setTooltipsOnColumnHeader($("#allPhyServer"),15,"Total RAM Memory provided by this Server in Gigabytes");
+    setTooltipsOnColumnHeader($("#allPhyServer"),16,"Percent of Total Memory that is assigned to Hosts running on this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),17,"Total number of CPU Cores provided by this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),18,"Percent of Total CPU that is assigned to hosts running on this Server");
+    setTooltipsOnColumnHeader($("#allPhyServer"),19,"General notes about this Server");
 
 
 
