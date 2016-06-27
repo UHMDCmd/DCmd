@@ -139,16 +139,19 @@ editurl:'editAllPerson',
         jQuery("tr.ui-jqgrid-labels th:eq(" + iColumn + ")", thd).attr("title", text);
     };
 
-    setTooltipsOnColumnHeader($("#allPerson"),0,"Unique UH Username");
-    setTooltipsOnColumnHeader($("#allPerson"),1,"Last Name");
-    setTooltipsOnColumnHeader($("#allPerson"),2,"First Name");
-    setTooltipsOnColumnHeader($("#allPerson"),3,"Middle Initial");
-    setTooltipsOnColumnHeader($("#allPerson"),4,"Professional Title");
-    setTooltipsOnColumnHeader($("#allPerson"),5,"Manager uhName");
-    setTooltipsOnColumnHeader($("#allPerson"),6,"Primary Phone Contact");
-    setTooltipsOnColumnHeader($("#allPerson"),7,"Primary Email Contact");
-    setTooltipsOnColumnHeader($("#allPerson"),8,"Unique Campus Wide Id");
-
+    setTooltipsOnColumnHeader($("#allPerson"),0,"Edit Staff");
+    setTooltipsOnColumnHeader($("#allPerson"),1,"Unique UH Username");
+    setTooltipsOnColumnHeader($("#allPerson"),2,"Last Name");
+    setTooltipsOnColumnHeader($("#allPerson"),3,"First Name");
+    setTooltipsOnColumnHeader($("#allPerson"),4,"Middle Initial");
+    setTooltipsOnColumnHeader($("#allPerson"),5,"Professional Title");
+    setTooltipsOnColumnHeader($("#allPerson"),6,"Manager uhName");
+    setTooltipsOnColumnHeader($("#allPerson"),7,"Office Phone Contact");
+    setTooltipsOnColumnHeader($("#allPerson"),8,"Primary Phone Contact");
+    setTooltipsOnColumnHeader($("#allPerson"),9,"Secondary Phone Contact");
+    setTooltipsOnColumnHeader($("#allPerson"),10,"Primary Email Contact");
+    setTooltipsOnColumnHeader($("#allPerson"),11,"Unique UH Campus Wide ID");
+    setTooltipsOnColumnHeader($("#allPerson"),12,"General Notes about Staff");
 
 
     jQuery(window).bind('resize', function() {

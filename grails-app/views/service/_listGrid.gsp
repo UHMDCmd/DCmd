@@ -119,6 +119,7 @@
         setTooltipsOnColumnHeader($("#allServices"),4,"The Status of this Application. e.g . Available, Disabled, etc.");
         setTooltipsOnColumnHeader($("#allServices"),5,"The Primary System Administrator assigned to this Service");
         setTooltipsOnColumnHeader($("#allServices"),6,"The Primary System Administrator assigned to the Application");
+        setTooltipsOnColumnHeader($("#allServices"),7,"The General Notes about Service");
         
         jQuery(window).bind('resize', function() {
             dynamicListSize('#allServices');

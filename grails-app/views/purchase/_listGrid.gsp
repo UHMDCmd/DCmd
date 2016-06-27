@@ -368,12 +368,19 @@
             jQuery("tr.ui-jqgrid-labels th:eq(" + iColumn + ")", thd).attr("title", text);
         };
 
-        setTooltipsOnColumnHeader($("#allPurchases"),0,"A unique ITS Id given to the Entity");
-        setTooltipsOnColumnHeader($("#allPurchases"),1,"Virtualization method of Server (e.g., Solaris, VMWare, etc.)");
-        setTooltipsOnColumnHeader($("#allPurchases"),2,"VMWare Cluster the Server hardware is assigned to (N/A if not a VMWare server)");
-        setTooltipsOnColumnHeader($("#allPurchases"),3,"Host that is the primary OS of this Server (e.g. Global Zone for Solaris)");
-        setTooltipsOnColumnHeader($("#allPurchases"),4,"Status of the Server (Available, Offline, Retired, etc.)");
-        setTooltipsOnColumnHeader($("#allPurchases"),5,"The Primary System Administrator assigned to this Server");
+        setTooltipsOnColumnHeader($("#allPurchases"),0,"Expand to see Purchase SubGrid");
+        setTooltipsOnColumnHeader($("#allPurchases"),1,"Inline action tools");
+        setTooltipsOnColumnHeader($("#allPurchases"),2,"Fiscal Year");
+        setTooltipsOnColumnHeader($("#allPurchases"),3,"A unique ITS Id given to the Entity");
+        setTooltipsOnColumnHeader($("#allPurchases"),4,"Vendor Name");
+        setTooltipsOnColumnHeader($("#allPurchases"),5,"Status");
+        setTooltipsOnColumnHeader($("#allPurchases"),6,"Type");
+        setTooltipsOnColumnHeader($("#allPurchases"),7,"Payment Type");
+        setTooltipsOnColumnHeader($("#allPurchases"),8,"Number of Items");
+        setTooltipsOnColumnHeader($("#allPurchases"),9,"Total Tax");
+        setTooltipsOnColumnHeader($("#allPurchases"),10,"Total Cost");
+        setTooltipsOnColumnHeader($("#allPurchases"),11,"Anniversary");
+        setTooltipsOnColumnHeader($("#allPurchases"),12,"General Notes about Purchase");
 
 
 

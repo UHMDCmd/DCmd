@@ -77,7 +77,7 @@ url:'listAllCluster',
     setTooltipsOnColumnHeader($("#allCluster"),1,"Number of Physical Servers making up the Cluster");
     setTooltipsOnColumnHeader($("#allCluster"),2,"Number of Virtual Hosts running on the Cluster");
     setTooltipsOnColumnHeader($("#allCluster"),3,"Last time the Cluster information was updated");
-
+    setTooltipsOnColumnHeader($("#allCluster"),4,"Notes about the Cluster");
 
 
     jQuery(window).bind('resize', function() {
