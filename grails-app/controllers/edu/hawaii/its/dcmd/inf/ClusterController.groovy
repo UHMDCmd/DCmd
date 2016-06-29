@@ -133,7 +133,7 @@ class ClusterController {
         }
 
 
-        def totalRows = clusters.size()
+        def totalRows = clusters.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
 
         def results = clusters?.collect { [ cell: [it.name, it.assetSet.size(), it.hostSet.size(),it.lastUpdated.format('MM/dd/yy h:m a'), it.generalNote], id: it.id ] }
