@@ -546,13 +546,12 @@ class PersonController {
             if (params.firstName) ilike('firstName', "%${params.firstName}%")
             if (params.midInit) ilike('midInit', "%${params.midInit}%")
             if (params.title) ilike('title', "%${params.title}%")
-
             if (params.primaryEmail) ilike('primaryEmail', "%${params.primaryEmail}%")
             if (params.telephone) ilike('telephone', "%${params.telephone}%")
-
+            if (params.primaryPhone) ilike('primaryPhone', "%${params.primaryPhone}%")
+            if (params.secondPhone) ilike('secondPhone', "%${params.secondPhone}%")
             if (params.uhNumber) ilike('uhNumber', "%${params.uhNumber}%")
             if (params.generalNote) ilike('generalNote', "%${params.generalNote}%")
-
             order(sortIndex, sortOrder)
 
         }
