@@ -200,6 +200,7 @@
 
 .ui-jqgrid .inline-edit-cell {
 	padding: 4px 0px 4px 4px;
+	background: white;
 }
 /* Tree Grid */
 .ui-jqgrid .tree-wrap {float: left; position: relative;height: 18px;white-space: nowrap;overflow: hidden;}
