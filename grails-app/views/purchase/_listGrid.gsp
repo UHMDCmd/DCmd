@@ -185,7 +185,7 @@
                         );
                     }
                 }},
-                {name:'fiscalYear', width:50, fixed:true, editable:true, title:false, search:true, align:"center", sort:true},
+                {name:'fiscalYear', width:65, fixed:true, editable:true, title:false, search:true, align:"center", sort:true},
                 {name:'uhContractTitle', width:80, editable:true, title:false},
                 {name:'vendorName',width:80, editable:true, title:false},
                 {name:'purchaseStatus', width:110, fixed:true, formatter:'select', editable:true, title:false, edittype:'select', unformat: purchaseStatusUnFormat,editoptions: {value:purchaseStatuses.listItems(),
