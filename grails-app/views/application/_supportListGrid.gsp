@@ -75,7 +75,7 @@ editurl:'editAllSupportList',
             colNames:['', 'Application', 'Env', 'Project Manager', 'Functional Lead', 'Developer Lead', 'Technical Lead', 'Primary SA*', 'Secondary SA*', 'Tertiary SA*', 'Primary DBA*', 'Secondary DBA', 'Tertiary DBA',
                  'General Notes','id'],
             colModel:[
-                {name:'actions', index:'actions', editable:false, required:false, sortable:false, width:40,
+                {name:'actions', index:'actions', editable:false, required:false, sortable:false,search: false, width:40,
                     formatter: 'actions', formatoptions: {
                     keys: true, editbutton: true, delbutton:false }
                 },
