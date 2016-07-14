@@ -170,7 +170,10 @@
                 <a class = "home_button" href="${createLink(uri: '/person/home')}">DCMD Home</a>
                 <div class="actions_divider"></div>
 
-                <g:if test="${pageType != 'denied' && assetType != 'Rack' && pageType != 'asset' && pageType != 'cluster'}">
+
+                %{-- <g:if test="${pageType != 'denied' && assetType != 'Rack' && pageType != 'asset' && pageType != 'cluster'}"> --}%
+                <g:if test="${pageType != 'denied' && assetType != 'Rack' && pageType != 'asset'}">
+
                     <g:actionSubmit controller="${pageType}" class="create_button" action="create" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 
                     <g:actionSubmit controller="${pageType}" class="edit_button" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
