@@ -75,7 +75,7 @@
                         }
                     }
                 },
-                {name:"tierService", width:200, editable:false ,edittype:'select', editoptions: {dataUrl:"listServicesForAppAsSelect?appId=${applicationInstance.id}",
+                {name:"tierService", width:200, editable:true ,edittype:'select', editoptions: {dataUrl:"listServicesForAppAsSelect?appId=${applicationInstance.id}",
                     dataInit:function(e){$(e).select2({
                         width: 200
                     })}

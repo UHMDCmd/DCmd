@@ -427,16 +427,31 @@ class ApplicationController {
             order('serviceTitle', 'asc')
         }
         System.out.println(lst)
+        if (lst.isEmpty()){
+            StringBuffer buf = new StringBuffer("<select><option value=null>Please Create a Service First</option>")
 
-        StringBuffer buf = new StringBuffer("<select>")
-        lst.each{
-            buf.append("<option value=\"${it.id}\">")
-            buf.append(it.toString())
-            buf.append("</option>")
+            lst.each{
+                buf.append("<option value=\"${it.id}\">")
+                buf.append(it.toString())
+                buf.append("</option>")
+            }
+            buf.append("</select>")
+
+            render buf.toString()
         }
-        buf.append("</select>")
+        else {
+            StringBuffer buf = new StringBuffer("<select>")
 
-        render buf.toString()
+            lst.each{
+                buf.append("<option value=\"${it.id}\">")
+                buf.append(it.toString())
+                buf.append("</option>")
+            }
+            buf.append("</select>")
+
+            render buf.toString()
+        }
+
     }
 
     def getStatus = {
