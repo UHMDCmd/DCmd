@@ -181,7 +181,7 @@ editurl:'editAllSupportList',
 
 </script>
 
-<g:render template="../advancedOptions" model="[pageType:'host', gridId:'#allSupportedHosts', importOption:true, importAction: 'importSupportList', export:true, exportAction:'exportSupportList', hostFilter:true]" />
+<g:render template="../advancedOptions" model="[pageType:'host', support: true, gridId:'#allSupportedHosts', importOption:true, importAction: 'importSupportList', export:true, exportAction:'exportSupportList', hostFilter:true]" />
 <table id="allSupportedHosts"></table>
 <div id="supportedHostAllPager"></div>
 

@@ -392,7 +392,7 @@ url:'listAllPhyServer',
 </script>
 
 
-<g:render template="../advancedOptions" model="[pageType:'physicalServer', gridId:'#allPhyServer', export:true, exportAction:'exportListAll', hostFilter:true]" />
+<g:render template="../advancedOptions" model="[pageType:'physicalServer',support:false, gridId:'#allPhyServer', export:true, exportAction:'exportListAll', hostFilter:true]" />
 
 <table id="allPhyServer"></table>
 <div id="allServerPager"></div>

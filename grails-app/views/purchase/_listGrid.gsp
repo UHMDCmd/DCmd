@@ -411,7 +411,7 @@
 </script>
 
 
-<g:render template="../advancedOptions" model="[pageType:'purchase', gridId:'#allPurchases', export:true, elapsePurchaseFilter:true, exportAction:'exportListAll', hostFilter:false]" />
+<g:render template="../advancedOptions" model="[pageType:'purchase',support:false, gridId:'#allPurchases', export:true, elapsePurchaseFilter:true, exportAction:'exportListAll', hostFilter:false]" />
 
 
 <table id="allPurchases"></table>

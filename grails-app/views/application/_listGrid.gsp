@@ -128,7 +128,7 @@ url:'listAll',
   - If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-<g:render template="../advancedOptions" model="[pageType:'application', gridId:'#allApplications', export:true, exportAction:'exportListAll', hostFilter:true]" />
+<g:render template="../advancedOptions" model="[pageType:'application',support:false, gridId:'#allApplications', export:true, exportAction:'exportListAll', hostFilter:true]" />
 
 <table id="allApplications"></table>
 <div id="applicationAllPager"></div>

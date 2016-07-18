@@ -213,6 +213,7 @@
             document.getElementById("loadingModal").style.display="inline";
             var postdata = $("${gridId}").jqGrid('getGridParam', 'postData');
             var url="${createLink(controller:"${pageType}",action:"${exportAction}")}";
+            var supports = ${support};
             jQuery.ajax({
                 async:true,
                 url: url,
@@ -223,7 +224,12 @@
                 },
                 success: function(data) {
 //                    console.log(data);
-                    JSONToCSVConvertor(data, "${pageType} list", true);
+                    if(supports == true) {
+                        JSONToCSVConvertor(data, "${pageType} support list", true);
+                    }
+                    else if(supports != true){
+                        JSONToCSVConvertor(data, "${pageType} list", true);
+                    }
                 },
                 complete: function(data) {
                     document.getElementById("loadingModal").style.display="none";
