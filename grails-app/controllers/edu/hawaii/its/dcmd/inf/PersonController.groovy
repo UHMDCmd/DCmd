@@ -552,6 +552,11 @@ class PersonController {
             if (params.secondPhone) ilike('secondPhone', "%${params.secondPhone}%")
             if (params.uhNumber) ilike('uhNumber', "%${params.uhNumber}%")
             if (params.generalNote) ilike('generalNote', "%${params.generalNote}%")
+            if (params.manager) {
+                manager {
+                    ilike('uhName', "%${params.manager}%")
+                }
+            }
             order(sortIndex, sortOrder)
 
         }
