@@ -112,6 +112,7 @@ class ApplicationService {
                 }
             }
             if (params.applicationDescription) ilike('applicationDescription', "%${params.applicationDescription}%")
+            if (params.url) ilike('url', "%${params.url}%")
             if (params.status) {
                 status{
                     ilike('abbreviation', "%${params.status}%")
