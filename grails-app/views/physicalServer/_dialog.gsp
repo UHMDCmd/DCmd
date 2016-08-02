@@ -208,7 +208,6 @@
             <td valign="top" class="name" id='globalTitle'>Server OS (Global Zone, etc.)</td>
             <td valign="top" class="value">
                 <input type="hidden" name="globalZone" id="globalZone" />
-                <input class="ui-corner-all" id="btnCreateGlobalHost" type="button" value="+" style="width:22px; height:25px; padding-bottom:6px; margin-top:3px; background: -moz-linear-gradient(center bottom , #CCCCCC 0%, #EEEEEE 60%) repeat scroll 0 0 #CCCCCC; vertical-align: middle;"/>
             </td>
         </tr>
     </table>
