@@ -113,6 +113,11 @@
                         });
                     })
                 }
+                /******* Hides trash can icon for host in edit if Server OS has similar host selected ********/
+                if($("#s2id_globalZone").find("span").text() != "Please Select..."){
+                    var val = $("#globalZone").attr("value"); //Declares the value that is in the Server OS select
+                    $("#host_list").find("tr#" + val).find("td:nth-child(1)").find("#jDeleteButton_" + val).hide()
+                }
             }
         })
         jQuery(window).bind('resize', function() {
