@@ -458,6 +458,7 @@ class AssetService {
             case 'add':
                 // add instruction sent
                 //System.out.println(params)
+                params.id=null
                 item = new Host(params)
 //                item.main_asset = Asset.get(params.assetId)
                 if (! item.hasErrors() && item.save()) {
