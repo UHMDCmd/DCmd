@@ -68,7 +68,7 @@
                 {name:'primarySA', width:50, editable:false},
                 {name:'totalMem', width:40, editable:false},
                 {name:'assignedMem', width:50, editable:false},
-                {name:'totalCores', width:40, editable:false},
+                {name:'totalCores', width:40, editable:false,},
                 {name:'assignedCPU', width:50, editable:false},
                 {name:'serverNotes',editable:false},
                 {name:'id', hidden:true}
@@ -85,11 +85,15 @@
             cellurl:'editAssets?clusterId=${clusterInstance.id}',
             sortname: 'itsId',
             sortorder: 'asc',
-            searchOnEnter:true,
+            //searchOnEnter:true,
             headertitles: true,
             scrollOffset:0,
             shrinkToFit: true,
-            autowidth: true
+            autowidth: true,
+
+            loadComplete: function () {
+                $('.ui-search-toolbar').hide();
+            }
 
 //        }).navGrid('#task_list_pager',
 //                {add:true,edit:true,del:true,search:false,refresh:true},       // which buttons to show?
