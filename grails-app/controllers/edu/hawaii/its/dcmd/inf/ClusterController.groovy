@@ -28,7 +28,6 @@ import edu.hawaii.its.dcmd.inf.Host
 import grails.gorm.DetachedCriteria
 
 class ClusterController {
-
     def scaffold = Cluster
     def personService
     def assetService
@@ -88,20 +87,24 @@ class ClusterController {
         //get the instance being updated
         def clusterInstance = Cluster.get(params.id)
 
+
         if (clusterInstance) {
 
             log.debug "asset instance not null"
-
             //update the object with the params and remove deleted notes
             clusterInstance.properties = params
-//			assetService.removeDeletedNotes(assetInstance)
 
+            if(clusterInstance.name != params.clusterName){
+                clusterInstance.name = params.clusterName
+            }
+//			assetService.removeDeletedNotes(assetInstance)
             //save and redirect
             if (!clusterInstance.hasErrors() && clusterInstance.save(flush: true)) {
+                System.out.println("CLUSTER SAVED SUCCESSFULLY.")
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'cluster.label', default: 'Cluster'), clusterInstance.id])}"
                 redirect(url: "/cluster/show?id=${clusterInstance.id}")
             } else {
-                render(view: "edit", model: [assetInstance: clusterInstance])
+                render(view: "edit", model: [clusterInstance: clusterInstance])
             }
 
             //asset not found; no edits can be performed; show the list
