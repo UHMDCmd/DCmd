@@ -280,7 +280,7 @@ class AssetService {
                 "<a href='../asset/show?id=${it.getRackAssignmentId()}'>${it.getRackAssignment()}</a>",
                 it.position(),
                 getCurrentLocationLink(it),
-                it.isAvailableForParts,
+                it.getAvailableForParts(),
                 it.serialNo, it.vendor, it.modelDesignation,
                 it.memorySize + " GB",
                 it.getMemoryPercentUsed(),

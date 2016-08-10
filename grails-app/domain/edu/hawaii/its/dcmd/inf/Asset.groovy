@@ -290,4 +290,12 @@ class Asset extends SupportableObject{
             return ""
     }
 
+    String getAvailableForParts(){
+        if(isAvailableForParts == null){
+            isAvailableForParts = false
+        }
+        return isAvailableForParts
+    }
+
+
 }
