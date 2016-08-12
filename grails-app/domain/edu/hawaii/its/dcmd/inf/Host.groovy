@@ -94,7 +94,7 @@ class Host extends SupportableObject {
 //		applicationAssignments(nullable: true)
  //       resourceAllocations(nullable: true)
         asset(nullable: true)
-        status(nullable: true)
+        status(nullable: true, default:"Available")
         os(nullable:true)
 
         cluster(nullable:true)
@@ -105,7 +105,7 @@ class Host extends SupportableObject {
         generalNote(nullable: true, maxSize: 1024)
         changeNote(nullable: true, maxSize: 1024)
         planningNote(nullable: true, maxSize: 1024)
-        env(nullable:true)
+        env(nullable:false)
 
         psaName(nullable: true)
         appList(nullable: true)

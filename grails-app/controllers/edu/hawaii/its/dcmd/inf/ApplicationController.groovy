@@ -124,8 +124,7 @@ class ApplicationController {
             redirect(url: "/application/show?id=${applicationInstance.id}")*/
         }
         else {
-            render(view: "create", model: [hostInstance: applicationInstance])
-
+            render(view: "create", model: [applicationInstance: applicationInstance])
         }
     }
     //save options redirected to master save action
