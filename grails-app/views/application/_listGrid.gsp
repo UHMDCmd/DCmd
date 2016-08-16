@@ -54,9 +54,9 @@ url:'listAll',
                 {name:"serviceTitle", width:120, editable:false,title:false},
                 {name:"serviceEnv", width:60, editable:false,title:false},
                 {name:"serviceDescription", width:120, editable:false,title:false},
-                {name:"hosts", width:80, editable:false,title:false},
+                {name:"hosts", width:80, editable:false,title:false, sortable:false},
                 {name:"serviceStatus", width:60, editable:false,title:false},
-                {name:"serviceAdmin", width:80, editable:false,title:false},
+                {name:"serviceAdmin", width:80, editable:false,title:false,sortable:false},
                 {name:"generalNote", width:200, editable:false,title:false}
             ],
             rowNum:100,
@@ -69,6 +69,18 @@ url:'listAll',
             shrinkToFit: true,
             gridview: true
         });
+        var setTooltipsOnColumnHeader = function (grid, iColumn, text) {
+            var thd = jQuery("thead:first", grid[0].grid.hDiv)[0];
+            jQuery("tr.ui-jqgrid-labels th:eq(" + iColumn + ")", thd).attr("title", text);
+        };
+
+        setTooltipsOnColumnHeader($("#"+subgrid_table_id),0,"The Name of the Service");
+        setTooltipsOnColumnHeader($("#"+subgrid_table_id),1,"The Environment of the Service  (e.g., Prod, Test, Dev, ...)");
+        setTooltipsOnColumnHeader($("#"+subgrid_table_id),2,"Service Description");
+        setTooltipsOnColumnHeader($("#"+subgrid_table_id),3,"The primary OS of he Service");
+        setTooltipsOnColumnHeader($("#"+subgrid_table_id),4,"The status of the Service");
+        setTooltipsOnColumnHeader($("#"+subgrid_table_id),5,"The Primary SA");
+        setTooltipsOnColumnHeader($("#"+subgrid_table_id),6,"General Notes of the Service");
     }
 
     });
@@ -93,13 +105,14 @@ url:'listAll',
 
     setTooltipsOnColumnHeader($("#allApplications"),0,"Expand to see Services associated with each Application");
     setTooltipsOnColumnHeader($("#allApplications"),1,"The Name of the Application");
-    setTooltipsOnColumnHeader($("#allApplications"),2,"The Environment of the Application  (e.g., Prod, Test, Dev.");
+    setTooltipsOnColumnHeader($("#allApplications"),2,"The Environment of the Application  (e.g., Prod, Test, Dev, ...)");
     setTooltipsOnColumnHeader($("#allApplications"),3,"A Brief Description of the function of this Application");
     setTooltipsOnColumnHeader($("#allApplications"),4,"The Status of this Application. e.g . Available, Disabled, etc.");
     setTooltipsOnColumnHeader($("#allApplications"),5,"The URL of the Application");
     setTooltipsOnColumnHeader($("#allApplications"),6,"The Primary System Administrator assigned to this Application");
     setTooltipsOnColumnHeader($("#allApplications"),7,"Maintenance Window");
     setTooltipsOnColumnHeader($("#allApplications"),8,"General Notes about the applications");
+
 
     jQuery(window).bind('resize', function() {
         dynamicListSize('#allApplications');
