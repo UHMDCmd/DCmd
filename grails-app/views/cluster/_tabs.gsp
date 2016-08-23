@@ -35,11 +35,11 @@
             </a>
         </li>
     </ul>
-    <div id="tabs-cluster-assets">
-        <g:render template='assetsGrid' model="[action:action]"/>
-    </div>
     <div id="tabs-cluster-hosts">
         <g:render template='hostGrid' model="[action:action]"/>
+    </div>
+    <div id="tabs-cluster-assets">
+        <g:render template='assetsGrid' model="[action:action]"/>
     </div>
     <div id="tabs-notes">
         <ul>
