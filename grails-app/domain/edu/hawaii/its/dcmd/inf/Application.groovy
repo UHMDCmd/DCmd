@@ -64,7 +64,7 @@ class Application extends SupportableObject {
         planningNote(nullable: true, maxSize: 1024)
         status(nullable: true, default:"Available")
         services(nullable: true)
-        env(nullable: true)
+        env(nullable: false)
         maintenanceWindow(nullable:true)
         url(nullable:true)
         incidentEmailList(nullable:true)

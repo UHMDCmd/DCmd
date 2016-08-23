@@ -182,7 +182,21 @@ class ApplicationService {
             application {
                 like('id', currentApplication.id)
             }
-            order('serviceTitle')
+            switch (sortIndex){
+                case 'serviceEnv':
+                    env {
+                        order('abbreviation', sortOrder)
+                    }
+                    break
+                case 'serviceStatus':
+                    status {
+                        order('abbreviation', sortOrder)
+                    }
+                    break
+                default :
+                    order(sortIndex, sortOrder)
+                    break
+            }
         }
         def totalRows = services.size()
         def numberOfPages = totalRows

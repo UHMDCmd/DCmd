@@ -53,10 +53,10 @@ class Service extends SupportableObject {
     static constraints = {
         serviceTitle(nullable:false, blank:false)
         serviceDescription(nullable:false)
-        status(nullable:true)
+        status(nullable: true, default:"Available")
         generalNote(nullable: true, maxSize: 1024)
         sla(nullable: true)
-        env(nullable: true)
+        env(nullable: false)
         tiers(nullable:true)
     }
 
