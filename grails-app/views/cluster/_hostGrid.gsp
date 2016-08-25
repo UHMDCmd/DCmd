@@ -53,16 +53,32 @@
             width:'1000',
             caption:'Virtual Host List',
             url:listHostUrl,
- //           editurl:'../cluster/editHosts?clusterId=${clusterInstance.id}',
+            editurl:'../cluster/editHosts?clusterId=${clusterInstance.id}',
             datatype: "json",
 
-            colNames: ['Hostname', 'Physical Server', 'Environment', 'VM Status', 'Primary SA', 'Max. Memory (GB)', 'Max CPU (MHz)', 'Notes', 'id'],
+            colNames: ['', 'Hostname', 'Physical Server', 'Environment', 'VM Status', 'Primary SA', 'Max. Memory (GB)', 'Max CPU (MHz)', 'Notes', 'id'],
             colModel:[
-                {name:"hostname", width:40, editable:false},
-                {name:'server', width:40, editable:false},
-                {name:'hostEnv', width:40, editable:false},
+                {name:'actions', index:'actions', editable:false, required:false, sortable:false, width:"20",
+                    formatter: 'actions', hidden:!editOption, formatoptions: {
+                    keys: true, editbutton: false }
+                },
+                {name:"hostname", width:40, editable:true, editable:editOption, formatter: 'showlink', formatoptions: {showAction:'show', baseLinkUrl:'../host/'}},
+                {name:'server', width:40, editable:true, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"physicalServer",action:"getPhysicalServerList")}',
+                    dataInit:function(e){$(e).select2({
+                        width: 160
+                    })}
+                }},
+                {name:'hostEnv', width:40, editable:true, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"environment",action:"listEnvsAsSelect")}',
+                    dataInit:function(e){$(e).select2({
+                        width: 160
+                    })}
+                }},
                 {name:'vmstatus', width:40, editable:false},
-                {name:'hostSA', width:50, sortable:false, editable:false},
+                {name:'hostSA', width:50, sortable:false, editable:true, editable:editOption,edittype:'select', editoptions: {dataUrl:'${createLink(controller:"person",action:"listAsSelect")}',
+                    dataInit:function(e){$(e).select2({
+                        width: 160
+                    })}
+                }},
                 {name:'memory', width:50, editable:false},
                 {name:'cpu', width:50, editable:false},
                 {name:'hostNote', width:200, editable:false},

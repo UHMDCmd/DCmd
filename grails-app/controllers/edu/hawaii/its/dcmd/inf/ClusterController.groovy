@@ -297,7 +297,7 @@ class ClusterController {
         }
         def totalRows = hosts.totalCount
         def numberOfPages = Math.ceil(totalRows / maxRows)
-        def results = hosts?.collect { [ cell: [
+        def results = hosts?.collect { [ cell: ['',
                 "<a href='../host/show?id=${it.id}'>${it.hostname}</a>",
                 "<a href='../physicalServer/show?id=${it.asset?.id}'>${it.asset?.itsId}</a>",
                 it.env.toString(), it.getVCenterStateString(),
@@ -327,19 +327,25 @@ class ClusterController {
         switch (params.oper) {
             case 'add':
                 // add instruction sent
-                //System.out.println(params)
+                params.id=null
+                System.out.println(params)
                 item = new Host(params)
                 item.type = 'VMWare'
-//                item.main_asset = Asset.get(params.assetId)
+                item.asset = Asset.get(params.server)
                 if (! item.hasErrors() && item.save()) {
                     message = "Created host ${params.hostname}"
-                    if(params.hostSA) {
-                        def primarySA = generalService.createSupportRole(item, Person.get(params.personSelect), 'Technical', RoleType.findByRoleName("Primary SA")?.id)
-
+                    if(params.hostSA){
+                        //def primarySA = generalService.createSupportRole(item, Person.get(params.personSelect), 'Technical', RoleType.findByRoleName("Primary SA")?.id)
+                        def primarySA = new SupportRole(supportedObject: item, person: Person.get(params.hostSA), roleType: 'Technical', roleName: RoleType.findByRoleName('Primary SA') )
+                        primarySA.save(failOnError: true, flush:true)
                     }
                     id = item.id
                     state = "OK"
                 } else {
+                    System.out.println("Error was found.")
+                    if(!item.save()){
+                        System.out.println("Item was not saved")
+                    }
                     message = item.errors.allErrors.get(0).toString()
                 }
                 break;
