@@ -59,6 +59,7 @@ class PersonController {
         Asset assetInstance = params.instance
         itsName = assetInstance.itsId
         objectId = assetInstance.id
+        objectType = 'physicalServer'
     //    println("asset name: " + itsName)
     //    println("asset id: " + objectId)
     }
