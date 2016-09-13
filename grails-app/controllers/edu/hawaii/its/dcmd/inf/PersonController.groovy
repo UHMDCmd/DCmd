@@ -827,8 +827,12 @@ class PersonController {
 
         def maxRows = 20
         def hosts = Host.createCriteria().list(max: maxRows) {
-            ilike('hostname', "%${params.searchString}%")
+            or {
+                ilike('hostname', "%${params.searchString}%")
+                ilike('ipAddress', "%${params.searchString}%")
+            }
             order('hostname', 'asc')
+            order('ipAddress', 'asc')
         }
         StringBuffer hostString = new StringBuffer()
         if (hosts.size() == 0)
