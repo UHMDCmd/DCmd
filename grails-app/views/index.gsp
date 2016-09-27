@@ -49,7 +49,7 @@
 
             <h1 class="site_title">
 
-                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.gif')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.7.3</sub></font></a>
+                <a href="/its/dcmd"><img src="${resource(dir:'images/dcmd-theme',file:'uh-logo-white.gif')}" border="0" style="width:32%"> DCmd <font size='-1'><sub>1.7.4</sub></font></a>
             </h1>
 
             <h2 class="section_title"></h2>
