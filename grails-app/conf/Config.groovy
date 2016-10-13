@@ -107,7 +107,7 @@ grails.plugin.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
  * Un-comment this for Production
  ***************************************************************************************/
 //grails.plugin.springsecurity.cas.serviceUrl = 'https://www.hawaii.edu/its/dcmd/j_spring_cas_security_check'
-//grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://www.hawaii.edu/its/dcmd/secure/receptor'
+//grails.plugin.springsecurity.cas.proxyCallbackUrl = null
 //grails.plugin.springsecurity.logout.afterLogoutUrl =
 //    'https://authn.hawaii.edu/cas/logout?url=https://www.hawaii.edu/its/dcmd/'
 //grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://authn.hawaii.edu/cas/'
@@ -117,16 +117,18 @@ grails.plugin.springsecurity.ldap.search.base = '[dc=hawaii,dc=edu,ou=People]'
  ***************************************************************************************/
 
 grails.plugin.springsecurity.cas.serviceUrl = 'http://localhost:8080/its/dcmd/j_spring_cas_security_check'
-grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/its/dcmd/secure/receptor'
+/* Set to null in order for CAS 5 security check to work. Original 'http://localhost:8080/its/dcmd/secure/receptor' */
+grails.plugin.springsecurity.cas.proxyCallbackUrl = null
 grails.plugin.springsecurity.logout.afterLogoutUrl =
-    'https://cas-test.its.hawaii.edu/cas/logout?url=http://localhost:8080/its/dcmd/'
+        'https://cas-test.its.hawaii.edu/cas/logout?url=http://localhost:8080/its/dcmd/'
 grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.edu/cas/'
+grails.plugin.springsecurity.cas.useSingleSignout = false
 
 /***************************************************************************************
  * Un-comment this for Test
  ***************************************************************************************/
 //grails.plugin.springsecurity.cas.serviceUrl = 'http:///dcm51.its.hawaii.edu:8080/its/dcmd/j_spring_cas_security_check'
-//grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http:///dcm51.its.hawaii.edu:8080/its/dcmd/secure/receptor'
+//grails.plugin.springsecurity.cas.proxyCallbackUrl = null
 //grails.plugin.springsecurity.logout.afterLogoutUrl =
 //    'https://cas-test.its.hawaii.edu/cas/logout?url=http://dcm51.its.hawaii.edu:8080/its/dcmd/'
 //grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.edu/cas/'
@@ -137,8 +139,8 @@ grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://cas-test.its.hawaii.
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/user/home'
 //grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://login.its.hawaii.edu/cas'
 
-
-grails.plugin.springsecurity.cas.proxyReceptorUrl = '/secure/receptor'
+/* Set to null in order for CAS 5 security check to work */
+grails.plugin.springsecurity.cas.proxyReceptorUrl = null
 
 grails.plugin.springsecurity.useSecurityEventListener = true
 
