@@ -1,3 +1,7 @@
+#DCmd has been moved to a new github location
+#It can be found at this URL.
+https://github.com/uhawaii-system-its-ti-iam/DCmd
+
 #Data Center Meta Data
 
 Data Center Meta Data is a Data Center Asset management system that maintains records for applications, servers, software clusters, as well as the individuals responsible for them.
